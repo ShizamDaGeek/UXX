@@ -1,9 +1,5 @@
-cmake_minimum_required(VERSION 3.31.10)
+cmake_minimum_required(VERSION 3.29.3)
 project(UXX C CXX)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_LONG_PATHS_SUPPORT ON)
 
 
 
@@ -14,9 +10,9 @@ add_compile_definitions(GLM_ENABLE_EXPERIMENTAL)
 
 # Include all libraries
 include_directories(
-    libs/GLAD/include
-    libs/GLM
-    libs/STB
+        libs/GLAD/include
+        libs/GLM
+        libs/STB
 )
 
 
@@ -27,17 +23,14 @@ add_library(glad STATIC libs/GLAD/src/glad.c)
 add_subdirectory(libs/GLFW)
 
 
-
 # Find packages
 find_package(OpenGL REQUIRED)
 
 
 
-# Adding all STB libaries
+# Add STB_IMAGE as a static library
 add_library(stb_image STATIC src/stb_image.cpp)
 target_include_directories(stb_image PUBLIC libs/STB)
-add_library(stb_truetype STATIC src/stb_truetype.cpp)
-target_include_directories(stb_truetype PUBLIC libs/STB)
 
 
 
@@ -49,9 +42,8 @@ add_executable(UXX ${SRC_FILES})
 
 # Link all the library and shit
 target_link_libraries(UXX PRIVATE
-    glfw
-    glad
-    OpenGL::GL
-    stb_image
-    stb_truetype
+        glfw
+        glad
+        OpenGL::GL
+        stb_image
 )

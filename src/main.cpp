@@ -1,7 +1,11 @@
-#include <iostream>
+#include "include/Backend.hpp"
 
 int main()
 {
-        std::cout << "Hello World \n";
+        Backend backend;
+        backend.init();
+        backend.run();
+        backend.blowup();
+
         return 0;
 }
