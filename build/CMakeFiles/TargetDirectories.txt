@@ -1,6 +1,5 @@
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/glad.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/stb_image.dir
-/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/stb_truetype.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/UXX.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/edit_cache.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/rebuild_cache.dir

@@ -78,7 +78,6 @@ build cmake_object_order_depends_target_stb_image: phony || .
 build CMakeFiles/stb_image.dir/src/stb_image.cpp.o: CXX_COMPILER__stb_image_unscanned_ /home/shizamda_geek/Documents/ALLCODEHERE/UXX/src/stb_image.cpp || cmake_object_order_depends_target_stb_image
   DEFINES = -DGLM_ENABLE_EXPERIMENTAL
   DEP_FILE = CMakeFiles/stb_image.dir/src/stb_image.cpp.o.d
-  FLAGS = -std=gnu++17
   INCLUDES = -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLAD/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLM -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/STB
   OBJECT_DIR = CMakeFiles/stb_image.dir
   OBJECT_FILE_DIR = CMakeFiles/stb_image.dir/src
@@ -99,50 +98,31 @@ build libstb_image.a: CXX_STATIC_LIBRARY_LINKER__stb_image_ CMakeFiles/stb_image
   TARGET_PDB = stb_image.a.dbg
 
 # =============================================================================
-# Object build statements for STATIC_LIBRARY target stb_truetype
-
-
-#############################################
-# Order-only phony target for stb_truetype
-
-build cmake_object_order_depends_target_stb_truetype: phony || .
-
-build CMakeFiles/stb_truetype.dir/src/stb_truetype.cpp.o: CXX_COMPILER__stb_truetype_unscanned_ /home/shizamda_geek/Documents/ALLCODEHERE/UXX/src/stb_truetype.cpp || cmake_object_order_depends_target_stb_truetype
-  DEFINES = -DGLM_ENABLE_EXPERIMENTAL
-  DEP_FILE = CMakeFiles/stb_truetype.dir/src/stb_truetype.cpp.o.d
-  FLAGS = -std=gnu++17
-  INCLUDES = -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLAD/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLM -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/STB
-  OBJECT_DIR = CMakeFiles/stb_truetype.dir
-  OBJECT_FILE_DIR = CMakeFiles/stb_truetype.dir/src
-
-
-# =============================================================================
-# Link build statements for STATIC_LIBRARY target stb_truetype
-
-
-#############################################
-# Link the static library libstb_truetype.a
-
-build libstb_truetype.a: CXX_STATIC_LIBRARY_LINKER__stb_truetype_ CMakeFiles/stb_truetype.dir/src/stb_truetype.cpp.o
-  OBJECT_DIR = CMakeFiles/stb_truetype.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = libstb_truetype.a
-  TARGET_PDB = stb_truetype.a.dbg
-
-# =============================================================================
 # Object build statements for EXECUTABLE target UXX
 
 
 #############################################
 # Order-only phony target for UXX
 
-build cmake_object_order_depends_target_UXX: phony || cmake_object_order_depends_target_glad cmake_object_order_depends_target_glfw cmake_object_order_depends_target_stb_image cmake_object_order_depends_target_stb_truetype
+build cmake_object_order_depends_target_UXX: phony || cmake_object_order_depends_target_glad cmake_object_order_depends_target_glfw cmake_object_order_depends_target_stb_image
+
+build CMakeFiles/UXX.dir/src/Backend.cpp.o: CXX_COMPILER__UXX_unscanned_ /home/shizamda_geek/Documents/ALLCODEHERE/UXX/src/Backend.cpp || cmake_object_order_depends_target_UXX
+  DEFINES = -DGLM_ENABLE_EXPERIMENTAL
+  DEP_FILE = CMakeFiles/UXX.dir/src/Backend.cpp.o.d
+  INCLUDES = -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLAD/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLM -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/STB -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLFW/include
+  OBJECT_DIR = CMakeFiles/UXX.dir
+  OBJECT_FILE_DIR = CMakeFiles/UXX.dir/src
+
+build CMakeFiles/UXX.dir/src/UXXInput.cpp.o: CXX_COMPILER__UXX_unscanned_ /home/shizamda_geek/Documents/ALLCODEHERE/UXX/src/UXXInput.cpp || cmake_object_order_depends_target_UXX
+  DEFINES = -DGLM_ENABLE_EXPERIMENTAL
+  DEP_FILE = CMakeFiles/UXX.dir/src/UXXInput.cpp.o.d
+  INCLUDES = -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLAD/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLM -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/STB -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLFW/include
+  OBJECT_DIR = CMakeFiles/UXX.dir
+  OBJECT_FILE_DIR = CMakeFiles/UXX.dir/src
 
 build CMakeFiles/UXX.dir/src/main.cpp.o: CXX_COMPILER__UXX_unscanned_ /home/shizamda_geek/Documents/ALLCODEHERE/UXX/src/main.cpp || cmake_object_order_depends_target_UXX
   DEFINES = -DGLM_ENABLE_EXPERIMENTAL
   DEP_FILE = CMakeFiles/UXX.dir/src/main.cpp.o.d
-  FLAGS = -std=gnu++17
   INCLUDES = -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLAD/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLM -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/STB -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLFW/include
   OBJECT_DIR = CMakeFiles/UXX.dir
   OBJECT_FILE_DIR = CMakeFiles/UXX.dir/src
@@ -150,7 +130,6 @@ build CMakeFiles/UXX.dir/src/main.cpp.o: CXX_COMPILER__UXX_unscanned_ /home/shiz
 build CMakeFiles/UXX.dir/src/stb_image.cpp.o: CXX_COMPILER__UXX_unscanned_ /home/shizamda_geek/Documents/ALLCODEHERE/UXX/src/stb_image.cpp || cmake_object_order_depends_target_UXX
   DEFINES = -DGLM_ENABLE_EXPERIMENTAL
   DEP_FILE = CMakeFiles/UXX.dir/src/stb_image.cpp.o.d
-  FLAGS = -std=gnu++17
   INCLUDES = -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLAD/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLM -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/STB -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLFW/include
   OBJECT_DIR = CMakeFiles/UXX.dir
   OBJECT_FILE_DIR = CMakeFiles/UXX.dir/src
@@ -158,15 +137,6 @@ build CMakeFiles/UXX.dir/src/stb_image.cpp.o: CXX_COMPILER__UXX_unscanned_ /home
 build CMakeFiles/UXX.dir/src/stb_truetype.cpp.o: CXX_COMPILER__UXX_unscanned_ /home/shizamda_geek/Documents/ALLCODEHERE/UXX/src/stb_truetype.cpp || cmake_object_order_depends_target_UXX
   DEFINES = -DGLM_ENABLE_EXPERIMENTAL
   DEP_FILE = CMakeFiles/UXX.dir/src/stb_truetype.cpp.o.d
-  FLAGS = -std=gnu++17
-  INCLUDES = -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLAD/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLM -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/STB -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLFW/include
-  OBJECT_DIR = CMakeFiles/UXX.dir
-  OBJECT_FILE_DIR = CMakeFiles/UXX.dir/src
-
-build CMakeFiles/UXX.dir/src/uxx_input.cpp.o: CXX_COMPILER__UXX_unscanned_ /home/shizamda_geek/Documents/ALLCODEHERE/UXX/src/uxx_input.cpp || cmake_object_order_depends_target_UXX
-  DEFINES = -DGLM_ENABLE_EXPERIMENTAL
-  DEP_FILE = CMakeFiles/UXX.dir/src/uxx_input.cpp.o.d
-  FLAGS = -std=gnu++17
   INCLUDES = -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLAD/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLM -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/STB -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/GLFW/include
   OBJECT_DIR = CMakeFiles/UXX.dir
   OBJECT_FILE_DIR = CMakeFiles/UXX.dir/src
@@ -179,10 +149,10 @@ build CMakeFiles/UXX.dir/src/uxx_input.cpp.o: CXX_COMPILER__UXX_unscanned_ /home
 #############################################
 # Link the executable UXX
 
-build UXX: CXX_EXECUTABLE_LINKER__UXX_ CMakeFiles/UXX.dir/src/main.cpp.o CMakeFiles/UXX.dir/src/stb_image.cpp.o CMakeFiles/UXX.dir/src/stb_truetype.cpp.o CMakeFiles/UXX.dir/src/uxx_input.cpp.o | libs/GLFW/src/libglfw3.a libglad.a libstb_image.a libstb_truetype.a /usr/lib64/librt.a /usr/lib64/libm.so /usr/lib64/libGLX.so /usr/lib64/libOpenGL.so || libglad.a libs/GLFW/src/libglfw3.a libstb_image.a libstb_truetype.a
+build UXX: CXX_EXECUTABLE_LINKER__UXX_ CMakeFiles/UXX.dir/src/Backend.cpp.o CMakeFiles/UXX.dir/src/UXXInput.cpp.o CMakeFiles/UXX.dir/src/main.cpp.o CMakeFiles/UXX.dir/src/stb_image.cpp.o CMakeFiles/UXX.dir/src/stb_truetype.cpp.o | libs/GLFW/src/libglfw3.a libglad.a libstb_image.a /usr/lib64/librt.a /usr/lib64/libm.so /usr/lib64/libGLX.so /usr/lib64/libOpenGL.so || libglad.a libs/GLFW/src/libglfw3.a libstb_image.a
   DEP_FILE = CMakeFiles/UXX.dir/link.d
   LINK_FLAGS = -Wl,--dependency-file=CMakeFiles/UXX.dir/link.d
-  LINK_LIBRARIES = libs/GLFW/src/libglfw3.a  libglad.a  libstb_image.a  libstb_truetype.a  /usr/lib64/librt.a  -lm  -ldl  /usr/lib64/libGLX.so  /usr/lib64/libOpenGL.so
+  LINK_LIBRARIES = libs/GLFW/src/libglfw3.a  libglad.a  libstb_image.a  /usr/lib64/librt.a  -lm  -ldl  /usr/lib64/libGLX.so  /usr/lib64/libOpenGL.so
   OBJECT_DIR = CMakeFiles/UXX.dir
   POST_BUILD = :
   PRE_LINK = :
@@ -917,8 +887,6 @@ build libglfw3.a: phony libs/GLFW/src/libglfw3.a
 
 build stb_image: phony libstb_image.a
 
-build stb_truetype: phony libstb_truetype.a
-
 build uninstall: phony libs/GLFW/uninstall
 
 build update_mappings: phony libs/GLFW/src/update_mappings
@@ -931,35 +899,7 @@ build update_mappings: phony libs/GLFW/src/update_mappings
 #############################################
 # Folder: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build
 
-build codegen: phony libs/GLFW/codegen
-
-# =============================================================================
-
-#############################################
-# Folder: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/libs/GLFW
-
-build libs/GLFW/codegen: phony libs/GLFW/src/codegen libs/GLFW/docs/codegen
-
-# =============================================================================
-
-#############################################
-# Folder: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/libs/GLFW/docs
-
-build libs/GLFW/docs/codegen: phony
-
-# =============================================================================
-
-#############################################
-# Folder: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/libs/GLFW/src
-
-build libs/GLFW/src/codegen: phony
-
-# =============================================================================
-
-#############################################
-# Folder: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build
-
-build all: phony libglad.a libstb_image.a libstb_truetype.a UXX libs/GLFW/all
+build all: phony libglad.a libstb_image.a UXX libs/GLFW/all
 
 # =============================================================================
 
