@@ -44,7 +44,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/libs/GLFW/cmake_install.cmake")
+  include("/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/cmake_install.cmake")
 endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT

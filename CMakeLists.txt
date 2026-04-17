@@ -10,17 +10,17 @@ add_compile_definitions(GLM_ENABLE_EXPERIMENTAL)
 
 # Include all libraries
 include_directories(
-        libs/GLAD/include
-        libs/GLM
-        libs/STB
+        third_party_libs/GLAD/include
+        third_party_libs/GLM
+        third_party_libs/STB
 )
 
 
 
 # Add GLAD
-add_library(glad STATIC libs/GLAD/src/glad.c)
+add_library(glad STATIC third_party_libs/GLAD/src/glad.c)
 # Add GLFW
-add_subdirectory(libs/GLFW)
+add_subdirectory(third_party_libs/GLFW)
 
 
 # Find packages
@@ -39,6 +39,8 @@ file(GLOB_RECURSE SRC_FILES "src/*.cpp")
 add_executable(UXX ${SRC_FILES})
 
 
+
+target_include_directories(UXX PUBLIC include)
 
 # Link all the library and shit
 target_link_libraries(UXX PRIVATE
