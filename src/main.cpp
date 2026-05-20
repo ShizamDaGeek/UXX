@@ -1,5 +1,5 @@
-#include "UXX/Backend.hpp"
-#include "UXX/Renderer.hpp"
+#include "Backend.hpp"
+#include "Renderer.hpp"
 
 int main()
 {

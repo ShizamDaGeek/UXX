@@ -1,4 +1,4 @@
-#include "UXX/Renderer.hpp"
+#include "Renderer.hpp"
 
 Renderer::Renderer() {}
 
@@ -6,7 +6,7 @@ Renderer::~Renderer() {}
 
 void Renderer::renderTriangle()
 {
- //        GLfloat vertices[] =
+        // GLfloat vertices[] =
 	// {
 	// 	-0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower left corner
 	// 	0.5f, -0.5f * float(sqrt(3)) / 3, 0.0f, // Lower right corner

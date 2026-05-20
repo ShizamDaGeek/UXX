@@ -113,9 +113,44 @@ build CMakeFiles/UXX.dir/src/Backend.cpp.o: CXX_COMPILER__UXX_unscanned_ /home/s
   OBJECT_DIR = CMakeFiles/UXX.dir
   OBJECT_FILE_DIR = CMakeFiles/UXX.dir/src
 
+build CMakeFiles/UXX.dir/src/EBO.cpp.o: CXX_COMPILER__UXX_unscanned_ /home/shizamda_geek/Documents/ALLCODEHERE/UXX/src/EBO.cpp || cmake_object_order_depends_target_UXX
+  DEFINES = -DGLM_ENABLE_EXPERIMENTAL
+  DEP_FILE = CMakeFiles/UXX.dir/src/EBO.cpp.o.d
+  INCLUDES = -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLAD/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLM -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/STB -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/STB
+  OBJECT_DIR = CMakeFiles/UXX.dir
+  OBJECT_FILE_DIR = CMakeFiles/UXX.dir/src
+
 build CMakeFiles/UXX.dir/src/Renderer.cpp.o: CXX_COMPILER__UXX_unscanned_ /home/shizamda_geek/Documents/ALLCODEHERE/UXX/src/Renderer.cpp || cmake_object_order_depends_target_UXX
   DEFINES = -DGLM_ENABLE_EXPERIMENTAL
   DEP_FILE = CMakeFiles/UXX.dir/src/Renderer.cpp.o.d
+  INCLUDES = -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLAD/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLM -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/STB -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/STB
+  OBJECT_DIR = CMakeFiles/UXX.dir
+  OBJECT_FILE_DIR = CMakeFiles/UXX.dir/src
+
+build CMakeFiles/UXX.dir/src/Shader.cpp.o: CXX_COMPILER__UXX_unscanned_ /home/shizamda_geek/Documents/ALLCODEHERE/UXX/src/Shader.cpp || cmake_object_order_depends_target_UXX
+  DEFINES = -DGLM_ENABLE_EXPERIMENTAL
+  DEP_FILE = CMakeFiles/UXX.dir/src/Shader.cpp.o.d
+  INCLUDES = -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLAD/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLM -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/STB -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/STB
+  OBJECT_DIR = CMakeFiles/UXX.dir
+  OBJECT_FILE_DIR = CMakeFiles/UXX.dir/src
+
+build CMakeFiles/UXX.dir/src/Texture.cpp.o: CXX_COMPILER__UXX_unscanned_ /home/shizamda_geek/Documents/ALLCODEHERE/UXX/src/Texture.cpp || cmake_object_order_depends_target_UXX
+  DEFINES = -DGLM_ENABLE_EXPERIMENTAL
+  DEP_FILE = CMakeFiles/UXX.dir/src/Texture.cpp.o.d
+  INCLUDES = -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLAD/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLM -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/STB -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/STB
+  OBJECT_DIR = CMakeFiles/UXX.dir
+  OBJECT_FILE_DIR = CMakeFiles/UXX.dir/src
+
+build CMakeFiles/UXX.dir/src/VAO.cpp.o: CXX_COMPILER__UXX_unscanned_ /home/shizamda_geek/Documents/ALLCODEHERE/UXX/src/VAO.cpp || cmake_object_order_depends_target_UXX
+  DEFINES = -DGLM_ENABLE_EXPERIMENTAL
+  DEP_FILE = CMakeFiles/UXX.dir/src/VAO.cpp.o.d
+  INCLUDES = -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLAD/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLM -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/STB -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/STB
+  OBJECT_DIR = CMakeFiles/UXX.dir
+  OBJECT_FILE_DIR = CMakeFiles/UXX.dir/src
+
+build CMakeFiles/UXX.dir/src/VBO.cpp.o: CXX_COMPILER__UXX_unscanned_ /home/shizamda_geek/Documents/ALLCODEHERE/UXX/src/VBO.cpp || cmake_object_order_depends_target_UXX
+  DEFINES = -DGLM_ENABLE_EXPERIMENTAL
+  DEP_FILE = CMakeFiles/UXX.dir/src/VBO.cpp.o.d
   INCLUDES = -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLAD/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLM -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/STB -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/include -I/home/shizamda_geek/Documents/ALLCODEHERE/UXX/libs/STB
   OBJECT_DIR = CMakeFiles/UXX.dir
   OBJECT_FILE_DIR = CMakeFiles/UXX.dir/src
@@ -149,7 +184,7 @@ build CMakeFiles/UXX.dir/src/stb_truetype.cpp.o: CXX_COMPILER__UXX_unscanned_ /h
 #############################################
 # Link the executable UXX
 
-build UXX: CXX_EXECUTABLE_LINKER__UXX_ CMakeFiles/UXX.dir/src/Backend.cpp.o CMakeFiles/UXX.dir/src/Renderer.cpp.o CMakeFiles/UXX.dir/src/main.cpp.o CMakeFiles/UXX.dir/src/stb_image.cpp.o CMakeFiles/UXX.dir/src/stb_truetype.cpp.o | third_party_libs/GLFW/src/libglfw3.a libglad.a libstb_image.a /usr/lib64/librt.a /usr/lib64/libm.so /usr/lib64/libGLX.so /usr/lib64/libOpenGL.so || libglad.a libstb_image.a third_party_libs/GLFW/src/libglfw3.a
+build UXX: CXX_EXECUTABLE_LINKER__UXX_ CMakeFiles/UXX.dir/src/Backend.cpp.o CMakeFiles/UXX.dir/src/EBO.cpp.o CMakeFiles/UXX.dir/src/Renderer.cpp.o CMakeFiles/UXX.dir/src/Shader.cpp.o CMakeFiles/UXX.dir/src/Texture.cpp.o CMakeFiles/UXX.dir/src/VAO.cpp.o CMakeFiles/UXX.dir/src/VBO.cpp.o CMakeFiles/UXX.dir/src/main.cpp.o CMakeFiles/UXX.dir/src/stb_image.cpp.o CMakeFiles/UXX.dir/src/stb_truetype.cpp.o | third_party_libs/GLFW/src/libglfw3.a libglad.a libstb_image.a /usr/lib64/librt.a /usr/lib64/libm.so /usr/lib64/libGLX.so /usr/lib64/libOpenGL.so || libglad.a libstb_image.a third_party_libs/GLFW/src/libglfw3.a
   DEP_FILE = CMakeFiles/UXX.dir/link.d
   LINK_FLAGS = -Wl,--dependency-file=CMakeFiles/UXX.dir/link.d
   LINK_LIBRARIES = third_party_libs/GLFW/src/libglfw3.a  libglad.a  libstb_image.a  /usr/lib64/librt.a  -lm  -ldl  /usr/lib64/libGLX.so  /usr/lib64/libOpenGL.so
@@ -893,6 +928,34 @@ build update_mappings: phony third_party_libs/GLFW/src/update_mappings
 
 # =============================================================================
 # Folder targets.
+
+# =============================================================================
+
+#############################################
+# Folder: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build
+
+build codegen: phony third_party_libs/GLFW/codegen
+
+# =============================================================================
+
+#############################################
+# Folder: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW
+
+build third_party_libs/GLFW/codegen: phony third_party_libs/GLFW/src/codegen third_party_libs/GLFW/docs/codegen
+
+# =============================================================================
+
+#############################################
+# Folder: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/docs
+
+build third_party_libs/GLFW/docs/codegen: phony
+
+# =============================================================================
+
+#############################################
+# Folder: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/src
+
+build third_party_libs/GLFW/src/codegen: phony
 
 # =============================================================================
 
