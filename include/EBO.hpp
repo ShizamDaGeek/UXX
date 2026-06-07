@@ -7,7 +7,7 @@ class EBO
 {
 public:
     unsigned int ID;
-    EBO(unsigned int* indices, GLsizeiptr size);
+    EBO(GLuint* indices, GLsizeiptr size);
 
     void Bind();
     void Unbind();

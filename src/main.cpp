@@ -3,15 +3,13 @@
 
 int main()
 {
-        Backend backend;
-        Renderer renderer;
+    Backend backend;
 
-        backend.init();
+    if (!backend.init())
+        return 1;
 
-        backend.run();
-        renderer.renderTriangle();
+    backend.run();
+    backend.blowup();
 
-        backend.blowup();
-
-        return 0;
+    return 0;
 }

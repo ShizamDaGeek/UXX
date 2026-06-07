@@ -1,5 +1,4 @@
-Introduction
-
+Introduction:
 UXX is a library made for C++ to create good looking UI for your C++ applications.
 Most modern UI libraries are either too complex, too old, performance tanking or 
 made for other purposes (like ImGui for game engines).
@@ -11,13 +10,19 @@ I personally decided to make this project mainly because I found a roadblock whe
 to making good UI for my OpenGL game. I also wanted to learn more about C++ and graphics 
 programming, and I think that this is a good project to work on.
 
-Documentation
+
+
+Documentation:
 Here are the Documentation to UXX API:
 
 
-Support
-If you want to support the project, you are welcome to buy my game of steam or donate to
-this project.
-My Steam Game: https://store.steampowered.com/app/3963720/SandBlocks/
 
-Examples
+Support:
+If you want to support this project, you are welcome to buy my game of steam for 5 bucks(USD) 
+or check out my YouTube channel as well.
+My Steam Game: https://store.steampowered.com/app/3963720/SandBlocks/
+My YouTube Channel: https://www.youtube.com/@ShizzyDa_Glizzy
+
+
+
+Examples Pictures:

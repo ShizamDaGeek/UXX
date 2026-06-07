@@ -7,21 +7,26 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <chrono>
-#include <GL/gl.h>
-#include <GL/glext.h>
+
+#include "Renderer.hpp"
+#include "Shader.hpp"
+#include "VAO.hpp"
+#include "VBO.hpp"
+#include "EBO.hpp"
 
 class Backend
 {
 public:
-        Backend();
-        ~Backend();
+    Backend();
+    ~Backend();
 
-        bool init();
-        void run();
-        void blowup();
+    bool init();
+    void run();
+    void blowup();
 
 private:
-        GLFWwindow* window;
+    GLFWwindow* window;
+    Renderer* renderer = nullptr;
 };
 
 #endif
