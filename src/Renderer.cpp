@@ -1,20 +1,19 @@
 #include "Renderer.hpp"
 #include <GL/gl.h>
-#include <functional>
 
 float rectangleVertices[] =
 {
-        // positions
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.5f,  0.5f, 0.0f,
-        -0.5f,  0.5f, 0.0f
+    // positions          // Color
+    -0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+    0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+    0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+    -0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 1.0f
 };
 
 unsigned int rectangleIndices[] =
 {
-        0, 1, 2,
-        2, 3, 0
+    0, 1, 2,
+    2, 3, 0
 };
 
 Renderer::Renderer() {}
@@ -35,7 +34,8 @@ void Renderer::init()
 	ebo = new EBO(rectangleIndices, sizeof(rectangleIndices));
 
 	// Links VBO attributes such as coordinates and colors to VAO
-	vao->LinkVBO(*vbo, 0);
+	vao->LinkAttrib(*vbo, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
+	vao->LinkAttrib(*vbo, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	// Unbind all to prevent accidentally modifying them
 	vao->Unbind();
 	vbo->Unbind();
@@ -43,8 +43,8 @@ void Renderer::init()
 
 	// Set the scale uniform once after shader is ready
     shader->Use();
-    GLuint uniID = glGetUniformLocation(shader->ID, "scale");
-    glUniform1f(uniID, 1.0f);
+    GLuint scale = glGetUniformLocation(shader->ID, "scale");
+    glUniform1f(scale, 1.0f);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
@@ -52,6 +52,27 @@ void Renderer::init()
 void Renderer::drawUXXPanel(Rect rect, Color color)
 {
     shader->Use();
+
+    float SCREEN_WIDTH = 1920.0f;
+    float SCREEN_HEIGHT = 1080.0f;
+
+    // ===[Color]===
+    GLuint colorLoc = glGetUniformLocation(shader->ID, "uColor");
+    glUniform4f(colorLoc, color.r, color.g, color.b, color.a);
+
+    // ===[Size]===
+    GLuint sizeLoc = glGetUniformLocation(shader->ID, "uSize");
+    glUniform2f(sizeLoc, (rect.width / SCREEN_WIDTH) * 2.0f, (rect.height / SCREEN_HEIGHT) * 2.0f);
+
+    // ===[Position]===
+    GLuint positionLoc = glGetUniformLocation(shader->ID, "uPosition");
+    glUniform2f(positionLoc, ((rect.xPos + rect.width * 0.5f) / SCREEN_WIDTH) * 2.0f - 1.0f,
+        1.0f - ((rect.yPos + rect.height * 0.5f) / SCREEN_HEIGHT) * 2.0f);
+
+    // ===[Rotation]===
+    GLuint rotationLoc = glGetUniformLocation(shader->ID, "uRotation");
+    glUniform1f(rotationLoc, rect.rotation);
+
     vao->Bind();
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
     vao->Unbind();

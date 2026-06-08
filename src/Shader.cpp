@@ -47,19 +47,19 @@ Shader::Shader(const char* vertexFile, const char* fragmentFile)
 // Use shader function
 void Shader::Use()
 {
-        glUseProgram(ID);
+    glUseProgram(ID);
 }
 
 // Delete Shader
 void Shader::Delete()
 {
-        glDeleteProgram(ID);
+    glDeleteProgram(ID);
 }
 
 // Check for errors
 void Shader::compileErrors(unsigned int shader, const char* type, const char* filePath)
 {
-        // Stores status of compilation
+    // Stores status of compilation
 	int hasCompiled;
 	// Character array to store error message in
 	char infoLog[1024];
@@ -71,7 +71,7 @@ void Shader::compileErrors(unsigned int shader, const char* type, const char* fi
 		{
 			glGetShaderInfoLog(shader, 1024, NULL, infoLog);
 			std::cout << "SHADER_COMPILATION_ERROR [" << type << "] in: "
-                        << filePath << "\n" << infoLog << '\n';
+                << filePath << "\n" << infoLog << '\n';
 		}
 	}
 	else
@@ -81,7 +81,7 @@ void Shader::compileErrors(unsigned int shader, const char* type, const char* fi
 		{
 			glGetProgramInfoLog(shader, 1024, NULL, infoLog);
 			std::cout << "SHADER_LINKING_ERROR [PROGRAM] files: "
-                        << filePath << "\n" << infoLog << '\n';
+                << filePath << "\n" << infoLog << '\n';
 		}
 	}
 }

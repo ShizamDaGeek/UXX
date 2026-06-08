@@ -24,6 +24,9 @@ public:
     void run();
     void blowup();
 
+    unsigned int SCREEN_WIDTH = 1920;
+    unsigned int SCREEN_HEIGHT = 1080;
+
 private:
     GLFWwindow* window;
     Renderer* renderer = nullptr;

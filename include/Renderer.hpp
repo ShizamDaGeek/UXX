@@ -12,13 +12,15 @@
 
 struct Rect
 {
-    float xPos, yPos, width, height;
-    Rect(float xPos, float yPos, float width, float height)
-        : xPos(xPos), yPos(yPos), width(width), height(height) {}
+    float xPos, yPos, width, height, rotation;
+
+    Rect(float xPos, float yPos, float width, float height, float rotation)
+        : xPos(xPos), yPos(yPos), width(width), height(height), rotation(rotation) {}
 };
 struct Color
 {
     float r, g, b, a;
+
     Color(float r, float g, float b, float a)
         : r(r), g(g), b(b), a(a) {}
 };

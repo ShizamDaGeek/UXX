@@ -1,5 +1,4 @@
 #include "Backend.hpp"
-#include <GLFW/glfw3.h>
 
 Backend::Backend() {}
 Backend::~Backend() {}
@@ -18,7 +17,7 @@ bool Backend::init()
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-    window = glfwCreateWindow(1920, 1080, "UXX Testing Window", NULL, NULL);
+    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "UXX Testing Window", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -26,13 +25,12 @@ bool Backend::init()
         return false;
     }
     glfwMakeContextCurrent(window);
-
-
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cerr << "Error trying to initialize GLAD\n";
         return false;
     }
+    glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     renderer = new Renderer();
     renderer->init();
@@ -44,12 +42,12 @@ void Backend::run()
     while (!glfwWindowShouldClose(window))
     {
         // Specify the color of the background
-    	glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+    	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     	// Clean the back buffer and assign the new color to it
     	glClear(GL_COLOR_BUFFER_BIT);
 
     	// Draw the UXX
-    	renderer->drawUXXPanel(Rect(0, 0, 800, 600), Color(0.07f, 0.13f, 0.17f, 1.0f));
+    	renderer->drawUXXPanel(Rect(0, 0, 80, 60, 0), Color(0.1f, 0.5f, 0.9f, 1.0f));
 
     	// Swap the back buffer with the front buffer
     	glfwSwapBuffers(window);
