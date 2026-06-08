@@ -68,14 +68,14 @@
 10	502	1772362608392220851	/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/libs/GLFW/docs/html/index.html	dec59bff44ea2319
 183	544	1776395711849108047	libs/GLFW/src/CMakeFiles/glfw.dir/wl_window.c.o	81aa57bd08b32568
 544	608	1776395712210108959	libs/GLFW/src/libglfw3.a	8c9a5b37c01282e0
-5	877	1780921057369175375	CMakeFiles/UXX.dir/src/Backend.cpp.o	f50f9cee0c94a439
-7	1018	1780915938140038460	CMakeFiles/UXX.dir/src/main.cpp.o	bcd7f8c5d2b4e2fd
+3	531	1780955165157977742	CMakeFiles/UXX.dir/src/Backend.cpp.o	f50f9cee0c94a439
+4	612	1780955079903695861	CMakeFiles/UXX.dir/src/main.cpp.o	bcd7f8c5d2b4e2fd
 3	878	1779171137874019460	CMakeFiles/stb_image.dir/src/stb_image.cpp.o	50119d9abd4d290b
 878	927	1779171138748158301	libstb_image.a	512fe074d00975cc
 288	960	1779171138158156313	CMakeFiles/UXX.dir/src/stb_image.cpp.o	485a12fde78cdcc7
-867	1015	1780921098748352145	UXX	e1c1c167479b8192
-1	167	1780921147787750403	build.ninja	52baa78c7516ac19
-6	867	1780921097887348466	CMakeFiles/UXX.dir/src/Renderer.cpp.o	a0858bcda257f18
+532	608	1780955165686978979	UXX	e1c1c167479b8192
+1	167	1780955190167819801	build.ninja	52baa78c7516ac19
+4	533	1780955115595861819	CMakeFiles/UXX.dir/src/Renderer.cpp.o	a0858bcda257f18
 3	9	1776399378095561327	third_party_libs/GLFW/src/viewporter-client-protocol.h	8b6eabaa11c83cb4
 3	9	1776399378095561327	/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/src/viewporter-client-protocol.h	8b6eabaa11c83cb4
 3	9	1776399378095561327	third_party_libs/GLFW/src/viewporter-client-protocol-code.h	e7249402bd598e62
@@ -147,5 +147,5 @@
 5	45	1780871393990549002	CMakeFiles/UXX.dir/src/EBO.cpp.o	253a86735eb12632
 8	1102	1780892512279396923	CMakeFiles/UXX.dir/src/Shader.cpp.o	961d8dfe5435af7c
 5	622	1780871393992102678	CMakeFiles/UXX.dir/src/Texture.cpp.o	3ac344605ff3702e
-5	919	1780921147854561924	CMakeFiles/UXX.dir/src/Backend.cpp.o	f50f9cee0c94a439
-919	1065	1780921148768565828	UXX	e1c1c167479b8192
+4	536	1780955190208036332	CMakeFiles/UXX.dir/src/Backend.cpp.o	f50f9cee0c94a439
+536	606	1780955190739037574	UXX	e1c1c167479b8192

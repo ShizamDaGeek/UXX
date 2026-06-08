@@ -49,8 +49,9 @@ void Renderer::init()
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
 
-void Renderer::drawUXXPanel(Rect rect, Color color)
+void Renderer::BeginUXXPanel(Rect rect, Color color)
 {
+    panelOpen = true;
     shader->Use();
 
     float SCREEN_WIDTH = 1920.0f;
@@ -78,17 +79,53 @@ void Renderer::drawUXXPanel(Rect rect, Color color)
     vao->Unbind();
 }
 
-void Renderer::drawUXXButton(Rect rect, Color color, Style style)
+void Renderer::EndUXXPanel()
+{
+    panelOpen = false;
+}
+
+void Renderer::drawUXXButton(Rect rect, Color color)
+{
+    if (panelOpen)
+    {
+        shader->Use();
+
+        float SCREEN_WIDTH = 1920.0f;
+        float SCREEN_HEIGHT = 1080.0f;
+
+        // ===[Color]===
+        GLuint colorLoc = glGetUniformLocation(shader->ID, "uColor");
+        glUniform4f(colorLoc, color.r, color.g, color.b, color.a);
+
+        // ===[Size]===
+        GLuint sizeLoc = glGetUniformLocation(shader->ID, "uSize");
+        glUniform2f(sizeLoc, (rect.width / SCREEN_WIDTH) * 2.0f, (rect.height / SCREEN_HEIGHT) * 2.0f);
+
+        // ===[Position]===
+        GLuint positionLoc = glGetUniformLocation(shader->ID, "uPosition");
+        glUniform2f(positionLoc, ((rect.xPos + rect.width * 0.5f) / SCREEN_WIDTH) * 2.0f - 1.0f,
+            1.0f - ((rect.yPos + rect.height * 0.5f) / SCREEN_HEIGHT) * 2.0f);
+
+        // ===[Rotation]===
+        GLuint rotationLoc = glGetUniformLocation(shader->ID, "uRotation");
+        glUniform1f(rotationLoc, rect.rotation);
+
+        vao->Bind();
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        vao->Unbind();
+    }
+    else
+    {
+        return;
+    }
+}
+
+void Renderer::drawUXXSlider(Rect rect, Color color)
 {
 
 }
 
-void Renderer::drawUXXSlider(Rect rect, Color color, Style style)
-{
-
-}
-
-void Renderer::drawUXXSwitch(Rect rect, Color color, Style style)
+void Renderer::drawUXXSwitch(Rect rect, Color color)
 {
 
 }

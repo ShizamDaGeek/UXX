@@ -46,8 +46,10 @@ void Backend::run()
     	// Clean the back buffer and assign the new color to it
     	glClear(GL_COLOR_BUFFER_BIT);
 
-    	// Draw the UXX
-    	renderer->drawUXXPanel(Rect(0, 0, 80, 60, 0), Color(0.1f, 0.5f, 0.9f, 1.0f));
+    	// Draw shit
+    	renderer->BeginUXXPanel(Rect(0, 0, 800, 600, 0), Color(0.1f, 0.5f, 0.9f, 1.0f));
+    	renderer->drawUXXButton(Rect(0, 0, 80, 60, 0), Color(0.9f, 0.3f, 0.6f, 1.0f));
+    	renderer->EndUXXPanel();
 
     	// Swap the back buffer with the front buffer
     	glfwSwapBuffers(window);

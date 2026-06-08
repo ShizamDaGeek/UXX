@@ -46,13 +46,17 @@ public:
 
     void init();
 
-    void drawUXXPanel(Rect rect, Color color);
-    void drawUXXButton(Rect rect, Color color, Style style);
-    void drawUXXSlider(Rect rect, Color color, Style style);
-    void drawUXXSwitch(Rect rect, Color color, Style style);
+    void BeginUXXPanel(Rect rect, Color color);
+    void EndUXXPanel();
+
+    void drawUXXButton(Rect rect, Color color);
+    void drawUXXSlider(Rect rect, Color color);
+    void drawUXXSwitch(Rect rect, Color color);
 
     void blowup();
 private:
+    bool panelOpen = false;
+
     VAO* vao = nullptr;
     VBO* vbo = nullptr;
     EBO* ebo = nullptr;
