@@ -10,9 +10,9 @@ add_compile_definitions(GLM_ENABLE_EXPERIMENTAL)
 
 # Include all libraries
 include_directories(
-        third_party_libs/GLAD/include
-        third_party_libs/GLM
-        third_party_libs/STB
+    third_party_libs/GLAD/include
+    third_party_libs/GLM
+    third_party_libs/STB
 )
 
 
@@ -44,8 +44,8 @@ target_include_directories(UXX PUBLIC include)
 
 # Link all the library and shit
 target_link_libraries(UXX PRIVATE
-        glfw
-        glad
-        OpenGL::GL
-        stb_image
+    glfw
+    glad
+    OpenGL::GL
+    stb_image
 )

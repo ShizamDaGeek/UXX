@@ -24,6 +24,8 @@ public:
     void run();
     void blowup();
 
+    static void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
+
     unsigned int SCREEN_WIDTH = 1920;
     unsigned int SCREEN_HEIGHT = 1080;
 

@@ -3,8 +3,12 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <GL/gl.h>
 #include <iostream>
+#include <string>
+#include <unordered_set>
 
+#include "Texture.hpp"
 #include "VAO.hpp"
 #include "VBO.hpp"
 #include "EBO.hpp"
@@ -41,19 +45,24 @@ struct Style
 class Renderer
 {
 public:
+    float SCREEN_WIDTH = 1920.0f;
+    float SCREEN_HEIGHT = 1080.0f;
+
     Renderer();
     ~Renderer();
 
     void init();
 
-    void BeginUXXPanel(Rect rect, Color color);
+    void BeginUXXPanel(Rect PanelRect, Color PanelColor);
     void EndUXXPanel();
 
-    void drawUXXButton(Rect rect, Color color);
-    void drawUXXSlider(Rect rect, Color color);
-    void drawUXXSwitch(Rect rect, Color color);
+    void DrawUXXButton(Rect ButtonRect, Color ButtonColor, std::string ButtonImagePath);
+    void DrawUXXSlider(Rect SliderRect, Color SliderColor);
+    void DrawUXXSwitch(Rect SwitchRect, Color SwitchColor);
 
-    void blowup();
+    void DrawUXXImage(Rect ImageRect, Color ImageColor, std::string ImagePath);
+
+    void BlowUp();
 private:
     bool panelOpen = false;
 
@@ -61,6 +70,11 @@ private:
     VBO* vbo = nullptr;
     EBO* ebo = nullptr;
     Shader* shader = nullptr;
+
+    std::unordered_map<std::string, GLTexture*> textureCache;
+    GLTexture* GetOrLoadTexture(const std::string& path);
+
+    void DrawQuad(Rect rect, Color color, GLTexture* tex);
 };
 
 #endif

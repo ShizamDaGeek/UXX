@@ -1,5 +1,16 @@
 #include "Backend.hpp"
 
+void Backend::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+    Backend* backend = static_cast<Backend*>(glfwGetWindowUserPointer(window));
+    if (backend && backend->renderer)
+    {
+        backend->renderer->SCREEN_WIDTH  = (float)width;
+        backend->renderer->SCREEN_HEIGHT = (float)height;
+    }
+}
+
 Backend::Backend() {}
 Backend::~Backend() {}
 
@@ -24,16 +35,22 @@ bool Backend::init()
         std::cerr << "Error trying to create window \n";
         return false;
     }
+    glfwSetWindowUserPointer(window, this);
+    glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
     glfwMakeContextCurrent(window);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cerr << "Error trying to initialize GLAD\n";
         return false;
     }
-    glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    int fbWidth, fbHeight;
+    glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
+    glViewport(0, 0, fbWidth, fbHeight);
 
     renderer = new Renderer();
     renderer->init();
+    renderer->SCREEN_WIDTH  = (float)fbWidth;
+    renderer->SCREEN_HEIGHT = (float)fbHeight;
     return true;
 }
 void Backend::run()
@@ -48,7 +65,8 @@ void Backend::run()
 
     	// Draw shit
     	renderer->BeginUXXPanel(Rect(0, 0, 800, 600, 0), Color(0.1f, 0.5f, 0.9f, 1.0f));
-    	renderer->drawUXXButton(Rect(0, 0, 80, 60, 0), Color(0.9f, 0.3f, 0.6f, 1.0f));
+    	renderer->DrawUXXButton(Rect(0, 0, 80, 60, 0), Color(0.9f, 0.3f, 0.6f, 1.0f), "../Image/scout.jpg");
+        renderer->DrawUXXImage(Rect(0, 0, 800, 600, 0), Color(0.9f, 0.3f, 0.6f, 1.0f), "../Image/scout.jpg");
     	renderer->EndUXXPanel();
 
     	// Swap the back buffer with the front buffer
@@ -59,7 +77,7 @@ void Backend::run()
 }
 void Backend::blowup()
 {
-    renderer->blowup();
+    renderer->BlowUp();
     delete renderer;
 
     glfwDestroyWindow(window);
