@@ -68,14 +68,14 @@
 10	502	1772362608392220851	/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/libs/GLFW/docs/html/index.html	dec59bff44ea2319
 183	544	1776395711849108047	libs/GLFW/src/CMakeFiles/glfw.dir/wl_window.c.o	81aa57bd08b32568
 544	608	1776395712210108959	libs/GLFW/src/libglfw3.a	8c9a5b37c01282e0
-5	630	1784346354525130002	CMakeFiles/UXX.dir/src/Backend.cpp.o	f50f9cee0c94a439
-6	608	1784346354526130005	CMakeFiles/UXX.dir/src/main.cpp.o	bcd7f8c5d2b4e2fd
+5	670	1784696000477756393	CMakeFiles/UXX.dir/src/Backend.cpp.o	f50f9cee0c94a439
+4	734	1784698017632432159	CMakeFiles/UXX.dir/src/main.cpp.o	bcd7f8c5d2b4e2fd
 10	2629	1784280368709289193	CMakeFiles/stb_image.dir/src/stb_image.cpp.o	50119d9abd4d290b
 2629	2791	1784280371328299717	libstb_image.a	512fe074d00975cc
 812	2872	1784280369512292420	CMakeFiles/UXX.dir/src/stb_image.cpp.o	485a12fde78cdcc7
-630	724	1784346355150131782	UXX	e1c1c167479b8192
-1	167	1784346375436190374	build.ninja	52baa78c7516ac19
-5	816	1784343723021636712	CMakeFiles/UXX.dir/src/Renderer.cpp.o	a0858bcda257f18
+671	771	1784696001143757987	UXX	e1c1c167479b8192
+1	167	1784698175124309109	build.ninja	52baa78c7516ac19
+6	780	1784698125495381728	CMakeFiles/UXX.dir/src/Renderer.cpp.o	a0858bcda257f18
 3	9	1776399378095561327	third_party_libs/GLFW/src/viewporter-client-protocol.h	8b6eabaa11c83cb4
 3	9	1776399378095561327	/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/src/viewporter-client-protocol.h	8b6eabaa11c83cb4
 3	9	1776399378095561327	third_party_libs/GLFW/src/viewporter-client-protocol-code.h	e7249402bd598e62
@@ -146,4 +146,6 @@
 4	35	1780878098797677505	CMakeFiles/UXX.dir/src/VAO.cpp.o	f06239f0815e881b
 5	45	1780871393990549002	CMakeFiles/UXX.dir/src/EBO.cpp.o	253a86735eb12632
 756	3074	1784280369455292191	CMakeFiles/UXX.dir/src/Shader.cpp.o	961d8dfe5435af7c
-3	567	1784346139128516635	CMakeFiles/UXX.dir/src/Texture.cpp.o	3ac344605ff3702e
+7	660	1784375335214797525	CMakeFiles/UXX.dir/src/Texture.cpp.o	3ac344605ff3702e
+5	667	1784698175177986669	CMakeFiles/UXX.dir/src/Backend.cpp.o	f50f9cee0c94a439
+668	781	1784698175840274457	UXX	e1c1c167479b8192

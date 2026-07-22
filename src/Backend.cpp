@@ -1,19 +1,28 @@
 #include "Backend.hpp"
 
+// |=====================================================
+// |---[Helper Functions]--------------------------------
+// |=====================================================
 void Backend::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
     Backend* backend = static_cast<Backend*>(glfwGetWindowUserPointer(window));
-    if (backend && backend->renderer)
+    if (backend)
     {
-        backend->renderer->SCREEN_WIDTH  = (float)width;
-        backend->renderer->SCREEN_HEIGHT = (float)height;
+        UXX::SCREEN_WIDTH  = (float)width;
+        UXX::SCREEN_HEIGHT = (float)height;
     }
 }
 
+// |=====================================================
+// |---[Constructer/Destructer]--------------------------
+// |=====================================================
 Backend::Backend() {}
 Backend::~Backend() {}
 
+// |=====================================================
+// |---[Initlize]----------------------------------------
+// |=====================================================
 bool Backend::init()
 {
     if (!glfwInit())
@@ -43,16 +52,21 @@ bool Backend::init()
         std::cerr << "Error trying to initialize GLAD\n";
         return false;
     }
+
     int fbWidth, fbHeight;
     glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
     glViewport(0, 0, fbWidth, fbHeight);
 
-    renderer = new Renderer();
-    renderer->init();
-    renderer->SCREEN_WIDTH  = (float)fbWidth;
-    renderer->SCREEN_HEIGHT = (float)fbHeight;
+    UXX::init();
+    UXX::SCREEN_WIDTH  = (float)fbWidth;
+    UXX::SCREEN_HEIGHT = (float)fbHeight;
+
     return true;
 }
+
+// |=====================================================
+// |---[Run and Hide]------------------------------------
+// |=====================================================
 void Backend::run()
 {
     /* Loop until the user closes the window */
@@ -64,10 +78,13 @@ void Backend::run()
     	glClear(GL_COLOR_BUFFER_BIT);
 
     	// Draw shit
-    	renderer->BeginUXXPanel(Rect(0, 0, 800, 600, 0), Color(0.1f, 0.5f, 0.9f, 1.0f));
-    	renderer->DrawUXXButton(Rect(0, 0, 80, 60, 0), Color(0.9f, 0.3f, 0.6f, 1.0f), "../Image/scout.jpg");
-        renderer->DrawUXXImage(Rect(0, 0, 800, 600, 0), Color(0.9f, 0.3f, 0.6f, 1.0f), "../Image/scout.jpg");
-    	renderer->EndUXXPanel();
+    	UXX::BeginPanel(Rect(0, 0, 800, 600, 0), Color(0.1f, 0.5f, 0.9f, 1.0f));
+
+        if (UXX::DrawButton(Rect(0, 0, 80, 60, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), "../Image/scout.jpg"))
+            std::cout << "Button Clicked" << "\n";
+
+        UXX::DrawImage(Rect(0, 50, 80, 60, 0), Color(1.0f, 1.0f, 1.0f, 0.5f), "../Image/scout.jpg");
+    	UXX::EndPanel();
 
     	// Swap the back buffer with the front buffer
     	glfwSwapBuffers(window);
@@ -75,10 +92,13 @@ void Backend::run()
     	glfwPollEvents();
     }
 }
-void Backend::blowup()
+
+// |=====================================================
+// |---[Heavy: You are Dead]-----------------------------
+// |=====================================================
+void Backend::die()
 {
-    renderer->BlowUp();
-    delete renderer;
+    UXX::BlowUp();
 
     glfwDestroyWindow(window);
     glfwTerminate();

@@ -4,6 +4,7 @@
 unsigned int GLTexture::loadTexture(const std::string& path, const char* texType)
 {
     int imgWidth, imgHeight, numColorChannel;
+    stbi_set_flip_vertically_on_load(true);
     unsigned char* imageBytes = stbi_load(path.c_str(), &imgWidth, &imgHeight, &numColorChannel, 0);
     if (!imageBytes)
         throw std::runtime_error("Failed to load texture: " + path);

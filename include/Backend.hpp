@@ -22,7 +22,7 @@ public:
 
     bool init();
     void run();
-    void blowup();
+    void die();
 
     static void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
 
@@ -31,7 +31,8 @@ public:
 
 private:
     GLFWwindow* window;
-    Renderer* renderer = nullptr;
+
+    void GetMouseInput();
 };
 
 #endif

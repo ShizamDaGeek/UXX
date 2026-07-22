@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <unordered_set>
+#include <unordered_map>
 
 #include "Texture.hpp"
 #include "VAO.hpp"
@@ -35,46 +36,31 @@ struct Style
     Color shadowColor;
 
     float borderWidth;
-
     float topleftCornerRadius;
     float topRightCornerRadius;
     float bottomLeftCornerRadius;
     float bottomRightCornerRadius;
 };
 
-class Renderer
+namespace Renderer
 {
-public:
-    float SCREEN_WIDTH = 1920.0f;
-    float SCREEN_HEIGHT = 1080.0f;
-
-    Renderer();
-    ~Renderer();
+    inline float SCREEN_WIDTH = 1920.0f;
+    inline float SCREEN_HEIGHT = 1080.0f;
 
     void init();
 
-    void BeginUXXPanel(Rect PanelRect, Color PanelColor);
-    void EndUXXPanel();
+    void BeginPanel(Rect PanelRect, Color PanelColor);
+    void EndPanel();
 
-    void DrawUXXButton(Rect ButtonRect, Color ButtonColor, std::string ButtonImagePath);
-    void DrawUXXSlider(Rect SliderRect, Color SliderColor);
-    void DrawUXXSwitch(Rect SwitchRect, Color SwitchColor);
+    bool DrawButton(Rect ButtonRect, Color ButtonColor, std::string ButtonImagePath);
+    void DrawSlider(Rect SliderRect, Color SliderColor);
+    void DrawSwitch(Rect SwitchRect, Color SwitchColor);
 
-    void DrawUXXImage(Rect ImageRect, Color ImageColor, std::string ImagePath);
+    void DrawImage(Rect ImageRect, Color ImageColor, std::string ImagePath);
 
     void BlowUp();
-private:
-    bool panelOpen = false;
-
-    VAO* vao = nullptr;
-    VBO* vbo = nullptr;
-    EBO* ebo = nullptr;
-    Shader* shader = nullptr;
-
-    std::unordered_map<std::string, GLTexture*> textureCache;
-    GLTexture* GetOrLoadTexture(const std::string& path);
-
-    void DrawQuad(Rect rect, Color color, GLTexture* tex);
 };
+
+namespace UXX = Renderer;
 
 #endif

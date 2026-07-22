@@ -5,11 +5,10 @@ int main()
 {
     Backend backend;
 
-    if (!backend.init())
-        return 1;
+    if (!backend.init()) return 1;
 
     backend.run();
-    backend.blowup();
+    backend.die();
 
     return 0;
 }
