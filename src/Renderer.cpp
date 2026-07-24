@@ -1,4 +1,5 @@
 #include "Renderer.hpp"
+#include <GLFW/glfw3.h>
 
 namespace Renderer
 {
@@ -16,9 +17,9 @@ namespace Renderer
         GLTexture* GetOrLoadTexture(const std::string& path);
 
         bool panelOpen = false;
-        bool leftMouseButtonPrssed = false;
-        bool rightMouseButtonPrssed = false;
-        bool middleMouseButtonPrssed = false;
+        bool leftMouseButtonPressed = false;
+        bool rightMouseButtonPressed = false;
+        bool middleMouseButtonPressed = false;
 
         double mousePositionX, mousePositionY;
 
@@ -80,6 +81,18 @@ namespace Renderer
     }
 
     // |=====================================================
+    // |---[Helper Functions]--------------------------------
+    // |=====================================================
+    void SetMouseState(double x, double y, bool leftDown, bool rightDown, bool middleDown)
+    {
+        mousePositionX = x;
+        mousePositionY = y;
+        leftMouseButtonPressed = leftDown;
+        rightMouseButtonPressed = rightDown;
+        middleMouseButtonPressed = middleDown;
+    }
+
+    // |=====================================================
     // |---[Init]--------------------------------------------
     // |=====================================================
     void init()
@@ -120,6 +133,14 @@ namespace Renderer
     {
         panelOpen = true;
         DrawQuad(PanelRect, PanelColor, nullptr);
+
+        GLint scissorX = (GLint)(PanelRect.xPos * SCREEN_SCALE_X);
+        GLint scissorY = (GLint)((SCREEN_HEIGHT - (PanelRect.yPos + PanelRect.height)) * SCREEN_SCALE_Y);
+        GLsizei scissorW = (GLsizei)(PanelRect.width  * SCREEN_SCALE_X);
+        GLsizei scissorH = (GLsizei)(PanelRect.height * SCREEN_SCALE_Y);
+
+        glEnable(GL_SCISSOR_TEST);
+        glScissor(scissorX, scissorY, scissorW, scissorH);
     }
     void EndPanel()
     {
@@ -136,7 +157,11 @@ namespace Renderer
         GLTexture* tex = GetOrLoadTexture(ButtonImagePath);
         DrawQuad(ButtonRect, ButtonColor, tex);
 
-        return true;
+        bool hovered = (mousePositionX >= ButtonRect.xPos && mousePositionX <= ButtonRect.xPos + ButtonRect.width &&
+                        mousePositionY >= ButtonRect.yPos && mousePositionY <= ButtonRect.yPos + ButtonRect.height);
+        bool clicked = hovered && leftMouseButtonPressed;
+
+        return clicked;
     }
     void DrawSlider(Rect SliderRect, Color SliderColor)
     {

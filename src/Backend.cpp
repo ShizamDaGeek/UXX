@@ -1,4 +1,5 @@
 #include "Backend.hpp"
+#include <GLFW/glfw3.h>
 
 // |=====================================================
 // |---[Helper Functions]--------------------------------
@@ -9,9 +10,55 @@ void Backend::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
     Backend* backend = static_cast<Backend*>(glfwGetWindowUserPointer(window));
     if (backend)
     {
-        UXX::SCREEN_WIDTH  = (float)width;
-        UXX::SCREEN_HEIGHT = (float)height;
+        int windowWidth, windowHeight;
+        glfwGetWindowSize(window, &windowWidth, &windowHeight);
+        UXX::SCREEN_WIDTH  = (float)windowWidth;
+        UXX::SCREEN_HEIGHT = (float)windowHeight;
+        UXX::SCREEN_SCALE_X = (float)width  / (float)windowWidth;
+        UXX::SCREEN_SCALE_Y = (float)height / (float)windowHeight;
     }
+}
+void Backend::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+{
+    Backend* backend = static_cast<Backend*>(glfwGetWindowUserPointer(window));
+    if (!backend) return;
+
+    if (button >= 0 && button < 3)
+    {
+        if (action == GLFW_PRESS)
+        {
+            backend->mouseButtonDown[button] = true;
+            backend->mouseButtonPressed[button] = true; // one-frame "just clicked" flag
+        }
+        else if (action == GLFW_RELEASE)
+        {
+            backend->mouseButtonDown[button] = false;
+            backend->mouseButtonReleased[button] = true; // one-frame "just released" flag
+        }
+    }
+}
+void Backend::CursorPosCallback(GLFWwindow* window, double xpos, double ypos)
+{
+    Backend* backend = static_cast<Backend*>(glfwGetWindowUserPointer(window));
+    if (backend)
+    {
+        backend->mouseX = xpos;
+        backend->mouseY = ypos;
+    }
+}
+
+void Backend::ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+{
+    Backend* backend = static_cast<Backend*>(glfwGetWindowUserPointer(window));
+    if (backend)
+    {
+        backend->scrollX = xoffset;
+        backend->scrollY = yoffset;
+    }
+}
+void Backend::GetMouseInput()
+{
+    glfwGetCursorPos(window, &mouseX, &mouseY);
 }
 
 // |=====================================================
@@ -46,6 +93,9 @@ bool Backend::init()
     }
     glfwSetWindowUserPointer(window, this);
     glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
+    glfwSetMouseButtonCallback(window, MouseButtonCallback);
+    glfwSetCursorPosCallback(window, CursorPosCallback);
+    glfwSetScrollCallback(window, ScrollCallback);
     glfwMakeContextCurrent(window);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
@@ -53,13 +103,18 @@ bool Backend::init()
         return false;
     }
 
-    int fbWidth, fbHeight;
-    glfwGetFramebufferSize(window, &fbWidth, &fbHeight);
-    glViewport(0, 0, fbWidth, fbHeight);
+    int windowWidth, windowHeight;
+    glfwGetWindowSize(window, &windowWidth, &windowHeight);
+    UXX::SCREEN_WIDTH  = (float)windowWidth;
+    UXX::SCREEN_HEIGHT = (float)windowHeight;
+
+    int frameBufferWidth, frameBufferHeight;
+    glfwGetFramebufferSize(window, &frameBufferWidth, &frameBufferHeight);
+    glViewport(0, 0, frameBufferWidth, frameBufferHeight);
+    UXX::SCREEN_SCALE_X = (float)frameBufferWidth  / (float)windowWidth;
+    UXX::SCREEN_SCALE_Y = (float)frameBufferHeight / (float)windowHeight;
 
     UXX::init();
-    UXX::SCREEN_WIDTH  = (float)fbWidth;
-    UXX::SCREEN_HEIGHT = (float)fbHeight;
 
     return true;
 }
@@ -72,15 +127,31 @@ void Backend::run()
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
+        // Reset one-frame flags before polling new events
+        for (int i = 0; i < 3; i++)
+        {
+            mouseButtonPressed[i] = false;
+            mouseButtonReleased[i] = false;
+        }
+        scrollX = 0.0;
+        scrollY = 0.0;
+
+        glfwPollEvents();
+
+        UXX::SetMouseState(mouseX, mouseY,
+            mouseButtonPressed[GLFW_MOUSE_BUTTON_LEFT],
+            mouseButtonPressed[GLFW_MOUSE_BUTTON_RIGHT],
+            mouseButtonPressed[GLFW_MOUSE_BUTTON_MIDDLE]);
+
         // Specify the color of the background
     	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     	// Clean the back buffer and assign the new color to it
     	glClear(GL_COLOR_BUFFER_BIT);
 
     	// Draw shit
-    	UXX::BeginPanel(Rect(0, 0, 800, 600, 0), Color(0.1f, 0.5f, 0.9f, 1.0f));
+    	UXX::BeginPanel(Rect(0, 0, 800, 75, 0), Color(0.1f, 0.5f, 0.9f, 1.0f));
 
-        if (UXX::DrawButton(Rect(0, 0, 80, 60, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), "../Image/scout.jpg"))
+        if (UXX::DrawButton(Rect(0, 0, 50, 50, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), "../Image/scout.jpg"))
             std::cout << "Button Clicked" << "\n";
 
         UXX::DrawImage(Rect(0, 50, 80, 60, 0), Color(1.0f, 1.0f, 1.0f, 0.5f), "../Image/scout.jpg");
@@ -88,8 +159,6 @@ void Backend::run()
 
     	// Swap the back buffer with the front buffer
     	glfwSwapBuffers(window);
-    	// Take care of all GLFW events
-    	glfwPollEvents();
     }
 }
 

@@ -46,8 +46,12 @@ namespace Renderer
 {
     inline float SCREEN_WIDTH = 1920.0f;
     inline float SCREEN_HEIGHT = 1080.0f;
+    inline float SCREEN_SCALE_X = 1.0f;
+    inline float SCREEN_SCALE_Y = 1.0f;
 
     void init();
+
+    void SetMouseState(double x, double y, bool leftDown, bool rightDown, bool middleDown);
 
     void BeginPanel(Rect PanelRect, Color PanelColor);
     void EndPanel();
