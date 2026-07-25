@@ -149,12 +149,27 @@ void Backend::run()
     	glClear(GL_COLOR_BUFFER_BIT);
 
     	// Draw shit
-    	UXX::BeginPanel(Rect(0, 0, 800, 75, 0), Color(0.1f, 0.5f, 0.9f, 1.0f));
+    	UXX::BeginPanel(Rect(0, 0, 800, 600, 0), Color(0.1f, 0.5f, 0.9f, 1.0f));
 
-        if (UXX::DrawButton(Rect(0, 0, 50, 50, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), "../Image/scout.jpg"))
+        Color normalColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+        Color hoveredColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
+        Color clickedColor = Color(0.0f, 0.0f, 0.0f, 1.0f);
+
+        static int intSliderValue = 1;
+        static float floatSliderValue = 1.0f;
+        static bool boolSwitchValue = false;
+
+        if (UXX::DrawButton(Rect(0, 0, 100, 100, 0), normalColor, hoveredColor, clickedColor, "../Image/scout.jpg"))
+        {
             std::cout << "Button Clicked" << "\n";
+        }
 
         UXX::DrawImage(Rect(0, 50, 80, 60, 0), Color(1.0f, 1.0f, 1.0f, 0.5f), "../Image/scout.jpg");
+
+        UXX::DrawIntSlider(Rect(50, 150, 80, 20, 0), Color(0.5f, 0.3f, 0.9f, 1.0f), Color(0.3f, 0.9f, 0.5f, 1.0f), intSliderValue, 1, 100, 1);
+        UXX::DrawFloatSlider(Rect(50, 175, 80, 20, 0), Color(0.5f, 0.3f, 0.9f, 1.0f), Color(0.3f, 0.9f, 0.5f, 1.0f), floatSliderValue, 1.0f, 100.0f);
+        UXX::DrawSwitch(Rect(50, 200, 80, 20, 0), Color(0.5f, 0.3f, 0.9f, 1.0f), Color(0.3f, 0.9f, 0.5f, 1.0f), boolSwitchValue);
+
     	UXX::EndPanel();
 
     	// Swap the back buffer with the front buffer

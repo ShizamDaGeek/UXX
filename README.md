@@ -28,8 +28,12 @@ or support my YouTube channel by Subscribing as well:
 
 
 ## **Windows/Context/Input/Event UXX Supports (So Far):**
+- **GLFW:** yes (I will be using GLFW for a bit before workin support for SDL3 and others)
+- **SDL2:** No
+- **SDL3:** No (If I don't have SDL2 supported what makes you think I supported the third one) 
+- **SFML:** No
+- 
 
 
 
-
-## **Examples Code to Picture:**
+## **Examples from Code to Picture:**

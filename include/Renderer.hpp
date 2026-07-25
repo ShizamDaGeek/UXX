@@ -8,6 +8,8 @@
 #include <string>
 #include <unordered_set>
 #include <unordered_map>
+#include <algorithm>
+#include <cmath>
 
 #include "Texture.hpp"
 #include "VAO.hpp"
@@ -56,9 +58,11 @@ namespace Renderer
     void BeginPanel(Rect PanelRect, Color PanelColor);
     void EndPanel();
 
-    bool DrawButton(Rect ButtonRect, Color ButtonColor, std::string ButtonImagePath);
-    void DrawSlider(Rect SliderRect, Color SliderColor);
-    void DrawSwitch(Rect SwitchRect, Color SwitchColor);
+    bool DrawButton(Rect ButtonRect, Color ButtonColor, Color ButtonHoverColor, Color ButtonClickedColor, std::string ButtonImagePath);
+
+    bool DrawIntSlider(Rect IntSliderRect, Color IntTrackColor, Color IntHandleColor, int& value, int minIntValue, int maxIntValue, int intStep);
+    bool DrawFloatSlider(Rect FloatSliderRect, Color FloatTrackColor, Color FloatHandleColor, float& value, float minFloatValue, float maxFloatValue);
+    bool DrawSwitch(Rect SwitchRect, Color OnColor, Color OffColor, bool& value);
 
     void DrawImage(Rect ImageRect, Color ImageColor, std::string ImagePath);
 

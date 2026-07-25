@@ -78,6 +78,17 @@ namespace Renderer
 
             if (tex) tex->Unbind();
         }
+        // Shared drag math for sliders
+        float SliderDragT(Rect SliderRect, float handleWidth)
+        {
+            bool hoveringTrack = (mousePositionX >= SliderRect.xPos && mousePositionX <= SliderRect.xPos + SliderRect.width &&
+                                    mousePositionY >= SliderRect.yPos && mousePositionY <= SliderRect.yPos + SliderRect.height);
+
+            if (!leftMouseButtonPressed || !hoveringTrack) return -1.0f;
+
+            float newT = (float)(mousePositionX - SliderRect.xPos - handleWidth * 0.5f) / (SliderRect.width - handleWidth);
+            return std::clamp(newT, 0.0f, 1.0f);
+        }
     }
 
     // |=====================================================
@@ -150,26 +161,99 @@ namespace Renderer
     // |=====================================================
     // |---[Common UI stuff]---------------------------------
     // |=====================================================
-    bool DrawButton(Rect ButtonRect, Color ButtonColor, std::string ButtonImagePath)
+    bool DrawButton(Rect ButtonRect, Color ButtonColor, Color ButtonHoverColor, Color ButtonClickedColor, std::string ButtonImagePath)
     {
         if (!panelOpen) return false;
 
-        GLTexture* tex = GetOrLoadTexture(ButtonImagePath);
-        DrawQuad(ButtonRect, ButtonColor, tex);
-
+        // Find out what state the button is on
         bool hovered = (mousePositionX >= ButtonRect.xPos && mousePositionX <= ButtonRect.xPos + ButtonRect.width &&
                         mousePositionY >= ButtonRect.yPos && mousePositionY <= ButtonRect.yPos + ButtonRect.height);
         bool clicked = hovered && leftMouseButtonPressed;
 
+        // Pick color based on state
+        Color finalColor = ButtonColor;
+        if (hovered)
+            finalColor = ButtonHoverColor;
+        if (clicked)
+            finalColor = ButtonClickedColor;
+
+        // Draw button with the colors
+        GLTexture* tex = GetOrLoadTexture(ButtonImagePath);
+        DrawQuad(ButtonRect, finalColor, tex);
+
         return clicked;
     }
-    void DrawSlider(Rect SliderRect, Color SliderColor)
+    bool DrawIntSlider(Rect IntSliderRect, Color IntTrackColor, Color IntHandleColor, int& value, int minIntValue, int maxIntValue, int intStep)
     {
+        if (!panelOpen) return false;
 
+        float handleWidth = IntSliderRect.height;
+        float t = (float)(value - minIntValue) / (float)(maxIntValue - minIntValue);
+        float handleX = IntSliderRect.xPos + t * (IntSliderRect.width - handleWidth);
+        Rect handleRect{ handleX, IntSliderRect.yPos, handleWidth, IntSliderRect.height, 0.0f };
+
+        bool changed = false;
+        float newT = SliderDragT(IntSliderRect, handleWidth);
+        if (newT >= 0.0f)
+        {
+            int steps = (maxIntValue - minIntValue) / std::max(intStep, 1);
+            int newValue = minIntValue + (int)std::round(newT * steps) * intStep;
+            newValue = std::clamp(newValue, minIntValue, maxIntValue);
+            if (newValue != value)
+            {
+                value = newValue;
+                changed = true;
+            }
+        }
+
+        DrawQuad(IntSliderRect, IntTrackColor, nullptr);
+        DrawQuad(handleRect, IntHandleColor, nullptr);
+
+        return changed;
     }
-    void DrawSwitch(Rect SwitchRect, Color SwitchColor)
+    bool DrawFloatSlider(Rect FloatSliderRect, Color FloatTrackColor, Color FloatHandleColor, float& value, float minFloatValue, float maxFloatValue)
     {
+        if (!panelOpen) return false;
 
+        float handleWidth = FloatSliderRect.height;
+        float t = (value - minFloatValue) / (maxFloatValue - minFloatValue);
+        float handleX = FloatSliderRect.xPos + t * (FloatSliderRect.width - handleWidth);
+        Rect handleRect{ handleX, FloatSliderRect.yPos, handleWidth, FloatSliderRect.height, 0.0f };
+
+        bool changed = false;
+        float newT = SliderDragT(FloatSliderRect, handleWidth);
+        if (newT >= 0.0f)
+        {
+            float newValue = minFloatValue + newT * (maxFloatValue - minFloatValue);
+            if (newValue != value)
+            {
+                value = newValue;
+                changed = true;
+            }
+        }
+
+        DrawQuad(FloatSliderRect, FloatTrackColor, nullptr);
+        DrawQuad(handleRect, FloatHandleColor, nullptr);
+
+        return changed;
+    }
+    bool DrawSwitch(Rect SwitchRect, Color OnColor, Color OffColor, bool& value)
+    {
+        if (!panelOpen) return false;
+
+        bool hovered = (mousePositionX >= SwitchRect.xPos && mousePositionX <= SwitchRect.xPos + SwitchRect.width &&
+                        mousePositionY >= SwitchRect.yPos && mousePositionY <= SwitchRect.yPos + SwitchRect.height);
+
+        bool toggled = false;
+        if (hovered && leftMouseButtonPressed)
+        {
+            value = !value;
+            toggled = true;
+        }
+
+        DrawQuad(SwitchRect, value ? OnColor : OffColor, nullptr);
+
+        return toggled;
     }
 
     // |=====================================================
