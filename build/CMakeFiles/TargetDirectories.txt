@@ -1,6 +1,8 @@
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/glad.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/stb_image.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/UXX.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/package.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/package_source.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/edit_cache.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/rebuild_cache.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/list_install_components.dir
@@ -8,6 +10,8 @@
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/install/local.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/CMakeFiles/install/strip.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/CMakeFiles/uninstall.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/CMakeFiles/package.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/CMakeFiles/package_source.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/CMakeFiles/edit_cache.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/CMakeFiles/rebuild_cache.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/CMakeFiles/list_install_components.dir
@@ -16,6 +20,8 @@
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/CMakeFiles/install/strip.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/src/CMakeFiles/glfw.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/src/CMakeFiles/update_mappings.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/src/CMakeFiles/package.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/src/CMakeFiles/package_source.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/src/CMakeFiles/edit_cache.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/src/CMakeFiles/rebuild_cache.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/src/CMakeFiles/list_install_components.dir
@@ -23,9 +29,20 @@
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/src/CMakeFiles/install/local.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/src/CMakeFiles/install/strip.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/docs/CMakeFiles/docs.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/docs/CMakeFiles/package.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/docs/CMakeFiles/package_source.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/docs/CMakeFiles/edit_cache.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/docs/CMakeFiles/rebuild_cache.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/docs/CMakeFiles/list_install_components.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/docs/CMakeFiles/install.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/docs/CMakeFiles/install/local.dir
 /home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/GLFW/docs/CMakeFiles/install/strip.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/FREETYPE/CMakeFiles/freetype.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/FREETYPE/CMakeFiles/package.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/FREETYPE/CMakeFiles/package_source.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/FREETYPE/CMakeFiles/edit_cache.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/FREETYPE/CMakeFiles/rebuild_cache.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/FREETYPE/CMakeFiles/list_install_components.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/FREETYPE/CMakeFiles/install.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/FREETYPE/CMakeFiles/install/local.dir
+/home/shizamda_geek/Documents/ALLCODEHERE/UXX/build/third_party_libs/FREETYPE/CMakeFiles/install/strip.dir

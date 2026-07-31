@@ -13,6 +13,7 @@ include_directories(
     third_party_libs/GLAD/include
     third_party_libs/GLM
     third_party_libs/STB
+    third_party_libs/FREETYPE
 )
 
 
@@ -21,6 +22,8 @@ include_directories(
 add_library(glad STATIC third_party_libs/GLAD/src/glad.c)
 # Add GLFW
 add_subdirectory(third_party_libs/GLFW)
+# Add FREETYPE
+add_subdirectory(third_party_libs/FREETYPE)
 
 
 # Find packages
@@ -48,4 +51,5 @@ target_link_libraries(UXX PRIVATE
     glad
     OpenGL::GL
     stb_image
+    freetype
 )

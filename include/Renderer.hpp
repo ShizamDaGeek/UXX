@@ -16,6 +16,7 @@
 #include "VBO.hpp"
 #include "EBO.hpp"
 #include "Shader.hpp"
+#include "Font.hpp"
 
 struct Rect
 {
@@ -51,20 +52,25 @@ namespace Renderer
     inline float SCREEN_SCALE_X = 1.0f;
     inline float SCREEN_SCALE_Y = 1.0f;
 
+    static Shader* textShader = nullptr;
+    static unsigned int textVAO, textVBO;
+
     void init();
+    void InitTextRendering();
 
     void SetMouseState(double x, double y, bool leftDown, bool rightDown, bool middleDown);
 
     void BeginPanel(Rect PanelRect, Color PanelColor);
     void EndPanel();
 
-    bool DrawButton(Rect ButtonRect, Color ButtonColor, Color ButtonHoverColor, Color ButtonClickedColor, std::string ButtonImagePath);
+    bool Button(Rect ButtonRect, Color ButtonColor, Color ButtonHoverColor, Color ButtonClickedColor, std::string ButtonImagePath);
+    bool IntSlider(Rect IntSliderRect, Color IntTrackColor, Color IntHandleColor, int& value, int minIntValue, int maxIntValue, int intStep);
+    bool FloatSlider(Rect FloatSliderRect, Color FloatTrackColor, Color FloatHandleColor, float& value, float minFloatValue, float maxFloatValue);
+    bool Switch(Rect SwitchRect, Color OnColor, Color OffColor, bool& value);
 
-    bool DrawIntSlider(Rect IntSliderRect, Color IntTrackColor, Color IntHandleColor, int& value, int minIntValue, int maxIntValue, int intStep);
-    bool DrawFloatSlider(Rect FloatSliderRect, Color FloatTrackColor, Color FloatHandleColor, float& value, float minFloatValue, float maxFloatValue);
-    bool DrawSwitch(Rect SwitchRect, Color OnColor, Color OffColor, bool& value);
-
-    void DrawImage(Rect ImageRect, Color ImageColor, std::string ImagePath);
+    void Image(Rect ImageRect, Color ImageColor, std::string ImagePath);
+    void Separator(Rect SeparatorRect);
+    void Text(Rect TextRect, Color TextColor, float TextSize, std::string TextItself, std::string FontPath);
 
     void BlowUp();
 };

@@ -1,0 +1,5547 @@
+{
+  "date": "2026-07-26T19:02:27.801000230+12:00",
+  "data": {
+    "_cpack_set_default": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 559,
+            "character": 9
+          },
+          "end": {
+            "line": 559,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/CPack.cmake\n\nInternal use functions",
+      "is_function": true
+    },
+    "CPACK_BINARY_INNOSETUP": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 745,
+            "character": 11
+          },
+          "end": {
+            "line": 745,
+            "character": 33
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CPACK_BINARY_FREEBSD": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 724,
+            "character": 13
+          },
+          "end": {
+            "line": 724,
+            "character": 33
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "extra_files": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/docs/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 19,
+            "character": 4
+          },
+          "end": {
+            "line": 19,
+            "character": 15
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/docs/CMakeLists.txt",
+      "is_function": false
+    },
+    "_CPACK_ADDCOMP_STR": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 398,
+            "character": 8
+          },
+          "end": {
+            "line": 398,
+            "character": 26
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake",
+      "is_function": false
+    },
+    "CMAKE_MSVC_RUNTIME_LIBRARY": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 98,
+            "character": 12
+          },
+          "end": {
+            "line": 98,
+            "character": 38
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+      "is_function": false
+    },
+    "VERSION_MAJOR": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 135,
+            "character": 4
+          },
+          "end": {
+            "line": 135,
+            "character": 17
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "CPACK_BINARY_7Z": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 743,
+            "character": 11
+          },
+          "end": {
+            "line": 743,
+            "character": 26
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CPACK_SOURCE_RPM": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 790,
+            "character": 13
+          },
+          "end": {
+            "line": 790,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "__LAST_LIBDIR_DEFAULT": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/GNUInstallDirs.cmake",
+        "range": {
+          "start": {
+            "line": 300,
+            "character": 14
+          },
+          "end": {
+            "line": 300,
+            "character": 35
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/GNUInstallDirs.cmake",
+      "is_function": false
+    },
+    "CPACK_IGNORE_FILES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 983,
+            "character": 4
+          },
+          "end": {
+            "line": 983,
+            "character": 22
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CHECK_FUNCTION_EXISTS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckFunctionExists.cmake",
+        "range": {
+          "start": {
+            "line": 52,
+            "character": 6
+          },
+          "end": {
+            "line": 52,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake",
+      "is_function": true
+    },
+    "${_no_cmake_environment_path}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 225,
+            "character": 10
+          },
+          "end": {
+            "line": 225,
+            "character": 39
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "${_extra_paths_var}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 270,
+            "character": 6
+          },
+          "end": {
+            "line": 270,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "_pkgconfig_allow_system_libs_old": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 455,
+            "character": 8
+          },
+          "end": {
+            "line": 455,
+            "character": 40
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "GLFW_BUILD_TESTS": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 18,
+            "character": 7
+          },
+          "end": {
+            "line": 18,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+      "is_function": false
+    },
+    "GLAD_VULKAN": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 15,
+            "character": 4
+          },
+          "end": {
+            "line": 15,
+            "character": 15
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt",
+      "is_function": false
+    },
+    "_next_is_framework": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 305,
+            "character": 12
+          },
+          "end": {
+            "line": 305,
+            "character": 30
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "_CIF_LINK_LIBRARIES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFile.cmake",
+        "range": {
+          "start": {
+            "line": 74,
+            "character": 12
+          },
+          "end": {
+            "line": 74,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake",
+      "is_function": false
+    },
+    "_INCLUDE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+        "range": {
+          "start": {
+            "line": 92,
+            "character": 8
+          },
+          "end": {
+            "line": 92,
+            "character": 16
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+      "is_function": false
+    },
+    "ENV{PKG_CONFIG_PATH}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 471,
+            "character": 8
+          },
+          "end": {
+            "line": 471,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nRestore the environment variable",
+      "is_function": false
+    },
+    "${_var}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 137,
+            "character": 10
+          },
+          "end": {
+            "line": 137,
+            "character": 17
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+      "is_function": false
+    },
+    "GNUInstallDirs_get_absolute_install_dir": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/GNUInstallDirs.cmake",
+        "range": {
+          "start": {
+            "line": 381,
+            "character": 6
+          },
+          "end": {
+            "line": 381,
+            "character": 45
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/GNUInstallDirs.cmake",
+      "is_function": true
+    },
+    "CHECK_COMPILER_FLAG_COMMON_PATTERNS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake",
+        "range": {
+          "start": {
+            "line": 8,
+            "character": 7
+          },
+          "end": {
+            "line": 8,
+            "character": 42
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake",
+      "is_function": true
+    },
+    "CPackComponent_CMake_INCLUDED": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 327,
+            "character": 4
+          },
+          "end": {
+            "line": 327,
+            "character": 33
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake",
+      "is_function": false
+    },
+    "MACRO_CHECK_FUNCTION_DEFINITIONS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckFunctionExists.cmake",
+        "range": {
+          "start": {
+            "line": 54,
+            "character": 8
+          },
+          "end": {
+            "line": 54,
+            "character": 40
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake",
+      "is_function": false
+    },
+    "_pkgconfig_${_varname}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 176,
+            "character": 8
+          },
+          "end": {
+            "line": 176,
+            "character": 30
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nmessage(STATUS \"  ${_varname} ... ${_pkgconfig_invoke_result}\")",
+      "is_function": false
+    },
+    "CPACK_BINARY_TGZ": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 729,
+            "character": 13
+          },
+          "end": {
+            "line": 729,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "_cmake_targets_not_defined": {
+      "location": {
+        "uri": "file:///usr/lib64/cmake/PNG/PNGTargets.cmake",
+        "range": {
+          "start": {
+            "line": 19,
+            "character": 4
+          },
+          "end": {
+            "line": 19,
+            "character": 30
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/lib64/cmake/PNG/PNGTargets.cmake",
+      "is_function": false
+    },
+    "_CFCC_locale_vars": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake",
+        "range": {
+          "start": {
+            "line": 65,
+            "character": 6
+          },
+          "end": {
+            "line": 65,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake\n\nNormalize locale during test compilation.",
+      "is_function": false
+    },
+    "_CPACK_INSTTYPE_STR": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 503,
+            "character": 6
+          },
+          "end": {
+            "line": 503,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake",
+      "is_function": false
+    },
+    "CPACK_SOURCE_TXZ": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 793,
+            "character": 13
+          },
+          "end": {
+            "line": 793,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "_GNUInstallDirs_cache_path_fallback": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/GNUInstallDirs.cmake",
+        "range": {
+          "start": {
+            "line": 181,
+            "character": 6
+          },
+          "end": {
+            "line": 181,
+            "character": 41
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/GNUInstallDirs.cmake\n\nDATAROOTDIR.",
+      "is_function": true
+    },
+    "_GNUInstallDirs_cache_path": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/GNUInstallDirs.cmake",
+        "range": {
+          "start": {
+            "line": 171,
+            "character": 6
+          },
+          "end": {
+            "line": 171,
+            "character": 32
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/GNUInstallDirs.cmake\n\nCreate a cache variable with default for a path.",
+      "is_function": true
+    },
+    "GLFW_LIB_NAME_SUFFIX": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 306,
+            "character": 13
+          },
+          "end": {
+            "line": 306,
+            "character": 33
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+      "is_function": false
+    },
+    "GLFW_PKG_CONFIG_LIBS_PRIVATE": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 355,
+            "character": 4
+          },
+          "end": {
+            "line": 355,
+            "character": 32
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+      "is_function": false
+    },
+    "CPACK_BINARY_TZ": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 720,
+            "character": 15
+          },
+          "end": {
+            "line": 720,
+            "character": 30
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CONSOLE_BINARIES": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 52,
+            "character": 4
+          },
+          "end": {
+            "line": 52,
+            "character": 20
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt",
+      "is_function": false
+    },
+    "CPACK_INSTALL_CMAKE_PROJECTS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 978,
+            "character": 4
+          },
+          "end": {
+            "line": 978,
+            "character": 32
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "DOXYGEN_SKIP_DOT": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/docs/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 33,
+            "character": 4
+          },
+          "end": {
+            "line": 33,
+            "character": 20
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/docs/CMakeLists.txt",
+      "is_function": false
+    },
+    "_lang_textual": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 37,
+            "character": 10
+          },
+          "end": {
+            "line": 37,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+      "is_function": false
+    },
+    "${_list}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 698,
+            "character": 8
+          },
+          "end": {
+            "line": 698,
+            "character": 16
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "options": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 405,
+            "character": 6
+          },
+          "end": {
+            "line": 405,
+            "character": 13
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "__cpack_system_name": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 653,
+            "character": 8
+          },
+          "end": {
+            "line": 653,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CVF_VERSION": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/WriteBasicConfigVersionFile.cmake",
+        "range": {
+          "start": {
+            "line": 44,
+            "character": 10
+          },
+          "end": {
+            "line": 44,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/WriteBasicConfigVersionFile.cmake",
+      "is_function": false
+    },
+    "CMAKE_DEBUG_POSTFIX": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 334,
+            "character": 6
+          },
+          "end": {
+            "line": 334,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "CPACK_BINARY_CYGWIN": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 708,
+            "character": 13
+          },
+          "end": {
+            "line": 708,
+            "character": 32
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "_FAIL_REGEX": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 54,
+            "character": 8
+          },
+          "end": {
+            "line": 54,
+            "character": 19
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+      "is_function": false
+    },
+    "CHECK_${LANG}_SOURCE_COMPILES_ADD_LIBRARIES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 87,
+            "character": 10
+          },
+          "end": {
+            "line": 87,
+            "character": 53
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+      "is_function": false
+    },
+    "CPACK_COMPONENT_HEADERS_DISPLAY_NAME": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 500,
+            "character": 4
+          },
+          "end": {
+            "line": 500,
+            "character": 40
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "CPACK_COMPONENTS_ALL": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 947,
+            "character": 10
+          },
+          "end": {
+            "line": 947,
+            "character": 30
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake\n\nbecome one later if the user uses the cpack_add_* commands).",
+      "is_function": false
+    },
+    "CPACK_COMPONENTS_ALL_SET_BY_USER": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 934,
+            "character": 8
+          },
+          "end": {
+            "line": 934,
+            "character": 40
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake\n\npart of a component-based installation; trust her.",
+      "is_function": false
+    },
+    "${option}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakeDependentOption.cmake",
+        "range": {
+          "start": {
+            "line": 84,
+            "character": 8
+          },
+          "end": {
+            "line": 84,
+            "character": 17
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakeDependentOption.cmake",
+      "is_function": false
+    },
+    "__cpack_source_ignore_files_default": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 970,
+            "character": 4
+          },
+          "end": {
+            "line": 970,
+            "character": 39
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "_pkgconfig_allow_system_cflags_old": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 461,
+            "character": 8
+          },
+          "end": {
+            "line": 461,
+            "character": 42
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "${_prefix}_LIBRARIES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 510,
+            "character": 6
+          },
+          "end": {
+            "line": 510,
+            "character": 26
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "${option}_AVAILABLE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakeDependentOption.cmake",
+        "range": {
+          "start": {
+            "line": 69,
+            "character": 14
+          },
+          "end": {
+            "line": 69,
+            "character": 33
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakeDependentOption.cmake",
+      "is_function": false
+    },
+    "CPACK_DOWNLOAD_ADD_REMOVE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 541,
+            "character": 8
+          },
+          "end": {
+            "line": 541,
+            "character": 33
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake",
+      "is_function": false
+    },
+    "_CIF_CMP0075_WARNED": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFile.cmake",
+        "range": {
+          "start": {
+            "line": 77,
+            "character": 12
+          },
+          "end": {
+            "line": 77,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake",
+      "is_function": false
+    },
+    "cpack_append_option_set_command": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 376,
+            "character": 6
+          },
+          "end": {
+            "line": 376,
+            "character": 37
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake\n\nappended to a CPack configuration file.",
+      "is_function": true
+    },
+    "CMAKE_CHECK_FLAG_COMMON_INIT": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 6
+          },
+          "end": {
+            "line": 14,
+            "character": 34
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake",
+      "is_function": true
+    },
+    "_IMPORT_PREFIX": {
+      "location": {
+        "uri": "file:///usr/lib64/cmake/PNG/PNGTargets.cmake",
+        "range": {
+          "start": {
+            "line": 93,
+            "character": 4
+          },
+          "end": {
+            "line": 93,
+            "character": 18
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/lib64/cmake/PNG/PNGTargets.cmake\n\nCleanup temporary variables.",
+      "is_function": false
+    },
+    "CPACK_COMPONENTS_LEN": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 949,
+            "character": 8
+          },
+          "end": {
+            "line": 949,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CHECK_FUNCTION_EXISTS_ADD_LIBRARIES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckFunctionExists.cmake",
+        "range": {
+          "start": {
+            "line": 69,
+            "character": 10
+          },
+          "end": {
+            "line": 69,
+            "character": 45
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake",
+      "is_function": false
+    },
+    "glfw_PKG_DEPS": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 155,
+            "character": 8
+          },
+          "end": {
+            "line": 155,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+      "is_function": false
+    },
+    "CPACK_DEFAULT_PACKAGE_DESCRIPTION_SUMMARY": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 598,
+            "character": 4
+          },
+          "end": {
+            "line": 598,
+            "character": 45
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "_pkgconfig_parse_options": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 197,
+            "character": 6
+          },
+          "end": {
+            "line": 197,
+            "character": 30
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nSplits given arguments into options and a package list",
+      "is_function": true
+    },
+    "_is_env": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 257,
+            "character": 8
+          },
+          "end": {
+            "line": 257,
+            "character": 15
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "CPACK_COMPONENT_UNSPECIFIED_REQUIRED": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 958,
+            "character": 4
+          },
+          "end": {
+            "line": 958,
+            "character": 40
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "${_SRC}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake",
+        "range": {
+          "start": {
+            "line": 53,
+            "character": 8
+          },
+          "end": {
+            "line": 53,
+            "character": 15
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake",
+      "is_function": false
+    },
+    "${_OUTPUT_VARIABLE}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 125,
+            "character": 10
+          },
+          "end": {
+            "line": 125,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+      "is_function": false
+    },
+    "GLAD_GL": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 4
+          },
+          "end": {
+            "line": 14,
+            "character": 11
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt",
+      "is_function": false
+    },
+    "_cmake_expected_targets": {
+      "location": {
+        "uri": "file:///usr/lib64/cmake/PNG/PNGTargets.cmake",
+        "range": {
+          "start": {
+            "line": 20,
+            "character": 4
+          },
+          "end": {
+            "line": 20,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/lib64/cmake/PNG/PNGTargets.cmake",
+      "is_function": false
+    },
+    "_indent": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 668,
+            "character": 8
+          },
+          "end": {
+            "line": 668,
+            "character": 15
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "CPACK_BINARY_NSIS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 744,
+            "character": 11
+          },
+          "end": {
+            "line": 744,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "_pkgconfig_invoke": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 141,
+            "character": 6
+          },
+          "end": {
+            "line": 141,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nInvokes pkgconfig, cleans up the result and sets variables",
+      "is_function": true
+    },
+    "versionTemplateFile": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/WriteBasicConfigVersionFile.cmake",
+        "range": {
+          "start": {
+            "line": 35,
+            "character": 6
+          },
+          "end": {
+            "line": 35,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/WriteBasicConfigVersionFile.cmake",
+      "is_function": false
+    },
+    "_PKG_CONFIG_VALIDATOR": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 70,
+            "character": 6
+          },
+          "end": {
+            "line": 70,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "CHECK_FUNCTION_EXISTS_ADD_INCLUDES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckFunctionExists.cmake",
+        "range": {
+          "start": {
+            "line": 81,
+            "character": 10
+          },
+          "end": {
+            "line": 81,
+            "character": 44
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake",
+      "is_function": false
+    },
+    "PKG_CONFIG_FOUND": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 121,
+            "character": 4
+          },
+          "end": {
+            "line": 121,
+            "character": 20
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nhandled by FPHSA.",
+      "is_function": false
+    },
+    "CPACK_CONFIG_DL_STR": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 527,
+            "character": 6
+          },
+          "end": {
+            "line": 527,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake",
+      "is_function": false
+    },
+    "CMAKE_CHECK_COMPILER_FLAG": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake",
+        "range": {
+          "start": {
+            "line": 8,
+            "character": 9
+          },
+          "end": {
+            "line": 8,
+            "character": 34
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake",
+      "is_function": true
+    },
+    "CHECK_${LANG}_SOURCE_COMPILES_ADD_INCLUDES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 100,
+            "character": 10
+          },
+          "end": {
+            "line": 100,
+            "character": 52
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+      "is_function": false
+    },
+    "CMAKE_IMPORT_FILE_VERSION": {
+      "location": {
+        "uri": "file:///usr/lib64/cmake/PNG/PNGTargets.cmake",
+        "range": {
+          "start": {
+            "line": 124,
+            "character": 4
+          },
+          "end": {
+            "line": 124,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/lib64/cmake/PNG/PNGTargets.cmake\n\nCommands beyond this point should not need to know the version.",
+      "is_function": false
+    },
+    "_cpack_escape_for_cmake": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 565,
+            "character": 9
+          },
+          "end": {
+            "line": 565,
+            "character": 32
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": true
+    },
+    "${absvar}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/GNUInstallDirs.cmake",
+        "range": {
+          "start": {
+            "line": 424,
+            "character": 8
+          },
+          "end": {
+            "line": 424,
+            "character": 17
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/GNUInstallDirs.cmake",
+      "is_function": false
+    },
+    "CPACK_BINARY_ZIP": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 748,
+            "character": 11
+          },
+          "end": {
+            "line": 748,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "protocol_path": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 79,
+            "character": 12
+          },
+          "end": {
+            "line": 79,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+      "is_function": false
+    },
+    "CPACK_BINARY_DRAGNDROP": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 712,
+            "character": 15
+          },
+          "end": {
+            "line": 712,
+            "character": 37
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "_pkg_check_modules_failed": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 583,
+            "character": 8
+          },
+          "end": {
+            "line": 583,
+            "character": 33
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "_CMAKE_CHECK_FLAG_COMMON_CONFIG_locale_vars_saved_${v}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake",
+        "range": {
+          "start": {
+            "line": 67,
+            "character": 8
+          },
+          "end": {
+            "line": 67,
+            "character": 62
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake",
+      "is_function": false
+    },
+    "multiValueArgs": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 407,
+            "character": 6
+          },
+          "end": {
+            "line": 407,
+            "character": 20
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "CHECK_C_COMPILER_FLAG": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckCCompilerFlag.cmake",
+        "range": {
+          "start": {
+            "line": 54,
+            "character": 7
+          },
+          "end": {
+            "line": 54,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CheckCCompilerFlag.cmake",
+      "is_function": true
+    },
+    "FT_WITH_BZIP2": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 154,
+            "character": 7
+          },
+          "end": {
+            "line": 154,
+            "character": 20
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "MACRO_CHECK_INCLUDE_FILES_FLAGS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+        "range": {
+          "start": {
+            "line": 84,
+            "character": 8
+          },
+          "end": {
+            "line": 84,
+            "character": 39
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+      "is_function": false
+    },
+    "cpack_encode_variables": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 540,
+            "character": 9
+          },
+          "end": {
+            "line": 540,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/CPack.cmake\n\nused as an @ replacement in configure_file for the CPackConfig.",
+      "is_function": true
+    },
+    "PKG_CONFIG_EXECUTABLE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 105,
+            "character": 8
+          },
+          "end": {
+            "line": 105,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "${_imp_target_global}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 231,
+            "character": 10
+          },
+          "end": {
+            "line": 231,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "BUILD_SHARED_LIBS": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 182,
+            "character": 6
+          },
+          "end": {
+            "line": 182,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "PKG_CONFIG_NAMES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 55,
+            "character": 4
+          },
+          "end": {
+            "line": 55,
+            "character": 20
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "outflags": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 519,
+            "character": 6
+          },
+          "end": {
+            "line": 519,
+            "character": 14
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "config_file": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 649,
+            "character": 8
+          },
+          "end": {
+            "line": 649,
+            "character": 19
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "CPACK_SOURCE_TGZ": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 792,
+            "character": 13
+          },
+          "end": {
+            "line": 792,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CVF_ARCH_INDEPENDENT_CHECK": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/WriteBasicConfigVersionFile.cmake",
+        "range": {
+          "start": {
+            "line": 49,
+            "character": 8
+          },
+          "end": {
+            "line": 49,
+            "character": 34
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/WriteBasicConfigVersionFile.cmake",
+      "is_function": false
+    },
+    "CPACK_PACKAGE_VERSION": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 588,
+            "character": 6
+          },
+          "end": {
+            "line": 588,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "_config_file": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 552,
+            "character": 10
+          },
+          "end": {
+            "line": 552,
+            "character": 22
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "CVF_VERSION_MINOR": {
+      "location": {
+        "uri": "file:///usr/lib64/cmake/PNG/PNGConfigVersion.cmake",
+        "range": {
+          "start": {
+            "line": 30,
+            "character": 8
+          },
+          "end": {
+            "line": 30,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/lib64/cmake/PNG/PNGConfigVersion.cmake",
+      "is_function": false
+    },
+    "_pkgconfig_extract_frameworks": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 493,
+            "character": 9
+          },
+          "end": {
+            "line": 493,
+            "character": 38
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nnot incorrectly be combined to \"-framework a b\"",
+      "is_function": true
+    },
+    "_LIBDIR_DEFAULT": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/GNUInstallDirs.cmake",
+        "range": {
+          "start": {
+            "line": 298,
+            "character": 12
+          },
+          "end": {
+            "line": 298,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/GNUInstallDirs.cmake",
+      "is_function": false
+    },
+    "_multiValueArgs": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 978,
+            "character": 6
+          },
+          "end": {
+            "line": 978,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "ENV{${v}}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake",
+        "range": {
+          "start": {
+            "line": 74,
+            "character": 8
+          },
+          "end": {
+            "line": 74,
+            "character": 17
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake",
+      "is_function": false
+    },
+    "_lang_ext": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 38,
+            "character": 10
+          },
+          "end": {
+            "line": 38,
+            "character": 19
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+      "is_function": false
+    },
+    "_key": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 67,
+            "character": 12
+          },
+          "end": {
+            "line": 67,
+            "character": 16
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+      "is_function": false
+    },
+    "src": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+        "range": {
+          "start": {
+            "line": 73,
+            "character": 10
+          },
+          "end": {
+            "line": 73,
+            "character": 13
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+      "is_function": false
+    },
+    "CHECK_${LANG}_SOURCE_COMPILES_ADD_LINK_OPTIONS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 81,
+            "character": 10
+          },
+          "end": {
+            "line": 81,
+            "character": 56
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+      "is_function": false
+    },
+    "CPACK_BINARY_RPM": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 726,
+            "character": 13
+          },
+          "end": {
+            "line": 726,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CPACK_SOURCE_TBZ2": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 791,
+            "character": 13
+          },
+          "end": {
+            "line": 791,
+            "character": 30
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "conda_prefix": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/GNUInstallDirs.cmake",
+        "range": {
+          "start": {
+            "line": 267,
+            "character": 10
+          },
+          "end": {
+            "line": 267,
+            "character": 22
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/GNUInstallDirs.cmake",
+      "is_function": false
+    },
+    "CPACK_PACKAGE_DESCRIPTION_FILE": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 485,
+            "character": 4
+          },
+          "end": {
+            "line": 485,
+            "character": 34
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "_OUTPUT_VARIABLE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 66,
+            "character": 12
+          },
+          "end": {
+            "line": 66,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+      "is_function": false
+    },
+    "${_PATTERNS}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake",
+        "range": {
+          "start": {
+            "line": 48,
+            "character": 8
+          },
+          "end": {
+            "line": 48,
+            "character": 20
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake",
+      "is_function": false
+    },
+    "_config_file_options": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 511,
+            "character": 6
+          },
+          "end": {
+            "line": 511,
+            "character": 26
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "_multi": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 580,
+            "character": 6
+          },
+          "end": {
+            "line": 580,
+            "character": 12
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "cpack_configure_downloads": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 519,
+            "character": 6
+          },
+          "end": {
+            "line": 519,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake",
+      "is_function": true
+    },
+    "cpack_optional_append": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 696,
+            "character": 6
+          },
+          "end": {
+            "line": 696,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": true
+    },
+    "GLFW_LIB_NAME": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 117,
+            "character": 8
+          },
+          "end": {
+            "line": 117,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+      "is_function": false
+    },
+    "GGAID_extra_args": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/GNUInstallDirs.cmake",
+        "range": {
+          "start": {
+            "line": 382,
+            "character": 6
+          },
+          "end": {
+            "line": 382,
+            "character": 22
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/GNUInstallDirs.cmake",
+      "is_function": false
+    },
+    "_PKG_CONFIG_FAILURE_MESSAGE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 85,
+            "character": 4
+          },
+          "end": {
+            "line": 85,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "FT_WITH_ZLIB": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 153,
+            "character": 7
+          },
+          "end": {
+            "line": 153,
+            "character": 19
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt\n\ninstead of \"BZIP2\").",
+      "is_function": false
+    },
+    "_pkg_check_modules_internal": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 545,
+            "character": 6
+          },
+          "end": {
+            "line": 545,
+            "character": 33
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n##",
+      "is_function": true
+    },
+    "TINYCTHREAD": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 18,
+            "character": 4
+          },
+          "end": {
+            "line": 18,
+            "character": 15
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt",
+      "is_function": false
+    },
+    "WRITE_BASIC_CONFIG_VERSION_FILE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/WriteBasicConfigVersionFile.cmake",
+        "range": {
+          "start": {
+            "line": 23,
+            "character": 9
+          },
+          "end": {
+            "line": 23,
+            "character": 40
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/WriteBasicConfigVersionFile.cmake",
+      "is_function": true
+    },
+    "CPACK_BINARY_STGZ": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 727,
+            "character": 13
+          },
+          "end": {
+            "line": 727,
+            "character": 30
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CPACK_DEFAULT_PACKAGE_DESCRIPTION_FILE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 611,
+            "character": 4
+          },
+          "end": {
+            "line": 611,
+            "character": 42
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CPACK_BINARY_IFW": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 758,
+            "character": 9
+          },
+          "end": {
+            "line": 758,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CPACK_COMPONENT_HEADERS_GROUP": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 507,
+            "character": 4
+          },
+          "end": {
+            "line": 507,
+            "character": 33
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "${_prefix}_INCLUDE_DIRS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 541,
+            "character": 6
+          },
+          "end": {
+            "line": 541,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "CPack_CMake_INCLUDED": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 511,
+            "character": 6
+          },
+          "end": {
+            "line": 511,
+            "character": 26
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "absInstallDir": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 434,
+            "character": 8
+          },
+          "end": {
+            "line": 434,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "cpack_add_component_group": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 459,
+            "character": 6
+          },
+          "end": {
+            "line": 459,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake\n\nMacro that adds a component group to the CPack installer",
+      "is_function": true
+    },
+    "CPACK_PACKAGE_VERSION_MAJOR": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 488,
+            "character": 4
+          },
+          "end": {
+            "line": 488,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "CPACK_PACKAGE_NAME": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 483,
+            "character": 4
+          },
+          "end": {
+            "line": 483,
+            "character": 22
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt\n\nPackaging",
+      "is_function": false
+    },
+    "CPACK_ADD_REMOVE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 543,
+            "character": 6
+          },
+          "end": {
+            "line": 543,
+            "character": 22
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake",
+      "is_function": false
+    },
+    "_GNUInstallDirs_cache_convert_to_path": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/GNUInstallDirs.cmake",
+        "range": {
+          "start": {
+            "line": 158,
+            "character": 6
+          },
+          "end": {
+            "line": 158,
+            "character": 43
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/GNUInstallDirs.cmake",
+      "is_function": true
+    },
+    "__FindPkgConfig_EXECUTABLE_VALIDATOR": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 59,
+            "character": 11
+          },
+          "end": {
+            "line": 59,
+            "character": 47
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": true
+    },
+    "_pkgconfig_path": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 388,
+            "character": 8
+          },
+          "end": {
+            "line": 388,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "_pkg_check_modules_packages": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 582,
+            "character": 8
+          },
+          "end": {
+            "line": 582,
+            "character": 35
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "CPACK_INSTALLED_DIRECTORIES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 979,
+            "character": 4
+          },
+          "end": {
+            "line": 979,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "cpack_append_list_variable_set_command": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 362,
+            "character": 6
+          },
+          "end": {
+            "line": 362,
+            "character": 44
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake\n\nThe string will eventually be appended to a CPack configuration file.",
+      "is_function": true
+    },
+    "GLFW_INSTALL": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 20,
+            "character": 7
+          },
+          "end": {
+            "line": 20,
+            "character": 19
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+      "is_function": false
+    },
+    "pkg_get_variable": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 977,
+            "character": 10
+          },
+          "end": {
+            "line": 977,
+            "character": 26
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": true
+    },
+    "_options": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 573,
+            "character": 6
+          },
+          "end": {
+            "line": 573,
+            "character": 14
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "maybe_else": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 657,
+            "character": 8
+          },
+          "end": {
+            "line": 657,
+            "character": 18
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "value": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 548,
+            "character": 12
+          },
+          "end": {
+            "line": 548,
+            "character": 17
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "cflags": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 518,
+            "character": 6
+          },
+          "end": {
+            "line": 518,
+            "character": 12
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "GLFW_PKG_CONFIG_REQUIRES_PRIVATE": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 353,
+            "character": 4
+          },
+          "end": {
+            "line": 353,
+            "character": 36
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+      "is_function": false
+    },
+    "PKG_CONFIG_ARGN": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 106,
+            "character": 8
+          },
+          "end": {
+            "line": 106,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "cpack_set_if_not_set": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 530,
+            "character": 6
+          },
+          "end": {
+            "line": 530,
+            "character": 26
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CPack.cmake\n\nMangles CMake-special characters. Only kept for backwards compatibility.",
+      "is_function": true
+    },
+    "CPACK_SOURCE_ZIP": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 807,
+            "character": 11
+          },
+          "end": {
+            "line": 807,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "ENV{PKG_CONFIG_ALLOW_SYSTEM_CFLAGS}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 480,
+            "character": 8
+          },
+          "end": {
+            "line": 480,
+            "character": 43
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "FT_WITH_HARFBUZZ": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 156,
+            "character": 7
+          },
+          "end": {
+            "line": 156,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "CPACK_COMPONENT_LIBRARIES_DISPLAY_NAME": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 499,
+            "character": 4
+          },
+          "end": {
+            "line": 499,
+            "character": 42
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "_pkg_check_modules_pkg_ver": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 599,
+            "character": 12
+          },
+          "end": {
+            "line": 599,
+            "character": 38
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "CMAKE_CHECK_FLAG_COMMON_FINISH": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake",
+        "range": {
+          "start": {
+            "line": 72,
+            "character": 6
+          },
+          "end": {
+            "line": 72,
+            "character": 36
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake",
+      "is_function": true
+    },
+    "header_paths": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/docs/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 21,
+            "character": 4
+          },
+          "end": {
+            "line": 21,
+            "character": 16
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/docs/CMakeLists.txt",
+      "is_function": false
+    },
+    "CHECK_INCLUDE_FILE_VAR": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFile.cmake",
+        "range": {
+          "start": {
+            "line": 52,
+            "character": 8
+          },
+          "end": {
+            "line": 52,
+            "character": 30
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake",
+      "is_function": false
+    },
+    "GLFW_BUILD_DOCS": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 19,
+            "character": 7
+          },
+          "end": {
+            "line": 19,
+            "character": 22
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+      "is_function": false
+    },
+    "_pkg_get_variable": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 182,
+            "character": 10
+          },
+          "end": {
+            "line": 182,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nInternal version of pkg_get_variable; expects PKG_CONFIG_PATH to already be set",
+      "is_function": true
+    },
+    "CPACK_BINARY_PRODUCTBUILD": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 713,
+            "character": 15
+          },
+          "end": {
+            "line": 713,
+            "character": 40
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CPACK_SOURCE_7Z": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 806,
+            "character": 11
+          },
+          "end": {
+            "line": 806,
+            "character": 26
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "_pkgconfig_extract_isystem": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 517,
+            "character": 9
+          },
+          "end": {
+            "line": 517,
+            "character": 35
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nthe actual path",
+      "is_function": true
+    },
+    "oneValueArgs": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 406,
+            "character": 6
+          },
+          "end": {
+            "line": 406,
+            "character": 18
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "CPACK_COMPONENT_LIBRARIES_DESCRIPTION": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 501,
+            "character": 4
+          },
+          "end": {
+            "line": 501,
+            "character": 41
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "cpack_append_string_variable_set_command": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 348,
+            "character": 9
+          },
+          "end": {
+            "line": 348,
+            "character": 49
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake\n\nappended to a CPack configuration file.",
+      "is_function": true
+    },
+    "PACKAGE_VERSION_EXACT": {
+      "location": {
+        "uri": "file:///usr/lib64/cmake/PNG/PNGConfigVersion.cmake",
+        "range": {
+          "start": {
+            "line": 68,
+            "character": 10
+          },
+          "end": {
+            "line": 68,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/lib64/cmake/PNG/PNGConfigVersion.cmake",
+      "is_function": false
+    },
+    "CPACK_UPLOAD_DIRECTORY": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 529,
+            "character": 6
+          },
+          "end": {
+            "line": 529,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake",
+      "is_function": false
+    },
+    "CPACK_NSIS_MODIFY_PATH": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 645,
+            "character": 6
+          },
+          "end": {
+            "line": 645,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "GLAD_GLES2": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/examples/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 21,
+            "character": 4
+          },
+          "end": {
+            "line": 21,
+            "character": 14
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/examples/CMakeLists.txt",
+      "is_function": false
+    },
+    "_pkg_search": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 302,
+            "character": 10
+          },
+          "end": {
+            "line": 302,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "CPACK_PACKAGE_RELOCATABLE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 682,
+            "character": 6
+          },
+          "end": {
+            "line": 682,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "_CPACK_OTHER_VARIABLES_": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 555,
+            "character": 6
+          },
+          "end": {
+            "line": 555,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "\"${var}\"": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 567,
+            "character": 6
+          },
+          "end": {
+            "line": 567,
+            "character": 14
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "_pkg_check_modules_exist_query": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 589,
+            "character": 10
+          },
+          "end": {
+            "line": 589,
+            "character": 40
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "GGAID_dir": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/GNUInstallDirs.cmake",
+        "range": {
+          "start": {
+            "line": 388,
+            "character": 8
+          },
+          "end": {
+            "line": 388,
+            "character": 17
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/GNUInstallDirs.cmake\n\nHistorical behavior: use ${dir} from caller's scope",
+      "is_function": false
+    },
+    "cpack_add_component": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 386,
+            "character": 6
+          },
+          "end": {
+            "line": 386,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake\n\nMacro that adds a component to the CPack installer",
+      "is_function": true
+    },
+    "_src_content": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+        "range": {
+          "start": {
+            "line": 51,
+            "character": 8
+          },
+          "end": {
+            "line": 51,
+            "character": 20
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+      "is_function": false
+    },
+    "_pkg_restore_path_internal": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 468,
+            "character": 6
+          },
+          "end": {
+            "line": 468,
+            "character": 32
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": true
+    },
+    "VERSION_MINOR": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 136,
+            "character": 4
+          },
+          "end": {
+            "line": 136,
+            "character": 17
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "\"${result_var}\"": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 66,
+            "character": 10
+          },
+          "end": {
+            "line": 66,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "GLFW_LIBRARY_TYPE": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 44,
+            "character": 4
+          },
+          "end": {
+            "line": 44,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+      "is_function": false
+    },
+    "_pkg_set_path_internal": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 369,
+            "character": 6
+          },
+          "end": {
+            "line": 369,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n##",
+      "is_function": true
+    },
+    "${_prefix}_CFLAGS_OTHER": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 540,
+            "character": 6
+          },
+          "end": {
+            "line": 540,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "CPACK_SOURCE_TZ": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 794,
+            "character": 13
+          },
+          "end": {
+            "line": 794,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "\"${result}\"": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 992,
+            "character": 6
+          },
+          "end": {
+            "line": 992,
+            "character": 17
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "CPACK_BINARY_NUGET": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 746,
+            "character": 11
+          },
+          "end": {
+            "line": 746,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "_branch_${_opt}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 560,
+            "character": 10
+          },
+          "end": {
+            "line": 560,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "_pkgconfig_add_extra_path": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 253,
+            "character": 9
+          },
+          "end": {
+            "line": 253,
+            "character": 34
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n- _pkgconfig_add_extra_path(_extra_paths ENV VAR)",
+      "is_function": true
+    },
+    "PKG_CONFIG_REQUIRED_PRIVATE": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 392,
+            "character": 4
+          },
+          "end": {
+            "line": 392,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "PKG_CONFIG_VERSION": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 40,
+            "character": 4
+          },
+          "end": {
+            "line": 40,
+            "character": 22
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n## Common stuff ####",
+      "is_function": false
+    },
+    "_pkg_check_modules_pkg_op": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 598,
+            "character": 12
+          },
+          "end": {
+            "line": 598,
+            "character": 37
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "_branch_INIT": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 546,
+            "character": 8
+          },
+          "end": {
+            "line": 546,
+            "character": 20
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "_global_opt": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 334,
+            "character": 10
+          },
+          "end": {
+            "line": 334,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "cpack_check_file_exists": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 685,
+            "character": 6
+          },
+          "end": {
+            "line": 685,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": true
+    },
+    "CMAKE_INSTALL_LIBDIR": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/GNUInstallDirs.cmake",
+        "range": {
+          "start": {
+            "line": 308,
+            "character": 8
+          },
+          "end": {
+            "line": 308,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/GNUInstallDirs.cmake",
+      "is_function": false
+    },
+    "PACKAGE_VERSION": {
+      "location": {
+        "uri": "file:///usr/lib64/cmake/PNG/PNGConfigVersion.cmake",
+        "range": {
+          "start": {
+            "line": 82,
+            "character": 6
+          },
+          "end": {
+            "line": 82,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/lib64/cmake/PNG/PNGConfigVersion.cmake",
+      "is_function": false
+    },
+    "_pkgconfig_invoke_result": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 167,
+            "character": 12
+          },
+          "end": {
+            "line": 167,
+            "character": 36
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "generate_apple_architecture_selection_file": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 572,
+            "character": 9
+          },
+          "end": {
+            "line": 572,
+            "character": 51
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": true
+    },
+    "CMAKE_TOOLCHAIN_FILE": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 123,
+            "character": 8
+          },
+          "end": {
+            "line": 123,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "__cpack_root_default": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 664,
+            "character": 6
+          },
+          "end": {
+            "line": 664,
+            "character": 26
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CPACK_TOPLEVEL_TAG": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 981,
+            "character": 4
+          },
+          "end": {
+            "line": 981,
+            "character": 22
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "pkg_check_modules": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 866,
+            "character": 6
+          },
+          "end": {
+            "line": 866,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": true
+    },
+    "PACKAGE_VERSION_UNSUITABLE": {
+      "location": {
+        "uri": "file:///usr/lib64/cmake/PNG/PNGConfigVersion.cmake",
+        "range": {
+          "start": {
+            "line": 83,
+            "character": 6
+          },
+          "end": {
+            "line": 83,
+            "character": 32
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/lib64/cmake/PNG/PNGConfigVersion.cmake",
+      "is_function": false
+    },
+    "next_is_isystem": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 531,
+            "character": 10
+          },
+          "end": {
+            "line": 531,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "WRITE_BASIC_PACKAGE_VERSION_FILE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 400,
+            "character": 6
+          },
+          "end": {
+            "line": 400,
+            "character": 38
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": true
+    },
+    "ICON": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/examples/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 17,
+            "character": 8
+          },
+          "end": {
+            "line": 17,
+            "character": 12
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/examples/CMakeLists.txt",
+      "is_function": false
+    },
+    "CHECK_INCLUDE_FILES_INCLUDE_DIRS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+        "range": {
+          "start": {
+            "line": 81,
+            "character": 10
+          },
+          "end": {
+            "line": 81,
+            "character": 42
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+      "is_function": false
+    },
+    "CPACK_NSIS_DISPLAY_NAME_SET": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 832,
+            "character": 6
+          },
+          "end": {
+            "line": 832,
+            "character": 33
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "GLFW_BUILD_SHARED_LIBRARY": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 54,
+            "character": 8
+          },
+          "end": {
+            "line": 54,
+            "character": 33
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+      "is_function": false
+    },
+    "BASE_SRCS": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 276,
+            "character": 4
+          },
+          "end": {
+            "line": 276,
+            "character": 13
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "_lang": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+        "range": {
+          "start": {
+            "line": 62,
+            "character": 10
+          },
+          "end": {
+            "line": 62,
+            "character": 15
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+      "is_function": false
+    },
+    "${_imp_target}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 228,
+            "character": 10
+          },
+          "end": {
+            "line": 228,
+            "character": 24
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "ldflags": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 494,
+            "character": 6
+          },
+          "end": {
+            "line": 494,
+            "character": 13
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "cpack_input_file": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 517,
+            "character": 6
+          },
+          "end": {
+            "line": 517,
+            "character": 22
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "VERSION_PATCH": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 137,
+            "character": 4
+          },
+          "end": {
+            "line": 137,
+            "character": 17
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "CPACK_BINARY_TBZ2": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 728,
+            "character": 13
+          },
+          "end": {
+            "line": 728,
+            "character": 30
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CPACK_SOURCE_CYGWIN": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 787,
+            "character": 13
+          },
+          "end": {
+            "line": 787,
+            "character": 32
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CPACK_BINARY_WIX": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 747,
+            "character": 11
+          },
+          "end": {
+            "line": 747,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CHECK_INCLUDE_FILES_CONTENT": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+        "range": {
+          "start": {
+            "line": 83,
+            "character": 8
+          },
+          "end": {
+            "line": 83,
+            "character": 35
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+      "is_function": false
+    },
+    "_CPACK_ADDGRP_STR": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 468,
+            "character": 6
+          },
+          "end": {
+            "line": 468,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake",
+      "is_function": false
+    },
+    "_pkg_create_imp_target": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 331,
+            "character": 9
+          },
+          "end": {
+            "line": 331,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\ncreate an imported target from all the information returned by pkg-config",
+      "is_function": true
+    },
+    "MACRO_CHECK_INCLUDE_FILE_FLAGS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFile.cmake",
+        "range": {
+          "start": {
+            "line": 51,
+            "character": 8
+          },
+          "end": {
+            "line": 51,
+            "character": 38
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake",
+      "is_function": false
+    },
+    "CPACK_RESOURCE_FILE_LICENSE": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 486,
+            "character": 4
+          },
+          "end": {
+            "line": 486,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "${strvar}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 354,
+            "character": 8
+          },
+          "end": {
+            "line": 354,
+            "character": 17
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake",
+      "is_function": false
+    },
+    "FT_WITH_PNG": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 155,
+            "character": 7
+          },
+          "end": {
+            "line": 155,
+            "character": 18
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "${_no_cmake_path}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 222,
+            "character": 10
+          },
+          "end": {
+            "line": 222,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "_pkg_find_libs": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 276,
+            "character": 9
+          },
+          "end": {
+            "line": 276,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\ngiven directories",
+      "is_function": true
+    },
+    "_pkg_recalculate": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 361,
+            "character": 6
+          },
+          "end": {
+            "line": 361,
+            "character": 22
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nthis is a macro and not a function so the result of _pkg_find_libs is automatically propagated",
+      "is_function": true
+    },
+    "_pkg_check_prefix": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 659,
+            "character": 14
+          },
+          "end": {
+            "line": 659,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "CPACK_GENERATOR": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 980,
+            "character": 4
+          },
+          "end": {
+            "line": 980,
+            "character": 19
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "incdirs": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 520,
+            "character": 6
+          },
+          "end": {
+            "line": 520,
+            "character": 13
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "CPACK_DOWNLOAD_SITE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 530,
+            "character": 6
+          },
+          "end": {
+            "line": 530,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake",
+      "is_function": false
+    },
+    "CVF_VERSION_MAJOR": {
+      "location": {
+        "uri": "file:///usr/lib64/cmake/PNG/PNGConfigVersion.cmake",
+        "range": {
+          "start": {
+            "line": 29,
+            "character": 8
+          },
+          "end": {
+            "line": 29,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/lib64/cmake/PNG/PNGConfigVersion.cmake",
+      "is_function": false
+    },
+    "_else": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 549,
+            "character": 6
+          },
+          "end": {
+            "line": 549,
+            "character": 11
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "pkg_search_module": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 913,
+            "character": 6
+          },
+          "end": {
+            "line": 913,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": true
+    },
+    "_pkgconfig_set": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 132,
+            "character": 6
+          },
+          "end": {
+            "line": 132,
+            "character": 20
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": true
+    },
+    "defined_variables": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 981,
+            "character": 6
+          },
+          "end": {
+            "line": 981,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "CPACK_PACKAGE_VERSION_MINOR": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 489,
+            "character": 4
+          },
+          "end": {
+            "line": 489,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "${VARIABLE}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFile.cmake",
+        "range": {
+          "start": {
+            "line": 125,
+            "character": 10
+          },
+          "end": {
+            "line": 125,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake",
+      "is_function": false
+    },
+    "_cfe_source": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckFunctionExists.cmake",
+        "range": {
+          "start": {
+            "line": 87,
+            "character": 10
+          },
+          "end": {
+            "line": 87,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake",
+      "is_function": false
+    },
+    "__system_type_for_install": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/GNUInstallDirs.cmake",
+        "range": {
+          "start": {
+            "line": 281,
+            "character": 12
+          },
+          "end": {
+            "line": 281,
+            "character": 37
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/GNUInstallDirs.cmake",
+      "is_function": false
+    },
+    "CMAKE_DEPENDENT_OPTION": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakeDependentOption.cmake",
+        "range": {
+          "start": {
+            "line": 49,
+            "character": 6
+          },
+          "end": {
+            "line": 49,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CMakeDependentOption.cmake",
+      "is_function": true
+    },
+    "CONFIGURE_PACKAGE_CONFIG_FILE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 404,
+            "character": 9
+          },
+          "end": {
+            "line": 404,
+            "character": 38
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": true
+    },
+    "_cmake_targets_defined": {
+      "location": {
+        "uri": "file:///usr/lib64/cmake/PNG/PNGTargets.cmake",
+        "range": {
+          "start": {
+            "line": 18,
+            "character": 4
+          },
+          "end": {
+            "line": 18,
+            "character": 26
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/lib64/cmake/PNG/PNGTargets.cmake\n\nProtect against multiple inclusion, which would fail when already imported targets are added once more.",
+      "is_function": false
+    },
+    "CPACK_PACKAGE_VERSION_PATCH": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 490,
+            "character": 4
+          },
+          "end": {
+            "line": 490,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "PACKAGE_${var}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 447,
+            "character": 12
+          },
+          "end": {
+            "line": 447,
+            "character": 26
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "CPACK_BINARY_BUNDLE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 711,
+            "character": 15
+          },
+          "end": {
+            "line": 711,
+            "character": 34
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CHECK_INCLUDE_FILE_C_INCLUDE_DIRS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFile.cmake",
+        "range": {
+          "start": {
+            "line": 49,
+            "character": 10
+          },
+          "end": {
+            "line": 49,
+            "character": 43
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake",
+      "is_function": false
+    },
+    "CMAKE_REQUIRED_DEFINITIONS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake",
+        "range": {
+          "start": {
+            "line": 14,
+            "character": 6
+          },
+          "end": {
+            "line": 14,
+            "character": 32
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake",
+      "is_function": false
+    },
+    "GLFW_BUILD_EXAMPLES": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 17,
+            "character": 7
+          },
+          "end": {
+            "line": 17,
+            "character": 26
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+      "is_function": false
+    },
+    "cpack_add_install_type": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 494,
+            "character": 6
+          },
+          "end": {
+            "line": 494,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake\n\nMacro that adds an installation type to the CPack installer",
+      "is_function": true
+    },
+    "CHECK_C_SOURCE_COMPILES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckCSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 56,
+            "character": 6
+          },
+          "end": {
+            "line": 56,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CheckCSourceCompiles.cmake",
+      "is_function": true
+    },
+    "CMAKE_REQUIRED_FLAGS": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 337,
+            "character": 12
+          },
+          "end": {
+            "line": 337,
+            "character": 32
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt\n\nClear flags again to avoid breaking later tests",
+      "is_function": false
+    },
+    "_CFE_LINK_DIRECTORIES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckFunctionExists.cmake",
+        "range": {
+          "start": {
+            "line": 75,
+            "character": 10
+          },
+          "end": {
+            "line": 75,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake",
+      "is_function": false
+    },
+    "source_files": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/docs/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 3,
+            "character": 4
+          },
+          "end": {
+            "line": 3,
+            "character": 16
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/docs/CMakeLists.txt\n\n(i.e. Pages) list in the generated documentation",
+      "is_function": false
+    },
+    "CPACK_COMPONENT_HEADERS_DEPENDS": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 505,
+            "character": 4
+          },
+          "end": {
+            "line": 505,
+            "character": 35
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "_pkg_modules_found": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 930,
+            "character": 12
+          },
+          "end": {
+            "line": 930,
+            "character": 30
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "_pkgconfig_invoke_dyn": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 191,
+            "character": 6
+          },
+          "end": {
+            "line": 191,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n'--static'",
+      "is_function": true
+    },
+    "CMAKE_CHECK_SOURCE_COMPILES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 9,
+            "character": 9
+          },
+          "end": {
+            "line": 9,
+            "character": 36
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+      "is_function": true
+    },
+    "CMAKE_C_FLAGS_SAVE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFile.cmake",
+        "range": {
+          "start": {
+            "line": 59,
+            "character": 10
+          },
+          "end": {
+            "line": 59,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake",
+      "is_function": false
+    },
+    "${_VAR}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake",
+        "range": {
+          "start": {
+            "line": 9,
+            "character": 6
+          },
+          "end": {
+            "line": 9,
+            "character": 13
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake",
+      "is_function": false
+    },
+    "_GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/GNUInstallDirs.cmake",
+        "range": {
+          "start": {
+            "line": 317,
+            "character": 4
+          },
+          "end": {
+            "line": 317,
+            "character": 45
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/GNUInstallDirs.cmake\n\nSave for next run",
+      "is_function": false
+    },
+    "GETOPT": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 16,
+            "character": 4
+          },
+          "end": {
+            "line": 16,
+            "character": 10
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt",
+      "is_function": false
+    },
+    "PACKAGE_INIT": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 454,
+            "character": 6
+          },
+          "end": {
+            "line": 454,
+            "character": 18
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "arch": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 636,
+            "character": 8
+          },
+          "end": {
+            "line": 636,
+            "character": 12
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "CMAKE_OSX_ARCHITECTURES": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 181,
+            "character": 6
+          },
+          "end": {
+            "line": 181,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "${_result}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 239,
+            "character": 6
+          },
+          "end": {
+            "line": 239,
+            "character": 16
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "CPACK_BINARY_TXZ": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 730,
+            "character": 13
+          },
+          "end": {
+            "line": 730,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CPACK_RPM_PACKAGE_SOURCES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 986,
+            "character": 4
+          },
+          "end": {
+            "line": 986,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "_lang_filename": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 41,
+            "character": 12
+          },
+          "end": {
+            "line": 41,
+            "character": 26
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+      "is_function": false
+    },
+    "cpack_append_variable_set_command": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPackComponent.cmake",
+        "range": {
+          "start": {
+            "line": 333,
+            "character": 9
+          },
+          "end": {
+            "line": 333,
+            "character": 42
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/CPackComponent.cmake\n\nconfiguration file.",
+      "is_function": true
+    },
+    "LIBRARY_VERSION": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 146,
+            "character": 4
+          },
+          "end": {
+            "line": 146,
+            "character": 19
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt\n\nIncrement REVISION.",
+      "is_function": false
+    },
+    "CPACK_COMPONENT_HEADERS_DESCRIPTION": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 503,
+            "character": 4
+          },
+          "end": {
+            "line": 503,
+            "character": 39
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "cpack_source_input_file": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 521,
+            "character": 6
+          },
+          "end": {
+            "line": 521,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CPACK_PACKAGE_DESCRIPTION_SUMMARY": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 484,
+            "character": 4
+          },
+          "end": {
+            "line": 484,
+            "character": 37
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "${var}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 137,
+            "character": 6
+          },
+          "end": {
+            "line": 137,
+            "character": 12
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nFIXME: Add a policy to switch to a normal variable.",
+      "is_function": false
+    },
+    "_pkgconfig_path_old": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 387,
+            "character": 8
+          },
+          "end": {
+            "line": 387,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nfrom the CMAKE_PREFIX_PATH variables",
+      "is_function": false
+    },
+    "${CHECK_COMPILER_FLAG_OUTPUT_VARIABLE}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake",
+        "range": {
+          "start": {
+            "line": 26,
+            "character": 8
+          },
+          "end": {
+            "line": 26,
+            "character": 46
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake",
+      "is_function": false
+    },
+    "GUI_ONLY_BINARIES": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 50,
+            "character": 4
+          },
+          "end": {
+            "line": 50,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt",
+      "is_function": false
+    },
+    "CPACK_COMPONENT_UNSPECIFIED_HIDDEN": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 957,
+            "character": 4
+          },
+          "end": {
+            "line": 957,
+            "character": 38
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake\n\nthem hidden and required.",
+      "is_function": false
+    },
+    "_CIF_LINK_OPTIONS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFile.cmake",
+        "range": {
+          "start": {
+            "line": 65,
+            "character": 10
+          },
+          "end": {
+            "line": 65,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake",
+      "is_function": false
+    },
+    "${_prefix}_LINK_LIBRARIES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 327,
+            "character": 6
+          },
+          "end": {
+            "line": 327,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "_CSC_LINK_DIRECTORIES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 93,
+            "character": 10
+          },
+          "end": {
+            "line": 93,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+      "is_function": false
+    },
+    "installPrefix": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 426,
+            "character": 8
+          },
+          "end": {
+            "line": 426,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "CPACK_BINARY_DEB": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 723,
+            "character": 13
+          },
+          "end": {
+            "line": 723,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "generate_wayland_protocol": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 78,
+            "character": 10
+          },
+          "end": {
+            "line": 78,
+            "character": 35
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+      "is_function": true
+    },
+    "CHECK_INCLUDE_FILES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+        "range": {
+          "start": {
+            "line": 49,
+            "character": 6
+          },
+          "end": {
+            "line": 49,
+            "character": 25
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+      "is_function": true
+    },
+    "_single": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 574,
+            "character": 6
+          },
+          "end": {
+            "line": 574,
+            "character": 13
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "${_is_silent}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 219,
+            "character": 10
+          },
+          "end": {
+            "line": 219,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "_extra_paths": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 370,
+            "character": 6
+          },
+          "end": {
+            "line": 370,
+            "character": 18
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "${_prefix}_LDFLAGS_OTHER": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 511,
+            "character": 6
+          },
+          "end": {
+            "line": 511,
+            "character": 30
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "CPACK_PACKAGE_FILE_NAME": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 982,
+            "character": 4
+          },
+          "end": {
+            "line": 982,
+            "character": 27
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "GLFW_CONFIG_PATH": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 107,
+            "character": 4
+          },
+          "end": {
+            "line": 107,
+            "character": 20
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt",
+      "is_function": false
+    },
+    "\"${name}\"": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 561,
+            "character": 8
+          },
+          "end": {
+            "line": 561,
+            "character": 17
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CPACK_STRIP_FILES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 984,
+            "character": 4
+          },
+          "end": {
+            "line": 984,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "ENV{PKG_CONFIG_ALLOW_SYSTEM_LIBS}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 474,
+            "character": 8
+          },
+          "end": {
+            "line": 474,
+            "character": 41
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "_pkg_check_modules_list": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 569,
+            "character": 6
+          },
+          "end": {
+            "line": 569,
+            "character": 29
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\ncreate a better addressable variable of the modules and calculate its size",
+      "is_function": false
+    },
+    "_SRC_EXT": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+        "range": {
+          "start": {
+            "line": 74,
+            "character": 10
+          },
+          "end": {
+            "line": 74,
+            "character": 18
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake",
+      "is_function": false
+    },
+    "_CIF_LINK_DIRECTORIES": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFile.cmake",
+        "range": {
+          "start": {
+            "line": 95,
+            "character": 10
+          },
+          "end": {
+            "line": 95,
+            "character": 31
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake",
+      "is_function": false
+    },
+    "_var": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 256,
+            "character": 8
+          },
+          "end": {
+            "line": 256,
+            "character": 12
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "LIBRARY_SOVERSION": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 147,
+            "character": 4
+          },
+          "end": {
+            "line": 147,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "_lib_dirs": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 395,
+            "character": 8
+          },
+          "end": {
+            "line": 395,
+            "character": 17
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nthe system",
+      "is_function": false
+    },
+    "PACKAGE_VERSION_COMPATIBLE": {
+      "location": {
+        "uri": "file:///usr/lib64/cmake/PNG/PNGConfigVersion.cmake",
+        "range": {
+          "start": {
+            "line": 64,
+            "character": 10
+          },
+          "end": {
+            "line": 64,
+            "character": 36
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/lib64/cmake/PNG/PNGConfigVersion.cmake",
+      "is_function": false
+    },
+    "CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 641,
+            "character": 6
+          },
+          "end": {
+            "line": 641,
+            "character": 48
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "CPACK_COMPONENT_LIBRARIES_GROUP": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 506,
+            "character": 4
+          },
+          "end": {
+            "line": 506,
+            "character": 35
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/FREETYPE/CMakeLists.txt",
+      "is_function": false
+    },
+    "_description": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+        "range": {
+          "start": {
+            "line": 99,
+            "character": 10
+          },
+          "end": {
+            "line": 99,
+            "character": 22
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake",
+      "is_function": false
+    },
+    "commands": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CPack.cmake",
+        "range": {
+          "start": {
+            "line": 541,
+            "character": 6
+          },
+          "end": {
+            "line": 541,
+            "character": 14
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake",
+      "is_function": false
+    },
+    "maybe_INSTALL_PREFIX": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 593,
+            "character": 8
+          },
+          "end": {
+            "line": 593,
+            "character": 28
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    },
+    "glfw_PKG_LIBS": {
+      "location": {
+        "uri": "file:///home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+        "range": {
+          "start": {
+            "line": 156,
+            "character": 8
+          },
+          "end": {
+            "line": 156,
+            "character": 21
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt",
+      "is_function": false
+    },
+    "_pkg_check_modules_pkg_name": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 597,
+            "character": 12
+          },
+          "end": {
+            "line": 597,
+            "character": 39
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "generate_apple_platform_selection_file": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 510,
+            "character": 9
+          },
+          "end": {
+            "line": 510,
+            "character": 47
+          }
+        }
+      },
+      "document_info": "defined function\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": true
+    },
+    "CHECK_FUNCTION_EXISTS_ADD_LINK_OPTIONS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckFunctionExists.cmake",
+        "range": {
+          "start": {
+            "line": 63,
+            "character": 10
+          },
+          "end": {
+            "line": 63,
+            "character": 48
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake",
+      "is_function": false
+    },
+    "_pkgconfig_unset": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 124,
+            "character": 6
+          },
+          "end": {
+            "line": 124,
+            "character": 22
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nUnsets the given variables",
+      "is_function": true
+    },
+    "CHECK_INCLUDE_FILE": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFile.cmake",
+        "range": {
+          "start": {
+            "line": 44,
+            "character": 6
+          },
+          "end": {
+            "line": 44,
+            "character": 24
+          }
+        }
+      },
+      "document_info": "defined macro\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake",
+      "is_function": true
+    },
+    "CMAKE_C_FLAGS": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CheckIncludeFile.cmake",
+        "range": {
+          "start": {
+            "line": 113,
+            "character": 10
+          },
+          "end": {
+            "line": 113,
+            "character": 23
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake",
+      "is_function": false
+    },
+    "${_is_req}": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/FindPkgConfig.cmake",
+        "range": {
+          "start": {
+            "line": 216,
+            "character": 10
+          },
+          "end": {
+            "line": 216,
+            "character": 20
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake",
+      "is_function": false
+    },
+    "_branch_code": {
+      "location": {
+        "uri": "file:///usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+        "range": {
+          "start": {
+            "line": 602,
+            "character": 6
+          },
+          "end": {
+            "line": 602,
+            "character": 18
+          }
+        }
+      },
+      "document_info": "defined variable\nfrom: /usr/share/cmake/Modules/CMakePackageConfigHelpers.cmake",
+      "is_function": false
+    }
+  }
+}

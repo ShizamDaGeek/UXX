@@ -16,6 +16,9 @@ namespace Renderer
         std::unordered_map<std::string, GLTexture*> textureCache;
         GLTexture* GetOrLoadTexture(const std::string& path);
 
+        std::unordered_map<std::string, Font*> fontCache;
+        Font* GetOrLoadFont(const std::string& path, unsigned int pixelHeight = 48);
+
         bool panelOpen = false;
         bool leftMouseButtonPressed = false;
         bool rightMouseButtonPressed = false;
@@ -51,6 +54,25 @@ namespace Renderer
             textureCache[path] = tex;
 
             return tex;
+        }
+        Font* GetOrLoadFont(const std::string& path, unsigned int pixelHeight)
+        {
+            std::string key = path + "#" + std::to_string(pixelHeight);
+
+            auto it = fontCache.find(key);
+            if (it != fontCache.end()) return it->second;
+
+            Font* font = new Font();
+            if (!font->initFreeType(path.c_str(), pixelHeight))
+            {
+                std::cerr << "Failed to load font: " << path << "\n";
+                delete font;
+                fontCache[path] = nullptr;
+                return nullptr;
+            }
+
+            fontCache[path] = font;
+            return font;
         }
         void DrawQuad(Rect rect, Color color, GLTexture* tex)
         {
@@ -104,7 +126,7 @@ namespace Renderer
     }
 
     // |=====================================================
-    // |---[Init]--------------------------------------------
+    // |---[Initlize stuff]----------------------------------
     // |=====================================================
     void init()
     {
@@ -135,6 +157,22 @@ namespace Renderer
         glUniform1f(scale, 1.0f);
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+        InitTextRendering();
+    }
+    void InitTextRendering()
+    {
+        textShader = new Shader("../shader_files/VertexText.glsl", "../shader_files/FragmentText.glsl");
+
+        glGenVertexArrays(1, &textVAO);
+        glGenBuffers(1, &textVBO);
+        glBindVertexArray(textVAO);
+        glBindBuffer(GL_ARRAY_BUFFER, textVBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindVertexArray(0);
     }
 
     // |=====================================================
@@ -161,7 +199,7 @@ namespace Renderer
     // |=====================================================
     // |---[Common UI stuff]---------------------------------
     // |=====================================================
-    bool DrawButton(Rect ButtonRect, Color ButtonColor, Color ButtonHoverColor, Color ButtonClickedColor, std::string ButtonImagePath)
+    bool Button(Rect ButtonRect, Color ButtonColor, Color ButtonHoverColor, Color ButtonClickedColor, std::string ButtonImagePath)
     {
         if (!panelOpen) return false;
 
@@ -183,7 +221,7 @@ namespace Renderer
 
         return clicked;
     }
-    bool DrawIntSlider(Rect IntSliderRect, Color IntTrackColor, Color IntHandleColor, int& value, int minIntValue, int maxIntValue, int intStep)
+    bool IntSlider(Rect IntSliderRect, Color IntTrackColor, Color IntHandleColor, int& value, int minIntValue, int maxIntValue, int intStep)
     {
         if (!panelOpen) return false;
 
@@ -211,7 +249,7 @@ namespace Renderer
 
         return changed;
     }
-    bool DrawFloatSlider(Rect FloatSliderRect, Color FloatTrackColor, Color FloatHandleColor, float& value, float minFloatValue, float maxFloatValue)
+    bool FloatSlider(Rect FloatSliderRect, Color FloatTrackColor, Color FloatHandleColor, float& value, float minFloatValue, float maxFloatValue)
     {
         if (!panelOpen) return false;
 
@@ -237,7 +275,7 @@ namespace Renderer
 
         return changed;
     }
-    bool DrawSwitch(Rect SwitchRect, Color OnColor, Color OffColor, bool& value)
+    bool Switch(Rect SwitchRect, Color OnColor, Color OffColor, bool& value)
     {
         if (!panelOpen) return false;
 
@@ -257,14 +295,38 @@ namespace Renderer
     }
 
     // |=====================================================
-    // |---[Advanced UI stuff]-------------------------------
+    // |---[UnCommon UI stuff]-------------------------------
     // |=====================================================
-    void DrawImage(Rect ImageRect, Color ImageColor, std::string ImagePath)
+    void Image(Rect ImageRect, Color ImageColor, std::string ImagePath)
     {
         if (!panelOpen) return;
 
         GLTexture* tex = GetOrLoadTexture(ImagePath);
         DrawQuad(ImageRect, ImageColor, tex);
+    }
+    void Separator(Rect SeparatorRect)
+    {
+
+    }
+    void Text(Rect TextRect, Color TextColor, float TextSize, std::string TextItself, std::string FontPath)
+    {
+        Font* font = GetOrLoadFont(FontPath,(unsigned int)TextSize);
+        if (!font) return;
+
+        textShader->Use();
+
+        glm::mat4 projection = glm::ortho(0.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT);
+        textShader->setMat4("projection", projection);
+        glUniform4f(glGetUniformLocation(textShader->ID, "textColor"),
+            TextColor.r, TextColor.g, TextColor.b, TextColor.a);
+
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+        // Convert top-down Rect.yPos into the bottom-up space the glyph math/projection expect
+        float bottomUpY = SCREEN_HEIGHT - TextRect.yPos;
+
+        font->rendererText(*textShader, TextItself, TextRect.xPos, bottomUpY, TextSize, textVAO, textVBO);
     }
 
     // |=====================================================
@@ -278,5 +340,13 @@ namespace Renderer
             delete tex;
         }
         textureCache.clear();
+
+        for (auto& [path, font] : fontCache)
+        {
+            if (!font) continue;
+            font->deleteFreeType();
+            delete font;
+        }
+        fontCache.clear();
     }
 }
