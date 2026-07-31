@@ -1,1574 +1,6 @@
 {
-  "date": "2026-07-26T19:02:27.799975058+12:00",
+  "date": "2026-07-31T13:50:55.864255326+12:00",
   "data": {
-    "/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt": [
-      {
-        "label": "generate_wayland_protocol",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
-      },
-      {
-        "label": "CHECK_INCLUDE_FILES",
-        "kind": 3,
-        "detail": "Command",
-        "documentation": "defined command from CheckIncludeFiles.cmake\n.rst:\nCheckIncludeFiles\n-----------------\n\nProvides a macro to check if a list of one or more header files can\nbe included together.\n\n.. command:: CHECK_INCLUDE_FILES\n\n  .. code-block:: cmake\n\n    CHECK_INCLUDE_FILES(\"<includes>\" <variable> [LANGUAGE <language>])\n\n  Check if the given ``<includes>`` list may be included together\n  in a source file and store the result in an internal cache\n  entry named ``<variable>``.  Specify the ``<includes>`` argument\n  as a :ref:`;-list <CMake Language Lists>` of header file names.\n\n  If ``LANGUAGE`` is set, the specified compiler will be used to perform the\n  check. Acceptable values are ``C`` and ``CXX``. If not set, the C compiler\n  will be used if enabled. If the C compiler is not enabled, the C++\n  compiler will be used if enabled.\n\nThe following variables may be set before calling this macro to modify\nthe way the check is run:\n\n.. include:: /module/CMAKE_REQUIRED_FLAGS.txt\n\n.. include:: /module/CMAKE_REQUIRED_DEFINITIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_INCLUDES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_OPTIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_LIBRARIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_DIRECTORIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_QUIET.txt\n\nSee modules :module:`CheckIncludeFile` and :module:`CheckIncludeFileCXX`\nto check for a single header file in ``C`` or ``CXX`` languages.\n#"
-      },
-      {
-        "label": "CHECK_INCLUDE_FILES",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_src_content",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_lang",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_lang",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_lang",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "src",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "src",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "CHECK_INCLUDE_FILES_INCLUDE_DIRS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "CHECK_INCLUDE_FILES_INCLUDE_DIRS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "CHECK_INCLUDE_FILES_CONTENT",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "MACRO_CHECK_INCLUDE_FILES_FLAGS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_INCLUDE",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_description",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_description",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_description",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_CIF_LINK_OPTIONS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_CIF_LINK_OPTIONS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_CIF_LINK_LIBRARIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_CIF_LINK_LIBRARIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_CIF_CMP0075_WARNED",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_CIF_LINK_DIRECTORIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "_CIF_LINK_DIRECTORIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "${VARIABLE}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "${VARIABLE}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
-      },
-      {
-        "label": "check_function_exists",
-        "kind": 3,
-        "detail": "Command",
-        "documentation": "defined command from CheckFunctionExists.cmake\n.rst:\nCheckFunctionExists\n-------------------\n\nCheck once if a C function can be linked from system libraries.\n\n.. command:: check_function_exists\n\n  .. code-block:: cmake\n\n    check_function_exists(<function> <variable>)\n\n  Checks that the ``<function>`` is provided by libraries on the system and store\n  the result in internal cache variable ``<variable>``.\n\nThe following variables may be set before calling this macro to modify the\nway the check is run:\n\n.. include:: /module/CMAKE_REQUIRED_FLAGS.txt\n\n.. include:: /module/CMAKE_REQUIRED_DEFINITIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_INCLUDES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_OPTIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_LIBRARIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_DIRECTORIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_QUIET.txt\n\n.. note::\n\n  Prefer using :module:`CheckSymbolExists` or :module:`CheckSourceCompiles`\n  instead of this module, for the following reasons:\n\n  * ``check_function_exists()`` can't detect functions that are inlined\n    in headers or specified as a macro.\n\n  * ``check_function_exists()`` can't detect anything in the 32-bit\n    versions of the Win32 API, because of a mismatch in calling conventions.\n\n  * ``check_function_exists()`` only verifies linking, it does not verify\n    that the function is declared in system headers.\n#"
-      },
-      {
-        "label": "CHECK_FUNCTION_EXISTS",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
-      },
-      {
-        "label": "MACRO_CHECK_FUNCTION_DEFINITIONS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
-      },
-      {
-        "label": "CHECK_FUNCTION_EXISTS_ADD_LINK_OPTIONS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
-      },
-      {
-        "label": "CHECK_FUNCTION_EXISTS_ADD_LINK_OPTIONS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
-      },
-      {
-        "label": "CHECK_FUNCTION_EXISTS_ADD_LIBRARIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
-      },
-      {
-        "label": "CHECK_FUNCTION_EXISTS_ADD_LIBRARIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
-      },
-      {
-        "label": "_CFE_LINK_DIRECTORIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
-      },
-      {
-        "label": "_CFE_LINK_DIRECTORIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
-      },
-      {
-        "label": "CHECK_FUNCTION_EXISTS_ADD_INCLUDES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
-      },
-      {
-        "label": "CHECK_FUNCTION_EXISTS_ADD_INCLUDES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
-      },
-      {
-        "label": "_cfe_source",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
-      },
-      {
-        "label": "_cfe_source",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
-      },
-      {
-        "label": "${VARIABLE}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
-      },
-      {
-        "label": "${VARIABLE}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
-      },
-      {
-        "label": "protocol_path",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
-      },
-      {
-        "label": "GLFW_LIB_NAME",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt\n\nOn Unix-like systems, shared libraries can use the soname system."
-      },
-      {
-        "label": "GLFW_LIB_NAME",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
-      },
-      {
-        "label": "GLFW_LIB_NAME_SUFFIX",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
-      },
-      {
-        "label": "glfw_PKG_DEPS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
-      },
-      {
-        "label": "glfw_PKG_LIBS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
-      },
-      {
-        "label": "pkg_check_modules",
-        "kind": 3,
-        "detail": "Command",
-        "documentation": "defined command from FindPkgConfig.cmake\n.rst:\n.. command:: pkg_check_modules\n\n  Checks for all the given modules, setting a variety of result variables in\n  the calling scope.\n\n  .. code-block:: cmake\n\n    pkg_check_modules(<prefix>\n                      [REQUIRED] [QUIET]\n                      [NO_CMAKE_PATH]\n                      [NO_CMAKE_ENVIRONMENT_PATH]\n                      [IMPORTED_TARGET [GLOBAL]]\n                      <moduleSpec> [<moduleSpec>...])\n\n  When the ``REQUIRED`` argument is given, the command will fail with an error\n  if module(s) could not be found.\n\n  When the ``QUIET`` argument is given, no status messages will be printed.\n\n  .. versionadded:: 3.1\n    The :variable:`CMAKE_PREFIX_PATH`,\n    :variable:`CMAKE_FRAMEWORK_PATH`, and :variable:`CMAKE_APPBUNDLE_PATH` cache\n    and environment variables will be added to the ``pkg-config`` search path.\n    The ``NO_CMAKE_PATH`` and ``NO_CMAKE_ENVIRONMENT_PATH`` arguments\n    disable this behavior for the cache variables and environment variables\n    respectively.\n    The :variable:`PKG_CONFIG_USE_CMAKE_PREFIX_PATH` variable set to ``FALSE``\n    disables this behavior globally.\n\n    .. This didn't actually work until 3.3.\n\n  .. versionadded:: 3.6\n    The ``IMPORTED_TARGET`` argument will create an imported target named\n    ``PkgConfig::<prefix>`` that can be passed directly as an argument to\n    :command:`target_link_libraries`.\n\n    .. This didn't actually work until 3.7.\n\n  .. versionadded:: 3.13\n    The ``GLOBAL`` argument will make the\n    imported target available in global scope.\n\n  .. versionadded:: 3.15\n    Non-library linker options reported by ``pkg-config`` are stored in the\n    :prop_tgt:`INTERFACE_LINK_OPTIONS` target property.\n\n  .. versionchanged:: 3.18\n    Include directories specified with ``-isystem`` are stored in the\n    :prop_tgt:`INTERFACE_INCLUDE_DIRECTORIES` target property.  Previous\n    versions of CMake left them in the :prop_tgt:`INTERFACE_COMPILE_OPTIONS`\n    property.\n\n  Each ``<moduleSpec>`` can be either a bare module name or it can be a\n  module name with a version constraint (operators ``=``, ``<``, ``>``,\n  ``<=`` and ``>=`` are supported).  The following are examples for a module\n  named ``foo`` with various constraints:\n\n  - ``foo`` matches any version.\n  - ``foo<2`` only matches versions before 2.\n  - ``foo>=3.1`` matches any version from 3.1 or later.\n  - ``foo=1.2.3`` requires that foo must be exactly version 1.2.3.\n\n  The following variables may be set upon return.  Two sets of values exist:\n  One for the common case (``<XXX> = <prefix>``) and another for the\n  information ``pkg-config`` provides when called with the ``--static``\n  option (``<XXX> = <prefix>_STATIC``).\n\n  ``<XXX>_FOUND``\n    set to 1 if module(s) exist\n  ``<XXX>_LIBRARIES``\n    only the libraries (without the '-l')\n  ``<XXX>_LINK_LIBRARIES``\n    the libraries and their absolute paths\n  ``<XXX>_LIBRARY_DIRS``\n    the paths of the libraries (without the '-L')\n  ``<XXX>_LDFLAGS``\n    all required linker flags\n  ``<XXX>_LDFLAGS_OTHER``\n    all other linker flags\n  ``<XXX>_INCLUDE_DIRS``\n    the '-I' preprocessor flags (without the '-I')\n  ``<XXX>_CFLAGS``\n    all required cflags\n  ``<XXX>_CFLAGS_OTHER``\n    the other compiler flags\n\n  All but ``<XXX>_FOUND`` may be a :ref:`;-list <CMake Language Lists>` if the\n  associated variable returned from ``pkg-config`` has multiple values.\n\n  .. versionchanged:: 3.18\n    Include directories specified with ``-isystem`` are stored in the\n    ``<XXX>_INCLUDE_DIRS`` variable.  Previous versions of CMake left them\n    in ``<XXX>_CFLAGS_OTHER``.\n\n  There are some special variables whose prefix depends on the number of\n  ``<moduleSpec>`` given.  When there is only one ``<moduleSpec>``,\n  ``<YYY>`` will simply be ``<prefix>``, but if two or more ``<moduleSpec>``\n  items are given, ``<YYY>`` will be ``<prefix>_<moduleName>``.\n\n  ``<YYY>_VERSION``\n    version of the module\n  ``<YYY>_PREFIX``\n    prefix directory of the module\n  ``<YYY>_INCLUDEDIR``\n    include directory of the module\n  ``<YYY>_LIBDIR``\n    lib directory of the module\n\n  .. versionchanged:: 3.8\n    For any given ``<prefix>``, ``pkg_check_modules()`` can be called multiple\n    times with different parameters.  Previous versions of CMake cached and\n    returned the first successful result.\n\n  .. versionchanged:: 3.16\n    If a full path to the found library can't be determined, but it's still\n    visible to the linker, pass it through as ``-l<name>``.  Previous versions\n    of CMake failed in this case.\n\n  Examples:\n\n  .. code-block:: cmake\n\n    pkg_check_modules (GLIB2 glib-2.0)\n\n  Looks for any version of glib2.  If found, the output variable\n  ``GLIB2_VERSION`` will hold the actual version found.\n\n  .. code-block:: cmake\n\n    pkg_check_modules (GLIB2 glib-2.0>=2.10)\n\n  Looks for at least version 2.10 of glib2.  If found, the output variable\n  ``GLIB2_VERSION`` will hold the actual version found.\n\n  .. code-block:: cmake\n\n    pkg_check_modules (FOO glib-2.0>=2.10 gtk+-2.0)\n\n  Looks for both glib2-2.0 (at least version 2.10) and any version of\n  gtk2+-2.0.  Only if both are found will ``FOO`` be considered found.\n  The ``FOO_glib-2.0_VERSION`` and ``FOO_gtk+-2.0_VERSION`` variables will be\n  set to their respective found module versions.\n\n  .. code-block:: cmake\n\n    pkg_check_modules (XRENDER REQUIRED xrender)\n\n  Requires any version of ``xrender``.  Example output variables set by a\n  successful call::\n\n    XRENDER_LIBRARIES=Xrender;X11\n    XRENDER_STATIC_LIBRARIES=Xrender;X11;pthread;Xau;Xdmcp\n#"
-      },
-      {
-        "label": "pkg_search_module",
-        "kind": 3,
-        "detail": "Command",
-        "documentation": "defined command from FindPkgConfig.cmake\n.rst:\n.. command:: pkg_search_module\n\n  The behavior of this command is the same as :command:`pkg_check_modules`,\n  except that rather than checking for all the specified modules, it searches\n  for just the first successful match.\n\n  .. code-block:: cmake\n\n    pkg_search_module(<prefix>\n                      [REQUIRED] [QUIET]\n                      [NO_CMAKE_PATH]\n                      [NO_CMAKE_ENVIRONMENT_PATH]\n                      [IMPORTED_TARGET [GLOBAL]]\n                      <moduleSpec> [<moduleSpec>...])\n\n  .. versionadded:: 3.16\n    If a module is found, the ``<prefix>_MODULE_NAME`` variable will contain the\n    name of the matching module. This variable can be used if you need to run\n    :command:`pkg_get_variable`.\n\n  Example:\n\n  .. code-block:: cmake\n\n    pkg_search_module (BAR libxml-2.0 libxml2 libxml>=2)\n#"
-      },
-      {
-        "label": "pkg_get_variable",
-        "kind": 3,
-        "detail": "Command",
-        "documentation": "defined command from FindPkgConfig.cmake\n.rst:\n.. command:: pkg_get_variable\n\n  .. versionadded:: 3.4\n\n  Retrieves the value of a pkg-config variable ``varName`` and stores it in the\n  result variable ``resultVar`` in the calling scope.\n\n  .. code-block:: cmake\n\n    pkg_get_variable(<resultVar> <moduleName> <varName>\n                     [DEFINE_VARIABLES <key>=<value>...])\n\n  If ``pkg-config`` returns multiple values for the specified variable,\n  ``resultVar`` will contain a :ref:`;-list <CMake Language Lists>`.\n\n  Options:\n\n  ``DEFINE_VARIABLES <key>=<value>...``\n    .. versionadded:: 3.28\n\n    Specify key-value pairs to redefine variables affecting the variable\n    retrieved with ``pkg-config``.\n\n  For example:\n\n  .. code-block:: cmake\n\n    pkg_get_variable(GI_GIRDIR gobject-introspection-1.0 girdir)\n#"
-      },
-      {
-        "label": "__FindPkgConfig_EXECUTABLE_VALIDATOR",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_get_variable",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nInternal version of pkg_get_variable; expects PKG_CONFIG_PATH to already be set"
-      },
-      {
-        "label": "_pkgconfig_add_extra_path",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n- _pkgconfig_add_extra_path(_extra_paths ENV VAR)"
-      },
-      {
-        "label": "_pkg_find_libs",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\ngiven directories"
-      },
-      {
-        "label": "_pkg_create_imp_target",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\ncreate an imported target from all the information returned by pkg-config"
-      },
-      {
-        "label": "_pkgconfig_extract_frameworks",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nnot incorrectly be combined to \"-framework a b\""
-      },
-      {
-        "label": "_pkgconfig_extract_isystem",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nthe actual path"
-      },
-      {
-        "label": "pkg_get_variable",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkgconfig_unset",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nUnsets the given variables"
-      },
-      {
-        "label": "_pkgconfig_set",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkgconfig_invoke",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nInvokes pkgconfig, cleans up the result and sets variables"
-      },
-      {
-        "label": "_pkgconfig_invoke_dyn",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n'--static'"
-      },
-      {
-        "label": "_pkgconfig_parse_options",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nSplits given arguments into options and a package list"
-      },
-      {
-        "label": "_pkg_recalculate",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nthis is a macro and not a function so the result of _pkg_find_libs is automatically propagated"
-      },
-      {
-        "label": "_pkg_set_path_internal",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n##"
-      },
-      {
-        "label": "_pkg_restore_path_internal",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_check_modules_internal",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n##"
-      },
-      {
-        "label": "pkg_check_modules",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "pkg_search_module",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "PKG_CONFIG_VERSION",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n## Common stuff ####"
-      },
-      {
-        "label": "PKG_CONFIG_EXECUTABLE",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "PKG_CONFIG_NAMES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_PKG_CONFIG_VALIDATOR",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "\"${result_var}\"",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_PKG_CONFIG_VALIDATOR",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "PKG_CONFIG_EXECUTABLE",
-        "kind": 6,
-        "detail": "Variable",
-        "documentation": "defined var\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "PKG_CONFIG_ARGN",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "PKG_CONFIG_ARGN",
-        "kind": 6,
-        "detail": "Variable",
-        "documentation": "defined var\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_PKG_CONFIG_FAILURE_MESSAGE",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "PKG_CONFIG_EXECUTABLE",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "PKG_CONFIG_ARGN",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "PKG_CONFIG_FOUND",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nhandled by FPHSA."
-      },
-      {
-        "label": "${var}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nFIXME: Add a policy to switch to a normal variable."
-      },
-      {
-        "label": "${var}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nFIXME: Add a policy to switch to a normal variable."
-      },
-      {
-        "label": "_pkgconfig_invoke_result",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkgconfig_${_varname}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkgconfig_invoke_result",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkgconfig_invoke_result",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkgconfig_${_varname}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nmessage(STATUS \"  ${_varname} ... ${_pkgconfig_invoke_result}\")"
-      },
-      {
-        "label": "\"${result}\"",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_is_req}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_is_silent}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_no_cmake_path}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_no_cmake_environment_path}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_imp_target}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_imp_target_global}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_no_cmake_path}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_no_cmake_environment_path}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_no_cmake_path}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_no_cmake_environment_path}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_is_req}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_is_silent}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_no_cmake_path}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_no_cmake_environment_path}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_imp_target}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_imp_target_global}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_result}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_is_env",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_var",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_is_env",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_extra_paths_var}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_search",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_next_is_framework",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "pkgcfg_lib_${_prefix}_${_pkg_search}",
-        "kind": 6,
-        "detail": "Variable",
-        "documentation": "defined var\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_prefix}_LINK_LIBRARIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_global_opt",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_extra_paths",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkgconfig_path_old",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nfrom the CMAKE_PREFIX_PATH variables"
-      },
-      {
-        "label": "_pkgconfig_path",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_lib_dirs",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nthe system"
-      },
-      {
-        "label": "ENV{PKG_CONFIG_PATH}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkgconfig_allow_system_libs_old",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "ENV{PKG_CONFIG_ALLOW_SYSTEM_LIBS}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkgconfig_allow_system_cflags_old",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "ENV{PKG_CONFIG_ALLOW_SYSTEM_CFLAGS}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "ENV{PKG_CONFIG_PATH}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nRestore the environment variable"
-      },
-      {
-        "label": "ENV{PKG_CONFIG_ALLOW_SYSTEM_LIBS}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "ENV{PKG_CONFIG_ALLOW_SYSTEM_CFLAGS}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "ldflags",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_prefix}_LIBRARIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_prefix}_LDFLAGS_OTHER",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "cflags",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "outflags",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "incdirs",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "next_is_isystem",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "next_is_isystem",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "next_is_isystem",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_prefix}_CFLAGS_OTHER",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "${_prefix}_INCLUDE_DIRS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_check_modules_list",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\ncreate a better addressable variable of the modules and calculate its size"
-      },
-      {
-        "label": "_pkg_check_modules_packages",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_check_modules_failed",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_check_modules_exist_query",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_check_modules_pkg_name",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_check_modules_pkg_op",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_check_modules_pkg_ver",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_check_modules_pkg_name",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_check_modules_pkg_op",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_check_modules_pkg_ver",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_check_prefix",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_check_prefix",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_modules_found",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_pkg_modules_found",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "_multiValueArgs",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "defined_variables",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "\"${result}\"",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
-      },
-      {
-        "label": "Wayland_LIBRARIES",
-        "kind": 6,
-        "detail": "Package",
-        "documentation": "package: Wayland"
-      },
-      {
-        "label": "Wayland_INCLUDE_DIRS",
-        "kind": 6,
-        "detail": "Package",
-        "documentation": "package: Wayland"
-      },
-      {
-        "label": "EpollShim_LIBRARIES",
-        "kind": 6,
-        "detail": "Variable",
-        "documentation": "package: EpollShim"
-      },
-      {
-        "label": "EpollShim_INCLUDE_DIRS",
-        "kind": 6,
-        "detail": "Variable",
-        "documentation": "package: EpollShim"
-      },
-      {
-        "label": "X11_LIBRARIES",
-        "kind": 6,
-        "detail": "Variable",
-        "documentation": "package: X11"
-      },
-      {
-        "label": "X11_INCLUDE_DIRS",
-        "kind": 6,
-        "detail": "Variable",
-        "documentation": "package: X11"
-      },
-      {
-        "label": "RT_LIBRARY",
-        "kind": 6,
-        "detail": "Variable",
-        "documentation": "defined var\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
-      },
-      {
-        "label": "MATH_LIBRARY",
-        "kind": 6,
-        "detail": "Variable",
-        "documentation": "defined var\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
-      },
-      {
-        "label": "CHECK_INCLUDE_FILE",
-        "kind": 3,
-        "detail": "Command",
-        "documentation": "defined command from CheckIncludeFile.cmake\n.rst:\nCheckIncludeFile\n----------------\n\nProvides a macro to check if a header file can be included in ``C``.\n\n.. command:: CHECK_INCLUDE_FILE\n\n  .. code-block:: cmake\n\n    CHECK_INCLUDE_FILE(<include> <variable> [<flags>])\n\n  Check if the given ``<include>`` file may be included in a ``C``\n  source file and store the result in an internal cache entry named\n  ``<variable>``.  The optional third argument may be used to add\n  compilation flags to the check (or use ``CMAKE_REQUIRED_FLAGS`` below).\n\nThe following variables may be set before calling this macro to modify\nthe way the check is run:\n\n.. include:: /module/CMAKE_REQUIRED_FLAGS.txt\n\n.. include:: /module/CMAKE_REQUIRED_DEFINITIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_INCLUDES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_OPTIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_LIBRARIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_DIRECTORIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_QUIET.txt\n\nSee the :module:`CheckIncludeFiles` module to check for multiple headers\nat once.  See the :module:`CheckIncludeFileCXX` module to check for headers\nusing the ``CXX`` language.\n#"
-      },
-      {
-        "label": "CHECK_INCLUDE_FILE",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "CHECK_INCLUDE_FILE_C_INCLUDE_DIRS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "CHECK_INCLUDE_FILE_C_INCLUDE_DIRS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "MACRO_CHECK_INCLUDE_FILE_FLAGS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "CHECK_INCLUDE_FILE_VAR",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "CMAKE_C_FLAGS_SAVE",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "_CIF_LINK_OPTIONS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "_CIF_LINK_OPTIONS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "_CIF_LINK_LIBRARIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "_CIF_LINK_LIBRARIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "_CIF_CMP0075_WARNED",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "_CIF_LINK_DIRECTORIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "_CIF_LINK_DIRECTORIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "CMAKE_C_FLAGS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "${VARIABLE}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "${VARIABLE}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
-      },
-      {
-        "label": "GLFW_LIB_NAME_SUFFIX",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
-      },
-      {
-        "label": "check_c_compiler_flag",
-        "kind": 3,
-        "detail": "Command",
-        "documentation": "defined command from CheckCCompilerFlag.cmake\n.rst:\nCheckCCompilerFlag\n------------------\n\nCheck once whether the C compiler supports a given flag.\n\n.. command:: check_c_compiler_flag\n\n  .. code-block:: cmake\n\n    check_c_compiler_flag(<flag> <resultVar>)\n\nCheck once that the ``<flag>`` is accepted by the compiler without a diagnostic.\nThe result is stored in the internal cache variable specified by\n``<resultVar>``, with boolean ``true`` for success and boolean ``false`` for\nfailure.\n\n``true`` indicates only that the compiler did not issue a diagnostic message\nwhen given the flag. Whether the flag has any effect is beyond the scope of\nthis module.\n\nInternally, :command:`try_compile` is used to perform the check. If\n:variable:`CMAKE_TRY_COMPILE_TARGET_TYPE` is set to ``EXECUTABLE`` (default),\nthe check compiles and links an executable program. If set to\n``STATIC_LIBRARY``, the check is compiled but not linked.\n\nSee also :command:`check_compiler_flag` for a more general command syntax.\n\nThe compile and link commands can be influenced by setting any of the\nfollowing variables prior to calling ``check_c_compiler_flag()``. Unknown flags\nin these variables can case a false negative result.\n\n.. include:: /module/CMAKE_REQUIRED_FLAGS.txt\n\n.. include:: /module/CMAKE_REQUIRED_DEFINITIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_INCLUDES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_OPTIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_LIBRARIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_DIRECTORIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_QUIET.txt\n\n#"
-      },
-      {
-        "label": "CHECK_C_COMPILER_FLAG",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/CheckCCompilerFlag.cmake"
-      },
-      {
-        "label": "CMAKE_CHECK_COMPILER_FLAG",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake"
-      },
-      {
-        "label": "CMAKE_CHECK_FLAG_COMMON_INIT",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "CMAKE_CHECK_FLAG_COMMON_FINISH",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_SRC}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_PATTERNS}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_SRC}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_PATTERNS}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_SRC}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_PATTERNS}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_SRC}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_PATTERNS}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_SRC}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_PATTERNS}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_SRC}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_PATTERNS}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_SRC}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_PATTERNS}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_SRC}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "${_SRC}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "_CFCC_locale_vars",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake\n\nNormalize locale during test compilation."
-      },
-      {
-        "label": "_CMAKE_CHECK_FLAG_COMMON_CONFIG_locale_vars_saved_${v}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "ENV{${v}}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "ENV{${v}}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
-      },
-      {
-        "label": "CMAKE_CHECK_SOURCE_COMPILES",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_filename",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_textual",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_ext",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_textual",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_ext",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_textual",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_ext",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_textual",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_ext",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_textual",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_ext",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_textual",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_ext",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_textual",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_ext",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_textual",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_ext",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_textual",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_ext",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_lang_filename",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_FAIL_REGEX",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_SRC_EXT",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_key",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_key",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_SRC_EXT",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_key",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_OUTPUT_VARIABLE",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_key",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_SRC_EXT",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "CHECK_${LANG}_SOURCE_COMPILES_ADD_LINK_OPTIONS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "CHECK_${LANG}_SOURCE_COMPILES_ADD_LINK_OPTIONS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "CHECK_${LANG}_SOURCE_COMPILES_ADD_LIBRARIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "CHECK_${LANG}_SOURCE_COMPILES_ADD_LIBRARIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_CSC_LINK_DIRECTORIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "_CSC_LINK_DIRECTORIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "CHECK_${LANG}_SOURCE_COMPILES_ADD_INCLUDES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "CHECK_${LANG}_SOURCE_COMPILES_ADD_INCLUDES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "${_var}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "${_OUTPUT_VARIABLE}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "${_var}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "${_var}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
-      },
-      {
-        "label": "CHECK_COMPILER_FLAG_COMMON_PATTERNS",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
-      },
-      {
-        "label": "${_VAR}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
-      },
-      {
-        "label": "CMAKE_REQUIRED_DEFINITIONS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake"
-      },
-      {
-        "label": "${CHECK_COMPILER_FLAG_OUTPUT_VARIABLE}",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake"
-      },
-      {
-        "label": "check_c_source_compiles",
-        "kind": 3,
-        "detail": "Command",
-        "documentation": "defined command from CheckCSourceCompiles.cmake\n.rst:\nCheckCSourceCompiles\n--------------------\n\nCheck once if C source code can be built.\n\n.. command:: check_c_source_compiles\n\n  .. code-block:: cmake\n\n    check_c_source_compiles(<code> <resultVar>\n                            [FAIL_REGEX <regex1> [<regex2>...]])\n\n  Check once that the source supplied in ``<code>`` can be built. The result is\n  stored in the internal cache variable specified by ``<resultVar>``, with\n  boolean ``true`` for success and boolean ``false`` for failure.\n\n  If ``FAIL_REGEX`` is provided, then failure is determined by checking\n  if anything in the compiler output matches any of the specified regular\n  expressions.\n\n  Internally, :command:`try_compile` is used to compile the source. If\n  :variable:`CMAKE_TRY_COMPILE_TARGET_TYPE` is set to ``EXECUTABLE`` (default),\n  the source is compiled and linked as an executable program. If set to\n  ``STATIC_LIBRARY``, the source is compiled but not linked. In any case, all\n  functions must be declared as usual.\n\n  See also :command:`check_source_compiles` for a more general command syntax.\n\n  See also :command:`check_source_runs` to run compiled source.\n\n  The compile and link commands can be influenced by setting any of the\n  following variables prior to calling ``check_c_source_compiles()``:\n\n.. include:: /module/CMAKE_REQUIRED_FLAGS.txt\n\n.. include:: /module/CMAKE_REQUIRED_DEFINITIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_INCLUDES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_OPTIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_LIBRARIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_DIRECTORIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_QUIET.txt\n\n#"
-      },
-      {
-        "label": "CHECK_C_SOURCE_COMPILES",
-        "kind": 3,
-        "detail": "Function",
-        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/CheckCSourceCompiles.cmake"
-      },
-      {
-        "label": "CMAKE_REQUIRED_FLAGS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt\n\nCompatibility with data execution prevention (DEP)"
-      },
-      {
-        "label": "CMAKE_REQUIRED_FLAGS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt\n\nCompatibility with address space layout randomization (ASLR)"
-      },
-      {
-        "label": "CMAKE_REQUIRED_FLAGS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt\n\nCompatibility with 64-bit address space layout randomization (ASLR)"
-      },
-      {
-        "label": "CMAKE_REQUIRED_FLAGS",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt\n\nClear flags again to avoid breaking later tests"
-      },
-      {
-        "label": "GLFW_PKG_CONFIG_REQUIRES_PRIVATE",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
-      },
-      {
-        "label": "GLFW_PKG_CONFIG_LIBS_PRIVATE",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
-      }
-    ],
     "/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/examples/CMakeLists.txt": [
       {
         "label": "ICON",
@@ -1619,44 +51,6 @@
         "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/examples/CMakeLists.txt"
       }
     ],
-    "/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt": [
-      {
-        "label": "GLAD_GL",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt"
-      },
-      {
-        "label": "GLAD_VULKAN",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt"
-      },
-      {
-        "label": "GETOPT",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt"
-      },
-      {
-        "label": "TINYCTHREAD",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt"
-      },
-      {
-        "label": "GUI_ONLY_BINARIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt"
-      },
-      {
-        "label": "CONSOLE_BINARIES",
-        "kind": 12,
-        "detail": "Value",
-        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt"
-      }
-    ],
     "/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/docs/CMakeLists.txt": [
       {
         "label": "source_files",
@@ -1693,20 +87,6 @@
         "kind": 6,
         "detail": "Variable",
         "documentation": "package: Doxygen"
-      }
-    ],
-    "/home/shizamda_geek/Documents/ALLCODEHERE/UXX/CMakeLists.txt": [
-      {
-        "label": "OpenGL_LIBRARIES",
-        "kind": 6,
-        "detail": "Variable",
-        "documentation": "package: OpenGL"
-      },
-      {
-        "label": "OpenGL_INCLUDE_DIRS",
-        "kind": 6,
-        "detail": "Variable",
-        "documentation": "package: OpenGL"
       }
     ],
     "/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/CMakeLists.txt": [
@@ -4111,6 +2491,1626 @@
         "kind": 12,
         "detail": "Value",
         "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CPack.cmake"
+      }
+    ],
+    "/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt": [
+      {
+        "label": "GLAD_GL",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt"
+      },
+      {
+        "label": "GLAD_VULKAN",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt"
+      },
+      {
+        "label": "GETOPT",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt"
+      },
+      {
+        "label": "TINYCTHREAD",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt"
+      },
+      {
+        "label": "GUI_ONLY_BINARIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt"
+      },
+      {
+        "label": "CONSOLE_BINARIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/tests/CMakeLists.txt"
+      }
+    ],
+    "/home/shizamda_geek/Documents/ALLCODEHERE/UXX/CMakeLists.txt": [
+      {
+        "label": "OpenGL_LIBRARIES",
+        "kind": 6,
+        "detail": "Variable",
+        "documentation": "package: OpenGL"
+      },
+      {
+        "label": "OpenGL_INCLUDE_DIRS",
+        "kind": 6,
+        "detail": "Variable",
+        "documentation": "package: OpenGL"
+      }
+    ],
+    "/home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt": [
+      {
+        "label": "generate_wayland_protocol",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
+      },
+      {
+        "label": "CHECK_INCLUDE_FILES",
+        "kind": 3,
+        "detail": "Command",
+        "documentation": "defined command from CheckIncludeFiles.cmake\n.rst:\nCheckIncludeFiles\n-----------------\n\nProvides a macro to check if a list of one or more header files can\nbe included together.\n\n.. command:: CHECK_INCLUDE_FILES\n\n  .. code-block:: cmake\n\n    CHECK_INCLUDE_FILES(\"<includes>\" <variable> [LANGUAGE <language>])\n\n  Check if the given ``<includes>`` list may be included together\n  in a source file and store the result in an internal cache\n  entry named ``<variable>``.  Specify the ``<includes>`` argument\n  as a :ref:`;-list <CMake Language Lists>` of header file names.\n\n  If ``LANGUAGE`` is set, the specified compiler will be used to perform the\n  check. Acceptable values are ``C`` and ``CXX``. If not set, the C compiler\n  will be used if enabled. If the C compiler is not enabled, the C++\n  compiler will be used if enabled.\n\nThe following variables may be set before calling this macro to modify\nthe way the check is run:\n\n.. include:: /module/CMAKE_REQUIRED_FLAGS.txt\n\n.. include:: /module/CMAKE_REQUIRED_DEFINITIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_INCLUDES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_OPTIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_LIBRARIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_DIRECTORIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_QUIET.txt\n\nSee modules :module:`CheckIncludeFile` and :module:`CheckIncludeFileCXX`\nto check for a single header file in ``C`` or ``CXX`` languages.\n#"
+      },
+      {
+        "label": "CHECK_INCLUDE_FILES",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_src_content",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_lang",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_lang",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_lang",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "src",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "src",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "CHECK_INCLUDE_FILES_INCLUDE_DIRS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "CHECK_INCLUDE_FILES_INCLUDE_DIRS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "CHECK_INCLUDE_FILES_CONTENT",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "MACRO_CHECK_INCLUDE_FILES_FLAGS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_INCLUDE",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_description",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_description",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_description",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_CIF_LINK_OPTIONS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_CIF_LINK_OPTIONS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_CIF_LINK_LIBRARIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_CIF_LINK_LIBRARIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_CIF_CMP0075_WARNED",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_CIF_LINK_DIRECTORIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "_CIF_LINK_DIRECTORIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "${VARIABLE}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "${VARIABLE}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFiles.cmake"
+      },
+      {
+        "label": "check_function_exists",
+        "kind": 3,
+        "detail": "Command",
+        "documentation": "defined command from CheckFunctionExists.cmake\n.rst:\nCheckFunctionExists\n-------------------\n\nCheck once if a C function can be linked from system libraries.\n\n.. command:: check_function_exists\n\n  .. code-block:: cmake\n\n    check_function_exists(<function> <variable>)\n\n  Checks that the ``<function>`` is provided by libraries on the system and store\n  the result in internal cache variable ``<variable>``.\n\nThe following variables may be set before calling this macro to modify the\nway the check is run:\n\n.. include:: /module/CMAKE_REQUIRED_FLAGS.txt\n\n.. include:: /module/CMAKE_REQUIRED_DEFINITIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_INCLUDES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_OPTIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_LIBRARIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_DIRECTORIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_QUIET.txt\n\n.. note::\n\n  Prefer using :module:`CheckSymbolExists` or :module:`CheckSourceCompiles`\n  instead of this module, for the following reasons:\n\n  * ``check_function_exists()`` can't detect functions that are inlined\n    in headers or specified as a macro.\n\n  * ``check_function_exists()`` can't detect anything in the 32-bit\n    versions of the Win32 API, because of a mismatch in calling conventions.\n\n  * ``check_function_exists()`` only verifies linking, it does not verify\n    that the function is declared in system headers.\n#"
+      },
+      {
+        "label": "CHECK_FUNCTION_EXISTS",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
+      },
+      {
+        "label": "MACRO_CHECK_FUNCTION_DEFINITIONS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
+      },
+      {
+        "label": "CHECK_FUNCTION_EXISTS_ADD_LINK_OPTIONS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
+      },
+      {
+        "label": "CHECK_FUNCTION_EXISTS_ADD_LINK_OPTIONS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
+      },
+      {
+        "label": "CHECK_FUNCTION_EXISTS_ADD_LIBRARIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
+      },
+      {
+        "label": "CHECK_FUNCTION_EXISTS_ADD_LIBRARIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
+      },
+      {
+        "label": "_CFE_LINK_DIRECTORIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
+      },
+      {
+        "label": "_CFE_LINK_DIRECTORIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
+      },
+      {
+        "label": "CHECK_FUNCTION_EXISTS_ADD_INCLUDES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
+      },
+      {
+        "label": "CHECK_FUNCTION_EXISTS_ADD_INCLUDES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
+      },
+      {
+        "label": "_cfe_source",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
+      },
+      {
+        "label": "_cfe_source",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
+      },
+      {
+        "label": "${VARIABLE}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
+      },
+      {
+        "label": "${VARIABLE}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckFunctionExists.cmake"
+      },
+      {
+        "label": "protocol_path",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
+      },
+      {
+        "label": "GLFW_LIB_NAME",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt\n\nOn Unix-like systems, shared libraries can use the soname system."
+      },
+      {
+        "label": "GLFW_LIB_NAME",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
+      },
+      {
+        "label": "GLFW_LIB_NAME_SUFFIX",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
+      },
+      {
+        "label": "glfw_PKG_DEPS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
+      },
+      {
+        "label": "glfw_PKG_LIBS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
+      },
+      {
+        "label": "pkg_check_modules",
+        "kind": 3,
+        "detail": "Command",
+        "documentation": "defined command from FindPkgConfig.cmake\n.rst:\n.. command:: pkg_check_modules\n\n  Checks for all the given modules, setting a variety of result variables in\n  the calling scope.\n\n  .. code-block:: cmake\n\n    pkg_check_modules(<prefix>\n                      [REQUIRED] [QUIET]\n                      [NO_CMAKE_PATH]\n                      [NO_CMAKE_ENVIRONMENT_PATH]\n                      [IMPORTED_TARGET [GLOBAL]]\n                      <moduleSpec> [<moduleSpec>...])\n\n  When the ``REQUIRED`` argument is given, the command will fail with an error\n  if module(s) could not be found.\n\n  When the ``QUIET`` argument is given, no status messages will be printed.\n\n  .. versionadded:: 3.1\n    The :variable:`CMAKE_PREFIX_PATH`,\n    :variable:`CMAKE_FRAMEWORK_PATH`, and :variable:`CMAKE_APPBUNDLE_PATH` cache\n    and environment variables will be added to the ``pkg-config`` search path.\n    The ``NO_CMAKE_PATH`` and ``NO_CMAKE_ENVIRONMENT_PATH`` arguments\n    disable this behavior for the cache variables and environment variables\n    respectively.\n    The :variable:`PKG_CONFIG_USE_CMAKE_PREFIX_PATH` variable set to ``FALSE``\n    disables this behavior globally.\n\n    .. This didn't actually work until 3.3.\n\n  .. versionadded:: 3.6\n    The ``IMPORTED_TARGET`` argument will create an imported target named\n    ``PkgConfig::<prefix>`` that can be passed directly as an argument to\n    :command:`target_link_libraries`.\n\n    .. This didn't actually work until 3.7.\n\n  .. versionadded:: 3.13\n    The ``GLOBAL`` argument will make the\n    imported target available in global scope.\n\n  .. versionadded:: 3.15\n    Non-library linker options reported by ``pkg-config`` are stored in the\n    :prop_tgt:`INTERFACE_LINK_OPTIONS` target property.\n\n  .. versionchanged:: 3.18\n    Include directories specified with ``-isystem`` are stored in the\n    :prop_tgt:`INTERFACE_INCLUDE_DIRECTORIES` target property.  Previous\n    versions of CMake left them in the :prop_tgt:`INTERFACE_COMPILE_OPTIONS`\n    property.\n\n  Each ``<moduleSpec>`` can be either a bare module name or it can be a\n  module name with a version constraint (operators ``=``, ``<``, ``>``,\n  ``<=`` and ``>=`` are supported).  The following are examples for a module\n  named ``foo`` with various constraints:\n\n  - ``foo`` matches any version.\n  - ``foo<2`` only matches versions before 2.\n  - ``foo>=3.1`` matches any version from 3.1 or later.\n  - ``foo=1.2.3`` requires that foo must be exactly version 1.2.3.\n\n  The following variables may be set upon return.  Two sets of values exist:\n  One for the common case (``<XXX> = <prefix>``) and another for the\n  information ``pkg-config`` provides when called with the ``--static``\n  option (``<XXX> = <prefix>_STATIC``).\n\n  ``<XXX>_FOUND``\n    set to 1 if module(s) exist\n  ``<XXX>_LIBRARIES``\n    only the libraries (without the '-l')\n  ``<XXX>_LINK_LIBRARIES``\n    the libraries and their absolute paths\n  ``<XXX>_LIBRARY_DIRS``\n    the paths of the libraries (without the '-L')\n  ``<XXX>_LDFLAGS``\n    all required linker flags\n  ``<XXX>_LDFLAGS_OTHER``\n    all other linker flags\n  ``<XXX>_INCLUDE_DIRS``\n    the '-I' preprocessor flags (without the '-I')\n  ``<XXX>_CFLAGS``\n    all required cflags\n  ``<XXX>_CFLAGS_OTHER``\n    the other compiler flags\n\n  All but ``<XXX>_FOUND`` may be a :ref:`;-list <CMake Language Lists>` if the\n  associated variable returned from ``pkg-config`` has multiple values.\n\n  .. versionchanged:: 3.18\n    Include directories specified with ``-isystem`` are stored in the\n    ``<XXX>_INCLUDE_DIRS`` variable.  Previous versions of CMake left them\n    in ``<XXX>_CFLAGS_OTHER``.\n\n  There are some special variables whose prefix depends on the number of\n  ``<moduleSpec>`` given.  When there is only one ``<moduleSpec>``,\n  ``<YYY>`` will simply be ``<prefix>``, but if two or more ``<moduleSpec>``\n  items are given, ``<YYY>`` will be ``<prefix>_<moduleName>``.\n\n  ``<YYY>_VERSION``\n    version of the module\n  ``<YYY>_PREFIX``\n    prefix directory of the module\n  ``<YYY>_INCLUDEDIR``\n    include directory of the module\n  ``<YYY>_LIBDIR``\n    lib directory of the module\n\n  .. versionchanged:: 3.8\n    For any given ``<prefix>``, ``pkg_check_modules()`` can be called multiple\n    times with different parameters.  Previous versions of CMake cached and\n    returned the first successful result.\n\n  .. versionchanged:: 3.16\n    If a full path to the found library can't be determined, but it's still\n    visible to the linker, pass it through as ``-l<name>``.  Previous versions\n    of CMake failed in this case.\n\n  Examples:\n\n  .. code-block:: cmake\n\n    pkg_check_modules (GLIB2 glib-2.0)\n\n  Looks for any version of glib2.  If found, the output variable\n  ``GLIB2_VERSION`` will hold the actual version found.\n\n  .. code-block:: cmake\n\n    pkg_check_modules (GLIB2 glib-2.0>=2.10)\n\n  Looks for at least version 2.10 of glib2.  If found, the output variable\n  ``GLIB2_VERSION`` will hold the actual version found.\n\n  .. code-block:: cmake\n\n    pkg_check_modules (FOO glib-2.0>=2.10 gtk+-2.0)\n\n  Looks for both glib2-2.0 (at least version 2.10) and any version of\n  gtk2+-2.0.  Only if both are found will ``FOO`` be considered found.\n  The ``FOO_glib-2.0_VERSION`` and ``FOO_gtk+-2.0_VERSION`` variables will be\n  set to their respective found module versions.\n\n  .. code-block:: cmake\n\n    pkg_check_modules (XRENDER REQUIRED xrender)\n\n  Requires any version of ``xrender``.  Example output variables set by a\n  successful call::\n\n    XRENDER_LIBRARIES=Xrender;X11\n    XRENDER_STATIC_LIBRARIES=Xrender;X11;pthread;Xau;Xdmcp\n#"
+      },
+      {
+        "label": "pkg_search_module",
+        "kind": 3,
+        "detail": "Command",
+        "documentation": "defined command from FindPkgConfig.cmake\n.rst:\n.. command:: pkg_search_module\n\n  The behavior of this command is the same as :command:`pkg_check_modules`,\n  except that rather than checking for all the specified modules, it searches\n  for just the first successful match.\n\n  .. code-block:: cmake\n\n    pkg_search_module(<prefix>\n                      [REQUIRED] [QUIET]\n                      [NO_CMAKE_PATH]\n                      [NO_CMAKE_ENVIRONMENT_PATH]\n                      [IMPORTED_TARGET [GLOBAL]]\n                      <moduleSpec> [<moduleSpec>...])\n\n  .. versionadded:: 3.16\n    If a module is found, the ``<prefix>_MODULE_NAME`` variable will contain the\n    name of the matching module. This variable can be used if you need to run\n    :command:`pkg_get_variable`.\n\n  Example:\n\n  .. code-block:: cmake\n\n    pkg_search_module (BAR libxml-2.0 libxml2 libxml>=2)\n#"
+      },
+      {
+        "label": "pkg_get_variable",
+        "kind": 3,
+        "detail": "Command",
+        "documentation": "defined command from FindPkgConfig.cmake\n.rst:\n.. command:: pkg_get_variable\n\n  .. versionadded:: 3.4\n\n  Retrieves the value of a pkg-config variable ``varName`` and stores it in the\n  result variable ``resultVar`` in the calling scope.\n\n  .. code-block:: cmake\n\n    pkg_get_variable(<resultVar> <moduleName> <varName>\n                     [DEFINE_VARIABLES <key>=<value>...])\n\n  If ``pkg-config`` returns multiple values for the specified variable,\n  ``resultVar`` will contain a :ref:`;-list <CMake Language Lists>`.\n\n  Options:\n\n  ``DEFINE_VARIABLES <key>=<value>...``\n    .. versionadded:: 3.28\n\n    Specify key-value pairs to redefine variables affecting the variable\n    retrieved with ``pkg-config``.\n\n  For example:\n\n  .. code-block:: cmake\n\n    pkg_get_variable(GI_GIRDIR gobject-introspection-1.0 girdir)\n#"
+      },
+      {
+        "label": "__FindPkgConfig_EXECUTABLE_VALIDATOR",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_get_variable",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nInternal version of pkg_get_variable; expects PKG_CONFIG_PATH to already be set"
+      },
+      {
+        "label": "_pkgconfig_add_extra_path",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n- _pkgconfig_add_extra_path(_extra_paths ENV VAR)"
+      },
+      {
+        "label": "_pkg_find_libs",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\ngiven directories"
+      },
+      {
+        "label": "_pkg_create_imp_target",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\ncreate an imported target from all the information returned by pkg-config"
+      },
+      {
+        "label": "_pkgconfig_extract_frameworks",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nnot incorrectly be combined to \"-framework a b\""
+      },
+      {
+        "label": "_pkgconfig_extract_isystem",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nthe actual path"
+      },
+      {
+        "label": "pkg_get_variable",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkgconfig_unset",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nUnsets the given variables"
+      },
+      {
+        "label": "_pkgconfig_set",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkgconfig_invoke",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nInvokes pkgconfig, cleans up the result and sets variables"
+      },
+      {
+        "label": "_pkgconfig_invoke_dyn",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n'--static'"
+      },
+      {
+        "label": "_pkgconfig_parse_options",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nSplits given arguments into options and a package list"
+      },
+      {
+        "label": "_pkg_recalculate",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nthis is a macro and not a function so the result of _pkg_find_libs is automatically propagated"
+      },
+      {
+        "label": "_pkg_set_path_internal",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n##"
+      },
+      {
+        "label": "_pkg_restore_path_internal",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_check_modules_internal",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n##"
+      },
+      {
+        "label": "pkg_check_modules",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "pkg_search_module",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "PKG_CONFIG_VERSION",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\n## Common stuff ####"
+      },
+      {
+        "label": "PKG_CONFIG_EXECUTABLE",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "PKG_CONFIG_NAMES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_PKG_CONFIG_VALIDATOR",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "\"${result_var}\"",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_PKG_CONFIG_VALIDATOR",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "PKG_CONFIG_EXECUTABLE",
+        "kind": 6,
+        "detail": "Variable",
+        "documentation": "defined var\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "PKG_CONFIG_ARGN",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "PKG_CONFIG_ARGN",
+        "kind": 6,
+        "detail": "Variable",
+        "documentation": "defined var\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_PKG_CONFIG_FAILURE_MESSAGE",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "PKG_CONFIG_EXECUTABLE",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "PKG_CONFIG_ARGN",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "PKG_CONFIG_FOUND",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nhandled by FPHSA."
+      },
+      {
+        "label": "${var}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nFIXME: Add a policy to switch to a normal variable."
+      },
+      {
+        "label": "${var}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nFIXME: Add a policy to switch to a normal variable."
+      },
+      {
+        "label": "_pkgconfig_invoke_result",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkgconfig_${_varname}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkgconfig_invoke_result",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkgconfig_invoke_result",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkgconfig_${_varname}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nmessage(STATUS \"  ${_varname} ... ${_pkgconfig_invoke_result}\")"
+      },
+      {
+        "label": "\"${result}\"",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_is_req}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_is_silent}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_no_cmake_path}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_no_cmake_environment_path}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_imp_target}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_imp_target_global}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_no_cmake_path}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_no_cmake_environment_path}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_no_cmake_path}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_no_cmake_environment_path}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_is_req}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_is_silent}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_no_cmake_path}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_no_cmake_environment_path}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_imp_target}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_imp_target_global}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_result}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_is_env",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_var",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_is_env",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_extra_paths_var}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_search",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_next_is_framework",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "pkgcfg_lib_${_prefix}_${_pkg_search}",
+        "kind": 6,
+        "detail": "Variable",
+        "documentation": "defined var\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_prefix}_LINK_LIBRARIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_global_opt",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_extra_paths",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkgconfig_path_old",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nfrom the CMAKE_PREFIX_PATH variables"
+      },
+      {
+        "label": "_pkgconfig_path",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_lib_dirs",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nthe system"
+      },
+      {
+        "label": "ENV{PKG_CONFIG_PATH}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkgconfig_allow_system_libs_old",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "ENV{PKG_CONFIG_ALLOW_SYSTEM_LIBS}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkgconfig_allow_system_cflags_old",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "ENV{PKG_CONFIG_ALLOW_SYSTEM_CFLAGS}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "ENV{PKG_CONFIG_PATH}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\nRestore the environment variable"
+      },
+      {
+        "label": "ENV{PKG_CONFIG_ALLOW_SYSTEM_LIBS}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "ENV{PKG_CONFIG_ALLOW_SYSTEM_CFLAGS}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "ldflags",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_prefix}_LIBRARIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_prefix}_LDFLAGS_OTHER",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "cflags",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "outflags",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "incdirs",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "next_is_isystem",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "next_is_isystem",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "next_is_isystem",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_prefix}_CFLAGS_OTHER",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "${_prefix}_INCLUDE_DIRS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_check_modules_list",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake\n\ncreate a better addressable variable of the modules and calculate its size"
+      },
+      {
+        "label": "_pkg_check_modules_packages",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_check_modules_failed",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_check_modules_exist_query",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_check_modules_pkg_name",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_check_modules_pkg_op",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_check_modules_pkg_ver",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_check_modules_pkg_name",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_check_modules_pkg_op",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_check_modules_pkg_ver",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_check_prefix",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_check_prefix",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_modules_found",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_pkg_modules_found",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "_multiValueArgs",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "defined_variables",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "\"${result}\"",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/FindPkgConfig.cmake"
+      },
+      {
+        "label": "Wayland_LIBRARIES",
+        "kind": 6,
+        "detail": "Package",
+        "documentation": "package: Wayland"
+      },
+      {
+        "label": "Wayland_INCLUDE_DIRS",
+        "kind": 6,
+        "detail": "Package",
+        "documentation": "package: Wayland"
+      },
+      {
+        "label": "EpollShim_LIBRARIES",
+        "kind": 6,
+        "detail": "Variable",
+        "documentation": "package: EpollShim"
+      },
+      {
+        "label": "EpollShim_INCLUDE_DIRS",
+        "kind": 6,
+        "detail": "Variable",
+        "documentation": "package: EpollShim"
+      },
+      {
+        "label": "X11_LIBRARIES",
+        "kind": 6,
+        "detail": "Variable",
+        "documentation": "package: X11"
+      },
+      {
+        "label": "X11_INCLUDE_DIRS",
+        "kind": 6,
+        "detail": "Variable",
+        "documentation": "package: X11"
+      },
+      {
+        "label": "RT_LIBRARY",
+        "kind": 6,
+        "detail": "Variable",
+        "documentation": "defined var\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
+      },
+      {
+        "label": "MATH_LIBRARY",
+        "kind": 6,
+        "detail": "Variable",
+        "documentation": "defined var\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
+      },
+      {
+        "label": "CHECK_INCLUDE_FILE",
+        "kind": 3,
+        "detail": "Command",
+        "documentation": "defined command from CheckIncludeFile.cmake\n.rst:\nCheckIncludeFile\n----------------\n\nProvides a macro to check if a header file can be included in ``C``.\n\n.. command:: CHECK_INCLUDE_FILE\n\n  .. code-block:: cmake\n\n    CHECK_INCLUDE_FILE(<include> <variable> [<flags>])\n\n  Check if the given ``<include>`` file may be included in a ``C``\n  source file and store the result in an internal cache entry named\n  ``<variable>``.  The optional third argument may be used to add\n  compilation flags to the check (or use ``CMAKE_REQUIRED_FLAGS`` below).\n\nThe following variables may be set before calling this macro to modify\nthe way the check is run:\n\n.. include:: /module/CMAKE_REQUIRED_FLAGS.txt\n\n.. include:: /module/CMAKE_REQUIRED_DEFINITIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_INCLUDES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_OPTIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_LIBRARIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_DIRECTORIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_QUIET.txt\n\nSee the :module:`CheckIncludeFiles` module to check for multiple headers\nat once.  See the :module:`CheckIncludeFileCXX` module to check for headers\nusing the ``CXX`` language.\n#"
+      },
+      {
+        "label": "CHECK_INCLUDE_FILE",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "CHECK_INCLUDE_FILE_C_INCLUDE_DIRS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "CHECK_INCLUDE_FILE_C_INCLUDE_DIRS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "MACRO_CHECK_INCLUDE_FILE_FLAGS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "CHECK_INCLUDE_FILE_VAR",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "CMAKE_C_FLAGS_SAVE",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "_CIF_LINK_OPTIONS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "_CIF_LINK_OPTIONS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "_CIF_LINK_LIBRARIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "_CIF_LINK_LIBRARIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "_CIF_CMP0075_WARNED",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "_CIF_LINK_DIRECTORIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "_CIF_LINK_DIRECTORIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "CMAKE_C_FLAGS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "${VARIABLE}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "${VARIABLE}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CheckIncludeFile.cmake"
+      },
+      {
+        "label": "GLFW_LIB_NAME_SUFFIX",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
+      },
+      {
+        "label": "check_c_compiler_flag",
+        "kind": 3,
+        "detail": "Command",
+        "documentation": "defined command from CheckCCompilerFlag.cmake\n.rst:\nCheckCCompilerFlag\n------------------\n\nCheck once whether the C compiler supports a given flag.\n\n.. command:: check_c_compiler_flag\n\n  .. code-block:: cmake\n\n    check_c_compiler_flag(<flag> <resultVar>)\n\nCheck once that the ``<flag>`` is accepted by the compiler without a diagnostic.\nThe result is stored in the internal cache variable specified by\n``<resultVar>``, with boolean ``true`` for success and boolean ``false`` for\nfailure.\n\n``true`` indicates only that the compiler did not issue a diagnostic message\nwhen given the flag. Whether the flag has any effect is beyond the scope of\nthis module.\n\nInternally, :command:`try_compile` is used to perform the check. If\n:variable:`CMAKE_TRY_COMPILE_TARGET_TYPE` is set to ``EXECUTABLE`` (default),\nthe check compiles and links an executable program. If set to\n``STATIC_LIBRARY``, the check is compiled but not linked.\n\nSee also :command:`check_compiler_flag` for a more general command syntax.\n\nThe compile and link commands can be influenced by setting any of the\nfollowing variables prior to calling ``check_c_compiler_flag()``. Unknown flags\nin these variables can case a false negative result.\n\n.. include:: /module/CMAKE_REQUIRED_FLAGS.txt\n\n.. include:: /module/CMAKE_REQUIRED_DEFINITIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_INCLUDES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_OPTIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_LIBRARIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_DIRECTORIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_QUIET.txt\n\n#"
+      },
+      {
+        "label": "CHECK_C_COMPILER_FLAG",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/CheckCCompilerFlag.cmake"
+      },
+      {
+        "label": "CMAKE_CHECK_COMPILER_FLAG",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake"
+      },
+      {
+        "label": "CMAKE_CHECK_FLAG_COMMON_INIT",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "CMAKE_CHECK_FLAG_COMMON_FINISH",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_SRC}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_PATTERNS}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_SRC}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_PATTERNS}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_SRC}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_PATTERNS}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_SRC}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_PATTERNS}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_SRC}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_PATTERNS}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_SRC}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_PATTERNS}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_SRC}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_PATTERNS}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_SRC}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "${_SRC}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "_CFCC_locale_vars",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake\n\nNormalize locale during test compilation."
+      },
+      {
+        "label": "_CMAKE_CHECK_FLAG_COMMON_CONFIG_locale_vars_saved_${v}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "ENV{${v}}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "ENV{${v}}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckFlagCommonConfig.cmake"
+      },
+      {
+        "label": "CMAKE_CHECK_SOURCE_COMPILES",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined function\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_filename",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_textual",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_ext",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_textual",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_ext",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_textual",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_ext",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_textual",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_ext",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_textual",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_ext",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_textual",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_ext",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_textual",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_ext",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_textual",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_ext",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_textual",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_ext",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_lang_filename",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_FAIL_REGEX",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_SRC_EXT",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_key",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_key",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_SRC_EXT",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_key",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_OUTPUT_VARIABLE",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_key",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_SRC_EXT",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "CHECK_${LANG}_SOURCE_COMPILES_ADD_LINK_OPTIONS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "CHECK_${LANG}_SOURCE_COMPILES_ADD_LINK_OPTIONS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "CHECK_${LANG}_SOURCE_COMPILES_ADD_LIBRARIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "CHECK_${LANG}_SOURCE_COMPILES_ADD_LIBRARIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_CSC_LINK_DIRECTORIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "_CSC_LINK_DIRECTORIES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "CHECK_${LANG}_SOURCE_COMPILES_ADD_INCLUDES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "CHECK_${LANG}_SOURCE_COMPILES_ADD_INCLUDES",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "${_var}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "${_OUTPUT_VARIABLE}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "${_var}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "${_var}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake"
+      },
+      {
+        "label": "CHECK_COMPILER_FLAG_COMMON_PATTERNS",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
+      },
+      {
+        "label": "${_VAR}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake"
+      },
+      {
+        "label": "CMAKE_REQUIRED_DEFINITIONS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake"
+      },
+      {
+        "label": "${CHECK_COMPILER_FLAG_OUTPUT_VARIABLE}",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake"
+      },
+      {
+        "label": "check_c_source_compiles",
+        "kind": 3,
+        "detail": "Command",
+        "documentation": "defined command from CheckCSourceCompiles.cmake\n.rst:\nCheckCSourceCompiles\n--------------------\n\nCheck once if C source code can be built.\n\n.. command:: check_c_source_compiles\n\n  .. code-block:: cmake\n\n    check_c_source_compiles(<code> <resultVar>\n                            [FAIL_REGEX <regex1> [<regex2>...]])\n\n  Check once that the source supplied in ``<code>`` can be built. The result is\n  stored in the internal cache variable specified by ``<resultVar>``, with\n  boolean ``true`` for success and boolean ``false`` for failure.\n\n  If ``FAIL_REGEX`` is provided, then failure is determined by checking\n  if anything in the compiler output matches any of the specified regular\n  expressions.\n\n  Internally, :command:`try_compile` is used to compile the source. If\n  :variable:`CMAKE_TRY_COMPILE_TARGET_TYPE` is set to ``EXECUTABLE`` (default),\n  the source is compiled and linked as an executable program. If set to\n  ``STATIC_LIBRARY``, the source is compiled but not linked. In any case, all\n  functions must be declared as usual.\n\n  See also :command:`check_source_compiles` for a more general command syntax.\n\n  See also :command:`check_source_runs` to run compiled source.\n\n  The compile and link commands can be influenced by setting any of the\n  following variables prior to calling ``check_c_source_compiles()``:\n\n.. include:: /module/CMAKE_REQUIRED_FLAGS.txt\n\n.. include:: /module/CMAKE_REQUIRED_DEFINITIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_INCLUDES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_OPTIONS.txt\n\n.. include:: /module/CMAKE_REQUIRED_LIBRARIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_LINK_DIRECTORIES.txt\n\n.. include:: /module/CMAKE_REQUIRED_QUIET.txt\n\n#"
+      },
+      {
+        "label": "CHECK_C_SOURCE_COMPILES",
+        "kind": 3,
+        "detail": "Function",
+        "documentation": "defined macro\nfrom: /usr/share/cmake/Modules/CheckCSourceCompiles.cmake"
+      },
+      {
+        "label": "CMAKE_REQUIRED_FLAGS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt\n\nCompatibility with data execution prevention (DEP)"
+      },
+      {
+        "label": "CMAKE_REQUIRED_FLAGS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt\n\nCompatibility with address space layout randomization (ASLR)"
+      },
+      {
+        "label": "CMAKE_REQUIRED_FLAGS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt\n\nCompatibility with 64-bit address space layout randomization (ASLR)"
+      },
+      {
+        "label": "CMAKE_REQUIRED_FLAGS",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt\n\nClear flags again to avoid breaking later tests"
+      },
+      {
+        "label": "GLFW_PKG_CONFIG_REQUIRES_PRIVATE",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
+      },
+      {
+        "label": "GLFW_PKG_CONFIG_LIBS_PRIVATE",
+        "kind": 12,
+        "detail": "Value",
+        "documentation": "defined variable\nfrom: /home/shizamda_geek/Documents/ALLCODEHERE/UXX/third_party_libs/GLFW/src/CMakeLists.txt"
       }
     ]
   }
