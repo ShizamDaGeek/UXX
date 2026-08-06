@@ -1,5 +1,4 @@
 #include "Renderer.hpp"
-#include <GLFW/glfw3.h>
 
 namespace Renderer
 {
@@ -8,24 +7,43 @@ namespace Renderer
     // |=====================================================
     namespace
     {
+        // ===[Shader stuff]===
         VAO* vao = nullptr;
         VBO* vbo = nullptr;
         EBO* ebo = nullptr;
         Shader* shader = nullptr;
 
+        // ===[Caches]===
         std::unordered_map<std::string, GLTexture*> textureCache;
         GLTexture* GetOrLoadTexture(const std::string& path);
 
         std::unordered_map<std::string, Font*> fontCache;
         Font* GetOrLoadFont(const std::string& path, unsigned int pixelHeight = 48);
 
+        // ===[Tile]===
         bool panelOpen = false;
-        bool leftMouseButtonPressed = false;
-        bool rightMouseButtonPressed = false;
-        bool middleMouseButtonPressed = false;
 
+        // ===[Activate drag tracking]===
+        const void* activeDragWidget = nullptr;
+
+        // ===[Mouse]===
+        bool leftMouseButtonDown = false;
+        bool leftMouseButtonPressed = false;
+        bool leftMouseButtonReleased = false;
+        bool rightMouseButtonDown = false;
+        bool rightMouseButtonPressed = false;
+        bool rightMouseButtonReleased = false;
+        bool middleMouseButtonDown = false;
+        bool middleMouseButtonPressed = false;
+        bool middleMouseButtonReleased = false;
         double mousePositionX, mousePositionY;
 
+        // ===[Raw per-frame delta, for future scrollable widgets]===
+        double scrollDeltaXState = 0.0;
+        double scrollDeltaYState = 0.0;
+
+        // ===[Square like Minecraft]===
+        // Shared unit-quad geometry reused by every UI element
         float rectangleVertices[] =
         {
         //  positions               Color               TexCoords
@@ -42,10 +60,12 @@ namespace Renderer
         };
 
         // |=====================================================
-        // |---[Helper Functions]--------------------------------
+        // |---[Private Helper Functions]------------------------
         // |=====================================================
+        // ===[tits]===
         GLTexture* GetOrLoadTexture(const std::string& path)
         {
+            // Reuse an already-loaded texture if one exists for this path
             auto it = textureCache.find(path);
             if (it != textureCache.end()) return it->second;
 
@@ -55,8 +75,10 @@ namespace Renderer
 
             return tex;
         }
+        // ===[foot]===
         Font* GetOrLoadFont(const std::string& path, unsigned int pixelHeight)
         {
+            // Key by path+size so the same font at different sizes stays distinct
             std::string key = path + "#" + std::to_string(pixelHeight);
 
             auto it = fontCache.find(key);
@@ -74,6 +96,7 @@ namespace Renderer
             fontCache[path] = font;
             return font;
         }
+        // ===[Be there or be SQUARE]===
         void DrawQuad(Rect rect, Color color, GLTexture* tex)
         {
             shader->Use();
@@ -100,29 +123,109 @@ namespace Renderer
 
             if (tex) tex->Unbind();
         }
-        // Shared drag math for sliders
-        float SliderDragT(Rect SliderRect, float handleWidth)
+        // ===[Shared drag math for sliders]===
+        float SliderDragT(const void* widgetId, Rect SliderRect, float handleWidth)
         {
             bool hoveringTrack = (mousePositionX >= SliderRect.xPos && mousePositionX <= SliderRect.xPos + SliderRect.width &&
                                     mousePositionY >= SliderRect.yPos && mousePositionY <= SliderRect.yPos + SliderRect.height);
 
-            if (!leftMouseButtonPressed || !hoveringTrack) return -1.0f;
+            // Claim the drag on the exact frame the click lands on the track
+            if (activeDragWidget == nullptr && leftMouseButtonPressed && hoveringTrack)
+                activeDragWidget = widgetId;
+
+            // Only the widget that owns the drag responds, and only while the button stays held
+            if (activeDragWidget != widgetId || !leftMouseButtonDown) return -1.0f;
 
             float newT = (float)(mousePositionX - SliderRect.xPos - handleWidth * 0.5f) / (SliderRect.width - handleWidth);
             return std::clamp(newT, 0.0f, 1.0f);
         }
+
+        // Stack of scissor boxes so nested scissors restore properly
+        std::vector<std::array<GLint,4>> scissorStack;
+        std::vector<GLboolean> scissorEnabledStack;
+        // ===[Push a scissor rect, remembering whatever was active before]===
+        void PushScissor(Rect rect)
+        {
+            GLboolean wasEnabled = glIsEnabled(GL_SCISSOR_TEST);
+            GLint prev[4];
+            glGetIntegerv(GL_SCISSOR_BOX, prev);
+
+            scissorEnabledStack.push_back(wasEnabled);
+            scissorStack.push_back({ prev[0], prev[1], prev[2], prev[3] });
+
+            GLint x = (GLint)(rect.xPos * SCREEN_SCALE_X);
+            GLint y = (GLint)((SCREEN_HEIGHT - (rect.yPos + rect.height)) * SCREEN_SCALE_Y);
+            GLsizei w = (GLsizei)(rect.width  * SCREEN_SCALE_X);
+            GLsizei h = (GLsizei)(rect.height * SCREEN_SCALE_Y);
+
+            glEnable(GL_SCISSOR_TEST);
+            glScissor(x, y, w, h);
+        }
+        // ===[Restore whatever scissor state was active before the matching PushScissor]===
+        void PopScissor()
+        {
+            if (scissorStack.empty()) return;
+
+            auto& prev = scissorStack.back();
+            glScissor(prev[0], prev[1], prev[2], prev[3]);
+            if (!scissorEnabledStack.back()) glDisable(GL_SCISSOR_TEST);
+
+            scissorStack.pop_back();
+            scissorEnabledStack.pop_back();
+        }
+
+        // ===[Shared shader/uniform setup + draw call for any piece of text]===
+        void DrawTextRaw(float x, float bottomUpY, Color color, float size, const std::string& text, Font* font, float angleRadians)
+        {
+            if (!font) return;
+
+            textShader->Use();
+
+            // Set up an orthographic projection matching the current screen size
+            glm::mat4 projection = glm::ortho(0.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT);
+            textShader->setMat4("projection", projection);
+            glUniform4f(glGetUniformLocation(textShader->ID, "textColor"),
+                color.r, color.g, color.b, color.a);
+
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+            font->rendererText(*textShader, text, x, bottomUpY, size, textVAO, textVBO, angleRadians);
+        }
     }
 
     // |=====================================================
-    // |---[Helper Functions]--------------------------------
+    // |---[Public Helper Functions]-------------------------
     // |=====================================================
-    void SetMouseState(double x, double y, bool leftDown, bool rightDown, bool middleDown)
+    void SetMouseState(double x, double y,
+        bool leftDown, bool leftPressed, bool leftReleased,
+        bool rightDown, bool rightPressed, bool rightReleased,
+        bool middleDown, bool middlePressed, bool middleReleased,
+        double scrollDeltaX, double scrollDeltaY)
     {
         mousePositionX = x;
         mousePositionY = y;
-        leftMouseButtonPressed = leftDown;
-        rightMouseButtonPressed = rightDown;
-        middleMouseButtonPressed = middleDown;
+        leftMouseButtonDown = leftDown;
+        leftMouseButtonPressed = leftPressed;
+        leftMouseButtonReleased = leftReleased;
+        rightMouseButtonDown = rightDown;
+        rightMouseButtonPressed = rightPressed;
+        rightMouseButtonReleased = rightReleased;
+        middleMouseButtonDown = middleDown;
+        middleMouseButtonPressed = middlePressed;
+        middleMouseButtonReleased = middleReleased;
+
+        scrollDeltaXState = scrollDeltaX;
+        scrollDeltaYState = scrollDeltaY;
+
+        // A release always clears the active drag
+        if (leftMouseButtonReleased || rightMouseButtonReleased || middleMouseButtonReleased)
+            activeDragWidget = nullptr;
+    }
+    void GetScrollDelta(double& outX, double& outY)
+    {
+        outX = scrollDeltaXState;
+        outY = scrollDeltaYState;
     }
 
     // |=====================================================
@@ -162,12 +265,14 @@ namespace Renderer
     }
     void InitTextRendering()
     {
+        // Separate shader and VAO/VBO pair dedicated to glyph quads
         textShader = new Shader("../shader_files/VertexText.glsl", "../shader_files/FragmentText.glsl");
 
         glGenVertexArrays(1, &textVAO);
         glGenBuffers(1, &textVBO);
         glBindVertexArray(textVAO);
         glBindBuffer(GL_ARRAY_BUFFER, textVBO);
+        // Allocate a dynamic buffer sized for one quad (6 verts, 4 floats each), refilled per glyph
         glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(0);
         glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
@@ -178,28 +283,26 @@ namespace Renderer
     // |=====================================================
     // |---[Begin and End Panel]-----------------------------
     // |=====================================================
-    void BeginPanel(Rect PanelRect, Color PanelColor)
+    void BeginPanel(Rect PanelRect, Color PanelColor, std::string PanelImagePath)
     {
         panelOpen = true;
+
+        // Draw the panel background, optionally textured
+        GLTexture* tex = PanelImagePath.empty() ? nullptr : GetOrLoadTexture(PanelImagePath);
         DrawQuad(PanelRect, PanelColor, nullptr);
 
-        GLint scissorX = (GLint)(PanelRect.xPos * SCREEN_SCALE_X);
-        GLint scissorY = (GLint)((SCREEN_HEIGHT - (PanelRect.yPos + PanelRect.height)) * SCREEN_SCALE_Y);
-        GLsizei scissorW = (GLsizei)(PanelRect.width  * SCREEN_SCALE_X);
-        GLsizei scissorH = (GLsizei)(PanelRect.height * SCREEN_SCALE_Y);
-
-        glEnable(GL_SCISSOR_TEST);
-        glScissor(scissorX, scissorY, scissorW, scissorH);
+        PushScissor(PanelRect);
     }
     void EndPanel()
     {
         panelOpen = false;
+        PopScissor();
     }
 
     // |=====================================================
     // |---[Common UI stuff]---------------------------------
     // |=====================================================
-    bool Button(Rect ButtonRect, Color ButtonColor, Color ButtonHoverColor, Color ButtonClickedColor, std::string ButtonImagePath)
+    bool Button(Rect ButtonRect, Color ButtonColor, Color ButtonHoverColor, Color ButtonClickedColor, Color ButtonTextColor, float ButtonTextSize, std::string ButtonTextItself, std::string ButtonImagePath, std::string ButtonFontPath)
     {
         if (!panelOpen) return false;
 
@@ -219,19 +322,44 @@ namespace Renderer
         GLTexture* tex = GetOrLoadTexture(ButtonImagePath);
         DrawQuad(ButtonRect, finalColor, tex);
 
+        // If it's empty and don't do shit
+        if (!ButtonTextItself.empty())
+        {
+            Font* font = GetOrLoadFont(ButtonFontPath, (unsigned int)ButtonTextSize);
+            if (font)
+            {
+                // Draw font but cut it off if it's too long and out of the button
+                PushScissor(ButtonRect);
+
+                // Center the label horizontally and roughly vertically inside the button
+                float textWidth = font->measureTextWidth(ButtonTextItself, ButtonTextSize);
+                float textHeight = font->measureTextHeight(ButtonTextItself, ButtonTextSize);
+
+                float textX = ButtonRect.xPos + (ButtonRect.width - textWidth) * 0.5f;
+                float centerYTopDown = ButtonRect.yPos + ButtonRect.height * 0.5f + textHeight * 0.5f;
+                float bottomUpY = SCREEN_HEIGHT - centerYTopDown;
+
+                DrawTextRaw(textX, bottomUpY, ButtonTextColor, ButtonTextSize, ButtonTextItself, font, 0.0f);
+
+                PopScissor();
+            }
+        }
+
         return clicked;
     }
-    bool IntSlider(Rect IntSliderRect, Color IntTrackColor, Color IntHandleColor, int& value, int minIntValue, int maxIntValue, int intStep)
+    bool IntSlider(Rect IntSliderRect, Color IntTrackColor, Color IntHandleColor, int& value, int minIntValue, int maxIntValue, int intStep, Color IntSliderTextColor, float IntSliderTextSize, std::string IntSliderTextItself, std::string IntSliderImagePath, std::string IntSliderFontPath)
     {
         if (!panelOpen) return false;
 
+        // ===[Compute the handle's position from the current value]===
         float handleWidth = IntSliderRect.height;
         float t = (float)(value - minIntValue) / (float)(maxIntValue - minIntValue);
         float handleX = IntSliderRect.xPos + t * (IntSliderRect.width - handleWidth);
         Rect handleRect{ handleX, IntSliderRect.yPos, handleWidth, IntSliderRect.height, 0.0f };
 
+        // ===[Apply a drag, snapping the result to the nearest step]===
         bool changed = false;
-        float newT = SliderDragT(IntSliderRect, handleWidth);
+        float newT = SliderDragT(&value, IntSliderRect, handleWidth);
         if (newT >= 0.0f)
         {
             int steps = (maxIntValue - minIntValue) / std::max(intStep, 1);
@@ -244,22 +372,47 @@ namespace Renderer
             }
         }
 
+        // ===[Draw optional texture, and both the Slider Handle and Track]===
+        GLTexture* trackTex = IntSliderImagePath.empty() ? nullptr : GetOrLoadTexture(IntSliderImagePath);
         DrawQuad(IntSliderRect, IntTrackColor, nullptr);
         DrawQuad(handleRect, IntHandleColor, nullptr);
 
+        // ===[Label centered on the track both horizontally and vertically]===
+        if (!IntSliderTextItself.empty())
+        {
+            Font* font = GetOrLoadFont(IntSliderFontPath, (unsigned int)IntSliderTextSize);
+            if (font)
+            {
+                PushScissor(IntSliderRect);
+
+                float textWidth = font->measureTextWidth(IntSliderTextItself, IntSliderTextSize);
+                float textHeight = font->measureTextHeight(IntSliderTextItself, IntSliderTextSize);
+
+                float textX = IntSliderRect.xPos + (IntSliderRect.width - textWidth) * 0.5f;
+                float centerYTopDown = IntSliderRect.yPos + IntSliderRect.height * 0.5f + textHeight * 0.5f;
+                float bottomUpY = SCREEN_HEIGHT - centerYTopDown;
+
+                DrawTextRaw(textX, bottomUpY, IntSliderTextColor, IntSliderTextSize, IntSliderTextItself, font, 0.0f);
+
+                PopScissor();
+            }
+        }
+
         return changed;
     }
-    bool FloatSlider(Rect FloatSliderRect, Color FloatTrackColor, Color FloatHandleColor, float& value, float minFloatValue, float maxFloatValue)
+    bool FloatSlider(Rect FloatSliderRect, Color FloatTrackColor, Color FloatHandleColor, float& value, float minFloatValue, float maxFloatValue, Color FloatSliderTextColor, float FloatSliderTextSize, std::string FloatSliderTextItself, std::string FloatSliderImagePath, std::string FloatSliderFontPath)
     {
         if (!panelOpen) return false;
 
+        // ===[Compute the handle's position from the current value]===
         float handleWidth = FloatSliderRect.height;
         float t = (value - minFloatValue) / (maxFloatValue - minFloatValue);
         float handleX = FloatSliderRect.xPos + t * (FloatSliderRect.width - handleWidth);
         Rect handleRect{ handleX, FloatSliderRect.yPos, handleWidth, FloatSliderRect.height, 0.0f };
 
+        // ===[Apply a drag directly as a continuous value, no stepping needed]===
         bool changed = false;
-        float newT = SliderDragT(FloatSliderRect, handleWidth);
+        float newT = SliderDragT(&value, FloatSliderRect, handleWidth);
         if (newT >= 0.0f)
         {
             float newValue = minFloatValue + newT * (maxFloatValue - minFloatValue);
@@ -270,18 +423,42 @@ namespace Renderer
             }
         }
 
+        // ===[Draw optional texture, and both the Slider Handle and Track]===
+        GLTexture* trackTex = FloatSliderImagePath.empty() ? nullptr : GetOrLoadTexture(FloatSliderImagePath);
         DrawQuad(FloatSliderRect, FloatTrackColor, nullptr);
         DrawQuad(handleRect, FloatHandleColor, nullptr);
 
+        // ===[Label centered on the track both horizontally and vertically]===
+        if (!FloatSliderTextItself.empty())
+        {
+            Font* font = GetOrLoadFont(FloatSliderFontPath, (unsigned int)FloatSliderTextSize);
+            if (font)
+            {
+                PushScissor(FloatSliderRect);
+
+                float textWidth = font->measureTextWidth(FloatSliderTextItself, FloatSliderTextSize);
+                float textHeight = font->measureTextHeight(FloatSliderTextItself, FloatSliderTextSize);
+
+                float textX = FloatSliderRect.xPos + (FloatSliderRect.width - textWidth) * 0.5f;
+                float centerYTopDown = FloatSliderRect.yPos + FloatSliderRect.height * 0.5f + textHeight * 0.5f;
+                float bottomUpY = SCREEN_HEIGHT - centerYTopDown;
+
+                DrawTextRaw(textX, bottomUpY, FloatSliderTextColor, FloatSliderTextSize, FloatSliderTextItself, font, 0.0f);
+
+                PopScissor();
+            }
+        }
+
         return changed;
     }
-    bool Switch(Rect SwitchRect, Color OnColor, Color OffColor, bool& value)
+    bool Switch(Rect SwitchRect, Color SwitchOnColor, Color SwitchOffColor, Color SwitchTextColor, bool& value, float SwitchTextSize, std::string SwitchOnTextItself, std::string SwitchOffTextItself, std::string SwitchImagePath, std::string SwitchFontPath)
     {
         if (!panelOpen) return false;
 
         bool hovered = (mousePositionX >= SwitchRect.xPos && mousePositionX <= SwitchRect.xPos + SwitchRect.width &&
                         mousePositionY >= SwitchRect.yPos && mousePositionY <= SwitchRect.yPos + SwitchRect.height);
 
+        // A click anywhere on the switch flips its boolean state
         bool toggled = false;
         if (hovered && leftMouseButtonPressed)
         {
@@ -289,7 +466,32 @@ namespace Renderer
             toggled = true;
         }
 
-        DrawQuad(SwitchRect, value ? OnColor : OffColor, nullptr);
+        // ===[Draw optional texture and quad]===
+        GLTexture* tex = SwitchImagePath.empty() ? nullptr : GetOrLoadTexture(SwitchImagePath);
+        DrawQuad(SwitchRect, value ? SwitchOnColor : SwitchOffColor, nullptr);
+
+        // Pick the label based on current state
+        const std::string& activeText = value ? SwitchOnTextItself : SwitchOffTextItself;
+        if (!activeText.empty())
+        {
+            Font* font = GetOrLoadFont(SwitchFontPath, (unsigned int)SwitchTextSize);
+            if (font)
+            {
+                PushScissor(SwitchRect);
+
+                // Center the active label both horizontally and vertically
+                float textWidth = font->measureTextWidth(activeText, SwitchTextSize);
+                float textHeight = font->measureTextHeight(activeText, SwitchTextSize);
+
+                float textX = SwitchRect.xPos + (SwitchRect.width - textWidth) * 0.5f;
+                float centerYTopDown = SwitchRect.yPos + SwitchRect.height * 0.5f + textHeight * 0.5f;
+                float bottomUpY = SCREEN_HEIGHT - centerYTopDown;
+
+                DrawTextRaw(textX, bottomUpY, SwitchTextColor, SwitchTextSize, activeText, font, 0.0f);
+
+                PopScissor();
+            }
+        }
 
         return toggled;
     }
@@ -304,29 +506,25 @@ namespace Renderer
         GLTexture* tex = GetOrLoadTexture(ImagePath);
         DrawQuad(ImageRect, ImageColor, tex);
     }
-    void Separator(Rect SeparatorRect)
+    void Separator(Rect SeparatorRect, Color SeparatorColor)
     {
+        if (!panelOpen) return;
 
+        DrawQuad(SeparatorRect, SeparatorColor, nullptr);
     }
     void Text(Rect TextRect, Color TextColor, float TextSize, std::string TextItself, std::string FontPath)
     {
+        if (!panelOpen) return;
+
         Font* font = GetOrLoadFont(FontPath,(unsigned int)TextSize);
         if (!font) return;
 
-        textShader->Use();
-
-        glm::mat4 projection = glm::ortho(0.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT);
-        textShader->setMat4("projection", projection);
-        glUniform4f(glGetUniformLocation(textShader->ID, "textColor"),
-            TextColor.r, TextColor.g, TextColor.b, TextColor.a);
-
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
         // Convert top-down Rect.yPos into the bottom-up space the glyph math/projection expect
         float bottomUpY = SCREEN_HEIGHT - TextRect.yPos;
+        // Covert Rectangles degrees to radians
+        float angleRadians = glm::radians(TextRect.rotation);
 
-        font->rendererText(*textShader, TextItself, TextRect.xPos, bottomUpY, TextSize, textVAO, textVBO);
+        font->rendererText(*textShader, TextItself, TextRect.xPos, bottomUpY, TextSize, textVAO, textVBO, angleRadians);
     }
 
     // |=====================================================
@@ -334,6 +532,7 @@ namespace Renderer
     // |=====================================================
     void BlowUp()
     {
+        // ===[Free every cached texture]===
         for (auto& [path, tex] : textureCache)
         {
             tex->Delete();
@@ -341,6 +540,7 @@ namespace Renderer
         }
         textureCache.clear();
 
+        // ===[Free every cached font]===
         for (auto& [path, font] : fontCache)
         {
             if (!font) continue;

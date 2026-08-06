@@ -20,7 +20,7 @@ Here are the Documentation to UXX API:
 
 
 ## **Support:**
-If you want to support this project, you are welcome to buy my game/s of steam for 5 bucks(USD) 
+If you want to support this project, you are welcome to buy my game/s of steam
 or support my YouTube channel by Subscribing as well:
  - My Steam Game: https://store.steampowered.com/app/3963720/SandBlocks/
  - My YouTube Channel: https://www.youtube.com/@ShizzyDa_Glizzy
@@ -32,8 +32,47 @@ or support my YouTube channel by Subscribing as well:
 - **SDL2:** No
 - **SDL3:** No (If I don't have SDL2 supported what makes you think I supported the third one) 
 - **SFML:** No
-- 
 
 
 
 ## **Examples from Code to Picture:**
+
+# **General UI:**
+```
+	UXX::BeginPanel(Rect(0, 0, 1920, 1080, 0), Color(0.1f, 0.5f, 0.9f, 1.0f));
+
+    Color normalColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
+    Color hoveredColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
+    Color clickedColor = Color(0.0f, 0.0f, 0.0f, 1.0f);
+
+    Color color1 = Color(0.3f, 0.9f, 0.5f, 1.0f);
+    Color color2 = Color(0.5f, 0.3f, 0.9f, 1.0f);
+    Color color3 = Color(0.9f, 0.5f, 0.3f, 1.0f);
+
+    std::string scoutImagePath("../Images/scout.jpg");
+    std::string catImagePath("../Images/cat.jpg");
+    std::string fontPath("../Fonts/sandypixels_5x5_font2.ttf");
+
+    static int intSliderValue = 75;
+    static float floatSliderValue = 50.0f;
+    static bool boolSwitchValue = false;
+
+    if (UXX::Button(Rect(0, 0, 400, 400, 0), normalColor, hoveredColor, clickedColor, color1, 2.0f, "Cat", catImagePath, fontPath))
+        std::cout << "Cat" << "\n";
+
+    UXX::Image(Rect(500, 150, 250, 250, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), scoutImagePath);
+
+    UXX::IntSlider(Rect(0, 400, 80, 20, 0), color2, color1, intSliderValue, 1, 100, 1);
+    UXX::FloatSlider(Rect(0, 425, 80, 20, 0), color2, color1, floatSliderValue, 1.0f, 100.0f);
+    UXX::Switch(Rect(0, 450, 80, 20, 0), color1, color2, color3, boolSwitchValue, 1.0f, "On", "Off", fontPath);
+
+    UXX::Text(Rect(600, 100, 80, 60, -45), color1, 2.5f, "Think FAST Chuckle Nuts!", fontPath);
+
+   	UXX::EndPanel();
+```
+All that code created this masterpeice below \/\/\/
+![ExampeImage1](Images/example_image1.png)
+
+# **Another General UI:**
+
+# **A more advanced UI:**

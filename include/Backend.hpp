@@ -1,7 +1,7 @@
 #ifndef BACKEND_HPP
 #define BACKEND_HPP
 
-// The Backend will take care of the window making and initialization/clearing libraries
+// The Backend class will take care of the window making and initialization/clearing libraries
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

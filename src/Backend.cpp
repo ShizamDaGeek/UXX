@@ -1,5 +1,6 @@
 #include "Backend.hpp"
 #include <GLFW/glfw3.h>
+#include <optional>
 
 // |=====================================================
 // |---[Helper Functions]--------------------------------
@@ -10,6 +11,7 @@ void Backend::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
     Backend* backend = static_cast<Backend*>(glfwGetWindowUserPointer(window));
     if (backend)
     {
+        // Keep the renderer's screen-space constants in sync with the actual window/framebuffer sizes
         int windowWidth, windowHeight;
         glfwGetWindowSize(window, &windowWidth, &windowHeight);
         UXX::SCREEN_WIDTH  = (float)windowWidth;
@@ -23,6 +25,7 @@ void Backend::MouseButtonCallback(GLFWwindow* window, int button, int action, in
     Backend* backend = static_cast<Backend*>(glfwGetWindowUserPointer(window));
     if (!backend) return;
 
+    // Track both the held state and a one-frame press/release flag per mouse button
     if (button >= 0 && button < 3)
     {
         if (action == GLFW_PRESS)
@@ -78,6 +81,7 @@ bool Backend::init()
         return false;
     }
 
+    // ===[Request an OpenGL 4.6, core-profile, forward compatablity, context with debug output]===
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -91,6 +95,8 @@ bool Backend::init()
         std::cerr << "Error trying to create window \n";
         return false;
     }
+
+    // ===[Hook up input callbacks and make this context current]===
     glfwSetWindowUserPointer(window, this);
     glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
     glfwSetMouseButtonCallback(window, MouseButtonCallback);
@@ -103,11 +109,13 @@ bool Backend::init()
         return false;
     }
 
+    // ===[Record initial window size for the renderer's screen-space math]===
     int windowWidth, windowHeight;
     glfwGetWindowSize(window, &windowWidth, &windowHeight);
     UXX::SCREEN_WIDTH  = (float)windowWidth;
     UXX::SCREEN_HEIGHT = (float)windowHeight;
 
+    // ===[Framebuffer size can differ from window size on high-DPI displays, so track the scale]===
     int frameBufferWidth, frameBufferHeight;
     glfwGetFramebufferSize(window, &frameBufferWidth, &frameBufferHeight);
     glViewport(0, 0, frameBufferWidth, frameBufferHeight);
@@ -124,7 +132,7 @@ bool Backend::init()
 // |=====================================================
 void Backend::run()
 {
-    /* Loop until the user closes the window */
+    // Loop until the user closes the window
     while (!glfwWindowShouldClose(window))
     {
         // Reset one-frame flags before polling new events
@@ -138,39 +146,53 @@ void Backend::run()
 
         glfwPollEvents();
 
+        // Mouse States
         UXX::SetMouseState(mouseX, mouseY,
+            mouseButtonDown[GLFW_MOUSE_BUTTON_LEFT],
             mouseButtonPressed[GLFW_MOUSE_BUTTON_LEFT],
+            mouseButtonReleased[GLFW_MOUSE_BUTTON_LEFT],
+            mouseButtonDown[GLFW_MOUSE_BUTTON_RIGHT],
             mouseButtonPressed[GLFW_MOUSE_BUTTON_RIGHT],
-            mouseButtonPressed[GLFW_MOUSE_BUTTON_MIDDLE]);
+            mouseButtonReleased[GLFW_MOUSE_BUTTON_RIGHT],
+            mouseButtonDown[GLFW_MOUSE_BUTTON_MIDDLE],
+            mouseButtonPressed[GLFW_MOUSE_BUTTON_MIDDLE],
+            mouseButtonReleased[GLFW_MOUSE_BUTTON_MIDDLE],
+            scrollX, scrollY);
 
         // Specify the color of the background
     	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     	// Clean the back buffer and assign the new color to it
     	glClear(GL_COLOR_BUFFER_BIT);
 
-    	// Draw shit
-    	UXX::BeginPanel(Rect(0, 0, 800, 600, 0), Color(0.1f, 0.5f, 0.9f, 1.0f));
+    	// Draw UI
+    	UXX::BeginPanel(Rect(0, 0, 1920, 1080, 0), Color(0.1f, 0.5f, 0.9f, 1.0f), "");
 
         Color normalColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
         Color hoveredColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
         Color clickedColor = Color(0.0f, 0.0f, 0.0f, 1.0f);
 
-        static int intSliderValue = 1;
-        static float floatSliderValue = 1.0f;
+        Color color1 = Color(0.3f, 0.9f, 0.5f, 1.0f);
+        Color color2 = Color(0.5f, 0.3f, 0.9f, 1.0f);
+        Color color3 = Color(0.9f, 0.5f, 0.3f, 1.0f);
+
+        std::string scoutImagePath("../Images/scout.jpg");
+        std::string catImagePath("../Images/cat.jpg");
+        std::string fontPath("../Fonts/sandypixels_5x5_font2.ttf");
+
+        static int intSliderValue = 75;
+        static float floatSliderValue = 50.0f;
         static bool boolSwitchValue = false;
 
-        if (UXX::Button(Rect(0, 0, 100, 500, 0), normalColor, hoveredColor, clickedColor, "../Image/scout.jpg"))
-        {
-            std::cout << "Chuckle Nut" << "\n";
-        }
+        if (UXX::Button(Rect(0, 0, 400, 400, 0), normalColor, hoveredColor, clickedColor, color1, 2.0f, "Cat", catImagePath, fontPath))
+            std::cout << "Cat" << "\n";
 
-        UXX::Image(Rect(0, 150, 80, 60, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), "../Image/scout.jpg");
+        UXX::Image(Rect(500, 150, 250, 250, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), scoutImagePath);
 
-        UXX::IntSlider(Rect(50, 150, 80, 20, 0), Color(0.5f, 0.3f, 0.9f, 1.0f), Color(0.3f, 0.9f, 0.5f, 1.0f), intSliderValue, 1, 100, 1);
-        UXX::FloatSlider(Rect(50, 175, 80, 20, 0), Color(0.5f, 0.3f, 0.9f, 1.0f), Color(0.3f, 0.9f, 0.5f, 1.0f), floatSliderValue, 1.0f, 100.0f);
-        UXX::Switch(Rect(50, 200, 80, 20, 0), Color(0.5f, 0.3f, 0.9f, 1.0f), Color(0.3f, 0.9f, 0.5f, 1.0f), boolSwitchValue);
+        UXX::IntSlider(Rect(0, 400, 80, 20, 0), color2, color1, intSliderValue, 1, 100, 1, color3, 1.3f, std::to_string(intSliderValue), "", fontPath);
+        UXX::FloatSlider(Rect(0, 425, 80, 20, 0), color2, color1, floatSliderValue, 1.0f, 100.0f, color3, 1.3f, std::to_string((int)floatSliderValue), "", fontPath);
+        UXX::Switch(Rect(0, 450, 80, 20, 0), color1, color2, color3, boolSwitchValue, 1.0f, "On", "Off", "", fontPath);
 
-        UXX::Text(Rect(50, 275, 80, 60, 0), Color(0.3f, 0.9f, 0.5f, 1.0f), 2.5f, "Hey Chuckle Nut click ME!", "../Font/sandypixels_5x5_font2.ttf");
+        UXX::Text(Rect(600, 100, 80, 60, -45), color1, 2.5f, "Think FAST Chuckle Nuts!", fontPath);
 
     	UXX::EndPanel();
 

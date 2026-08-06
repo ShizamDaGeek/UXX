@@ -1,10 +1,14 @@
 #ifndef TEXTURE_HPP
 #define TEXTURE_HPP
 
+// The Texture class will help with texture (isn't it obvious)
+
 #include <glad/glad.h>
+#include <GL/gl.h>
 #include <stb_image.h>
 #include <string>
 #include <cstring>
+
 #include "Shader.hpp"
 
 struct Texture

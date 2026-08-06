@@ -23,7 +23,10 @@ add_library(glad STATIC third_party_libs/GLAD/src/glad.c)
 # Add GLFW
 add_subdirectory(third_party_libs/GLFW)
 # Add FREETYPE
+set(CMAKE_WARN_DEPRECATED OFF)
+set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS ON CACHE BOOL "" FORCE)
 add_subdirectory(third_party_libs/FREETYPE)
+set(CMAKE_WARN_DEPRECATED ON)
 
 
 # Find packages
@@ -42,10 +45,10 @@ file(GLOB_RECURSE SRC_FILES "src/*.cpp")
 add_executable(UXX ${SRC_FILES})
 
 
-
+# have the c++ files look inside of include outside src not vice versa
 target_include_directories(UXX PUBLIC include)
 
-# Link all the library and shit
+# Link all the library
 target_link_libraries(UXX PRIVATE
     glfw
     glad
@@ -53,3 +56,7 @@ target_link_libraries(UXX PRIVATE
     stb_image
     freetype
 )
+
+if(TARGET freetype)
+    target_compile_options(freetype PRIVATE -Wno-deprecated-declarations)
+endif()

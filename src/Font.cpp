@@ -1,6 +1,8 @@
 #include "Font.hpp"
-#include <GL/gl.h>
 
+// |=====================================================
+// |---[Init FreeType]-----------------------------------
+// |=====================================================
 bool Font::initFreeType(const char* fontpath, unsigned int pixelHeight)
 {
     FT_Library ft;
@@ -18,10 +20,13 @@ bool Font::initFreeType(const char* fontpath, unsigned int pixelHeight)
         return false;
     }
 
+    // Rasterize glyphs at the requested pixel height
     FT_Set_Pixel_Sizes(face, 0, pixelHeight);
 
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // disable byte-alignment restriction
+    // disable byte-alignment restriction
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
+    // ===[Load the first 128 ASCII glyphs into individual textures]===
     for (unsigned char c = 0; c < 128; c++)
     {
         if (FT_Load_Char(face, c, FT_LOAD_RENDER))
@@ -45,7 +50,9 @@ bool Font::initFreeType(const char* fontpath, unsigned int pixelHeight)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-        Character character = {
+        // Cache this glyph's texture and metrics for later measurement/drawing
+        Character character =
+        {
             texture,
             (int)face->glyph->bitmap.width,
             (int)face->glyph->bitmap.rows,
@@ -63,15 +70,30 @@ bool Font::initFreeType(const char* fontpath, unsigned int pixelHeight)
 
     return true;
 }
+
+// |=====================================================
+// |---[Renderer Text]-----------------------------------
+// |=====================================================
 void Font::rendererText(Shader shader, const std::string& text, float x, float y, float scale,
-    unsigned int VAO, unsigned int VBO)
+    unsigned int VAO, unsigned int VBO, float angleRadians)
 {
     shader.Use();
+
+    // Build model matrix. Translate to (x,y), then rotate around that point
+    glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(x, y, 0.0f));
+    model = glm::rotate(model, angleRadians, glm::vec3(0.0f, 0.0f, 1.0f));
+
+    // upload it
+    GLint modelLoc = glGetUniformLocation(shader.ID, "model");
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
     glActiveTexture(GL_TEXTURE0);
     glBindVertexArray(VAO);
 
-    static bool printedOnce = false;
+    // Unroatated local space
+    float penX = 0.0f;
 
+    static bool printedOnce = false;
     for (char c : text)
     {
         if (characters.find(c) == characters.end())
@@ -82,9 +104,9 @@ void Font::rendererText(Shader shader, const std::string& text, float x, float y
 
         Character ch = characters[c];
 
-        float xpos = x + ch.bearingX * scale;
-        float ypos = y - (ch.height - ch.bearingY) * scale;
-
+        // local-space position, relative to pen origin (0,0)
+        float xpos = penX + ch.bearingX * scale;
+        float ypos = -(ch.height - ch.bearingY) * scale;
         float w = ch.width * scale;
         float h = ch.height * scale;
 
@@ -95,6 +117,7 @@ void Font::rendererText(Shader shader, const std::string& text, float x, float y
                         << " w=" << w << " h=" << h << "\n";
         }
 
+        // Quad corners in the order the two triangles expect
         float vertices[6][4] = {
             { xpos,     ypos + h,   0.0f, 0.0f },
             { xpos,     ypos,       0.0f, 1.0f },
@@ -115,16 +138,72 @@ void Font::rendererText(Shader shader, const std::string& text, float x, float y
         if (err != GL_NO_ERROR && !printedOnce)
             std::cout << "[Font] GL error after draw: 0x" << std::hex << err << std::dec << "\n";
 
-        x += (ch.advance >> 6) * scale;
+        // Move the pen forward by this glyph's advance (26.6 fixed-point, hence >> 6)
+        penX += (ch.advance >> 6) * scale;
     }
 
     printedOnce = true;
-
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
+
+// |=====================================================
+// |---[Measure the Width&height of the Text]------------
+// |=====================================================
+float Font::measureTextWidth(const std::string& text, float scale)
+{
+    float width = 0.0f;
+
+    // Sum each glyph's horizontal advance to get the total rendered width
+    for (char c : text)
+    {
+        auto it = characters.find(c);
+        if (it == characters.end()) continue;
+
+        width += (it->second.advance >> 6) * scale;
+    }
+
+    return width;
+}
+float Font::measureTextHeight(const std::string& text, float scale)
+{
+    float minY = 0.0f, maxY = 0.0f;
+    bool first = true;
+
+    // Track the tallest ascender and lowest descender across all glyphs in the string
+    for (char c : text)
+    {
+        auto it = characters.find(c);
+        if (it == characters.end()) continue;
+
+        const Character& ch = it->second;
+
+        // Mirrors the vertex math in rendererText, top edge sits at bearingY, bottom edge sits at -(height - bearingY)
+        float top = ch.bearingY * scale;
+        float bottom = -(ch.height - ch.bearingY) * scale;
+
+        if (first)
+        {
+            minY = bottom;
+            maxY = top;
+            first = false;
+        }
+        else
+        {
+            minY = std::min(minY, bottom);
+            maxY = std::max(maxY, top);
+        }
+    }
+
+    return maxY - minY;
+}
+
+// |=====================================================
+// |---[I just installed it why I gotta delete it]-------
+// |=====================================================
 void Font::deleteFreeType()
 {
+    // Free every cached glyph texture before dropping the map
     for (auto& [c, ch] : characters)
         glDeleteTextures(1, &ch.textureID);
 

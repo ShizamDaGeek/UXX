@@ -1,6 +1,8 @@
 #ifndef RENDERER_HPP
 #define RENDERER_HPP
 
+// The Renderer class will handle pretty much all UI drawing related stuff
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <GL/gl.h>
@@ -10,6 +12,7 @@
 #include <unordered_map>
 #include <algorithm>
 #include <cmath>
+#include <vector>
 
 #include "Texture.hpp"
 #include "VAO.hpp"
@@ -45,6 +48,8 @@ struct Style
     float bottomRightCornerRadius;
 };
 
+enum class SeparatorStyle { Solid, Dashed, Dotted };
+
 namespace Renderer
 {
     inline float SCREEN_WIDTH = 1920.0f;
@@ -58,18 +63,32 @@ namespace Renderer
     void init();
     void InitTextRendering();
 
-    void SetMouseState(double x, double y, bool leftDown, bool rightDown, bool middleDown);
+    void SetMouseState(double x, double y,
+        bool leftDown, bool leftPressed, bool leftReleased,
+        bool rightDown, bool rightPressed, bool rightReleased,
+        bool middleDown, bool middlePressed, bool middleReleased,
+        double scrollDeltaX, double scrollDeltaY);
+    void GetScrollDelta(double& outX, double& outY);
 
-    void BeginPanel(Rect PanelRect, Color PanelColor);
+    // This is the order that the structs sould go:
+    // Rect -> Color -> Anything realted to the UI itself _
+    //                                                     |
+    //  --- Font path <- Image path <- Text <- Text Size <-
+    // |
+    // |                             /TT\  /
+    // |                         O*=[_||_]<--
+    //  -------_-_---____----- ..oO  U  U  \
+
+    void BeginPanel(Rect PanelRect, Color PanelColor, std::string PanelImagePath);
     void EndPanel();
 
-    bool Button(Rect ButtonRect, Color ButtonColor, Color ButtonHoverColor, Color ButtonClickedColor, std::string ButtonImagePath);
-    bool IntSlider(Rect IntSliderRect, Color IntTrackColor, Color IntHandleColor, int& value, int minIntValue, int maxIntValue, int intStep);
-    bool FloatSlider(Rect FloatSliderRect, Color FloatTrackColor, Color FloatHandleColor, float& value, float minFloatValue, float maxFloatValue);
-    bool Switch(Rect SwitchRect, Color OnColor, Color OffColor, bool& value);
+    bool Button(Rect ButtonRect, Color ButtonColor, Color ButtonHoverColor, Color ButtonClickedColor, Color ButtonTextColor, float ButtonTextSize, std::string ButtonTextItself, std::string ButtonImagePath, std::string ButtonFontPath);
+    bool IntSlider(Rect IntSliderRect, Color IntTrackColor, Color IntHandleColor, int& value, int minIntValue, int maxIntValue, int intStep, Color IntSliderTextColor, float IntSliderTextSize, std::string IntSliderTextItself, std::string IntSliderImagePath, std::string IntSliderFontPath);
+    bool FloatSlider(Rect FloatSliderRect, Color FloatTrackColor, Color FloatHandleColor, float& value, float minFloatValue, float maxFloatValue, Color FloatSliderTextColor, float FloatSliderTextSize, std::string FloatSliderTextItself, std::string FloatSliderImagePath, std::string FloatSliderFontPath);
+    bool Switch(Rect SwitchRect, Color SwitchOnColor, Color SwitchOffColor, Color SwitchTextColor, bool& value, float SwitchTextSize, std::string SwitchOnTextItself, std::string SwitchOffTextItself, std::string SwitchImagePath, std::string SwitchFontPath);
 
     void Image(Rect ImageRect, Color ImageColor, std::string ImagePath);
-    void Separator(Rect SeparatorRect);
+    void Separator(Rect SeparatorRect, Color SeparatorColor);
     void Text(Rect TextRect, Color TextColor, float TextSize, std::string TextItself, std::string FontPath);
 
     void BlowUp();

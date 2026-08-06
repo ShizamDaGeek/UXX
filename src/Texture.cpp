@@ -1,9 +1,12 @@
 #include "Texture.hpp"
-#include <GL/gl.h>
 
+// |=====================================================
+// |---[Load Texture]------------------------------------
+// |=====================================================
 unsigned int GLTexture::loadTexture(const std::string& path, const char* texType)
 {
     int imgWidth, imgHeight, numColorChannel;
+    // Flip on load (since OpenGL expects the origin at the bottom-left)
     stbi_set_flip_vertically_on_load(true);
     unsigned char* imageBytes = stbi_load(path.c_str(), &imgWidth, &imgHeight, &numColorChannel, 0);
     if (!imageBytes)
@@ -20,6 +23,7 @@ unsigned int GLTexture::loadTexture(const std::string& path, const char* texType
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
+    // ===[Pick the correct internal/source format based on texture type and channel count]===
     if (strcmp(texType, "normal") == 0)
 	{
 		if (numColorChannel == 4)
@@ -70,22 +74,35 @@ unsigned int GLTexture::loadTexture(const std::string& path, const char* texType
 
 	return texID;
 }
+
+// |=====================================================
+// |---[Constructor]-------------------------------------
+// |=====================================================
 GLTexture::GLTexture(const char* image, const char* texType, unsigned int slot)
 {
     type = texType;
     unit = slot;
     ID = loadTexture(image, texType);
 
+    // Bind immediately so the texture is ready on its assigned unit
     glActiveTexture(GL_TEXTURE0 + slot);
     glBindTexture(GL_TEXTURE_2D, ID);
 }
+
+// |=====================================================
+// |---[Texture Unit]------------------------------------
+// |=====================================================
 void GLTexture::texUnit(Shader& shader, const char* uniform, unsigned int unit)
 {
+    // Tell the shader's sampler uniform which texture unit to read from
 	GLuint texUni = glGetUniformLocation(shader.ID, uniform);
 	shader.Use();
 	glUniform1i(texUni, unit);
 }
 
+// |=====================================================
+// |---[Bind, Unbind, and Delete Texture]----------------
+// |=====================================================
 void GLTexture::Bind()
 {
 	glActiveTexture(GL_TEXTURE0 + unit);

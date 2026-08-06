@@ -1,6 +1,8 @@
 #ifndef SHADER_HPP
 #define SHADER_HPP
 
+// Not exacaly Nvidia RTX type shaders, but it will do
+
 #include <glad/glad.h>
 #include <string>
 #include <cstring>
