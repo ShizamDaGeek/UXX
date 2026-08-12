@@ -1,4 +1,4 @@
-#include "Shader.hpp"
+#include "internal/Shader.hpp"
 
 // |=====================================================
 // |---[Get all contents in the File]--------------------

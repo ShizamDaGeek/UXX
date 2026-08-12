@@ -1,5 +1,5 @@
-#ifndef BACKEND_HPP
-#define BACKEND_HPP
+#ifndef GLFWBACKEND_HPP
+#define GLFWBACKEND_HPP
 
 // The Backend class will take care of the window making and initialization/clearing libraries
 
@@ -7,18 +7,19 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <chrono>
+#include <optional>
 
-#include "Renderer.hpp"
-#include "Shader.hpp"
-#include "VAO.hpp"
-#include "VBO.hpp"
-#include "EBO.hpp"
+#include "UXX.hpp"
+#include "internal/Shader.hpp"
+#include "internal/VAO.hpp"
+#include "internal/VBO.hpp"
+#include "internal/EBO.hpp"
 
-class Backend
+class GLFWBackend
 {
 public:
-    Backend();
-    ~Backend();
+    GLFWBackend();
+    ~GLFWBackend();
 
     bool init();
     void run();

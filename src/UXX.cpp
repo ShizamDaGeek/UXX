@@ -1,6 +1,6 @@
-#include "Renderer.hpp"
+#include "UXX.hpp"
 
-namespace Renderer
+namespace UXX
 {
     // |=====================================================
     // |---[Private state]-----------------------------------
@@ -229,10 +229,32 @@ namespace Renderer
     }
 
     // |=====================================================
+    // |---[Set window backend/Get graphics info]------------
+    // |=====================================================
+    void SetWindowBackend(WindowBackend backend)
+    {
+        graphicsInfo.backend = backend;
+    }
+    const GraphicsInfo& GetGraphicsInfo()
+    {
+        return graphicsInfo;
+    }
+
+    // |=====================================================
     // |---[Initlize stuff]----------------------------------
     // |=====================================================
     void init()
     {
+        // ===[Query the live GL context, must run after glad is loaded]===
+        glGetIntegerv(GL_MAJOR_VERSION, &graphicsInfo.glMajor);
+        glGetIntegerv(GL_MINOR_VERSION, &graphicsInfo.glMinor);
+        const char* v = (const char*)glGetString(GL_VERSION);
+        const char* vendor = (const char*)glGetString(GL_VENDOR);
+        const char* renderer = (const char*)glGetString(GL_RENDERER);
+        graphicsInfo.glVersionString = v ? v : "unknown";
+        graphicsInfo.glVendor = vendor ? vendor : "unknown";
+        graphicsInfo.glRenderer = renderer ? renderer : "unknown";
+
         // ===[Generates shader object using vertex and fragment shaders .glsl files]===
         shader = new Shader("../shader_files/VertexShader.glsl", "../shader_files/FragmentShader.glsl");
 

@@ -1,15 +1,13 @@
-#include "Backend.hpp"
-#include <GLFW/glfw3.h>
-#include <optional>
+#include "GLFWBackend.hpp"
 
 // |=====================================================
 // |---[Helper Functions]--------------------------------
 // |=====================================================
-void Backend::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
+void GLFWBackend::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
-    Backend* backend = static_cast<Backend*>(glfwGetWindowUserPointer(window));
-    if (backend)
+    GLFWBackend* glfwBackend = static_cast<GLFWBackend*>(glfwGetWindowUserPointer(window));
+    if (glfwBackend)
     {
         // Keep the renderer's screen-space constants in sync with the actual window/framebuffer sizes
         int windowWidth, windowHeight;
@@ -20,46 +18,46 @@ void Backend::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
         UXX::SCREEN_SCALE_Y = (float)height / (float)windowHeight;
     }
 }
-void Backend::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+void GLFWBackend::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
 {
-    Backend* backend = static_cast<Backend*>(glfwGetWindowUserPointer(window));
-    if (!backend) return;
+    GLFWBackend* glfwBackend = static_cast<GLFWBackend*>(glfwGetWindowUserPointer(window));
+    if (!glfwBackend) return;
 
     // Track both the held state and a one-frame press/release flag per mouse button
     if (button >= 0 && button < 3)
     {
         if (action == GLFW_PRESS)
         {
-            backend->mouseButtonDown[button] = true;
-            backend->mouseButtonPressed[button] = true; // one-frame "just clicked" flag
+            glfwBackend->mouseButtonDown[button] = true;
+            glfwBackend->mouseButtonPressed[button] = true; // one-frame "just clicked" flag
         }
         else if (action == GLFW_RELEASE)
         {
-            backend->mouseButtonDown[button] = false;
-            backend->mouseButtonReleased[button] = true; // one-frame "just released" flag
+            glfwBackend->mouseButtonDown[button] = false;
+            glfwBackend->mouseButtonReleased[button] = true; // one-frame "just released" flag
         }
     }
 }
-void Backend::CursorPosCallback(GLFWwindow* window, double xpos, double ypos)
+void GLFWBackend::CursorPosCallback(GLFWwindow* window, double xpos, double ypos)
 {
-    Backend* backend = static_cast<Backend*>(glfwGetWindowUserPointer(window));
-    if (backend)
+    GLFWBackend* glfwBackend = static_cast<GLFWBackend*>(glfwGetWindowUserPointer(window));
+    if (glfwBackend)
     {
-        backend->mouseX = xpos;
-        backend->mouseY = ypos;
+        glfwBackend->mouseX = xpos;
+        glfwBackend->mouseY = ypos;
     }
 }
 
-void Backend::ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+void GLFWBackend::ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    Backend* backend = static_cast<Backend*>(glfwGetWindowUserPointer(window));
-    if (backend)
+    GLFWBackend* glfwBackend = static_cast<GLFWBackend*>(glfwGetWindowUserPointer(window));
+    if (glfwBackend)
     {
-        backend->scrollX = xoffset;
-        backend->scrollY = yoffset;
+        glfwBackend->scrollX = xoffset;
+        glfwBackend->scrollY = yoffset;
     }
 }
-void Backend::GetMouseInput()
+void GLFWBackend::GetMouseInput()
 {
     glfwGetCursorPos(window, &mouseX, &mouseY);
 }
@@ -67,13 +65,13 @@ void Backend::GetMouseInput()
 // |=====================================================
 // |---[Constructer/Destructer]--------------------------
 // |=====================================================
-Backend::Backend() {}
-Backend::~Backend() {}
+GLFWBackend::GLFWBackend() {}
+GLFWBackend::~GLFWBackend() {}
 
 // |=====================================================
 // |---[Initlize]----------------------------------------
 // |=====================================================
-bool Backend::init()
+bool GLFWBackend::init()
 {
     if (!glfwInit())
     {
@@ -122,6 +120,7 @@ bool Backend::init()
     UXX::SCREEN_SCALE_X = (float)frameBufferWidth  / (float)windowWidth;
     UXX::SCREEN_SCALE_Y = (float)frameBufferHeight / (float)windowHeight;
 
+    UXX::SetWindowBackend(WindowBackend::GLFW);
     UXX::init();
 
     return true;
@@ -130,7 +129,7 @@ bool Backend::init()
 // |=====================================================
 // |---[Run and Hide]------------------------------------
 // |=====================================================
-void Backend::run()
+void GLFWBackend::run()
 {
     // Loop until the user closes the window
     while (!glfwWindowShouldClose(window))
@@ -204,7 +203,7 @@ void Backend::run()
 // |=====================================================
 // |---[Heavy: You are Dead]-----------------------------
 // |=====================================================
-void Backend::die()
+void GLFWBackend::die()
 {
     UXX::BlowUp();
 

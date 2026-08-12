@@ -1,5 +1,5 @@
-#ifndef RENDERER_HPP
-#define RENDERER_HPP
+#ifndef UXX_HPP
+#define UXX_HPP
 
 // The Renderer class will handle pretty much all UI drawing related stuff
 
@@ -14,12 +14,12 @@
 #include <cmath>
 #include <vector>
 
-#include "Texture.hpp"
-#include "VAO.hpp"
-#include "VBO.hpp"
-#include "EBO.hpp"
-#include "Shader.hpp"
-#include "Font.hpp"
+#include "internal/Texture.hpp"
+#include "internal/VAO.hpp"
+#include "internal/VBO.hpp"
+#include "internal/EBO.hpp"
+#include "internal/Shader.hpp"
+#include "internal/Font.hpp"
 
 struct Rect
 {
@@ -50,7 +50,17 @@ struct Style
 
 enum class SeparatorStyle { Solid, Dashed, Dotted };
 
-namespace Renderer
+enum class WindowBackend
+{
+    UNKNOWN,
+    GLFW,
+    SDL2,
+    SDL3,
+    SFML
+};
+
+
+namespace UXX
 {
     inline float SCREEN_WIDTH = 1920.0f;
     inline float SCREEN_HEIGHT = 1080.0f;
@@ -59,6 +69,17 @@ namespace Renderer
 
     static Shader* textShader = nullptr;
     static unsigned int textVAO, textVBO;
+
+    struct GraphicsInfo
+    {
+        WindowBackend backend = WindowBackend::UNKNOWN;
+        int glMajor = 0;
+        int glMinor = 0;
+        std::string glVersionString;
+        std::string glVendor;
+        std::string glRenderer;
+    };
+    const GraphicsInfo& GetGraphicsInfo();
 
     void init();
     void InitTextRendering();
@@ -79,6 +100,7 @@ namespace Renderer
     // |                         O*=[_||_]<--
     //  -------_-_---____----- ..oO  U  U  \
 
+    void SetWindowBackend(WindowBackend backend);
     void BeginPanel(Rect PanelRect, Color PanelColor, std::string PanelImagePath);
     void EndPanel();
 
@@ -93,7 +115,5 @@ namespace Renderer
 
     void BlowUp();
 };
-
-namespace UXX = Renderer;
 
 #endif
