@@ -1,0 +1,11 @@
+@PACKAGE_INIT@ # Expands to boilerplate (PACKAGE_PREFIX_DIR, set_and_check, etc.) for relocatable installs
+
+include(CMakeFindDependencyMacro)
+find_dependency(OpenGL) # Re-find UXX's public dependencies so consumers don't have to
+
+# Pull in the exported targets (defines UXX::UXX) if not already loaded
+if(NOT TARGET UXX::UXX)
+    include("${CMAKE_CURRENT_LIST_DIR}/UXXTargets.cmake")
+endif()
+
+check_required_components(UXX) # Standard find_package version/component sanity check

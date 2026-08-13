@@ -79,17 +79,22 @@ namespace UXX
         std::string glVendor;
         std::string glRenderer;
     };
+
+    inline GraphicsInfo graphicsInfo;
     const GraphicsInfo& GetGraphicsInfo();
+
+    void SetWindowBackend(WindowBackend backend);
 
     void init();
     void InitTextRendering();
 
-    void SetMouseState(double x, double y,
+    void SetMouseState(double mouseX, double mouseY,
         bool leftDown, bool leftPressed, bool leftReleased,
         bool rightDown, bool rightPressed, bool rightReleased,
         bool middleDown, bool middlePressed, bool middleReleased,
         double scrollDeltaX, double scrollDeltaY);
     void GetScrollDelta(double& outX, double& outY);
+    void SetKeyState(bool leftArrowPressed, bool rightArrowPressed, bool upArrowPressed, bool downArrowPressed);
 
     // This is the order that the structs sould go:
     // Rect -> Color -> Anything realted to the UI itself _
@@ -100,7 +105,6 @@ namespace UXX
     // |                         O*=[_||_]<--
     //  -------_-_---____----- ..oO  U  U  \
 
-    void SetWindowBackend(WindowBackend backend);
     void BeginPanel(Rect PanelRect, Color PanelColor, std::string PanelImagePath);
     void EndPanel();
 

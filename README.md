@@ -50,9 +50,9 @@ Color color1 = Color(0.3f, 0.9f, 0.5f, 1.0f);
 Color color2 = Color(0.5f, 0.3f, 0.9f, 1.0f);
 Color color3 = Color(0.9f, 0.5f, 0.3f, 1.0f);
 
-std::string scoutImagePath("../Images/scout.jpg");
-std::string catImagePath("../Images/cat.jpg");
-std::string fontPath("../Fonts/sandypixels_5x5_font2.ttf");
+std::string scoutImagePath("../UXXAssets/Images/scout.jpg");
+std::string catImagePath("../UXXAssets/Images/cat.jpg");
+std::string fontPath("../UXXAssets/Fonts/sandypixels_5x5_font2.ttf");
 
 static int intSliderValue = 75;
 static float floatSliderValue = 50.0f;
@@ -72,7 +72,7 @@ UXX::Text(Rect(600, 100, 80, 60, -45), color1, 2.5f, "Think FAST Chuckle Nuts!",
 UXX::EndPanel();
 ```
 All that code created this masterpeice below VVV
-![ExampeImage1](Images/example_image1.png)
+![ExampeImage1](UXXAssets/Images/example_image1.png)
 
 ### **General UI:**
 

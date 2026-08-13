@@ -22,6 +22,11 @@ namespace UXX
 
         // ===[Tile]===
         bool panelOpen = false;
+        // ===[Keyboard]===
+        bool leftArrowKeyPressed = false;
+        bool rightArrowKeyPressed = false;
+        bool upArrowKeyPressed = false;
+        bool downArrowKeyPressed = false;
 
         // ===[Activate drag tracking]===
         const void* activeDragWidget = nullptr;
@@ -97,7 +102,7 @@ namespace UXX
             return font;
         }
         // ===[Be there or be SQUARE]===
-        void DrawQuad(Rect rect, Color color, GLTexture* tex)
+        void DrawQuad(Rect rect, Color color, GLTexture* texture)
         {
             shader->Use();
 
@@ -113,18 +118,18 @@ namespace UXX
             // Rotation of Quad
             glUniform1f(glGetUniformLocation(shader->ID, "uRotation"), rect.rotation);
             // Tell the shader whether to sample tex0 or just use the flat color
-            glUniform1i(glGetUniformLocation(shader->ID, "uUseTexture"), tex ? 1 : 0);
+            glUniform1i(glGetUniformLocation(shader->ID, "uUseTexture"), texture ? 1 : 0);
 
-            if (tex) tex->Bind();
+            if (texture) texture->Bind();
 
             vao->Bind();
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
             vao->Unbind();
 
-            if (tex) tex->Unbind();
+            if (texture) texture->Unbind();
         }
         // ===[Shared drag math for sliders]===
-        float SliderDragT(const void* widgetId, Rect SliderRect, float handleWidth)
+        float SliderNormalizedDragValue(const void* widgetId, Rect SliderRect, float handleWidth)
         {
             bool hoveringTrack = (mousePositionX >= SliderRect.xPos && mousePositionX <= SliderRect.xPos + SliderRect.width &&
                                     mousePositionY >= SliderRect.yPos && mousePositionY <= SliderRect.yPos + SliderRect.height);
@@ -136,8 +141,8 @@ namespace UXX
             // Only the widget that owns the drag responds, and only while the button stays held
             if (activeDragWidget != widgetId || !leftMouseButtonDown) return -1.0f;
 
-            float newT = (float)(mousePositionX - SliderRect.xPos - handleWidth * 0.5f) / (SliderRect.width - handleWidth);
-            return std::clamp(newT, 0.0f, 1.0f);
+            float normalizedDragPosition = (float)(mousePositionX - SliderRect.xPos - handleWidth * 0.5f) / (SliderRect.width - handleWidth);
+            return std::clamp(normalizedDragPosition, 0.0f, 1.0f);
         }
 
         // Stack of scissor boxes so nested scissors restore properly
@@ -153,13 +158,13 @@ namespace UXX
             scissorEnabledStack.push_back(wasEnabled);
             scissorStack.push_back({ prev[0], prev[1], prev[2], prev[3] });
 
-            GLint x = (GLint)(rect.xPos * SCREEN_SCALE_X);
-            GLint y = (GLint)((SCREEN_HEIGHT - (rect.yPos + rect.height)) * SCREEN_SCALE_Y);
-            GLsizei w = (GLsizei)(rect.width  * SCREEN_SCALE_X);
-            GLsizei h = (GLsizei)(rect.height * SCREEN_SCALE_Y);
+            GLint scissorX = (GLint)(rect.xPos * SCREEN_SCALE_X);
+            GLint scissorY = (GLint)((SCREEN_HEIGHT - (rect.yPos + rect.height)) * SCREEN_SCALE_Y);
+            GLsizei scissorWidth = (GLsizei)(rect.width  * SCREEN_SCALE_X);
+            GLsizei scissorHeight = (GLsizei)(rect.height * SCREEN_SCALE_Y);
 
             glEnable(GL_SCISSOR_TEST);
-            glScissor(x, y, w, h);
+            glScissor(scissorX, scissorY, scissorWidth, scissorHeight);
         }
         // ===[Restore whatever scissor state was active before the matching PushScissor]===
         void PopScissor()
@@ -175,7 +180,7 @@ namespace UXX
         }
 
         // ===[Shared shader/uniform setup + draw call for any piece of text]===
-        void DrawTextRaw(float x, float bottomUpY, Color color, float size, const std::string& text, Font* font, float angleRadians)
+        void DrawTextRaw(float textPositionX, float bottomUpY, Color color, float size, const std::string& text, Font* font, float angleRadians)
         {
             if (!font) return;
 
@@ -190,21 +195,21 @@ namespace UXX
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-            font->rendererText(*textShader, text, x, bottomUpY, size, textVAO, textVBO, angleRadians);
+            font->rendererText(*textShader, text, textPositionX, bottomUpY, size, textVAO, textVBO, angleRadians);
         }
     }
 
     // |=====================================================
     // |---[Public Helper Functions]-------------------------
     // |=====================================================
-    void SetMouseState(double x, double y,
+    void SetMouseState(double mouseX, double mouseY,
         bool leftDown, bool leftPressed, bool leftReleased,
         bool rightDown, bool rightPressed, bool rightReleased,
         bool middleDown, bool middlePressed, bool middleReleased,
         double scrollDeltaX, double scrollDeltaY)
     {
-        mousePositionX = x;
-        mousePositionY = y;
+        mousePositionX = mouseX;
+        mousePositionY = mouseY;
         leftMouseButtonDown = leftDown;
         leftMouseButtonPressed = leftPressed;
         leftMouseButtonReleased = leftReleased;
@@ -227,6 +232,13 @@ namespace UXX
         outX = scrollDeltaXState;
         outY = scrollDeltaYState;
     }
+    void SetKeyState(bool leftArrowPressed, bool rightArrowPressed, bool upArrowPressed, bool downArrowPressed)
+    {
+        leftArrowKeyPressed = leftArrowPressed;
+        rightArrowKeyPressed = rightArrowPressed;
+        upArrowKeyPressed = upArrowPressed;
+        downArrowKeyPressed = downArrowPressed;
+    }
 
     // |=====================================================
     // |---[Set window backend/Get graphics info]------------
@@ -248,10 +260,10 @@ namespace UXX
         // ===[Query the live GL context, must run after glad is loaded]===
         glGetIntegerv(GL_MAJOR_VERSION, &graphicsInfo.glMajor);
         glGetIntegerv(GL_MINOR_VERSION, &graphicsInfo.glMinor);
-        const char* v = (const char*)glGetString(GL_VERSION);
+        const char* version = (const char*)glGetString(GL_VERSION);
         const char* vendor = (const char*)glGetString(GL_VENDOR);
         const char* renderer = (const char*)glGetString(GL_RENDERER);
-        graphicsInfo.glVersionString = v ? v : "unknown";
+        graphicsInfo.glVersionString = version ? version : "unknown";
         graphicsInfo.glVendor = vendor ? vendor : "unknown";
         graphicsInfo.glRenderer = renderer ? renderer : "unknown";
 
@@ -373,19 +385,14 @@ namespace UXX
     {
         if (!panelOpen) return false;
 
-        // ===[Compute the handle's position from the current value]===
-        float handleWidth = IntSliderRect.height;
-        float t = (float)(value - minIntValue) / (float)(maxIntValue - minIntValue);
-        float handleX = IntSliderRect.xPos + t * (IntSliderRect.width - handleWidth);
-        Rect handleRect{ handleX, IntSliderRect.yPos, handleWidth, IntSliderRect.height, 0.0f };
-
         // ===[Apply a drag, snapping the result to the nearest step]===
         bool changed = false;
-        float newT = SliderDragT(&value, IntSliderRect, handleWidth);
-        if (newT >= 0.0f)
+        float handleWidth = IntSliderRect.height;
+        float newNormalizedValue = SliderNormalizedDragValue(&value, IntSliderRect, handleWidth);
+        if (newNormalizedValue >= 0.0f)
         {
             int steps = (maxIntValue - minIntValue) / std::max(intStep, 1);
-            int newValue = minIntValue + (int)std::round(newT * steps) * intStep;
+            int newValue = minIntValue + (int)std::round(newNormalizedValue * steps) * intStep;
             newValue = std::clamp(newValue, minIntValue, maxIntValue);
             if (newValue != value)
             {
@@ -393,6 +400,29 @@ namespace UXX
                 changed = true;
             }
         }
+
+        // ===[Keyboard nudging while hovered]===
+        bool hoveredTrack = (mousePositionX >= IntSliderRect.xPos && mousePositionX <= IntSliderRect.xPos + IntSliderRect.width &&
+                              mousePositionY >= IntSliderRect.yPos && mousePositionY <= IntSliderRect.yPos + IntSliderRect.height);
+
+        if (hoveredTrack)
+        {
+            if (leftArrowKeyPressed || downArrowKeyPressed)
+            {
+                int newValue = std::clamp(value - intStep, minIntValue, maxIntValue);
+                if (newValue != value) { value = newValue; changed = true; }
+            }
+            if (rightArrowKeyPressed || upArrowKeyPressed)
+            {
+                int newValue = std::clamp(value + intStep, minIntValue, maxIntValue);
+                if (newValue != value) { value = newValue; changed = true; }
+            }
+        }
+
+        // ===[Compute the handle position, using the up-to-date value]===
+        float normalizedValue = (float)(value - minIntValue) / (float)(maxIntValue - minIntValue);
+        float handleX = IntSliderRect.xPos + normalizedValue * (IntSliderRect.width - handleWidth);
+        Rect handleRect{ handleX, IntSliderRect.yPos, handleWidth, IntSliderRect.height, 0.0f };
 
         // ===[Draw optional texture, and both the Slider Handle and Track]===
         GLTexture* trackTex = IntSliderImagePath.empty() ? nullptr : GetOrLoadTexture(IntSliderImagePath);
@@ -426,24 +456,43 @@ namespace UXX
     {
         if (!panelOpen) return false;
 
-        // ===[Compute the handle's position from the current value]===
-        float handleWidth = FloatSliderRect.height;
-        float t = (value - minFloatValue) / (maxFloatValue - minFloatValue);
-        float handleX = FloatSliderRect.xPos + t * (FloatSliderRect.width - handleWidth);
-        Rect handleRect{ handleX, FloatSliderRect.yPos, handleWidth, FloatSliderRect.height, 0.0f };
-
         // ===[Apply a drag directly as a continuous value, no stepping needed]===
         bool changed = false;
-        float newT = SliderDragT(&value, FloatSliderRect, handleWidth);
-        if (newT >= 0.0f)
+        float handleWidth = FloatSliderRect.height;
+        float newNormalizedValue = SliderNormalizedDragValue(&value, FloatSliderRect, handleWidth);
+        if (newNormalizedValue >= 0.0f)
         {
-            float newValue = minFloatValue + newT * (maxFloatValue - minFloatValue);
+            float newValue = minFloatValue + newNormalizedValue * (maxFloatValue - minFloatValue);
             if (newValue != value)
             {
                 value = newValue;
                 changed = true;
             }
         }
+
+        // ===[Keyboard nudging while hovered]===
+        bool hoveredTrack = (mousePositionX >= FloatSliderRect.xPos && mousePositionX <= FloatSliderRect.xPos + FloatSliderRect.width &&
+                              mousePositionY >= FloatSliderRect.yPos && mousePositionY <= FloatSliderRect.yPos + FloatSliderRect.height);
+
+        if (hoveredTrack)
+        {
+            float step = (maxFloatValue - minFloatValue) * 0.01f; // 1% per keypress
+            if (leftArrowKeyPressed || downArrowKeyPressed)
+            {
+                float newValue = std::clamp(value - step, minFloatValue, maxFloatValue);
+                if (newValue != value) { value = newValue; changed = true; }
+            }
+            if (rightArrowKeyPressed || upArrowKeyPressed)
+            {
+                float newValue = std::clamp(value + step, minFloatValue, maxFloatValue);
+                if (newValue != value) { value = newValue; changed = true; }
+            }
+        }
+
+        // ===[Compute the handle position, using the up-to-date value]===
+        float normalizedValue = (value - minFloatValue) / (maxFloatValue - minFloatValue);
+        float handleX = FloatSliderRect.xPos + normalizedValue * (FloatSliderRect.width - handleWidth);
+        Rect handleRect{ handleX, FloatSliderRect.yPos, handleWidth, FloatSliderRect.height, 0.0f };
 
         // ===[Draw optional texture, and both the Slider Handle and Track]===
         GLTexture* trackTex = FloatSliderImagePath.empty() ? nullptr : GetOrLoadTexture(FloatSliderImagePath);

@@ -134,18 +134,18 @@ void GLFWBackend::run()
     // Loop until the user closes the window
     while (!glfwWindowShouldClose(window))
     {
-        // Reset one-frame flags before polling new events
-        for (int i = 0; i < 3; i++)
+        // ===[Reset one-frame flags before polling new events]===
+        for (int buttonIndex = 0; buttonIndex < 3; buttonIndex++)
         {
-            mouseButtonPressed[i] = false;
-            mouseButtonReleased[i] = false;
+            mouseButtonPressed[buttonIndex] = false;
+            mouseButtonReleased[buttonIndex] = false;
         }
         scrollX = 0.0;
         scrollY = 0.0;
 
         glfwPollEvents();
 
-        // Mouse States
+        // ===[Mouse States]===
         UXX::SetMouseState(mouseX, mouseY,
             mouseButtonDown[GLFW_MOUSE_BUTTON_LEFT],
             mouseButtonPressed[GLFW_MOUSE_BUTTON_LEFT],
@@ -158,12 +158,57 @@ void GLFWBackend::run()
             mouseButtonReleased[GLFW_MOUSE_BUTTON_MIDDLE],
             scrollX, scrollY);
 
+        // ===[Arrow key polling]===
+        static bool previousLeft = false, previousRight = false, previousUp = false, previousDown = false;
+        static double leftHeldSince = 0.0, rightHeldSince = 0.0, upHeldSince = 0.0, downHeldSince = 0.0;
+        static double leftLastRepeat = 0.0, rightLastRepeat = 0.0, upLastRepeat = 0.0, downLastRepeat = 0.0;
+
+        const double repeatDelay = 0.4;   // seconds held before repeat kicks in
+        const double repeatRate  = 0.05;  // seconds between repeats once repeating
+
+        double now = glfwGetTime();
+
+        bool currentLeft    = glfwGetKey(window, GLFW_KEY_LEFT)     == GLFW_PRESS;
+        bool currentRight   = glfwGetKey(window, GLFW_KEY_RIGHT)    == GLFW_PRESS;
+        bool currentUp      = glfwGetKey(window, GLFW_KEY_UP)       == GLFW_PRESS;
+        bool currentDown    = glfwGetKey(window, GLFW_KEY_DOWN)     == GLFW_PRESS;
+
+        auto ComputeFire = [&](bool current, bool& previous, double& heldSince, double& lastRepeat) -> bool
+        {
+            bool fire = false;
+            if (current && !previous)
+            {
+                // Just pressed: fire immediately, start the hold timer
+                fire = true;
+                heldSince = now;
+                lastRepeat = now;
+            }
+            else if (current && previous)
+            {
+                // Still held: fire again after the initial delay, then at the repeat rate
+                if (now - heldSince >= repeatDelay && now - lastRepeat >= repeatRate)
+                {
+                    fire = true;
+                    lastRepeat = now;
+                }
+            }
+            previous = current;
+            return fire;
+        };
+
+        bool fireLeft  = ComputeFire(currentLeft,  previousLeft,  leftHeldSince,  leftLastRepeat);
+        bool fireRight = ComputeFire(currentRight, previousRight, rightHeldSince, rightLastRepeat);
+        bool fireUp    = ComputeFire(currentUp,    previousUp,    upHeldSince,    upLastRepeat);
+        bool fireDown  = ComputeFire(currentDown,  previousDown,  downHeldSince,  downLastRepeat);
+
+        UXX::SetKeyState(fireLeft, fireRight, fireUp, fireDown);
+
         // Specify the color of the background
     	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     	// Clean the back buffer and assign the new color to it
     	glClear(GL_COLOR_BUFFER_BIT);
 
-    	// Draw UI
+    	// ===[Draw UI]===
     	UXX::BeginPanel(Rect(0, 0, 1920, 1080, 0), Color(0.1f, 0.5f, 0.9f, 1.0f), "");
 
         Color normalColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
@@ -174,9 +219,9 @@ void GLFWBackend::run()
         Color color2 = Color(0.5f, 0.3f, 0.9f, 1.0f);
         Color color3 = Color(0.9f, 0.5f, 0.3f, 1.0f);
 
-        std::string scoutImagePath("../Images/scout.jpg");
-        std::string catImagePath("../Images/cat.jpg");
-        std::string fontPath("../Fonts/sandypixels_5x5_font2.ttf");
+        std::string scoutImagePath("../UXXAssets/Images/scout.jpg");
+        std::string catImagePath("../UXXAssets/Images/cat.jpg");
+        std::string fontPath("../UXXAssets/Fonts/sandypixels_5x5_font2.ttf");
 
         static int intSliderValue = 75;
         static float floatSliderValue = 50.0f;
