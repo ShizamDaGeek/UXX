@@ -13,6 +13,10 @@ namespace UXX
         EBO* ebo = nullptr;
         Shader* shader = nullptr;
 
+        GLint uColorLoc = -1, uSizeLoc = -1, uPositionLoc = -1, uRotationLoc = -1, uUseTextureLoc = -1;
+        GLint textColorLoc = -1;
+        GLint textModelLoc = -1;
+
         // ===[Caches]===
         std::unordered_map<std::string, GLTexture*> textureCache;
         GLTexture* GetOrLoadTexture(const std::string& path);
@@ -41,8 +45,10 @@ namespace UXX
         bool middleMouseButtonDown = false;
         bool middleMouseButtonPressed = false;
         bool middleMouseButtonReleased = false;
-        double mousePositionX, mousePositionY;
 
+        bool mouseHoveredOverWidgetThisFrame = false;
+
+        double mousePositionX, mousePositionY;
         // ===[Raw per-frame delta, for future scrollable widgets]===
         double scrollDeltaXState = 0.0;
         double scrollDeltaYState = 0.0;
@@ -105,7 +111,7 @@ namespace UXX
             {
                 std::cerr << "Failed to load font: " << path << "\n";
                 delete font;
-                fontCache[path] = nullptr;
+                fontCache[path] = font;
                 return nullptr;
             }
 
@@ -118,26 +124,40 @@ namespace UXX
             shader->Use();
 
             // Color of Quad
-            glUniform4f(glGetUniformLocation(shader->ID, "uColor"), color.r, color.g, color.b, color.a);
+            glUniform4f(uColorLoc, color.r, color.g, color.b, color.a);
             // Size of Quad
-            glUniform2f(glGetUniformLocation(shader->ID, "uSize"),
-                (rect.width / SCREEN_WIDTH) * 2.0f, (rect.height / SCREEN_HEIGHT) * 2.0f);
+            glUniform2f(uSizeLoc, (rect.width / SCREEN_WIDTH) * 2.0f, (rect.height / SCREEN_HEIGHT) * 2.0f);
             // Position of Quad
-            glUniform2f(glGetUniformLocation(shader->ID, "uPosition"),
+            glUniform2f(uPositionLoc,
                 ((rect.xPos + rect.width * 0.5f) / SCREEN_WIDTH) * 2.0f - 1.0f,
                 1.0f - ((rect.yPos + rect.height * 0.5f) / SCREEN_HEIGHT) * 2.0f);
             // Rotation of Quad
-            glUniform1f(glGetUniformLocation(shader->ID, "uRotation"), rect.rotation);
+            glUniform1f(uRotationLoc, rect.rotation);
             // Tell the shader whether to sample tex0 or just use the flat color
-            glUniform1i(glGetUniformLocation(shader->ID, "uUseTexture"), texture ? 1 : 0);
+            glUniform1i(uUseTextureLoc, texture ? 1 : 0);
 
             if (texture) texture->Bind();
-
             vao->Bind();
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
             vao->Unbind();
-
             if (texture) texture->Unbind();
+        }
+        // ===[Shared shader/uniform setup + draw call for any piece of text]===
+        void DrawTextRaw(float textPositionX, float bottomUpY, Color color, float size, const std::string& text, Font* font, float angleRadians)
+        {
+            if (!font) return;
+
+            textShader->Use();
+
+            // Set up an orthographic projection matching the current screen size
+            glm::mat4 projection = glm::ortho(0.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT);
+            textShader->setMat4("projection", projection);
+            glUniform4f(textColorLoc, color.r, color.g, color.b, color.a);
+
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+            font->rendererText(*textShader, text, textPositionX, bottomUpY, size, textVAO, textVBO, textModelLoc, angleRadians);
         }
         // ===[Shared drag math for sliders]===
         float SliderNormalizedDragValue(const void* widgetId, Rect SliderRect, float handleWidth)
@@ -189,25 +209,6 @@ namespace UXX
             scissorStack.pop_back();
             scissorEnabledStack.pop_back();
         }
-
-        // ===[Shared shader/uniform setup + draw call for any piece of text]===
-        void DrawTextRaw(float textPositionX, float bottomUpY, Color color, float size, const std::string& text, Font* font, float angleRadians)
-        {
-            if (!font) return;
-
-            textShader->Use();
-
-            // Set up an orthographic projection matching the current screen size
-            glm::mat4 projection = glm::ortho(0.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT);
-            textShader->setMat4("projection", projection);
-            glUniform4f(glGetUniformLocation(textShader->ID, "textColor"),
-                color.r, color.g, color.b, color.a);
-
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-            font->rendererText(*textShader, text, textPositionX, bottomUpY, size, textVAO, textVBO, angleRadians);
-        }
     }
 
     // |=====================================================
@@ -234,6 +235,8 @@ namespace UXX
         scrollDeltaXState = scrollDeltaX;
         scrollDeltaYState = scrollDeltaY;
 
+        mouseHoveredOverWidgetThisFrame = false;
+
         // A release always clears the active drag
         if (leftMouseButtonReleased || rightMouseButtonReleased || middleMouseButtonReleased)
             activeDragWidget = nullptr;
@@ -249,6 +252,10 @@ namespace UXX
         rightArrowKeyPressed = rightArrowPressed;
         upArrowKeyPressed = upArrowPressed;
         downArrowKeyPressed = downArrowPressed;
+    }
+    bool MouseHoveredOverWidget()
+    {
+        return mouseHoveredOverWidgetThisFrame;
     }
 
     // |=====================================================
@@ -303,6 +310,11 @@ namespace UXX
         shader->Use();
         GLuint scale = glGetUniformLocation(shader->ID, "scale");
         glUniform1f(scale, 1.0f);
+        uColorLoc      = glGetUniformLocation(shader->ID, "uColor");
+        uSizeLoc       = glGetUniformLocation(shader->ID, "uSize");
+        uPositionLoc   = glGetUniformLocation(shader->ID, "uPosition");
+        uRotationLoc   = glGetUniformLocation(shader->ID, "uRotation");
+        uUseTextureLoc = glGetUniformLocation(shader->ID, "uUseTexture");
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
@@ -312,6 +324,8 @@ namespace UXX
     {
         // Separate shader and VAO/VBO pair dedicated to glyph quads
         textShader = new Shader("../shader_files/VertexText.glsl", "../shader_files/FragmentText.glsl");
+        textColorLoc = glGetUniformLocation(textShader->ID, "textColor");
+        textModelLoc = glGetUniformLocation(textShader->ID, "model");
 
         glGenVertexArrays(1, &textVAO);
         glGenBuffers(1, &textVBO);
@@ -333,8 +347,8 @@ namespace UXX
         panelOpen = true;
 
         // Draw the panel background, optionally textured
-        GLTexture* tex = PanelImagePath.empty() ? nullptr : GetOrLoadTexture(PanelImagePath);
-        DrawQuad(PanelRect, PanelColor, nullptr);
+        GLTexture* panelTexture = PanelImagePath.empty() ? nullptr : GetOrLoadTexture(PanelImagePath);
+        DrawQuad(PanelRect, PanelColor, panelTexture);
 
         PushScissor(PanelRect);
     }
@@ -352,20 +366,21 @@ namespace UXX
         if (!panelOpen) return false;
 
         // Find out what state the button is on
-        bool hovered = (mousePositionX >= ButtonRect.xPos && mousePositionX <= ButtonRect.xPos + ButtonRect.width &&
-                        mousePositionY >= ButtonRect.yPos && mousePositionY <= ButtonRect.yPos + ButtonRect.height);
-        bool clicked = hovered && leftMouseButtonPressed;
+        bool hoveredButton = (mousePositionX >= ButtonRect.xPos && mousePositionX <= ButtonRect.xPos + ButtonRect.width &&
+                                mousePositionY >= ButtonRect.yPos && mousePositionY <= ButtonRect.yPos + ButtonRect.height);
+        if (hoveredButton) mouseHoveredOverWidgetThisFrame = true;
+        bool clickedButton = hoveredButton && leftMouseButtonPressed;
 
         // Pick color based on state
         Color finalColor = ButtonColor;
-        if (hovered)
+        if (hoveredButton)
             finalColor = ButtonHoverColor;
-        if (clicked)
+        if (clickedButton)
             finalColor = ButtonClickedColor;
 
         // Draw button with the colors
-        GLTexture* tex = GetOrLoadTexture(ButtonImagePath);
-        DrawQuad(ButtonRect, finalColor, tex);
+        GLTexture* buttonTexture = GetOrLoadTexture(ButtonImagePath);
+        DrawQuad(ButtonRect, finalColor, buttonTexture);
 
         // If it's empty and don't do shit
         if (!ButtonTextItself.empty())
@@ -390,7 +405,7 @@ namespace UXX
             }
         }
 
-        return clicked;
+        return clickedButton;
     }
     bool IntSlider(Rect IntSliderRect, Color IntTrackColor, Color IntHandleColor, int& value, int minIntValue, int maxIntValue, int intStep, Color IntSliderTextColor, float IntSliderTextSize, std::string IntSliderTextItself, std::string IntSliderImagePath, std::string IntSliderFontPath)
     {
@@ -413,10 +428,11 @@ namespace UXX
         }
 
         // ===[Keyboard nudging while hovered]===
-        bool hoveredTrack = (mousePositionX >= IntSliderRect.xPos && mousePositionX <= IntSliderRect.xPos + IntSliderRect.width &&
+        bool hoveredIntTrack = (mousePositionX >= IntSliderRect.xPos && mousePositionX <= IntSliderRect.xPos + IntSliderRect.width &&
                               mousePositionY >= IntSliderRect.yPos && mousePositionY <= IntSliderRect.yPos + IntSliderRect.height);
 
-        if (hoveredTrack)
+        if (hoveredIntTrack) mouseHoveredOverWidgetThisFrame = true;
+        if (hoveredIntTrack)
         {
             if (leftArrowKeyPressed || downArrowKeyPressed)
             {
@@ -436,8 +452,8 @@ namespace UXX
         Rect handleRect{ handleX, IntSliderRect.yPos, handleWidth, IntSliderRect.height, 0.0f };
 
         // ===[Draw optional texture, and both the Slider Handle and Track]===
-        GLTexture* trackTex = IntSliderImagePath.empty() ? nullptr : GetOrLoadTexture(IntSliderImagePath);
-        DrawQuad(IntSliderRect, IntTrackColor, nullptr);
+        GLTexture* intTrackTexture = IntSliderImagePath.empty() ? nullptr : GetOrLoadTexture(IntSliderImagePath);
+        DrawQuad(IntSliderRect, IntTrackColor, intTrackTexture);
         DrawQuad(handleRect, IntHandleColor, nullptr);
 
         // ===[Label centered on the track both horizontally and vertically]===
@@ -482,10 +498,11 @@ namespace UXX
         }
 
         // ===[Keyboard nudging while hovered]===
-        bool hoveredTrack = (mousePositionX >= FloatSliderRect.xPos && mousePositionX <= FloatSliderRect.xPos + FloatSliderRect.width &&
+        bool hoveredFloatTrack = (mousePositionX >= FloatSliderRect.xPos && mousePositionX <= FloatSliderRect.xPos + FloatSliderRect.width &&
                               mousePositionY >= FloatSliderRect.yPos && mousePositionY <= FloatSliderRect.yPos + FloatSliderRect.height);
 
-        if (hoveredTrack)
+        if (hoveredFloatTrack) mouseHoveredOverWidgetThisFrame = true;
+        if (hoveredFloatTrack)
         {
             float step = (maxFloatValue - minFloatValue) * 0.01f; // 1% per keypress
             if (leftArrowKeyPressed || downArrowKeyPressed)
@@ -506,8 +523,8 @@ namespace UXX
         Rect handleRect{ handleX, FloatSliderRect.yPos, handleWidth, FloatSliderRect.height, 0.0f };
 
         // ===[Draw optional texture, and both the Slider Handle and Track]===
-        GLTexture* trackTex = FloatSliderImagePath.empty() ? nullptr : GetOrLoadTexture(FloatSliderImagePath);
-        DrawQuad(FloatSliderRect, FloatTrackColor, nullptr);
+        GLTexture* floatTrackTexture = FloatSliderImagePath.empty() ? nullptr : GetOrLoadTexture(FloatSliderImagePath);
+        DrawQuad(FloatSliderRect, FloatTrackColor, floatTrackTexture);
         DrawQuad(handleRect, FloatHandleColor, nullptr);
 
         // ===[Label centered on the track both horizontally and vertically]===
@@ -537,12 +554,13 @@ namespace UXX
     {
         if (!panelOpen) return false;
 
-        bool hovered = (mousePositionX >= SwitchRect.xPos && mousePositionX <= SwitchRect.xPos + SwitchRect.width &&
+        bool hoveredSwitch = (mousePositionX >= SwitchRect.xPos && mousePositionX <= SwitchRect.xPos + SwitchRect.width &&
                         mousePositionY >= SwitchRect.yPos && mousePositionY <= SwitchRect.yPos + SwitchRect.height);
 
         // A click anywhere on the switch flips its boolean state
         bool toggled = false;
-        if (hovered && leftMouseButtonPressed)
+        if (hoveredSwitch) mouseHoveredOverWidgetThisFrame = true;
+        if (hoveredSwitch && leftMouseButtonPressed)
         {
             value = !value;
             toggled = true;
@@ -606,7 +624,7 @@ namespace UXX
         // Covert Rectangles degrees to radians
         float angleRadians = glm::radians(TextRect.rotation);
 
-        font->rendererText(*textShader, TextItself, TextRect.xPos, bottomUpY, TextSize, textVAO, textVBO, angleRadians);
+        font->rendererText(*textShader, TextItself, TextRect.xPos, bottomUpY, TextSize, textVAO, textVBO, textModelLoc, angleRadians);
     }
 
     // |=====================================================
@@ -617,6 +635,7 @@ namespace UXX
         // ===[Free every cached texture]===
         for (auto& [path, tex] : textureCache)
         {
+            if (!tex) continue;
             tex->Delete();
             delete tex;
         }

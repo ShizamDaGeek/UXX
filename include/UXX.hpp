@@ -67,8 +67,8 @@ namespace UXX
     inline float SCREEN_SCALE_X = 1.0f;
     inline float SCREEN_SCALE_Y = 1.0f;
 
-    static Shader* textShader = nullptr;
-    static unsigned int textVAO, textVBO;
+    inline Shader* textShader = nullptr;
+    inline unsigned int textVAO, textVBO;
 
     struct GraphicsInfo
     {
@@ -95,6 +95,7 @@ namespace UXX
         double scrollDeltaX, double scrollDeltaY);
     void GetScrollDelta(double& outX, double& outY);
     void SetKeyState(bool leftArrowPressed, bool rightArrowPressed, bool upArrowPressed, bool downArrowPressed);
+    bool MouseHoveredOverWidget();
 
     // This is the order that the structs sould go:
     // Rect -> Color -> Anything realted to the UI itself _

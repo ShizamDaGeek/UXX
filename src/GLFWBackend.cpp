@@ -232,7 +232,7 @@ void GLFWBackend::run()
             std::cout << "Cat" << "\n";
 
         UXX::Image(Rect(500, 150, 250, 250, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), scoutImagePath);
-        UXX::Image(Rect(800, 550, 250, 250, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), supermanImagePath);
+        UXX::Image(Rect(800, 550, 300, 300, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), supermanImagePath);
 
         UXX::IntSlider(Rect(0, 400, 80, 20, 0), color2, color1, intSliderValue, 1, 100, 1, color3, 1.3f, std::to_string(intSliderValue), "", fontPath);
         UXX::FloatSlider(Rect(0, 425, 80, 20, 0), color2, color1, floatSliderValue, 1.0f, 100.0f, color3, 1.3f, std::to_string((int)floatSliderValue), "", fontPath);
@@ -241,6 +241,16 @@ void GLFWBackend::run()
         UXX::Text(Rect(600, 100, 80, 60, -45), color1, 2.5f, "Think FAST Chuckle Nuts!", fontPath);
 
     	UXX::EndPanel();
+
+        // ===[Swap cursor when hovering an interactive widget]===
+        static GLFWcursor* handCursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
+        static bool cursorIsHand = false;
+        bool wantHand = UXX::MouseHoveredOverWidget();
+        if (wantHand != cursorIsHand)
+        {
+            glfwSetCursor(window, wantHand ? handCursor : nullptr);
+            cursorIsHand = wantHand;
+        }
 
     	// Swap the back buffer with the front buffer
     	glfwSwapBuffers(window);

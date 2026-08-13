@@ -73,17 +73,14 @@ bool Font::initFreeType(const char* fontpath, unsigned int pixelHeight)
 // |---[Renderer Text]-----------------------------------
 // |=====================================================
 void Font::rendererText(Shader shader, const std::string& text, float positionX, float positionY,
-    float scale, unsigned int VAO, unsigned int VBO, float angleRadians)
+    float scale, unsigned int VAO, unsigned int VBO, GLint modelLoc, float angleRadians)
 {
     shader.Use();
 
     // Build model matrix. Translate to (x,y), then rotate around that point
     glm::mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(positionX, positionY, 0.0f));
     model = glm::rotate(model, angleRadians, glm::vec3(0.0f, 0.0f, 1.0f));
-
-    // upload it
-    GLint modelLocation = glGetUniformLocation(shader.ID, "model");
-    glUniformMatrix4fv(modelLocation, 1, GL_FALSE, glm::value_ptr(model));
+    glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
     glActiveTexture(GL_TEXTURE0);
     glBindVertexArray(VAO);
@@ -133,9 +130,14 @@ void Font::rendererText(Shader shader, const std::string& text, float positionX,
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glDrawArrays(GL_TRIANGLES, 0, 6);
 
-        GLenum error = glGetError();
-        if (error != GL_NO_ERROR && !printedOnce)
-            std::cout << "[Font] GL error after draw: 0x" << std::hex << error << std::dec << "\n";
+        #ifndef NDEBUG
+        if (!printedOnce)
+        {
+            GLenum error = glGetError();
+            if (error != GL_NO_ERROR)
+                std::cout << "[Font] GL error after draw: 0x" << std::hex << error << std::dec << "\n";
+        }
+        #endif
 
         // Move the pen forward by this glyph's advance (26.6 fixed-point, hence >> 6)
         penX += (glyph.advance >> 6) * scale;

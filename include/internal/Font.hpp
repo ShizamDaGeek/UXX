@@ -30,7 +30,7 @@ public:
     bool initFreeType(const char* fontpath, unsigned int pixelHeight);
 
     void rendererText(Shader shader, const std::string& text, float positionX, float positionY,
-        float scale, unsigned int VAO, unsigned int VBO, float angleRadians = 0.0f);
+        float scale, unsigned int VAO, unsigned int VBO, GLint modelLoc, float angleRadians = 0.0f);
 
     float measureTextWidth(const std::string& text, float scale);
     float measureTextHeight(const std::string& text, float scale);

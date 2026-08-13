@@ -73,7 +73,7 @@ UXX::Text(Rect(600, 100, 80, 60, -45), color1, 2.5f, "Think FAST Chuckle Nuts!",
 
 UXX::EndPanel();
 ```
-All that code created this masterpeice below VVV
+All that code created this masterpeice under   VVV
 ![ExampeImage1](UXXAssets/Images/example_image1.png)
 
 ### **General UI:**
