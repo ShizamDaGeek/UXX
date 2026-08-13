@@ -221,6 +221,7 @@ void GLFWBackend::run()
 
         std::string scoutImagePath("../UXXAssets/Images/scout.jpg");
         std::string catImagePath("../UXXAssets/Images/cat.jpg");
+        std::string supermanImagePath("../UXXAssets/Images/transparent_image.png");
         std::string fontPath("../UXXAssets/Fonts/sandypixels_5x5_font2.ttf");
 
         static int intSliderValue = 75;
@@ -231,6 +232,7 @@ void GLFWBackend::run()
             std::cout << "Cat" << "\n";
 
         UXX::Image(Rect(500, 150, 250, 250, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), scoutImagePath);
+        UXX::Image(Rect(800, 550, 250, 250, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), supermanImagePath);
 
         UXX::IntSlider(Rect(0, 400, 80, 20, 0), color2, color1, intSliderValue, 1, 100, 1, color3, 1.3f, std::to_string(intSliderValue), "", fontPath);
         UXX::FloatSlider(Rect(0, 425, 80, 20, 0), color2, color1, floatSliderValue, 1.0f, 100.0f, color3, 1.3f, std::to_string((int)floatSliderValue), "", fontPath);

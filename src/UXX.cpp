@@ -74,10 +74,21 @@ namespace UXX
             auto it = textureCache.find(path);
             if (it != textureCache.end()) return it->second;
 
-            GLTexture* tex = new GLTexture(path.c_str(), "", 0);
-            tex->texUnit(*shader, "tex0", 0);
-            textureCache[path] = tex;
+            GLTexture* tex = nullptr;
+            try
+            {
+                tex = new GLTexture(path.c_str(), "", 0);
+                tex->texUnit(*shader, "tex0", 0);
+            }
+            catch (const std::exception& e)
+            {
+                std::cerr << "[UXX] Texture completely unavailable for \"" << path
+                            << "\": " << e.what() << " - drawing flat color instead.\n";
+                delete tex;
+                tex = nullptr;
+            }
 
+            textureCache[path] = tex;
             return tex;
         }
         // ===[foot]===
