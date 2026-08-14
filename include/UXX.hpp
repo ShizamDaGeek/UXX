@@ -100,6 +100,11 @@ namespace UXX
         bool rightDown, bool rightPressed, bool rightReleased,
         bool middleDown, bool middlePressed, bool middleReleased,
         double scrollDeltaX, double scrollDeltaY);
+    void GetMouse(double* x = nullptr, double* y = nullptr,
+        bool* leftDown = nullptr, bool* leftPressed = nullptr, bool* leftReleased = nullptr,
+        bool* rightDown = nullptr, bool* rightPressed = nullptr, bool* rightReleased = nullptr,
+        bool* middleDown = nullptr, bool* middlePressed = nullptr, bool* middleReleased = nullptr,
+        double* scrollX = nullptr, double* scrollY = nullptr);
     void GetScrollDelta(double& outX, double& outY);
     void SetKeyState(bool leftArrowPressed, bool rightArrowPressed, bool upArrowPressed, bool downArrowPressed);
     bool MouseHoveredOverWidget();

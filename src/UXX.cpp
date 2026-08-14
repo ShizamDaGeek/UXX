@@ -24,6 +24,10 @@ namespace UXX
         std::unordered_map<std::string, Font*> fontCache;
         Font* GetOrLoadFont(const std::string& path, unsigned int pixelHeight = 48);
 
+        // Forward declaration needed because SliderNormalizedDragValue calls WidgetClaimsActive
+        // before its own definition appears in this file
+        bool WidgetClaimsActive(const void* widgetIdentifier, bool widgetIsHoveredThisFrame);
+
         // ===[Tile]===
         bool panelOpen = false;
         // ===[Keyboard]===
@@ -32,8 +36,9 @@ namespace UXX
         bool upArrowKeyPressed = false;
         bool downArrowKeyPressed = false;
 
-        // ===[Activate drag tracking]===
-        const void* activeDragWidget = nullptr;
+        // ===[Shared hover/active widget ownership, used by every widget type]===
+        const void* currentFrameHoveredWidgetIdentifier = nullptr;
+        const void* currentFrameActiveWidgetIdentifier = nullptr;
 
         // ===[Mouse]===
         bool leftMouseButtonDown = false;
@@ -160,20 +165,36 @@ namespace UXX
             font->rendererText(*textShader, text, textPositionX, bottomUpY, size, textVAO, textVBO, textModelLoc, angleRadians);
         }
         // ===[Shared drag math for sliders]===
-        float SliderNormalizedDragValue(const void* widgetId, Rect SliderRect, float handleWidth)
+        float SliderNormalizedDragValue(const void* widgetIdentifier, Rect sliderRect, float handleWidth, bool widgetIsHoveredThisFrame)
         {
-            bool hoveringTrack = (mousePositionX >= SliderRect.xPos && mousePositionX <= SliderRect.xPos + SliderRect.width &&
-                                    mousePositionY >= SliderRect.yPos && mousePositionY <= SliderRect.yPos + SliderRect.height);
-
-            // Claim the drag on the exact frame the click lands on the track
-            if (activeDragWidget == nullptr && leftMouseButtonPressed && hoveringTrack)
-                activeDragWidget = widgetId;
+            bool widgetIsActive = WidgetClaimsActive(widgetIdentifier, widgetIsHoveredThisFrame);
 
             // Only the widget that owns the drag responds, and only while the button stays held
-            if (activeDragWidget != widgetId || !leftMouseButtonDown) return -1.0f;
+            if (!widgetIsActive || !leftMouseButtonDown) return -1.0f;
 
-            float normalizedDragPosition = (float)(mousePositionX - SliderRect.xPos - handleWidth * 0.5f) / (SliderRect.width - handleWidth);
+            float normalizedDragPosition = (float)(mousePositionX - sliderRect.xPos - handleWidth * 0.5f) / (sliderRect.width - handleWidth);
             return std::clamp(normalizedDragPosition, 0.0f, 1.0f);
+        }
+        // ===[Claims hover for whichever widget is topmost under the cursor this frame]===
+        bool WidgetIsHovered(const void* widgetIdentifier, Rect widgetBounds)
+        {
+            bool cursorInsideBounds = (mousePositionX >= widgetBounds.xPos && mousePositionX <= widgetBounds.xPos + widgetBounds.width &&
+                                        mousePositionY >= widgetBounds.yPos && mousePositionY <= widgetBounds.yPos + widgetBounds.height);
+
+            // Last widget submitted this frame that contains the cursor wins hover,
+            if (cursorInsideBounds)
+                currentFrameHoveredWidgetIdentifier = widgetIdentifier;
+
+            return currentFrameHoveredWidgetIdentifier == widgetIdentifier;
+        }
+
+        // ===[Claims the active slot on press, holds it until release, shared by every widget type]===
+        bool WidgetClaimsActive(const void* widgetIdentifier, bool widgetIsHoveredThisFrame)
+        {
+            if (currentFrameActiveWidgetIdentifier == nullptr && widgetIsHoveredThisFrame && leftMouseButtonPressed)
+                currentFrameActiveWidgetIdentifier = widgetIdentifier;
+
+            return currentFrameActiveWidgetIdentifier == widgetIdentifier;
         }
 
         // Stack of scissor boxes so nested scissors restore properly
@@ -236,15 +257,40 @@ namespace UXX
         scrollDeltaYState = scrollDeltaY;
 
         mouseHoveredOverWidgetThisFrame = false;
+        currentFrameHoveredWidgetIdentifier = nullptr;
 
-        // A release always clears the active drag
+        // A release always clears the active widget
         if (leftMouseButtonReleased || rightMouseButtonReleased || middleMouseButtonReleased)
-            activeDragWidget = nullptr;
+            currentFrameActiveWidgetIdentifier = nullptr;
     }
     void GetScrollDelta(double& outX, double& outY)
     {
         outX = scrollDeltaXState;
         outY = scrollDeltaYState;
+    }
+    void GetMouse(double* x, double* y,
+        bool* leftDown, bool* leftPressed, bool* leftReleased,
+        bool* rightDown, bool* rightPressed, bool* rightReleased,
+        bool* middleDown, bool* middlePressed, bool* middleReleased,
+        double* scrollX, double* scrollY)
+    {
+        if (x) *x = mousePositionX;
+        if (y) *y = mousePositionY;
+
+        if (leftDown)     *leftDown     = leftMouseButtonDown;
+        if (leftPressed)  *leftPressed  = leftMouseButtonPressed;
+        if (leftReleased) *leftReleased = leftMouseButtonReleased;
+
+        if (rightDown)     *rightDown     = rightMouseButtonDown;
+        if (rightPressed)  *rightPressed  = rightMouseButtonPressed;
+        if (rightReleased) *rightReleased = rightMouseButtonReleased;
+
+        if (middleDown)     *middleDown     = middleMouseButtonDown;
+        if (middlePressed)  *middlePressed  = middleMouseButtonPressed;
+        if (middleReleased) *middleReleased = middleMouseButtonReleased;
+
+        if (scrollX) *scrollX = scrollDeltaXState;
+        if (scrollY) *scrollY = scrollDeltaYState;
     }
     void SetKeyState(bool leftArrowPressed, bool rightArrowPressed, bool upArrowPressed, bool downArrowPressed)
     {
@@ -422,46 +468,49 @@ namespace UXX
     {
         if (!panelOpen) return false;
 
-        // ===[Apply a drag, snapping the result to the nearest step]===
         bool changed = false;
         float handleWidth = IntSliderRect.height;
-        float newNormalizedValue = SliderNormalizedDragValue(&value, IntSliderRect, handleWidth);
-        // Guard against a caller passing 0 (or negative) for the step
         int safeIntStep = std::max(intStep, 1);
-        if (newNormalizedValue >= 0.0f)
+
+        // ===[Hover must be known before we ask whether this widget owns the drag]===
+        bool hoveredIntTrack = WidgetIsHovered(&value, IntSliderRect);
+        if (hoveredIntTrack) mouseHoveredOverWidgetThisFrame = true;
+
+        // ===[Apply a drag, snapping the result to the nearest step]===
+        float normalizedDragPositionThisFrame = SliderNormalizedDragValue(&value, IntSliderRect, handleWidth, hoveredIntTrack);
+        if (normalizedDragPositionThisFrame >= 0.0f)
         {
-            int steps = (maxIntValue - minIntValue) / safeIntStep;
-            int newValue = minIntValue + (int)std::round(newNormalizedValue * steps) * safeIntStep;
-            newValue = std::clamp(newValue, minIntValue, maxIntValue);
-            if (newValue != value)
+            int totalSteps = (maxIntValue - minIntValue) / safeIntStep;
+            int draggedValue = minIntValue + (int)std::round(normalizedDragPositionThisFrame * totalSteps) * safeIntStep;
+            draggedValue = std::clamp(draggedValue, minIntValue, maxIntValue);
+            if (draggedValue != value)
             {
-                value = newValue;
+                value = draggedValue;
                 changed = true;
             }
         }
 
         // ===[Keyboard nudging while hovered]===
-        bool hoveredIntTrack = (mousePositionX >= IntSliderRect.xPos && mousePositionX <= IntSliderRect.xPos + IntSliderRect.width &&
-                                mousePositionY >= IntSliderRect.yPos && mousePositionY <= IntSliderRect.yPos + IntSliderRect.height);
-
-        if (hoveredIntTrack) mouseHoveredOverWidgetThisFrame = true;
         if (hoveredIntTrack)
         {
             if (leftArrowKeyPressed || downArrowKeyPressed)
             {
-                int newValue = std::clamp(value - safeIntStep, minIntValue, maxIntValue);
-                if (newValue != value) { value = newValue; changed = true; }
+                int nudgedValue = std::clamp(value - safeIntStep, minIntValue, maxIntValue);
+                if (nudgedValue != value) { value = nudgedValue; changed = true; }
             }
             if (rightArrowKeyPressed || upArrowKeyPressed)
             {
-                int newValue = std::clamp(value + safeIntStep, minIntValue, maxIntValue);
-                if (newValue != value) { value = newValue; changed = true; }
+                int nudgedValue = std::clamp(value + safeIntStep, minIntValue, maxIntValue);
+                if (nudgedValue != value) { value = nudgedValue; changed = true; }
             }
         }
 
-        // ===[Compute the handle position, using the up-to-date value]===
-        float normalizedValue = (float)(value - minIntValue) / (float)(maxIntValue - minIntValue);
-        float handleX = IntSliderRect.xPos + normalizedValue * (IntSliderRect.width - handleWidth);
+        // ===[Handle position always tracks the actual current value, not the transient drag delta,
+        //     so it stays correct on frames where the slider isn't being actively dragged]===
+        float currentNormalizedPosition = (maxIntValue != minIntValue)
+            ? (float)(value - minIntValue) / (float)(maxIntValue - minIntValue)
+            : 0.0f;
+        float handleX = IntSliderRect.xPos + currentNormalizedPosition * (IntSliderRect.width - handleWidth);
         Rect handleRect{ handleX, IntSliderRect.yPos, handleWidth, IntSliderRect.height, 0.0f };
 
         // ===[Draw optional texture, and both the Slider Handle and Track]===
@@ -507,43 +556,47 @@ namespace UXX
     {
         if (!panelOpen) return false;
 
-        // ===[Apply a drag directly as a continuous value, no stepping needed]===
         bool changed = false;
         float handleWidth = FloatSliderRect.height;
-        float newNormalizedValue = SliderNormalizedDragValue(&value, FloatSliderRect, handleWidth);
-        if (newNormalizedValue >= 0.0f)
+
+        // ===[Hover must be known before we ask whether this widget owns the drag]===
+        bool hoveredFloatTrack = WidgetIsHovered(&value, FloatSliderRect);
+        if (hoveredFloatTrack) mouseHoveredOverWidgetThisFrame = true;
+
+        // ===[Apply a drag directly as a continuous value, no stepping needed]===
+        float normalizedDragPositionThisFrame = SliderNormalizedDragValue(&value, FloatSliderRect, handleWidth, hoveredFloatTrack);
+        if (normalizedDragPositionThisFrame >= 0.0f)
         {
-            float newValue = minFloatValue + newNormalizedValue * (maxFloatValue - minFloatValue);
-            if (newValue != value)
+            float draggedValue = minFloatValue + normalizedDragPositionThisFrame * (maxFloatValue - minFloatValue);
+            if (draggedValue != value)
             {
-                value = newValue;
+                value = draggedValue;
                 changed = true;
             }
         }
 
         // ===[Keyboard nudging while hovered]===
-        bool hoveredFloatTrack = (mousePositionX >= FloatSliderRect.xPos && mousePositionX <= FloatSliderRect.xPos + FloatSliderRect.width &&
-                              mousePositionY >= FloatSliderRect.yPos && mousePositionY <= FloatSliderRect.yPos + FloatSliderRect.height);
-
-        if (hoveredFloatTrack) mouseHoveredOverWidgetThisFrame = true;
         if (hoveredFloatTrack)
         {
-            float step = (maxFloatValue - minFloatValue) * 0.01f; // 1% per keypress
+            float keyboardNudgeStep = (maxFloatValue - minFloatValue) * 0.01f; // 1% per keypress
             if (leftArrowKeyPressed || downArrowKeyPressed)
             {
-                float newValue = std::clamp(value - step, minFloatValue, maxFloatValue);
-                if (newValue != value) { value = newValue; changed = true; }
+                float nudgedValue = std::clamp(value - keyboardNudgeStep, minFloatValue, maxFloatValue);
+                if (nudgedValue != value) { value = nudgedValue; changed = true; }
             }
             if (rightArrowKeyPressed || upArrowKeyPressed)
             {
-                float newValue = std::clamp(value + step, minFloatValue, maxFloatValue);
-                if (newValue != value) { value = newValue; changed = true; }
+                float nudgedValue = std::clamp(value + keyboardNudgeStep, minFloatValue, maxFloatValue);
+                if (nudgedValue != value) { value = nudgedValue; changed = true; }
             }
         }
 
-        // ===[Compute the handle position, using the up-to-date value]===
-        float normalizedValue = (value - minFloatValue) / (maxFloatValue - minFloatValue);
-        float handleX = FloatSliderRect.xPos + normalizedValue * (FloatSliderRect.width - handleWidth);
+        // ===[Handle position always tracks the actual current value, not the transient drag delta,
+        //     so it stays correct on frames where the slider isn't being actively dragged]===
+        float currentNormalizedPosition = (maxFloatValue != minFloatValue)
+            ? (value - minFloatValue) / (maxFloatValue - minFloatValue)
+            : 0.0f;
+        float handleX = FloatSliderRect.xPos + currentNormalizedPosition * (FloatSliderRect.width - handleWidth);
         Rect handleRect{ handleX, FloatSliderRect.yPos, handleWidth, FloatSliderRect.height, 0.0f };
 
         // ===[Draw optional texture, and both the Slider Handle and Track]===
@@ -588,12 +641,11 @@ namespace UXX
     {
         if (!panelOpen) return false;
 
-        bool hoveredSwitch = (mousePositionX >= SwitchRect.xPos && mousePositionX <= SwitchRect.xPos + SwitchRect.width &&
-                        mousePositionY >= SwitchRect.yPos && mousePositionY <= SwitchRect.yPos + SwitchRect.height);
+        bool hoveredSwitch = WidgetIsHovered(&value, SwitchRect);
+        if (hoveredSwitch) mouseHoveredOverWidgetThisFrame = true;
 
         // ===[A click anywhere on the switch flips its boolean state]===
         bool toggled = false;
-        if (hoveredSwitch) mouseHoveredOverWidgetThisFrame = true;
         if (hoveredSwitch && leftMouseButtonPressed)
         {
             value = !value;

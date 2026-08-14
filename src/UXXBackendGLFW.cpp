@@ -1,13 +1,13 @@
-#include "GLFWBackend.hpp"
+#include "UXXBackendGLFW.hpp"
 
 // |=====================================================
 // |---[Helper Functions]--------------------------------
 // |=====================================================
-void GLFWBackend::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
+void UXXBackendGLFW::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
-    GLFWBackend* glfwBackend = static_cast<GLFWBackend*>(glfwGetWindowUserPointer(window));
-    if (glfwBackend)
+    UXXBackendGLFW* uxxBackendGLFW = static_cast<UXXBackendGLFW*>(glfwGetWindowUserPointer(window));
+    if (uxxBackendGLFW)
     {
         // Keep the renderer's screen-space constants in sync with the actual window/framebuffer sizes
         int windowWidth, windowHeight;
@@ -18,60 +18,49 @@ void GLFWBackend::FramebufferSizeCallback(GLFWwindow* window, int width, int hei
         UXX::SCREEN_SCALE_Y = (float)height / (float)windowHeight;
     }
 }
-void GLFWBackend::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+void UXXBackendGLFW::CursorPosCallback(GLFWwindow* window, double xpos, double ypos)
 {
-    GLFWBackend* glfwBackend = static_cast<GLFWBackend*>(glfwGetWindowUserPointer(window));
-    if (!glfwBackend) return;
-
-    // Track both the held state and a one-frame press/release flag per mouse button
-    if (button >= 0 && button < 3)
+    UXXBackendGLFW* uxxBackendGLFWInstance = static_cast<UXXBackendGLFW*>(glfwGetWindowUserPointer(window));
+    if (uxxBackendGLFWInstance)
     {
-        if (action == GLFW_PRESS)
-        {
-            glfwBackend->mouseButtonDown[button] = true;
-            glfwBackend->mouseButtonPressed[button] = true; // one-frame "just clicked" flag
-        }
-        else if (action == GLFW_RELEASE)
-        {
-            glfwBackend->mouseButtonDown[button] = false;
-            glfwBackend->mouseButtonReleased[button] = true; // one-frame "just released" flag
-        }
-    }
-}
-void GLFWBackend::CursorPosCallback(GLFWwindow* window, double xpos, double ypos)
-{
-    GLFWBackend* glfwBackend = static_cast<GLFWBackend*>(glfwGetWindowUserPointer(window));
-    if (glfwBackend)
-    {
-        glfwBackend->mouseX = xpos;
-        glfwBackend->mouseY = ypos;
+        uxxBackendGLFWInstance->mouseState.cursorPositionX = xpos;
+        uxxBackendGLFWInstance->mouseState.cursorPositionY = ypos;
     }
 }
 
-void GLFWBackend::ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+void UXXBackendGLFW::ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    GLFWBackend* glfwBackend = static_cast<GLFWBackend*>(glfwGetWindowUserPointer(window));
-    if (glfwBackend)
+    UXXBackendGLFW* uxxBackendGLFWInstance = static_cast<UXXBackendGLFW*>(glfwGetWindowUserPointer(window));
+    if (uxxBackendGLFWInstance)
     {
-        glfwBackend->scrollX = xoffset;
-        glfwBackend->scrollY = yoffset;
+        uxxBackendGLFWInstance->mouseState.scrollWheelDeltaX = xoffset;
+        uxxBackendGLFWInstance->mouseState.scrollWheelDeltaY = yoffset;
     }
 }
-void GLFWBackend::GetMouseInput()
+
+void UXXBackendGLFW::PollMouseState()
 {
-    glfwGetCursorPos(window, &mouseX, &mouseY);
+    // ===[Sweep every index GLFW supports and let whichever ones exist report themselves]===
+    for (int mouseButtonIndex = 0; mouseButtonIndex < TOTAL_SUPPORTED_MOUSE_BUTTON_COUNT; mouseButtonIndex++)
+    {
+        bool buttonIsCurrentlyDown = glfwGetMouseButton(window, mouseButtonIndex) == GLFW_PRESS;
+
+        mouseState.buttonPressedThisFrame[mouseButtonIndex]  = buttonIsCurrentlyDown && !mouseState.buttonHeldThisFrame[mouseButtonIndex];
+        mouseState.buttonReleasedThisFrame[mouseButtonIndex] = !buttonIsCurrentlyDown && mouseState.buttonHeldThisFrame[mouseButtonIndex];
+        mouseState.buttonHeldThisFrame[mouseButtonIndex]     = buttonIsCurrentlyDown;
+    }
 }
 
 // |=====================================================
 // |---[Constructer/Destructer]--------------------------
 // |=====================================================
-GLFWBackend::GLFWBackend() {}
-GLFWBackend::~GLFWBackend() {}
+UXXBackendGLFW::UXXBackendGLFW() {}
+UXXBackendGLFW::~UXXBackendGLFW() {}
 
 // |=====================================================
 // |---[Initlize]----------------------------------------
 // |=====================================================
-bool GLFWBackend::init()
+bool UXXBackendGLFW::init()
 {
     if (!glfwInit())
     {
@@ -101,7 +90,6 @@ bool GLFWBackend::init()
     // ===[Hook up input callbacks and make this context current]===
     glfwSetWindowUserPointer(window, this);
     glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
-    glfwSetMouseButtonCallback(window, MouseButtonCallback);
     glfwSetCursorPosCallback(window, CursorPosCallback);
     glfwSetScrollCallback(window, ScrollCallback);
     glfwMakeContextCurrent(window);
@@ -134,34 +122,29 @@ bool GLFWBackend::init()
 // |=====================================================
 // |---[Run and Hide]------------------------------------
 // |=====================================================
-void GLFWBackend::run()
+void UXXBackendGLFW::run(std::function<void()> drawUserInterfaceCallback)
 {
     // Loop until the user closes the window
     while (!glfwWindowShouldClose(window))
     {
-        // ===[Reset one-frame flags before polling new events]===
-        for (int buttonIndex = 0; buttonIndex < 3; buttonIndex++)
-        {
-            mouseButtonPressed[buttonIndex] = false;
-            mouseButtonReleased[buttonIndex] = false;
-        }
-        scrollX = 0.0;
-        scrollY = 0.0;
+        mouseState.scrollWheelDeltaX = 0.0;
+        mouseState.scrollWheelDeltaY = 0.0;
 
         glfwPollEvents();
+        PollMouseState();
 
         // ===[Mouse States]===
-        UXX::SetMouseState(mouseX, mouseY,
-            mouseButtonDown[GLFW_MOUSE_BUTTON_LEFT],
-            mouseButtonPressed[GLFW_MOUSE_BUTTON_LEFT],
-            mouseButtonReleased[GLFW_MOUSE_BUTTON_LEFT],
-            mouseButtonDown[GLFW_MOUSE_BUTTON_RIGHT],
-            mouseButtonPressed[GLFW_MOUSE_BUTTON_RIGHT],
-            mouseButtonReleased[GLFW_MOUSE_BUTTON_RIGHT],
-            mouseButtonDown[GLFW_MOUSE_BUTTON_MIDDLE],
-            mouseButtonPressed[GLFW_MOUSE_BUTTON_MIDDLE],
-            mouseButtonReleased[GLFW_MOUSE_BUTTON_MIDDLE],
-            scrollX, scrollY);
+        UXX::SetMouseState(mouseState.cursorPositionX, mouseState.cursorPositionY,
+            mouseState.buttonHeldThisFrame[GLFW_MOUSE_BUTTON_LEFT],
+            mouseState.buttonPressedThisFrame[GLFW_MOUSE_BUTTON_LEFT],
+            mouseState.buttonReleasedThisFrame[GLFW_MOUSE_BUTTON_LEFT],
+            mouseState.buttonHeldThisFrame[GLFW_MOUSE_BUTTON_RIGHT],
+            mouseState.buttonPressedThisFrame[GLFW_MOUSE_BUTTON_RIGHT],
+            mouseState.buttonReleasedThisFrame[GLFW_MOUSE_BUTTON_RIGHT],
+            mouseState.buttonHeldThisFrame[GLFW_MOUSE_BUTTON_MIDDLE],
+            mouseState.buttonPressedThisFrame[GLFW_MOUSE_BUTTON_MIDDLE],
+            mouseState.buttonReleasedThisFrame[GLFW_MOUSE_BUTTON_MIDDLE],
+            mouseState.scrollWheelDeltaX, mouseState.scrollWheelDeltaY);
 
         // ===[Arrow key polling]===
         static bool previousLeft = false, previousRight = false, previousUp = false, previousDown = false;
@@ -213,39 +196,12 @@ void GLFWBackend::run()
     	// Clean the back buffer and assign the new color to it
     	glClear(GL_COLOR_BUFFER_BIT);
 
+        double mouseX, mouseY;
+        UXX::GetMouse(&mouseX, &mouseY);
+
     	// ===[Draw UI]===
-    	UXX::BeginPanel(Rect(0, 0, 1920, 1080, 0), Color(0.1f, 0.5f, 0.9f, 1.0f), "");
-
-        Color normalColor = Color(1.0f, 1.0f, 1.0f, 1.0f);
-        Color hoveredColor = Color(0.5f, 0.5f, 0.5f, 1.0f);
-        Color clickedColor = Color(0.0f, 0.0f, 0.0f, 1.0f);
-
-        Color color1 = Color(0.3f, 0.9f, 0.5f, 1.0f);
-        Color color2 = Color(0.5f, 0.3f, 0.9f, 1.0f);
-        Color color3 = Color(0.9f, 0.5f, 0.3f, 1.0f);
-
-        std::string scoutImagePath("../UXXAssets/Images/scout.jpg");
-        std::string catImagePath("../UXXAssets/Images/cat.jpg");
-        std::string supermanImagePath("../UXXAssets/Images/transparent_image.png");
-        std::string fontPath("../UXXAssets/Fonts/sandypixels_5x5_font2.ttf");
-
-        static int intSliderValue = 75;
-        static float floatSliderValue = 50.0f;
-        static bool boolSwitchValue = false;
-
-        if (UXX::Button(Rect(0, 0, 400, 400, 0), normalColor, hoveredColor, clickedColor, color1, 2.0f, "Cat", catImagePath, fontPath))
-            std::cout << "Cat" << "\n";
-
-        UXX::Image(Rect(500, 150, 250, 250, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), scoutImagePath);
-        UXX::Image(Rect(800, 550, 300, 300, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), supermanImagePath);
-
-        UXX::IntSlider(Rect(0, 400, 140, 40, 0), intSliderValue, 1, 100, 1, color2, color1, color3, 2, std::to_string(intSliderValue), "", fontPath);
-        UXX::FloatSlider(Rect(0, 450, 140, 40, 0), floatSliderValue, 1.0f, 100.0f, 1.0f, color2, color1, color3, 2, std::to_string((int)floatSliderValue), "", fontPath);
-        UXX::Switch(Rect(0, 500, 140, 40, 0), boolSwitchValue, color1, color2, color3, 2, "On", "Off", catImagePath, scoutImagePath, fontPath);
-
-        UXX::Text(Rect(600, 100, 80, 60, -45), color1, 2.5f, "Think FAST Chuckle Nuts!", fontPath);
-
-    	UXX::EndPanel();
+        if (drawUserInterfaceCallback)
+            drawUserInterfaceCallback();
 
         // ===[Swap cursor when hovering an interactive widget]===
         static GLFWcursor* handCursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
@@ -265,7 +221,7 @@ void GLFWBackend::run()
 // |=====================================================
 // |---[Heavy: You are Dead]-----------------------------
 // |=====================================================
-void GLFWBackend::die()
+void UXXBackendGLFW::die()
 {
     UXX::BlowUp();
 
