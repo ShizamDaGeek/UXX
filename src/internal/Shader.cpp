@@ -5,16 +5,16 @@
 // |=====================================================
 std::string get_file_contents(const char* filename)
 {
-	std::ifstream in(filename, std::ios::binary);
-	if (in)
+	std::ifstream fileInputStream(filename, std::ios::binary);
+	if (fileInputStream)
 	{
 		std::string contents;
 		// Jump to the end to find the file size, then read it all in one go
-		in.seekg(0, std::ios::end);
-		contents.resize(in.tellg());
-		in.seekg(0, std::ios::beg);
-		in.read(&contents[0], contents.size());
-		in.close();
+		fileInputStream.seekg(0, std::ios::end);
+		contents.resize(fileInputStream.tellg());
+		fileInputStream.seekg(0, std::ios::beg);
+		fileInputStream.read(&contents[0], contents.size());
+		fileInputStream.close();
 		return(contents);
 	}
 	throw std::runtime_error(std::string("Could not open file: ") + filename);
@@ -25,6 +25,9 @@ std::string get_file_contents(const char* filename)
 // |=====================================================
 Shader::Shader(const char* vertexFile, const char* fragmentFile)
 {
+    vertexFilePath = vertexFile;
+    fragmentFilePath = fragmentFile;
+
     // Load the raw GLSL source from both shader files from disk
     std::string vertexCode = get_file_contents(vertexFile);
     std::string fragmentCode = get_file_contents(fragmentFile);

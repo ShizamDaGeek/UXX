@@ -48,7 +48,7 @@ namespace UXX
 
         bool mouseHoveredOverWidgetThisFrame = false;
 
-        double mousePositionX, mousePositionY;
+        double mousePositionX = -1.0, mousePositionY = -1.0;
         // ===[Raw per-frame delta, for future scrollable widgets]===
         double scrollDeltaXState = 0.0;
         double scrollDeltaYState = 0.0;
@@ -77,25 +77,25 @@ namespace UXX
         GLTexture* GetOrLoadTexture(const std::string& path)
         {
             // Reuse an already-loaded texture if one exists for this path
-            auto it = textureCache.find(path);
-            if (it != textureCache.end()) return it->second;
+            auto foundTextureEntry = textureCache.find(path);
+            if (foundTextureEntry != textureCache.end()) return foundTextureEntry->second;
 
-            GLTexture* tex = nullptr;
+            GLTexture* loadedTexture = nullptr;
             try
             {
-                tex = new GLTexture(path.c_str(), "", 0);
-                tex->texUnit(*shader, "tex0", 0);
+                loadedTexture = new GLTexture(path.c_str(), "", 0);
+                loadedTexture->texUnit(*shader, "tex0", 0);
             }
             catch (const std::exception& e)
             {
                 std::cerr << "[UXX] Texture completely unavailable for \"" << path
                             << "\": " << e.what() << " - drawing flat color instead.\n";
-                delete tex;
-                tex = nullptr;
+                delete loadedTexture;
+                loadedTexture = nullptr;
             }
 
-            textureCache[path] = tex;
-            return tex;
+            textureCache[path] = loadedTexture;
+            return loadedTexture;
         }
         // ===[foot]===
         Font* GetOrLoadFont(const std::string& path, unsigned int pixelHeight)
@@ -103,19 +103,19 @@ namespace UXX
             // Key by path+size so the same font at different sizes stays distinct
             std::string key = path + "#" + std::to_string(pixelHeight);
 
-            auto it = fontCache.find(key);
-            if (it != fontCache.end()) return it->second;
+            auto foundFontEntry = fontCache.find(key);
+            if (foundFontEntry != fontCache.end()) return foundFontEntry->second;
 
             Font* font = new Font();
             if (!font->initFreeType(path.c_str(), pixelHeight))
             {
                 std::cerr << "Failed to load font: " << path << "\n";
                 delete font;
-                fontCache[path] = font;
+                fontCache[key] = nullptr;
                 return nullptr;
             }
 
-            fontCache[path] = font;
+            fontCache[key] = font;
             return font;
         }
         // ===[Be there or be SQUARE]===
@@ -124,7 +124,7 @@ namespace UXX
             shader->Use();
 
             // Color of Quad
-            glUniform4f(uColorLoc, color.r, color.g, color.b, color.a);
+            glUniform4f(uColorLoc, color.red, color.green, color.blue, color.alpha);
             // Size of Quad
             glUniform2f(uSizeLoc, (rect.width / SCREEN_WIDTH) * 2.0f, (rect.height / SCREEN_HEIGHT) * 2.0f);
             // Position of Quad
@@ -152,7 +152,7 @@ namespace UXX
             // Set up an orthographic projection matching the current screen size
             glm::mat4 projection = glm::ortho(0.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT);
             textShader->setMat4("projection", projection);
-            glUniform4f(textColorLoc, color.r, color.g, color.b, color.a);
+            glUniform4f(textColorLoc, color.red, color.green, color.blue, color.alpha);
 
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -379,7 +379,7 @@ namespace UXX
             finalColor = ButtonClickedColor;
 
         // Draw button with the colors
-        GLTexture* buttonTexture = GetOrLoadTexture(ButtonImagePath);
+        GLTexture* buttonTexture = ButtonImagePath.empty() ? nullptr : GetOrLoadTexture(ButtonImagePath);
         DrawQuad(ButtonRect, finalColor, buttonTexture);
 
         // If it's empty and don't do shit
@@ -407,7 +407,18 @@ namespace UXX
 
         return clickedButton;
     }
-    bool IntSlider(Rect IntSliderRect, Color IntTrackColor, Color IntHandleColor, int& value, int minIntValue, int maxIntValue, int intStep, Color IntSliderTextColor, float IntSliderTextSize, std::string IntSliderTextItself, std::string IntSliderImagePath, std::string IntSliderFontPath)
+    bool IntSlider(Rect IntSliderRect,
+                    int& value,
+                    int minIntValue,
+                    int maxIntValue,
+                    int intStep,
+                    Color IntTrackColor,
+                    Color IntHandleColor,
+                    Color IntSliderTextColor,
+                    float IntSliderTextSize,
+                    std::string IntSliderTextItself,
+                    std::string IntSliderImagePath,
+                    std::string IntSliderFontPath)
     {
         if (!panelOpen) return false;
 
@@ -415,10 +426,12 @@ namespace UXX
         bool changed = false;
         float handleWidth = IntSliderRect.height;
         float newNormalizedValue = SliderNormalizedDragValue(&value, IntSliderRect, handleWidth);
+        // Guard against a caller passing 0 (or negative) for the step
+        int safeIntStep = std::max(intStep, 1);
         if (newNormalizedValue >= 0.0f)
         {
-            int steps = (maxIntValue - minIntValue) / std::max(intStep, 1);
-            int newValue = minIntValue + (int)std::round(newNormalizedValue * steps) * intStep;
+            int steps = (maxIntValue - minIntValue) / safeIntStep;
+            int newValue = minIntValue + (int)std::round(newNormalizedValue * steps) * safeIntStep;
             newValue = std::clamp(newValue, minIntValue, maxIntValue);
             if (newValue != value)
             {
@@ -429,19 +442,19 @@ namespace UXX
 
         // ===[Keyboard nudging while hovered]===
         bool hoveredIntTrack = (mousePositionX >= IntSliderRect.xPos && mousePositionX <= IntSliderRect.xPos + IntSliderRect.width &&
-                              mousePositionY >= IntSliderRect.yPos && mousePositionY <= IntSliderRect.yPos + IntSliderRect.height);
+                                mousePositionY >= IntSliderRect.yPos && mousePositionY <= IntSliderRect.yPos + IntSliderRect.height);
 
         if (hoveredIntTrack) mouseHoveredOverWidgetThisFrame = true;
         if (hoveredIntTrack)
         {
             if (leftArrowKeyPressed || downArrowKeyPressed)
             {
-                int newValue = std::clamp(value - intStep, minIntValue, maxIntValue);
+                int newValue = std::clamp(value - safeIntStep, minIntValue, maxIntValue);
                 if (newValue != value) { value = newValue; changed = true; }
             }
             if (rightArrowKeyPressed || upArrowKeyPressed)
             {
-                int newValue = std::clamp(value + intStep, minIntValue, maxIntValue);
+                int newValue = std::clamp(value + safeIntStep, minIntValue, maxIntValue);
                 if (newValue != value) { value = newValue; changed = true; }
             }
         }
@@ -479,7 +492,18 @@ namespace UXX
 
         return changed;
     }
-    bool FloatSlider(Rect FloatSliderRect, Color FloatTrackColor, Color FloatHandleColor, float& value, float minFloatValue, float maxFloatValue, Color FloatSliderTextColor, float FloatSliderTextSize, std::string FloatSliderTextItself, std::string FloatSliderImagePath, std::string FloatSliderFontPath)
+    bool FloatSlider(Rect FloatSliderRect,
+                    float& value,
+                    float minFloatValue,
+                    float maxFloatValue,
+                    float floatStep,
+                    Color FloatTrackColor,
+                    Color FloatHandleColor,
+                    Color FloatSliderTextColor,
+                    float FloatSliderTextSize,
+                    std::string FloatSliderTextItself,
+                    std::string FloatSliderImagePath,
+                    std::string FloatSliderFontPath)
     {
         if (!panelOpen) return false;
 
@@ -550,14 +574,24 @@ namespace UXX
 
         return changed;
     }
-    bool Switch(Rect SwitchRect, Color SwitchOnColor, Color SwitchOffColor, Color SwitchTextColor, bool& value, float SwitchTextSize, std::string SwitchOnTextItself, std::string SwitchOffTextItself, std::string SwitchImagePath, std::string SwitchFontPath)
+    bool Switch(Rect SwitchRect,
+                bool& value,
+                Color SwitchOnColor,
+                Color SwitchOffColor,
+                Color SwitchTextColor,
+                float SwitchTextSize,
+                std::string SwitchOnTextItself,
+                std::string SwitchOffTextItself,
+                std::string SwitchOnImagePath,
+                std::string SwitchOffImagePath,
+                std::string SwitchFontPath)
     {
         if (!panelOpen) return false;
 
         bool hoveredSwitch = (mousePositionX >= SwitchRect.xPos && mousePositionX <= SwitchRect.xPos + SwitchRect.width &&
                         mousePositionY >= SwitchRect.yPos && mousePositionY <= SwitchRect.yPos + SwitchRect.height);
 
-        // A click anywhere on the switch flips its boolean state
+        // ===[A click anywhere on the switch flips its boolean state]===
         bool toggled = false;
         if (hoveredSwitch) mouseHoveredOverWidgetThisFrame = true;
         if (hoveredSwitch && leftMouseButtonPressed)
@@ -567,8 +601,9 @@ namespace UXX
         }
 
         // ===[Draw optional texture and quad]===
-        GLTexture* tex = SwitchImagePath.empty() ? nullptr : GetOrLoadTexture(SwitchImagePath);
-        DrawQuad(SwitchRect, value ? SwitchOnColor : SwitchOffColor, nullptr);
+        const std::string& activeImagePath = value ? SwitchOnImagePath : SwitchOffImagePath;
+        GLTexture* switchTexture = activeImagePath.empty() ? nullptr : GetOrLoadTexture(activeImagePath);
+        DrawQuad(SwitchRect, value ? SwitchOnColor : SwitchOffColor, switchTexture);
 
         // Pick the label based on current state
         const std::string& activeText = value ? SwitchOnTextItself : SwitchOffTextItself;
@@ -603,8 +638,8 @@ namespace UXX
     {
         if (!panelOpen) return;
 
-        GLTexture* tex = GetOrLoadTexture(ImagePath);
-        DrawQuad(ImageRect, ImageColor, tex);
+        GLTexture* imageTexture = GetOrLoadTexture(ImagePath);
+        DrawQuad(ImageRect, ImageColor, imageTexture);
     }
     void Separator(Rect SeparatorRect, Color SeparatorColor)
     {
@@ -624,7 +659,7 @@ namespace UXX
         // Covert Rectangles degrees to radians
         float angleRadians = glm::radians(TextRect.rotation);
 
-        font->rendererText(*textShader, TextItself, TextRect.xPos, bottomUpY, TextSize, textVAO, textVBO, textModelLoc, angleRadians);
+        DrawTextRaw(TextRect.xPos, bottomUpY, TextColor, TextSize, TextItself, font, angleRadians);
     }
 
     // |=====================================================

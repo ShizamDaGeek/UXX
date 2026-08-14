@@ -16,9 +16,17 @@ programming, and I think that this is a good project to work on.
 
 
 ## **Documentation:**
-Here are the Documentation to UXX API:
+Documentation to UXX API:
+The UXX functions follow a pretty basic and easy to follow. UXX is heavly inspired by the ImGui. So if you come from a background that works with things like game engines or in-general debugging for 2D/3D scenes that require the use of ImGui, then using UXX will have the same simple and easy to use learning curve. Here are the in-order parametrs that are followed in most of the function for UI creation:    
+- Rect (X and Y Axis, Width and Height, and Rotation of Rectangle)
+- Color/s + Parameter/s (Color/s and Parameter/s are mostly swapped around from time to time but for the most part it will be Parameter/s first then Color/s. Parameter/s can accpet your variables such (e.g. int, float, bool) that the widget reads, if the user interacts with the UI (e.g Buttons, Sliders, Switches) it will write back) 
+- Text Color 
+- Text Size 
+- Text (What ever string of text you want to add on top of the UI Widget. Some will ask for two like the switch for ON/OFF)
+- Image path (Path to what ever directory your image is in)
+- Font path (Path to what ever directory your font is in)
 
-
+Starting off, to create UI you must first 
 
 ## **Support:**
 If you want to support this project, you are welcome to buy my game/s of steam
@@ -36,7 +44,7 @@ or support my YouTube channel by Subscribing as well:
 
 
 
-## **Examples from Code to Picture:**
+## **Examples (Code to Picture):**
 
 ### **Wacky UI (Scroll down for proper UI):**
 ``` c++
@@ -65,9 +73,9 @@ if (UXX::Button(Rect(0, 0, 400, 400, 0), normalColor, hoveredColor, clickedColor
 UXX::Image(Rect(500, 150, 250, 250, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), scoutImagePath);
 UXX::Image(Rect(800, 550, 250, 250, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), supermanImagePath);
 
-UXX::IntSlider(Rect(0, 400, 80, 20, 0), color2, color1, intSliderValue, 1, 100, 1);
-UXX::FloatSlider(Rect(0, 425, 80, 20, 0), color2, color1, floatSliderValue, 1.0f, 100.0f);
-UXX::Switch(Rect(0, 450, 80, 20, 0), color1, color2, color3, boolSwitchValue, 1.0f, "On", "Off", fontPath);
+UXX::IntSlider(Rect(0, 400, 140, 40, 0), intSliderValue, 1, 100, 1, color2, color1, color3, 2, std::to_string(intSliderValue), "", fontPath);
+UXX::FloatSlider(Rect(0, 450, 140, 40, 0), floatSliderValue, 1.0f, 100.0f, 1.0f, color2, color1, color3, 2, std::to_string((int)floatSliderValue), "", fontPath);
+UXX::Switch(Rect(0, 500, 140, 40, 0), boolSwitchValue, color1, color2, color3, 2, "On", "Off", catImagePath, scoutImagePath, fontPath); catImagePath, scoutImagePath, fontPath);
 
 UXX::Text(Rect(600, 100, 80, 60, -45), color1, 2.5f, "Think FAST Chuckle Nuts!", fontPath);
 
