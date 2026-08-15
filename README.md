@@ -26,11 +26,47 @@ The UXX functions follow a pretty basic and easy to follow. UXX is heavly inspir
 - Image path (Path to what ever directory your image is in)
 - Font path (Path to what ever directory your font is in)
 
-Starting off, to create UI you must first 
+Starting off, to create UI you must first do a quick small init before starting work on it:
+``` c++
+UXXBackendGLFW uxxBackendGLFW;
+if (!uxxBackendGLFW.init()) return 1; 
+```
+Then incompass the UI code in a lambda:
+``` cpp
+uxxBackendGLFW.run([&]()
+{
+```
+    ... UI Code Here ...
+```
+});
+```
 
-## **Support:**
+Here are all the function explaned that can be used in your code:
+``` c++
+// The Begin and End panle are the core funtions needed to start making UI with UXX. Panels can also be used inside each other for more UI expression. You will need to type the x&y axis, width&height, and rotation of the panel for it to show up on screen. Additionally you could also add a color and or an image of choice. 
+UXX::BeginPanel(Rect(x, y, width, height, rot), Color(0, 0, 0, 1), "path/to/image");
+UXX::EndPanel();
+
+// Ahhh yes buttons, one of the most importante UI widgets of computer history. A Button in UXX, just like the panels take 2 axis, width and height, and rotation for it to also appear in scene. With additional colors for different states like default/hovered/clicked. You can also add text with changeable color and size. And finally an image to also be applied to the button with another option to pick a spicific font file as well.   
+UXX::Button(Rect(x, y, width, height, rot), defaultColor, hoveredColor, clickedColor, fontColor, fontSize, "Text", "path/to/image", "path/to/font");
+
+// The image function parametrs are the same as the Begin panel, except it dose not have anything to do with panels, only images get drawn. 
+UXX::Image(Rect(x, y, width, height, rot), Color(3, 5, 9, 1), "path/to/image");
+
+// The Int and Float sliders function parametrs are the same but deal with different number types. Both sliders take 2 axis, width and height, and rotation for it to also appear in scene. But after this the sliders then take in a value(Int or Float depending on choice), a minimum value (how low can you go), a maximum value (high as a kyte), and finally a step counter (how many steps the handle should go up/down). The reset is pretty simple, the color of the track or handle, font color and size, text on top of slider, optionally a image for both track and handle, and finally the location of the image.  
+UXX::IntSlider(Rect(x, y, width, height, rot), intValue, minIntValue, maxIntValue, intStep, trackColor, handleColor, textColor, textSize, "Text", "path/to/trackImage", "path/to/handleImage", "path/to/font");
+UXX::FloatSlider(Rect(x, y, width, height, rot), floatValue, minFloatValue, maxFloatValue, floatStep, trackColor, handleColor, textColor, textSize, "Text", "path/to/trackImage", "path/to/handleImage", "path/to/font");
+
+// The Switch function takes in the x,y-location, scale, and rotation, a bool value, and then an On and Off color, text color and size, then an On and Off text string, optionally a image in place of color,  and finally, the font location.    
+UXX::Switch(Rect(x, y, width, height, rot), boolValue, switchOnColor, switchOffColor, textColor, textSize, "On Text", "Off Text", "path/to/onImage", "path/to/offImage", "path/to/font");
+
+// Text... pretty selfexplanatory, location, scale, rotation, text color and size, text itself and location of the font.
+UXX::Text(Rect(x, y, width, height, rot), textColor, textSize, "Text", "path/to/font");
+```
+
+## **Support Me:**
 If you want to support this project, you are welcome to buy my game/s of steam
-or support my YouTube channel by Subscribing as well:
+or support my YouTube channel by Subscribing:
  - My Steam Game: https://store.steampowered.com/app/3963720/SandBlocks/
  - My YouTube Channel: https://www.youtube.com/@ShizzyDa_Glizzy
 

@@ -746,12 +746,12 @@ namespace UXX
         GLTexture* imageTexture = GetOrLoadTexture(ImagePath);
         DrawQuad(ImageRect, ImageColor, imageTexture);
     }
-    void Separator(Rect SeparatorRect, Color SeparatorColor)
-    {
-        if (!panelOpen) return;
+    // void Separator(Rect SeparatorRect, Color SeparatorColor)
+    // {
+    //     if (!panelOpen) return;
 
-        DrawQuad(SeparatorRect, SeparatorColor, nullptr);
-    }
+    //     DrawQuad(SeparatorRect, SeparatorColor, nullptr);
+    // }
     void Text(Rect TextRect, Color TextColor, float TextSize, std::string TextItself, std::string FontPath)
     {
         if (!panelOpen) return;

@@ -164,7 +164,7 @@ namespace UXX
                 std::string SwitchFontPath = DefaultFontPath);
 
     void Image(Rect ImageRect, Color ImageColor, std::string ImagePath);
-    void Separator(Rect SeparatorRect, Color SeparatorColor);
+    // void Separator(Rect SeparatorRect, Color SeparatorColor);
     void Text(Rect TextRect, Color TextColor, float TextSize, std::string TextItself, std::string FontPath);
 
     void BlowUp();

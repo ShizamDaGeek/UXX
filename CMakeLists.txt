@@ -44,7 +44,7 @@ target_include_directories(stb_image PUBLIC
 # ===[UXX library]===
 file(GLOB_RECURSE UXX_SRC_FILES CONFIGURE_DEPENDS "src/*.cpp")
 if(NOT UXX_BUILD_GLFW_BACKEND)
-    list(FILTER UXX_SRC_FILES EXCLUDE REGEX ".*GLFWBackend\\.cpp$") # Drop GLFW backend source if it's disabled
+    list(FILTER UXX_SRC_FILES EXCLUDE REGEX ".*UXXBackendGLFW\\.cpp$") # Drop GLFW backend source if it's disabled
 endif()
 
 add_library(UXX STATIC ${UXX_SRC_FILES})
