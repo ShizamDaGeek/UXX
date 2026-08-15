@@ -135,7 +135,8 @@ namespace UXX
                     Color IntSliderTextColor = DefaultTextColor,
                     float IntSliderTextSize = 2,
                     std::string IntSliderTextItself = "",
-                    std::string IntSliderImagePath = "",
+                    std::string IntSliderTrackImagePath = "",
+                    std::string IntSliderHandleImagePath = "",
                     std::string IntSliderFontPath = DefaultFontPath);
     bool FloatSlider(Rect FloatSliderRect,
                     float& value,
@@ -147,7 +148,8 @@ namespace UXX
                     Color FloatSliderTextColor = DefaultTextColor,
                     float FloatSliderTextSize = 2,
                     std::string FloatSliderTextItself = "",
-                    std::string FloatSliderImagePath = "",
+                    std::string FloatSliderTrackImagePath = "",
+                    std::string FloatSliderHandleImagePath = "",
                     std::string FloatSliderFontPath = DefaultFontPath);
     bool Switch(Rect SwitchRect,
                 bool& value,

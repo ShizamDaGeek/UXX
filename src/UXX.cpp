@@ -13,7 +13,12 @@ namespace UXX
         EBO* ebo = nullptr;
         Shader* shader = nullptr;
 
-        GLint uColorLoc = -1, uSizeLoc = -1, uPositionLoc = -1, uRotationLoc = -1, uUseTextureLoc = -1;
+        GLint uColorLoc = -1,
+            uSizeLoc = -1,
+            uPositionLoc = -1,
+            uRotationLoc = -1,
+            uUseTextureLoc = -1,
+            uDarkenLoc = -1;
         GLint textColorLoc = -1;
         GLint textModelLoc = -1;
 
@@ -123,8 +128,17 @@ namespace UXX
             fontCache[key] = font;
             return font;
         }
+        // ===[Multiply just RGB by a factor, used to darken flat non-textured widget
+        // colors on hover/press alpha is left alone]===
+        Color ApplyDarken(Color color, float darkenFactor)
+        {
+            return Color(color.red * darkenFactor, color.green * darkenFactor, color.blue * darkenFactor, color.alpha);
+        }
+        // Shared hover/active darken factors so every widget dims consistently
+        constexpr float kHoverDarkenFactor  = 0.85f;
+        constexpr float kActiveDarkenFactor = 0.70f;
         // ===[Be there or be SQUARE]===
-        void DrawQuad(Rect rect, Color color, GLTexture* texture)
+        void DrawQuad(Rect rect, Color color, GLTexture* texture, float darkenAmount = 1.0f)
         {
             shader->Use();
 
@@ -140,6 +154,8 @@ namespace UXX
             glUniform1f(uRotationLoc, rect.rotation);
             // Tell the shader whether to sample tex0 or just use the flat color
             glUniform1i(uUseTextureLoc, texture ? 1 : 0);
+            // Darken of Quad when hoverd/clicked
+            glUniform1f(uDarkenLoc, darkenAmount);
 
             if (texture) texture->Bind();
             vao->Bind();
@@ -361,6 +377,7 @@ namespace UXX
         uPositionLoc   = glGetUniformLocation(shader->ID, "uPosition");
         uRotationLoc   = glGetUniformLocation(shader->ID, "uRotation");
         uUseTextureLoc = glGetUniformLocation(shader->ID, "uUseTexture");
+        uDarkenLoc     = glGetUniformLocation(shader->ID, "uDarken");
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
@@ -419,14 +436,21 @@ namespace UXX
 
         // Pick color based on state
         Color finalColor = ButtonColor;
+        float darkenAmount = 1.0f;
         if (hoveredButton)
+        {
             finalColor = ButtonHoverColor;
+            darkenAmount = kHoverDarkenFactor;
+        }
         if (clickedButton)
+        {
             finalColor = ButtonClickedColor;
+            darkenAmount = kActiveDarkenFactor;
+        }
 
         // Draw button with the colors
         GLTexture* buttonTexture = ButtonImagePath.empty() ? nullptr : GetOrLoadTexture(ButtonImagePath);
-        DrawQuad(ButtonRect, finalColor, buttonTexture);
+        DrawQuad(ButtonRect, finalColor, buttonTexture, darkenAmount);
 
         // If it's empty and don't do shit
         if (!ButtonTextItself.empty())
@@ -463,7 +487,8 @@ namespace UXX
                     Color IntSliderTextColor,
                     float IntSliderTextSize,
                     std::string IntSliderTextItself,
-                    std::string IntSliderImagePath,
+                    std::string IntSliderTrackImagePath,
+                    std::string IntSliderHandleImagePath,
                     std::string IntSliderFontPath)
     {
         if (!panelOpen) return false;
@@ -513,10 +538,20 @@ namespace UXX
         float handleX = IntSliderRect.xPos + currentNormalizedPosition * (IntSliderRect.width - handleWidth);
         Rect handleRect{ handleX, IntSliderRect.yPos, handleWidth, IntSliderRect.height, 0.0f };
 
+        // ===[Handle darkening: same has-image vs no-image split as Button]===
+        bool isActiveIntSlider = (currentFrameActiveWidgetIdentifier == &value);
+        float handleDarkenAmount = 1.0f;
+        if (isActiveIntSlider)     handleDarkenAmount = kActiveDarkenFactor;
+        else if (hoveredIntTrack)  handleDarkenAmount = kHoverDarkenFactor;
+
         // ===[Draw optional texture, and both the Slider Handle and Track]===
-        GLTexture* intTrackTexture = IntSliderImagePath.empty() ? nullptr : GetOrLoadTexture(IntSliderImagePath);
+        GLTexture* intTrackTexture  = IntSliderTrackImagePath.empty()  ? nullptr : GetOrLoadTexture(IntSliderTrackImagePath);
+        GLTexture* intHandleTexture = IntSliderHandleImagePath.empty() ? nullptr : GetOrLoadTexture(IntSliderHandleImagePath);
         DrawQuad(IntSliderRect, IntTrackColor, intTrackTexture);
-        DrawQuad(handleRect, IntHandleColor, nullptr);
+        // No image -> pre-darken the flat handle color. Has image -> pass the darken
+        // factor through and let the shader darken the texture instead.
+        Color finalHandleColor = intHandleTexture ? IntHandleColor : ApplyDarken(IntHandleColor, handleDarkenAmount);
+        DrawQuad(handleRect, finalHandleColor, intHandleTexture, handleDarkenAmount);
 
         // ===[Label centered on the track both horizontally and vertically]===
         if (!IntSliderTextItself.empty())
@@ -551,7 +586,8 @@ namespace UXX
                     Color FloatSliderTextColor,
                     float FloatSliderTextSize,
                     std::string FloatSliderTextItself,
-                    std::string FloatSliderImagePath,
+                    std::string FloatSliderTrackImagePath,
+                    std::string FloatSliderHandleImagePath,
                     std::string FloatSliderFontPath)
     {
         if (!panelOpen) return false;
@@ -599,10 +635,20 @@ namespace UXX
         float handleX = FloatSliderRect.xPos + currentNormalizedPosition * (FloatSliderRect.width - handleWidth);
         Rect handleRect{ handleX, FloatSliderRect.yPos, handleWidth, FloatSliderRect.height, 0.0f };
 
+        // ===[Handle darkening: same has-image vs no-image split as Button]===
+        bool isActiveFloatSlider = (currentFrameActiveWidgetIdentifier == &value);
+        float handleDarkenAmount = 1.0f;
+        if (isActiveFloatSlider)     handleDarkenAmount = kActiveDarkenFactor;
+        else if (hoveredFloatTrack)  handleDarkenAmount = kHoverDarkenFactor;
+
         // ===[Draw optional texture, and both the Slider Handle and Track]===
-        GLTexture* floatTrackTexture = FloatSliderImagePath.empty() ? nullptr : GetOrLoadTexture(FloatSliderImagePath);
+        GLTexture* floatTrackTexture  = FloatSliderTrackImagePath.empty()  ? nullptr : GetOrLoadTexture(FloatSliderTrackImagePath);
+        GLTexture* floatHandleTexture = FloatSliderHandleImagePath.empty() ? nullptr : GetOrLoadTexture(FloatSliderHandleImagePath);
         DrawQuad(FloatSliderRect, FloatTrackColor, floatTrackTexture);
-        DrawQuad(handleRect, FloatHandleColor, nullptr);
+        // No image -> pre-darken the flat handle color. Has image -> pass the darken
+        // factor through and let the shader darken the texture instead.
+        Color finalHandleColor = floatHandleTexture ? FloatHandleColor : ApplyDarken(FloatHandleColor, handleDarkenAmount);
+        DrawQuad(handleRect, finalHandleColor, floatHandleTexture, handleDarkenAmount);
 
         // ===[Label centered on the track both horizontally and vertically]===
         if (!FloatSliderTextItself.empty())
@@ -652,10 +698,17 @@ namespace UXX
             toggled = true;
         }
 
-        // ===[Draw optional texture and quad]===
+        // ===[Handle darkening: same has-image vs no-image split as Button]===
+        bool pressedSwitch = hoveredSwitch && leftMouseButtonDown;
+        float switchDarkenAmount = 1.0f;
+        if (pressedSwitch)        switchDarkenAmount = kActiveDarkenFactor;
+        else if (hoveredSwitch)   switchDarkenAmount = kHoverDarkenFactor;
+
         const std::string& activeImagePath = value ? SwitchOnImagePath : SwitchOffImagePath;
         GLTexture* switchTexture = activeImagePath.empty() ? nullptr : GetOrLoadTexture(activeImagePath);
-        DrawQuad(SwitchRect, value ? SwitchOnColor : SwitchOffColor, switchTexture);
+        Color baseSwitchColor = value ? SwitchOnColor : SwitchOffColor;
+        Color finalSwitchColor = switchTexture ? baseSwitchColor : ApplyDarken(baseSwitchColor, switchDarkenAmount);
+        DrawQuad(SwitchRect, finalSwitchColor, switchTexture, switchDarkenAmount);
 
         // Pick the label based on current state
         const std::string& activeText = value ? SwitchOnTextItself : SwitchOffTextItself;

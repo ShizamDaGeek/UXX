@@ -37,17 +37,34 @@ void UXXBackendGLFW::ScrollCallback(GLFWwindow* window, double xoffset, double y
         uxxBackendGLFWInstance->mouseState.scrollWheelDeltaY = yoffset;
     }
 }
+void UXXBackendGLFW::MouseButtonCallback(GLFWwindow* window, int button, int action, int mods)
+{
+    UXXBackendGLFW* uxxBackendGLFWInstance = static_cast<UXXBackendGLFW*>(glfwGetWindowUserPointer(window));
+    if (!uxxBackendGLFWInstance) return;
+    if (button < 0 || button >= TOTAL_SUPPORTED_MOUSE_BUTTON_COUNT) return;
 
+    // Fires immediately on the real OS event, independent of render frame pacing.
+    if (action == GLFW_PRESS)
+        uxxBackendGLFWInstance->mouseState.buttonPressedSinceLastPoll[button] = true;
+    else if (action == GLFW_RELEASE)
+        uxxBackendGLFWInstance->mouseState.buttonReleasedSinceLastPoll[button] = true;
+}
 void UXXBackendGLFW::PollMouseState()
 {
-    // ===[Sweep every index GLFW supports and let whichever ones exist report themselves]===
     for (int mouseButtonIndex = 0; mouseButtonIndex < TOTAL_SUPPORTED_MOUSE_BUTTON_COUNT; mouseButtonIndex++)
     {
         bool buttonIsCurrentlyDown = glfwGetMouseButton(window, mouseButtonIndex) == GLFW_PRESS;
 
-        mouseState.buttonPressedThisFrame[mouseButtonIndex]  = buttonIsCurrentlyDown && !mouseState.buttonHeldThisFrame[mouseButtonIndex];
-        mouseState.buttonReleasedThisFrame[mouseButtonIndex] = !buttonIsCurrentlyDown && mouseState.buttonHeldThisFrame[mouseButtonIndex];
+        // Press/release edges come from the callback buffer, not from comparing
+        // this poll's instantaneous state to last poll's - that comparison is
+        // exactly what dropped clicks that landed between two frames.
+        mouseState.buttonPressedThisFrame[mouseButtonIndex]  = mouseState.buttonPressedSinceLastPoll[mouseButtonIndex];
+        mouseState.buttonReleasedThisFrame[mouseButtonIndex] = mouseState.buttonReleasedSinceLastPoll[mouseButtonIndex];
         mouseState.buttonHeldThisFrame[mouseButtonIndex]     = buttonIsCurrentlyDown;
+
+        // Consumed for this frame - clear until the next real GLFW event
+        mouseState.buttonPressedSinceLastPoll[mouseButtonIndex]  = false;
+        mouseState.buttonReleasedSinceLastPoll[mouseButtonIndex] = false;
     }
 }
 
@@ -92,6 +109,7 @@ bool UXXBackendGLFW::init()
     glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
     glfwSetCursorPosCallback(window, CursorPosCallback);
     glfwSetScrollCallback(window, ScrollCallback);
+    glfwSetMouseButtonCallback(window, MouseButtonCallback);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1);
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))

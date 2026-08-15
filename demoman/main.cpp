@@ -21,6 +21,9 @@ int main()
         std::string scoutImagePath("../UXXAssets/Images/scout.jpg");
         std::string catImagePath("../UXXAssets/Images/cat.jpg");
         std::string supermanImagePath("../UXXAssets/Images/transparent_image.png");
+        std::string electionsImagePath("../UXXAssets/Images/elections.jpg");
+        std::string hamImagePath("../UXXAssets/Images/hamster.png");
+        std::string ballImagePath("../UXXAssets/Images/ball.png");
         std::string fontPath("../UXXAssets/Fonts/sandypixels_5x5_font2.ttf");
 
         static int intSliderValue = 75;
@@ -33,9 +36,9 @@ int main()
         UXX::Image(Rect(500, 150, 250, 250, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), scoutImagePath);
         UXX::Image(Rect(800, 550, 300, 300, 0), Color(1.0f, 1.0f, 1.0f, 1.0f), supermanImagePath);
 
-        UXX::IntSlider(Rect(0, 400, 140, 40, 0), intSliderValue, 1, 100, 1, color2, color1, color3, 2, std::to_string(intSliderValue), "", fontPath);
-        UXX::FloatSlider(Rect(0, 450, 140, 40, 0), floatSliderValue, 1.0f, 100.0f, 1.0f, color2, color1, color3, 2, std::to_string((int)floatSliderValue), "", fontPath);
-        UXX::Switch(Rect(0, 500, 140, 40, 0), boolSwitchValue, color1, color2, color3, 2, "On", "Off", catImagePath, scoutImagePath, fontPath);
+        UXX::IntSlider(Rect(0, 400, 400, 200, 0), intSliderValue, 1, 100, 1, color2, color1, color3, 2, std::to_string(intSliderValue), electionsImagePath, hamImagePath, fontPath);
+        UXX::FloatSlider(Rect(0, 600, 400, 200, 0), floatSliderValue, 1.0f, 100.0f, 1.0f, color2, color1, color3, 2, std::to_string((int)floatSliderValue), electionsImagePath, hamImagePath, fontPath);
+        UXX::Switch(Rect(0, 800, 400, 200, 0), boolSwitchValue, color1, color2, color3, 2, "On", "Off", catImagePath, scoutImagePath, fontPath);
 
         UXX::Text(Rect(600, 100, 80, 60, -45), color1, 2.5f, "Think FAST Chuckle Nuts!", fontPath);
 
