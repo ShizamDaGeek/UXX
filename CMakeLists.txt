@@ -5,7 +5,6 @@ project(UXX VERSION 0.1.0 LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-option(UXX_BUILD_DEMO "Build the UXX demo executable" ON)
 option(UXX_BUILD_GLFW_BACKEND "Build the GLFW window backend" ON)
 
 # Needed for GLM extensions like glm::radians on some setups
@@ -13,31 +12,44 @@ add_compile_definitions(GLM_ENABLE_EXPERIMENTAL)
 
 
 
-# ===[Third-party deps]===
-add_library(glad STATIC third_party_libs/GLAD/src/glad.c)
-target_include_directories(glad PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/third_party_libs/GLAD/include>
-    $<INSTALL_INTERFACE:include> # Relative path used once installed
-)
+# ===[Detect whether UXX is being built standalone or pulled in by a parent project]===
+if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
+    set(uxxIsTopLevelProject ON)
+else()
+    set(uxxIsTopLevelProject OFF)
+endif()
 
-if(UXX_BUILD_GLFW_BACKEND)
+option(UXX_BUILD_DEMO "Build the UXX demo executable" ${uxxIsTopLevelProject})
+
+
+
+# ===[Third-party deps]===
+if(NOT TARGET glad)
+    add_library(glad STATIC third_party_libs/GLAD/src/glad.c)
+    target_include_directories(glad PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/third_party_libs/GLAD/include>
+        $<INSTALL_INTERFACE:include>
+    )
+endif()
+
+if(UXX_BUILD_GLFW_BACKEND AND NOT TARGET glfw)
     add_subdirectory(third_party_libs/GLFW)
 endif()
 
-# Stops warnings that come from building Freetype's own CMakeLists
 set(CMAKE_WARN_DEPRECATED OFF)
 set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS ON CACHE BOOL "" FORCE)
 add_subdirectory(third_party_libs/FREETYPE)
-# Restore for the rest of the project
 set(CMAKE_WARN_DEPRECATED ON)
 
 find_package(OpenGL REQUIRED)
 
-add_library(stb_image STATIC src/internal/stb_image.cpp)
-target_include_directories(stb_image PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/third_party_libs/STB>
-    $<INSTALL_INTERFACE:include>
-)
+if(NOT TARGET stb_image)
+    add_library(stb_image STATIC src/internal/stb_image.cpp)
+    target_include_directories(stb_image PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/third_party_libs/STB>
+        $<INSTALL_INTERFACE:include>
+    )
+endif()
 
 
 

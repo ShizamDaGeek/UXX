@@ -35,9 +35,9 @@ Then incompass the UI code in a lambda:
 ``` cpp
 uxxBackendGLFW.run([&]()
 {
-```
+
     ... UI Code Here ...
-```
+    
 });
 ```
 

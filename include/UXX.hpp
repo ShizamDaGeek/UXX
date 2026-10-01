@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <cmath>
 #include <vector>
+#include <array>
 
 #include "internal/Texture.hpp"
 #include "internal/VAO.hpp"
