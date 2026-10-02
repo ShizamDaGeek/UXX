@@ -17,14 +17,8 @@ programming, and I think that this is a good project to work on.
 
 ## **Documentation:**
 Documentation to UXX API:
-The UXX functions follow a pretty basic and easy to follow. UXX is heavly inspired by the ImGui. So if you come from a background that works with things like game engines or in-general debugging for 2D/3D scenes that require the use of ImGui, then using UXX will have the same simple and easy to use learning curve. Here are the in-order parametrs that are followed in most of the function for UI creation:    
-- Rect (X and Y Axis, Width and Height, and Rotation of Rectangle)
-- Color/s + Parameter/s (Color/s and Parameter/s are mostly swapped around from time to time but for the most part it will be Parameter/s first then Color/s. Parameter/s can accpet your variables such (e.g. int, float, bool) that the widget reads, if the user interacts with the UI (e.g Buttons, Sliders, Switches) it will write back) 
-- Text Color 
-- Text Size 
-- Text (What ever string of text you want to add on top of the UI Widget. Some will ask for two like the switch for ON/OFF)
-- Image path (Path to what ever directory your image is in)
-- Font path (Path to what ever directory your font is in)
+The UXX functions follow a pretty basic and easy to follow. UXX is inspired by the ImGui c++ library and a little bit of CSS styling language. So if you come from a background that works with things like game engines, in-general debugging for 2D/3D scenes that require the use of ImGui, front-end web devlopment, then using UXX will have the same simple and easy to use learning curve. However, UXX is soo simple to use that even without a background in any of those things mentioned above, you could still understand and maybe even create an awesome game UI, app
+and much more!
 
 Starting off, to create UI you must first do a quick small init before starting work on it:
 ``` c++
@@ -41,34 +35,67 @@ uxxBackendGLFW.run([&]()
 });
 ```
 
-Here are all the function explaned that can be used in your code:
+Finally you can use these functions I have explaned below to get started using UXX in your C++ code-base:
 ``` c++
 // The Begin and End panle are the core funtions needed to start making UI with UXX. Panels can also be used inside each other for more UI expression. You will need to type the x&y axis, width&height, and rotation of the panel for it to show up on screen. Additionally you could also add a color and or an image of choice. 
 UXX::BeginPanel(Rect(x, y, width, height, rot), Color(0, 0, 0, 1), "path/to/image");
 UXX::EndPanel();
 
-// Ahhh yes buttons, one of the most importante UI widgets of computer history. A Button in UXX, just like the panels take 2 axis, width and height, and rotation for it to also appear in scene. With additional colors for different states like default/hovered/clicked. You can also add text with changeable color and size. And finally an image to also be applied to the button with another option to pick a spicific font file as well.   
-UXX::Button(Rect(x, y, width, height, rot), defaultColor, hoveredColor, clickedColor, fontColor, fontSize, "Text", "path/to/image", "path/to/font");
+// Before adding a UI widget you will first need to create structs with the a premade styles. The Style Structs is pretty easy and only takes a few minutes to an hour depending on how well you want your UI to look. Style Structs can also be reused over and over across the UI code and if any changes are needed then all the UI widgets will get updated along side the Style Structs.
+UXX::ButtonStyle beautifulButtonStyle
+{
+    .normalColor  = Color(1.0f, 1.0f, 1.0f, 1.0f),
+    .hoveredColor = Color(0.5f, 0.5f, 0.5f, 1.0f),
+    .clickedColor = Color(0.0f, 0.0f, 0.0f, 1.0f),
+    .textColor    = Color(0.3f, 0.9f, 0.5f, 1.0f),
+    .textSize     = 2.0f,
+    .fontPath     = fontPath,
+    .imagePath    = catImagePath
+};
+UXX::SliderStyle smoothSliderStyle
+{
+    .trackColor      = Color(0.5f, 0.3f, 0.9f, 1.0f),
+    .handleColor     = Color(0.3f, 0.9f, 0.5f, 1.0f),
+    .textColor       = Color(0.9f, 0.5f, 0.3f, 1.0f),
+    .textSize        = 2.0f,
+    .fontPath        = fontPath,
+    .trackImagePath  = ballImagePath,
+    .handleImagePath = batImagePath
+};
+UXX::SwitchStyle sassySwitchStyle
+{
+    .onColor      = Color(0.3f, 0.9f, 0.5f, 1.0f),
+    .offColor     = Color(0.5f, 0.3f, 0.9f, 1.0f),
+    .textColor    = Color(0.9f, 0.5f, 0.3f, 1.0f),
+    .textSize     = 2.0f,
+    .fontPath     = fontPath,
+    .onImagePath  = catOnImagePath,
+    .offImagePath = dogOffImagePath
+};
+UXX::TextStyle terrificTextStyle
+{
+    .color    = Color(0.3f, 0.9f, 0.5f, 1.0f),
+    .size     = 2.5f,
+    .fontPath = fontPath
+};
+UXX::ImageStyle increadableImageStyle { .imagePath = frutigerAeroImagePath };
+UXX::ImageStyle iranoutofbrainmemoryImageStyle { .imagePath = cogWheelImagePath };
 
-// The image function parametrs are the same as the Begin panel, except it dose not have anything to do with panels, only images get drawn. 
-UXX::Image(Rect(x, y, width, height, rot), Color(3, 5, 9, 1), "path/to/image");
 
-// The Int and Float sliders function parametrs are the same but deal with different number types. Both sliders take 2 axis, width and height, and rotation for it to also appear in scene. But after this the sliders then take in a value(Int or Float depending on choice), a minimum value (how low can you go), a maximum value (high as a kyte), and finally a step counter (how many steps the handle should go up/down). The reset is pretty simple, the color of the track or handle, font color and size, text on top of slider, optionally a image for both track and handle, and finally the location of the image.  
-UXX::IntSlider(Rect(x, y, width, height, rot), intValue, minIntValue, maxIntValue, intStep, trackColor, handleColor, textColor, textSize, "Text", "path/to/trackImage", "path/to/handleImage", "path/to/font");
-UXX::FloatSlider(Rect(x, y, width, height, rot), floatValue, minFloatValue, maxFloatValue, floatStep, trackColor, handleColor, textColor, textSize, "Text", "path/to/trackImage", "path/to/handleImage", "path/to/font");
+// ===[Widgets]===
+if (UXX::Button(Rect(0, 0, 400, 400, 0), beautifulButtonStyle, "Cat"))
+    std::cout << "Cat \n";
 
-// The Switch function takes in the x,y-location, scale, and rotation, a bool value, and then an On and Off color, text color and size, then an On and Off text string, optionally a image in place of color,  and finally, the font location.    
-UXX::Switch(Rect(x, y, width, height, rot), boolValue, switchOnColor, switchOffColor, textColor, textSize, "On Text", "Off Text", "path/to/onImage", "path/to/offImage", "path/to/font");
+UXX::Image(Rect(500, 150, 250, 250, 0), increadableImageStyle);
+UXX::Image(Rect(800, 550, 300, 300, 0), iranoutofbrainmemoryImageStyle);
 
-// Text... pretty selfexplanatory, location, scale, rotation, text color and size, text itself and location of the font.
-UXX::Text(Rect(x, y, width, height, rot), textColor, textSize, "Text", "path/to/font");
+UXX::IntSlider(Rect(0, 400, 400, 200, 0), intSliderValue, 1, 100, 1, smoothSliderStyle, std::to_string(intSliderValue));
+UXX::FloatSlider(Rect(0, 600, 400, 200, 0), floatSliderValue, 1.0f, 100.0f, 1.0f, smoothSliderStyle, std::to_string((int)floatSliderValue));
+
+UXX::Switch(Rect(0, 800, 400, 200, 0), boolSwitchValue, sassySwitchStyle, "I am turned On", "I am turned Off");
+
+UXX::Text(Rect(600, 100, 80, 60, -45), terrificTextStyle, "Example Text");
 ```
-
-## **Support Me:**
-If you want to support this project, you are welcome to buy my game/s of steam
-or support my YouTube channel by Subscribing:
- - My Steam Game: https://store.steampowered.com/app/3963720/SandBlocks/
- - My YouTube Channel: https://www.youtube.com/@ShizzyDa_Glizzy
 
 
 
@@ -77,6 +104,14 @@ or support my YouTube channel by Subscribing:
 - **SDL2:** No
 - **SDL3:** No (If I don't have SDL2 supported what makes you think I supported the third one) 
 - **SFML:** No
+
+
+
+## **Support Me:**
+If you want to support this project, you are welcome to buy my game/s of steam
+or support my YouTube channel by Subscribing and liking and sharing any of my videos:
+ - My Steam Game: https://store.steampowered.com/app/3963720/SandBlocks/
+ - My YouTube Channel: https://www.youtube.com/@ShizzyDa_Glizzy
 
 
 
