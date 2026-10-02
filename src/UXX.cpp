@@ -424,9 +424,17 @@ namespace UXX
     // |=====================================================
     // |---[Common UI stuff]---------------------------------
     // |=====================================================
-    bool Button(Rect ButtonRect, Color ButtonColor, Color ButtonHoverColor, Color ButtonClickedColor, Color ButtonTextColor, float ButtonTextSize, std::string ButtonTextItself, std::string ButtonImagePath, std::string ButtonFontPath)
+    bool Button(Rect ButtonRect, const ButtonStyle& buttonStyle, std::string ButtonTextItself)
     {
         if (!panelOpen) return false;
+
+        Color ButtonColor           = buttonStyle.normalColor;
+        Color ButtonHoverColor      = buttonStyle.hoveredColor;
+        Color ButtonClickedColor    = buttonStyle.clickedColor;
+        Color ButtonTextColor       = buttonStyle.textColor;
+        float ButtonTextSize        = buttonStyle.textSize;
+        std::string ButtonImagePath = buttonStyle.imagePath;
+        std::string ButtonFontPath  = buttonStyle.fontPath;
 
         // Find out what state the button is on
         bool hoveredButton = (mousePositionX >= ButtonRect.xPos && mousePositionX <= ButtonRect.xPos + ButtonRect.width &&
@@ -477,21 +485,18 @@ namespace UXX
 
         return clickedButton;
     }
-    bool IntSlider(Rect IntSliderRect,
-                    int& value,
-                    int minIntValue,
-                    int maxIntValue,
-                    int intStep,
-                    Color IntTrackColor,
-                    Color IntHandleColor,
-                    Color IntSliderTextColor,
-                    float IntSliderTextSize,
-                    std::string IntSliderTextItself,
-                    std::string IntSliderTrackImagePath,
-                    std::string IntSliderHandleImagePath,
-                    std::string IntSliderFontPath)
+    bool IntSlider(Rect IntSliderRect, int& value, int minIntValue, int maxIntValue, int intStep,
+        const SliderStyle& sliderStyle, std::string IntSliderTextItself)
     {
         if (!panelOpen) return false;
+
+        Color IntTrackColor                  = sliderStyle.trackColor;
+        Color IntHandleColor                 = sliderStyle.handleColor;
+        Color IntSliderTextColor             = sliderStyle.textColor;
+        float IntSliderTextSize              = sliderStyle.textSize;
+        std::string IntSliderTrackImagePath  = sliderStyle.trackImagePath;
+        std::string IntSliderHandleImagePath = sliderStyle.handleImagePath;
+        std::string IntSliderFontPath        = sliderStyle.fontPath;
 
         bool changed = false;
         float handleWidth = IntSliderRect.height;
@@ -576,21 +581,18 @@ namespace UXX
 
         return changed;
     }
-    bool FloatSlider(Rect FloatSliderRect,
-                    float& value,
-                    float minFloatValue,
-                    float maxFloatValue,
-                    float floatStep,
-                    Color FloatTrackColor,
-                    Color FloatHandleColor,
-                    Color FloatSliderTextColor,
-                    float FloatSliderTextSize,
-                    std::string FloatSliderTextItself,
-                    std::string FloatSliderTrackImagePath,
-                    std::string FloatSliderHandleImagePath,
-                    std::string FloatSliderFontPath)
+    bool FloatSlider(Rect FloatSliderRect, float& value, float minFloatValue, float maxFloatValue, float floatStep,
+        const SliderStyle& sliderStyle, std::string FloatSliderTextItself)
     {
         if (!panelOpen) return false;
+
+        Color FloatTrackColor                  = sliderStyle.trackColor;
+        Color FloatHandleColor                 = sliderStyle.handleColor;
+        Color FloatSliderTextColor             = sliderStyle.textColor;
+        float FloatSliderTextSize              = sliderStyle.textSize;
+        std::string FloatSliderTrackImagePath  = sliderStyle.trackImagePath;
+        std::string FloatSliderHandleImagePath = sliderStyle.handleImagePath;
+        std::string FloatSliderFontPath        = sliderStyle.fontPath;
 
         bool changed = false;
         float handleWidth = FloatSliderRect.height;
@@ -673,19 +675,18 @@ namespace UXX
 
         return changed;
     }
-    bool Switch(Rect SwitchRect,
-                bool& value,
-                Color SwitchOnColor,
-                Color SwitchOffColor,
-                Color SwitchTextColor,
-                float SwitchTextSize,
-                std::string SwitchOnTextItself,
-                std::string SwitchOffTextItself,
-                std::string SwitchOnImagePath,
-                std::string SwitchOffImagePath,
-                std::string SwitchFontPath)
+    bool Switch(Rect SwitchRect, bool& value, const SwitchStyle& switchStyle,
+        std::string SwitchOnTextItself, std::string SwitchOffTextItself)
     {
         if (!panelOpen) return false;
+
+        Color SwitchOnColor             = switchStyle.onColor;
+        Color SwitchOffColor            = switchStyle.offColor;
+        Color SwitchTextColor           = switchStyle.textColor;
+        float SwitchTextSize            = switchStyle.textSize;
+        std::string SwitchOnImagePath   = switchStyle.onImagePath;
+        std::string SwitchOffImagePath  = switchStyle.offImagePath;
+        std::string SwitchFontPath      = switchStyle.fontPath;
 
         bool hoveredSwitch = WidgetIsHovered(&value, SwitchRect);
         if (hoveredSwitch) mouseHoveredOverWidgetThisFrame = true;
@@ -739,12 +740,12 @@ namespace UXX
     // |=====================================================
     // |---[UnCommon UI stuff]-------------------------------
     // |=====================================================
-    void Image(Rect ImageRect, Color ImageColor, std::string ImagePath)
+    void Image(Rect ImageRect, const ImageStyle& imageStyle)
     {
         if (!panelOpen) return;
 
-        GLTexture* imageTexture = GetOrLoadTexture(ImagePath);
-        DrawQuad(ImageRect, ImageColor, imageTexture);
+        GLTexture* imageTexture = GetOrLoadTexture(imageStyle.imagePath);
+        DrawQuad(ImageRect, imageStyle.color, imageTexture);
     }
     // void Separator(Rect SeparatorRect, Color SeparatorColor)
     // {
@@ -752,19 +753,17 @@ namespace UXX
 
     //     DrawQuad(SeparatorRect, SeparatorColor, nullptr);
     // }
-    void Text(Rect TextRect, Color TextColor, float TextSize, std::string TextItself, std::string FontPath)
+    void Text(Rect TextRect, const TextStyle& textStyle, std::string TextItself)
     {
         if (!panelOpen) return;
 
-        Font* font = GetOrLoadFont(FontPath,(unsigned int)TextSize);
+        Font* font = GetOrLoadFont(textStyle.fontPath, (unsigned int)textStyle.size);
         if (!font) return;
 
-        // Convert top-down Rect.yPos into the bottom-up space the glyph math/projection expect
         float bottomUpY = SCREEN_HEIGHT - TextRect.yPos;
-        // Covert Rectangles degrees to radians
         float angleRadians = glm::radians(TextRect.rotation);
 
-        DrawTextRaw(TextRect.xPos, bottomUpY, TextColor, TextSize, TextItself, font, angleRadians);
+        DrawTextRaw(TextRect.xPos, bottomUpY, textStyle.color, textStyle.size, TextItself, font, angleRadians);
     }
 
     // |=====================================================

@@ -78,6 +78,50 @@ namespace UXX
     inline Color DefaultTextColor    { 1.0f, 1.0f, 1.0f, 1.0f };
     inline std::string DefaultFontPath = "../UXXAssets/Fonts/sandypixels_5x5_font2.ttf";
 
+    // ===[Style types for each UI widget]===
+    struct ButtonStyle
+    {
+        Color normalColor  = DefaultColor;
+        Color hoveredColor = DefaultHoverColor;
+        Color clickedColor = DefaultClickedColor;
+        Color textColor    = DefaultTextColor;
+        float textSize     = 2.0f;
+        std::string fontPath  = DefaultFontPath;
+        std::string imagePath = "";
+    };
+    // Shared by IntSlider and FloatSlider
+    struct SliderStyle
+    {
+        Color trackColor  = DefaultColor;
+        Color handleColor = DefaultHoverColor;
+        Color textColor   = DefaultTextColor;
+        float textSize    = 2.0f;
+        std::string fontPath        = DefaultFontPath;
+        std::string trackImagePath  = "";
+        std::string handleImagePath = "";
+    };
+    struct SwitchStyle
+    {
+        Color onColor   = DefaultColor;
+        Color offColor  = DefaultClickedColor;
+        Color textColor = DefaultTextColor;
+        float textSize  = 2.0f;
+        std::string fontPath     = DefaultFontPath;
+        std::string onImagePath  = "";
+        std::string offImagePath = "";
+    };
+    struct TextStyle
+    {
+        Color color = DefaultTextColor;
+        float size  = 2.0f;
+        std::string fontPath = DefaultFontPath;
+    };
+    struct ImageStyle
+    {
+        Color color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+        std::string imagePath = "";
+    };
+
     struct GraphicsInfo
     {
         WindowBackend backend = WindowBackend::UNKNOWN;
@@ -117,56 +161,21 @@ namespace UXX
     void BeginPanel(Rect PanelRect, Color PanelColor, std::string PanelImagePath);
     void EndPanel();
 
-    bool Button(Rect ButtonRect,
-                Color ButtonColor = DefaultColor,
-                Color ButtonHoverColor = DefaultHoverColor,
-                Color ButtonClickedColor = DefaultClickedColor,
-                Color ButtonTextColor = DefaultTextColor,
-                float ButtonTextSize = 2,
-                std::string ButtonTextItself = "",
-                std::string ButtonImagePath = "",
-                std::string ButtonFontPath = DefaultFontPath);
-    bool IntSlider(Rect IntSliderRect,
-                    int& value,
-                    int minIntValue,
-                    int maxIntValue,
-                    int intStep = 1,
-                    Color IntTrackColor = DefaultColor,
-                    Color IntHandleColor = DefaultHoverColor,
-                    Color IntSliderTextColor = DefaultTextColor,
-                    float IntSliderTextSize = 2,
-                    std::string IntSliderTextItself = "",
-                    std::string IntSliderTrackImagePath = "",
-                    std::string IntSliderHandleImagePath = "",
-                    std::string IntSliderFontPath = DefaultFontPath);
-    bool FloatSlider(Rect FloatSliderRect,
-                    float& value,
-                    float minFloatValue,
-                    float maxFloatValue,
-                    float floatStep = 1.0f,
-                    Color FloatTrackColor = DefaultColor,
-                    Color FloatHandleColor = DefaultHoverColor,
-                    Color FloatSliderTextColor = DefaultTextColor,
-                    float FloatSliderTextSize = 2,
-                    std::string FloatSliderTextItself = "",
-                    std::string FloatSliderTrackImagePath = "",
-                    std::string FloatSliderHandleImagePath = "",
-                    std::string FloatSliderFontPath = DefaultFontPath);
-    bool Switch(Rect SwitchRect,
-                bool& value,
-                Color SwitchOnColor = DefaultColor,
-                Color SwitchOffColor = DefaultClickedColor,
-                Color SwitchTextColor = DefaultTextColor,
-                float SwitchTextSize = 2,
-                std::string SwitchOnTextItself = "",
-                std::string SwitchOffTextItself = "",
-                std::string SwitchOnImagePath = "",
-                std::string SwitchOffImagePath = "",
-                std::string SwitchFontPath = DefaultFontPath);
+    bool Button(Rect buttonRect, const ButtonStyle& buttonStyle, std::string buttonText = "");
 
-    void Image(Rect ImageRect, Color ImageColor, std::string ImagePath);
+    bool IntSlider(Rect sliderRect, int& value, int minIntValue, int maxIntValue, int intStep,
+                   const SliderStyle& sliderStyle, std::string sliderText = "");
+
+    bool FloatSlider(Rect sliderRect, float& value, float minFloatValue, float maxFloatValue, float floatStep,
+                     const SliderStyle& sliderStyle, std::string sliderText = "");
+
+    bool Switch(Rect switchRect, bool& value, const SwitchStyle& switchStyle,
+                std::string switchOnText = "", std::string switchOffText = "");
+
+    void Image(Rect imageRect, const ImageStyle& imageStyle);
+    void Text(Rect textRect, const TextStyle& textStyle, std::string textItself);
     // void Separator(Rect SeparatorRect, Color SeparatorColor);
-    void Text(Rect TextRect, Color TextColor, float TextSize, std::string TextItself, std::string FontPath);
+    void InputField(Rect InputFeildRect, Color InputFeildColor);
 
     void BlowUp();
 };
