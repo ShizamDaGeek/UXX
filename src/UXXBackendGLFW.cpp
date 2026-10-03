@@ -3,6 +3,34 @@
 // |=====================================================
 // |---[Helper Functions]--------------------------------
 // |=====================================================
+// Collects typed ASCII characters between frames
+void UXXBackendGLFW::CharacterCallback(GLFWwindow* window, unsigned int unicodeCodepoint)
+{
+    UXXBackendGLFW* uxxBackendGLFWInstance = static_cast<UXXBackendGLFW*>(glfwGetWindowUserPointer(window));
+    if (!uxxBackendGLFWInstance) return;
+
+    // Only plain printable ASCII is supported for now
+    if (unicodeCodepoint >= 32 && unicodeCodepoint < 127)
+        uxxBackendGLFWInstance->typedCharactersSinceLastPoll.push_back((char)unicodeCodepoint);
+}
+// Counts backspace and enter presses (including key repeat) between frames
+void UXXBackendGLFW::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    UXXBackendGLFW* uxxBackendGLFWInstance = static_cast<UXXBackendGLFW*>(glfwGetWindowUserPointer(window));
+    if (!uxxBackendGLFWInstance) return;
+    if (action != GLFW_PRESS && action != GLFW_REPEAT) return;
+
+    if (key == GLFW_KEY_BACKSPACE) uxxBackendGLFWInstance->backspacePressCountSinceLastPoll++;
+    if (key == GLFW_KEY_ENTER || key == GLFW_KEY_KP_ENTER) uxxBackendGLFWInstance->enterPressCountSinceLastPoll++;
+    if (key == GLFW_KEY_LEFT)   uxxBackendGLFWInstance->leftArrowPressCountSinceLastPoll++;
+    if (key == GLFW_KEY_RIGHT)  uxxBackendGLFWInstance->rightArrowPressCountSinceLastPoll++;
+    if (key == GLFW_KEY_UP)     uxxBackendGLFWInstance->upArrowPressCountSinceLastPoll++;
+    if (key == GLFW_KEY_DOWN)   uxxBackendGLFWInstance->downArrowPressCountSinceLastPoll++;
+    if (key == GLFW_KEY_HOME)   uxxBackendGLFWInstance->homePressCountSinceLastPoll++;
+    if (key == GLFW_KEY_END)    uxxBackendGLFWInstance->endPressCountSinceLastPoll++;
+    if (key == GLFW_KEY_DELETE) uxxBackendGLFWInstance->deletePressCountSinceLastPoll++;
+
+}
 void UXXBackendGLFW::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
@@ -106,6 +134,8 @@ bool UXXBackendGLFW::init()
 
     // ===[Hook up input callbacks and make this context current]===
     glfwSetWindowUserPointer(window, this);
+    glfwSetCharCallback(window, CharacterCallback);
+    glfwSetKeyCallback(window, KeyCallback);
     glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
     glfwSetCursorPosCallback(window, CursorPosCallback);
     glfwSetScrollCallback(window, ScrollCallback);
@@ -163,6 +193,25 @@ void UXXBackendGLFW::run(std::function<void()> drawUserInterfaceCallback)
             mouseState.buttonPressedThisFrame[GLFW_MOUSE_BUTTON_MIDDLE],
             mouseState.buttonReleasedThisFrame[GLFW_MOUSE_BUTTON_MIDDLE],
             mouseState.scrollWheelDeltaX, mouseState.scrollWheelDeltaY);
+
+        // ===[Input States]===
+        UXX::SetTextInputState(typedCharactersSinceLastPoll, backspacePressCountSinceLastPoll, enterPressCountSinceLastPoll);
+        typedCharactersSinceLastPoll.clear();
+        backspacePressCountSinceLastPoll = 0;
+        enterPressCountSinceLastPoll = 0;
+
+        // Hand the editing key counts to UXX, then start counting again
+        UXX::SetEditKeyState(leftArrowPressCountSinceLastPoll, rightArrowPressCountSinceLastPoll,
+                             upArrowPressCountSinceLastPoll, downArrowPressCountSinceLastPoll,
+                             homePressCountSinceLastPoll, endPressCountSinceLastPoll,
+                             deletePressCountSinceLastPoll);
+        leftArrowPressCountSinceLastPoll = 0;
+        rightArrowPressCountSinceLastPoll = 0;
+        upArrowPressCountSinceLastPoll = 0;
+        downArrowPressCountSinceLastPoll = 0;
+        homePressCountSinceLastPoll = 0;
+        endPressCountSinceLastPoll = 0;
+        deletePressCountSinceLastPoll = 0;
 
         // ===[Arrow key polling]===
         static bool previousLeft = false, previousRight = false, previousUp = false, previousDown = false;
@@ -233,6 +282,8 @@ void UXXBackendGLFW::run(std::function<void()> drawUserInterfaceCallback)
 
     	// Swap the back buffer with the front buffer
     	glfwSwapBuffers(window);
+        // Wait for the GPU to finish so the driver cannot queue frames ahead, which adds typing lag
+        glFinish();
     }
 }
 

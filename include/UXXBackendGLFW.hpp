@@ -67,6 +67,20 @@ private:
     GLFWwindow* window;
     MouseState mouseState;
 
+    std::string typedCharactersSinceLastPoll;
+    int backspacePressCountSinceLastPoll = 0;
+    int enterPressCountSinceLastPoll = 0;
+    int leftArrowPressCountSinceLastPoll = 0;
+    int rightArrowPressCountSinceLastPoll = 0;
+    int upArrowPressCountSinceLastPoll = 0;
+    int downArrowPressCountSinceLastPoll = 0;
+    int homePressCountSinceLastPoll = 0;
+    int endPressCountSinceLastPoll = 0;
+    int deletePressCountSinceLastPoll = 0;
+
+    static void CharacterCallback(GLFWwindow* window, unsigned int unicodeCodepoint);
+    static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
     static void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
     static void CursorPosCallback(GLFWwindow* window, double xpos, double ypos);
     static void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset);

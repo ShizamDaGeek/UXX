@@ -1,7 +1,7 @@
 #ifndef UXX_HPP
 #define UXX_HPP
 
-// The Renderer class will handle pretty much all UI drawing related stuff
+// The UXX class will handle all UI drawing
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -14,6 +14,8 @@
 #include <cmath>
 #include <vector>
 #include <array>
+#include <cstdio>
+#include <cstdlib>
 
 #include "internal/Texture.hpp"
 #include "internal/VAO.hpp"
@@ -84,8 +86,10 @@ namespace UXX
         Color normalColor  = DefaultColor;
         Color hoveredColor = DefaultHoverColor;
         Color clickedColor = DefaultClickedColor;
+
         Color textColor    = DefaultTextColor;
         float textSize     = 2.0f;
+
         std::string fontPath  = DefaultFontPath;
         std::string imagePath = "";
     };
@@ -94,8 +98,10 @@ namespace UXX
     {
         Color trackColor  = DefaultColor;
         Color handleColor = DefaultHoverColor;
+
         Color textColor   = DefaultTextColor;
         float textSize    = 2.0f;
+
         std::string fontPath        = DefaultFontPath;
         std::string trackImagePath  = "";
         std::string handleImagePath = "";
@@ -104,8 +110,10 @@ namespace UXX
     {
         Color onColor   = DefaultColor;
         Color offColor  = DefaultClickedColor;
+
         Color textColor = DefaultTextColor;
         float textSize  = 2.0f;
+
         std::string fontPath     = DefaultFontPath;
         std::string onImagePath  = "";
         std::string offImagePath = "";
@@ -113,12 +121,38 @@ namespace UXX
     struct TextStyle
     {
         Color color = DefaultTextColor;
+
         float size  = 2.0f;
         std::string fontPath = DefaultFontPath;
     };
     struct ImageStyle
     {
         Color color = Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+        std::string imagePath = "";
+    };
+    // Shared by MultiInputField and NumberInputField
+    struct InputFieldStyle
+    {
+        Color backGroundColor = DefaultColor;
+
+        Color textColor = DefaultTextColor;
+        float textSize  = 2.0f;
+
+        std::string fontPath = DefaultFontPath;
+        std::string imagePath = "";
+    };
+    struct CodeInputFieldStyle
+    {
+        Color backGroundColor = DefaultColor;
+        Color roundBracketColor;
+        Color squareBracketColor;
+        Color curlyBracketColor;
+        Color angleBracketColor;
+
+        Color textColor = DefaultTextColor;
+        float textSize  = 2.0f;
+        std::string fontPath = DefaultFontPath;
         std::string imagePath = "";
     };
 
@@ -153,10 +187,13 @@ namespace UXX
     void GetScrollDelta(double& outX, double& outY);
     void SetKeyState(bool leftArrowPressed, bool rightArrowPressed, bool upArrowPressed, bool downArrowPressed);
     bool MouseHoveredOverWidget();
+    void SetTextInputState(const std::string& typedCharacters, int backspacePressCount, int enterPressCount);
+    void SetEditKeyState(int leftArrowPressCount, int rightArrowPressCount, int upArrowPressCount,
+        int downArrowPressCount, int homePressCount, int endPressCount, int deletePressCount);
 
     //                               /TT\  /
-    //                           O*=[_||_]<--
-    // *-------_-_---____----- ..oO  U  U  \
+    //                           *O=[_||_]<--
+    // *-------_-_---____-----_.'o*  U  U  \
 
     void BeginPanel(Rect PanelRect, Color PanelColor, std::string PanelImagePath);
     void EndPanel();
@@ -175,7 +212,9 @@ namespace UXX
     void Image(Rect imageRect, const ImageStyle& imageStyle);
     void Text(Rect textRect, const TextStyle& textStyle, std::string textItself);
     // void Separator(Rect SeparatorRect, Color SeparatorColor);
-    void InputField(Rect InputFeildRect, Color InputFeildColor);
+    bool MultiInputField(Rect inputFieldRect, std::string& textValue, const InputFieldStyle& inputFieldStyle);
+    bool NumberInputField(Rect inputFieldRect, float& numberValue, const InputFieldStyle& inputFieldStyle);
+    bool CodeInputField(Rect inputFieldRect, std::string& textValue, const CodeInputFieldStyle& codeInputFieldStyle);
 
     void BlowUp();
 };

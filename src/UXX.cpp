@@ -246,6 +246,260 @@ namespace UXX
             scissorStack.pop_back();
             scissorEnabledStack.pop_back();
         }
+        // Text typed this frame, delivered by the backend
+        std::string typedCharactersThisFrame;
+        // Caret position inside each input field, keyed by the widget's value address
+        std::unordered_map<const void*, size_t> caretIndexMap;
+
+        // Editing key presses counted this frame, delivered by the backend
+        int backspacePressCountThisFrame = 0;
+        int enterPressCountThisFrame = 0;
+        int leftArrowPressCountThisFrame = 0;
+        int rightArrowPressCountThisFrame = 0;
+        int upArrowPressCountThisFrame = 0;
+        int downArrowPressCountThisFrame = 0;
+        int homePressCountThisFrame = 0;
+        int endPressCountThisFrame = 0;
+        int deletePressCountThisFrame = 0;
+
+        // Which input field currently receives typing (nullptr means none)
+        const void* focusedInputFieldIdentifier = nullptr;
+
+        // Number fields edit a text buffer while focused, keyed by the widget's value address
+        std::unordered_map<const void*, std::string> numberFieldEditBufferMap;
+
+        // Click inside to focus (caret goes to the end), click outside to unfocus
+        bool UpdateInputFieldFocus(const void* widgetIdentifier, bool widgetIsHoveredThisFrame)
+        {
+            if (leftMouseButtonPressed)
+            {
+                if (widgetIsHoveredThisFrame)
+                {
+                    // npos gets clamped to the text length later, which means "the end"
+                    if (focusedInputFieldIdentifier != widgetIdentifier)
+                        caretIndexMap[widgetIdentifier] = std::string::npos;
+
+                    focusedInputFieldIdentifier = widgetIdentifier;
+                }
+                else if (focusedInputFieldIdentifier == widgetIdentifier)
+                {
+                    focusedInputFieldIdentifier = nullptr;
+                }
+            }
+            return focusedInputFieldIdentifier == widgetIdentifier;
+        }
+        // Index where the line holding the caret begins
+        size_t FindLineStartIndex(const std::string& textToSearch, size_t caretIndex)
+        {
+            if (caretIndex == 0) return 0;
+
+            size_t previousNewlineIndex = textToSearch.rfind('\n', caretIndex - 1);
+            return previousNewlineIndex == std::string::npos ? 0 : previousNewlineIndex + 1;
+        }
+        // Index where the line holding the caret ends (its newline, or the end of the text)
+        size_t FindLineEndIndex(const std::string& textToSearch, size_t caretIndex)
+        {
+            size_t nextNewlineIndex = textToSearch.find('\n', caretIndex);
+            return nextNewlineIndex == std::string::npos ? textToSearch.size() : nextNewlineIndex;
+        }
+        // Moves the caret up one line, keeping the same column when possible
+        void MoveCaretUpOneLine(const std::string& textToSearch, size_t& caretIndex)
+        {
+            size_t currentLineStartIndex = FindLineStartIndex(textToSearch, caretIndex);
+            if (currentLineStartIndex == 0) return;
+
+            size_t columnIndex = caretIndex - currentLineStartIndex;
+            size_t previousLineStartIndex = FindLineStartIndex(textToSearch, currentLineStartIndex - 1);
+            size_t previousLineLength = (currentLineStartIndex - 1) - previousLineStartIndex;
+
+            caretIndex = previousLineStartIndex + std::min(columnIndex, previousLineLength);
+        }
+        // Moves the caret down one line, keeping the same column when possible
+        void MoveCaretDownOneLine(const std::string& textToSearch, size_t& caretIndex)
+        {
+            size_t currentLineEndIndex = FindLineEndIndex(textToSearch, caretIndex);
+            if (currentLineEndIndex >= textToSearch.size()) return;
+
+            size_t columnIndex = caretIndex - FindLineStartIndex(textToSearch, caretIndex);
+            size_t nextLineStartIndex = currentLineEndIndex + 1;
+            size_t nextLineLength = FindLineEndIndex(textToSearch, nextLineStartIndex) - nextLineStartIndex;
+
+            caretIndex = nextLineStartIndex + std::min(columnIndex, nextLineLength);
+        }
+        // Applies this frame's caret movement and typing, returns true if the text changed
+        bool ApplyTypingToText(std::string& textToEdit, size_t& caretIndex, bool allowNewlines, const std::string& allowedCharacters)
+        {
+            bool textChanged = false;
+            caretIndex = std::min(caretIndex, textToEdit.size());
+
+            // Left and right arrows move one character at a time
+            for (int pressIndex = 0; pressIndex < leftArrowPressCountThisFrame; pressIndex++)
+                if (caretIndex > 0) caretIndex--;
+            for (int pressIndex = 0; pressIndex < rightArrowPressCountThisFrame; pressIndex++)
+                if (caretIndex < textToEdit.size()) caretIndex++;
+
+            // Up and down arrows only make sense in multi-line fields
+            if (allowNewlines)
+            {
+                for (int pressIndex = 0; pressIndex < upArrowPressCountThisFrame; pressIndex++)
+                    MoveCaretUpOneLine(textToEdit, caretIndex);
+                for (int pressIndex = 0; pressIndex < downArrowPressCountThisFrame; pressIndex++)
+                    MoveCaretDownOneLine(textToEdit, caretIndex);
+            }
+
+            // Home and End jump to the start or end of the current line
+            if (homePressCountThisFrame > 0) caretIndex = FindLineStartIndex(textToEdit, caretIndex);
+            if (endPressCountThisFrame > 0) caretIndex = FindLineEndIndex(textToEdit, caretIndex);
+
+            // Insert typed characters at the caret, skipping any that are not allowed
+            for (char typedCharacter : typedCharactersThisFrame)
+            {
+                if (!allowedCharacters.empty() && allowedCharacters.find(typedCharacter) == std::string::npos) continue;
+                textToEdit.insert(caretIndex, 1, typedCharacter);
+                caretIndex++;
+                textChanged = true;
+            }
+
+            // Backspace removes the character before the caret
+            for (int pressIndex = 0; pressIndex < backspacePressCountThisFrame; pressIndex++)
+            {
+                if (caretIndex == 0) break;
+                textToEdit.erase(caretIndex - 1, 1);
+                caretIndex--;
+                textChanged = true;
+            }
+
+            // Delete removes the character after the caret
+            for (int pressIndex = 0; pressIndex < deletePressCountThisFrame; pressIndex++)
+            {
+                if (caretIndex >= textToEdit.size()) break;
+                textToEdit.erase(caretIndex, 1);
+                textChanged = true;
+            }
+
+            // Enter adds a new line at the caret in multi-line fields, otherwise it ends editing
+            for (int pressIndex = 0; pressIndex < enterPressCountThisFrame; pressIndex++)
+            {
+                if (allowNewlines)
+                {
+                    textToEdit.insert(caretIndex, 1, '\n');
+                    caretIndex++;
+                    textChanged = true;
+                }
+                else focusedInputFieldIdentifier = nullptr;
+            }
+
+            return textChanged;
+        }
+        // Picks the bracket color for a character, or the normal text color
+        Color PickCodeCharacterColor(char character, const CodeInputFieldStyle& codeStyle)
+        {
+            if (character == '(' || character == ')') return codeStyle.roundBracketColor;
+            if (character == '[' || character == ']') return codeStyle.squareBracketColor;
+            if (character == '{' || character == '}') return codeStyle.curlyBracketColor;
+            if (character == '<' || character == '>') return codeStyle.angleBracketColor;
+            return codeStyle.textColor;
+        }
+        // Draws the text line by line plus a blinking caret, colors brackets if codeStyle is given
+        void DrawInputFieldText(Rect fieldRect, const std::string& textToDraw, size_t caretIndex, bool fieldIsFocused,
+            Color textColor, float textSize, const std::string& fontPath,
+            const CodeInputFieldStyle* codeStyle)
+        {
+            Font* font = GetOrLoadFont(fontPath, (unsigned int)textSize);
+            if (!font) return;
+
+            PushScissor(fieldRect);
+
+            const float paddingInsideField = 8.0f;
+            float lineHeight = font->measureTextHeight("A", textSize) * 1.5f;
+            caretIndex = std::min(caretIndex, textToDraw.size());
+
+            size_t lineStartIndex = 0;
+            int lineNumber = 0;
+            int caretLineNumber = 0;
+            std::string textBeforeCaretOnItsLine;
+
+            // Walk through the text one line at a time
+            while (true)
+            {
+                size_t lineEndIndex = textToDraw.find('\n', lineStartIndex);
+                std::string lineText = textToDraw.substr(lineStartIndex,
+                    lineEndIndex == std::string::npos ? std::string::npos : lineEndIndex - lineStartIndex);
+
+                float baselineTopDownY = fieldRect.yPos + paddingInsideField + lineHeight * (lineNumber + 1);
+                float baselineBottomUpY = SCREEN_HEIGHT - baselineTopDownY;
+                float lineStartX = fieldRect.xPos + paddingInsideField;
+
+                if (codeStyle)
+                {
+                    // Draw runs of normal text in one call, and each bracket on its own for its color
+                    const std::string bracketCharacters = "()[]{}<>";
+                    float currentRunStartX = lineStartX;
+                    size_t runStartIndex = 0;
+
+                    while (runStartIndex < lineText.size())
+                    {
+                        bool runIsBracket = bracketCharacters.find(lineText[runStartIndex]) != std::string::npos;
+                        size_t runEndIndex = runStartIndex + 1;
+
+                        // Normal text keeps growing until the next bracket, a bracket is always one character
+                        if (!runIsBracket)
+                        {
+                            while (runEndIndex < lineText.size() &&
+                                   bracketCharacters.find(lineText[runEndIndex]) == std::string::npos)
+                                runEndIndex++;
+                        }
+
+                        std::string runText = lineText.substr(runStartIndex, runEndIndex - runStartIndex);
+                        DrawTextRaw(currentRunStartX, baselineBottomUpY,
+                                    PickCodeCharacterColor(lineText[runStartIndex], *codeStyle),
+                                    textSize, runText, font, 0.0f);
+
+                        // Move the start of the next run to the right by the width of this run
+                        currentRunStartX += font->measureTextWidth(runText, textSize);
+                        runStartIndex = runEndIndex;
+                    }
+                }
+                else
+                    DrawTextRaw(lineStartX, baselineBottomUpY, textColor, textSize, lineText, font, 0.0f);
+
+                // Remember which line holds the caret and the text to the left of it
+                if (caretIndex >= lineStartIndex && caretIndex <= lineStartIndex + lineText.size())
+                {
+                    caretLineNumber = lineNumber;
+                    textBeforeCaretOnItsLine = lineText.substr(0, caretIndex - lineStartIndex);
+                }
+
+                if (lineEndIndex == std::string::npos) break;
+                lineStartIndex = lineEndIndex + 1;
+                lineNumber++;
+            }
+
+            // Blink the caret at its real position while focused
+            bool caretIsVisible = fieldIsFocused && std::fmod(glfwGetTime(), 1.0) < 0.5;
+            if (caretIsVisible)
+            {
+                float caretX = fieldRect.xPos + paddingInsideField + font->measureTextWidth(textBeforeCaretOnItsLine, textSize);
+                float caretTopY = fieldRect.yPos + paddingInsideField + lineHeight * caretLineNumber;
+                DrawQuad(Rect(caretX, caretTopY, 2.0f, lineHeight), textColor, nullptr);
+            }
+
+            PopScissor();
+        }
+        // Draws background, handles hover and focus, shared by all three fields
+        bool BeginInputField(const void* widgetIdentifier, Rect fieldRect, Color backgroundColor,
+                             const std::string& imagePath)
+        {
+            bool fieldIsHovered = WidgetIsHovered(widgetIdentifier, fieldRect);
+            if (fieldIsHovered) mouseHoveredOverWidgetThisFrame = true;
+
+            bool fieldIsFocused = UpdateInputFieldFocus(widgetIdentifier, fieldIsHovered);
+
+            GLTexture* backgroundTexture = imagePath.empty() ? nullptr : GetOrLoadTexture(imagePath);
+            DrawQuad(fieldRect, backgroundColor, backgroundTexture);
+
+            return fieldIsFocused;
+        }
     }
 
     // |=====================================================
@@ -319,6 +573,24 @@ namespace UXX
     {
         return mouseHoveredOverWidgetThisFrame;
     }
+    void SetTextInputState(const std::string& typedCharacters, int backspacePressCount, int enterPressCount)
+    {
+        typedCharactersThisFrame = typedCharacters;
+        backspacePressCountThisFrame = backspacePressCount;
+        enterPressCountThisFrame = enterPressCount;
+    }
+    // Receives how many times each editing key was pressed this frame
+    void SetEditKeyState(int leftArrowPressCount, int rightArrowPressCount, int upArrowPressCount,
+                         int downArrowPressCount, int homePressCount, int endPressCount, int deletePressCount)
+    {
+        leftArrowPressCountThisFrame = leftArrowPressCount;
+        rightArrowPressCountThisFrame = rightArrowPressCount;
+        upArrowPressCountThisFrame = upArrowPressCount;
+        downArrowPressCountThisFrame = downArrowPressCount;
+        homePressCountThisFrame = homePressCount;
+        endPressCountThisFrame = endPressCount;
+        deletePressCountThisFrame = deletePressCount;
+    }
 
     // |=====================================================
     // |---[Set window backend/Get graphics info]------------
@@ -370,7 +642,7 @@ namespace UXX
 
        	// Set the scale uniform once after shader is ready
         shader->Use();
-        GLuint scale = glGetUniformLocation(shader->ID, "scale");
+        GLuint scale   = glGetUniformLocation(shader->ID, "scale");
         glUniform1f(scale, 1.0f);
         uColorLoc      = glGetUniformLocation(shader->ID, "uColor");
         uSizeLoc       = glGetUniformLocation(shader->ID, "uSize");
@@ -386,7 +658,7 @@ namespace UXX
     void InitTextRendering()
     {
         // Separate shader and VAO/VBO pair dedicated to glyph quads
-        textShader = new Shader("../shader_files/VertexText.glsl", "../shader_files/FragmentText.glsl");
+        textShader   = new Shader("../shader_files/VertexText.glsl", "../shader_files/FragmentText.glsl");
         textColorLoc = glGetUniformLocation(textShader->ID, "textColor");
         textModelLoc = glGetUniformLocation(textShader->ID, "model");
 
@@ -764,6 +1036,78 @@ namespace UXX
         float angleRadians = glm::radians(TextRect.rotation);
 
         DrawTextRaw(TextRect.xPos, bottomUpY, textStyle.color, textStyle.size, TextItself, font, angleRadians);
+    }
+    bool MultiInputField(Rect inputFieldRect, std::string& textValue, const InputFieldStyle& inputFieldStyle)
+    {
+        if (!panelOpen) return false;
+
+        bool fieldIsFocused = BeginInputField(&textValue, inputFieldRect, inputFieldStyle.backGroundColor, inputFieldStyle.imagePath);
+        size_t& caretIndex = caretIndexMap[&textValue];
+
+        bool textChanged = false;
+        if (fieldIsFocused) textChanged = ApplyTypingToText(textValue, caretIndex, true, "");
+
+        DrawInputFieldText(inputFieldRect, textValue, caretIndex, fieldIsFocused, inputFieldStyle.textColor,
+            inputFieldStyle.textSize, inputFieldStyle.fontPath, nullptr);
+        return textChanged;
+    }
+    bool NumberInputField(Rect inputFieldRect, float& numberValue, const InputFieldStyle& inputFieldStyle)
+    {
+        if (!panelOpen) return false;
+
+        bool fieldWasFocusedBefore = (focusedInputFieldIdentifier == &numberValue);
+        bool fieldIsFocused = BeginInputField(&numberValue, inputFieldRect, inputFieldStyle.backGroundColor, inputFieldStyle.imagePath);
+        size_t& caretIndex = caretIndexMap[&numberValue];
+
+        // Turn the current number into editable text when the field first gains focus
+        std::string& editBuffer = numberFieldEditBufferMap[&numberValue];
+        if (fieldIsFocused && !fieldWasFocusedBefore)
+        {
+            char formattedNumber[32];
+            std::snprintf(formattedNumber, sizeof(formattedNumber), "%g", numberValue);
+            editBuffer = formattedNumber;
+        }
+
+        // While focused, edit the buffer and push every valid parse into the real value
+        bool numberChanged = false;
+        if (fieldIsFocused && ApplyTypingToText(editBuffer, caretIndex, false, "0123456789.-"))
+        {
+            char* parseEndPointer = nullptr;
+            float parsedNumber = std::strtof(editBuffer.c_str(), &parseEndPointer);
+            bool bufferIsValidNumber = !editBuffer.empty() && parseEndPointer != editBuffer.c_str();
+            if (bufferIsValidNumber && parsedNumber != numberValue)
+            {
+                numberValue = parsedNumber;
+                numberChanged = true;
+            }
+        }
+
+        // Show the raw buffer while editing, otherwise the formatted value
+        std::string textToShow = editBuffer;
+        if (!fieldIsFocused)
+        {
+            char formattedNumber[32];
+            std::snprintf(formattedNumber, sizeof(formattedNumber), "%g", numberValue);
+            textToShow = formattedNumber;
+        }
+
+        DrawInputFieldText(inputFieldRect, textToShow, caretIndex, fieldIsFocused, inputFieldStyle.textColor,
+            inputFieldStyle.textSize, inputFieldStyle.fontPath, nullptr);
+        return numberChanged;
+    }
+    bool CodeInputField(Rect inputFieldRect, std::string& textValue, const CodeInputFieldStyle& codeInputFieldStyle)
+    {
+        if (!panelOpen) return false;
+
+        bool fieldIsFocused = BeginInputField(&textValue, inputFieldRect, codeInputFieldStyle.backGroundColor, codeInputFieldStyle.imagePath);
+        size_t& caretIndex = caretIndexMap[&textValue];
+
+        bool textChanged = false;
+        if (fieldIsFocused) textChanged = ApplyTypingToText(textValue, caretIndex, true, "");
+
+        DrawInputFieldText(inputFieldRect, textValue, caretIndex, fieldIsFocused, codeInputFieldStyle.textColor,
+            codeInputFieldStyle.textSize, codeInputFieldStyle.fontPath, &codeInputFieldStyle);
+        return textChanged;
     }
 
     // |=====================================================
