@@ -97,6 +97,10 @@ int main()
         static float numberFieldValue = 5.0f;
         static std::string codeTextValue = "";
 
+        static float inventoryScrollOffset = 0.0f;
+        const float inventoryContentHeight = 1200.0f;
+        Rect inventoryScrollBoxRect(100, 500, 400, 300);
+
         // ===[Styles]===
         UXX::InputFieldStyle inputFieldStyle;
         UXX::CodeInputFieldStyle codeInputFieldStyle
@@ -106,11 +110,28 @@ int main()
             .curlyBracketColor  = Color(1.0f, 0.4f, 0.8f),
             .angleBracketColor  = Color(0.5f, 1.0f, 0.5f)
         };
+        UXX::ButtonStyle buttonStyle
+        {
+            .normalColor  = Color(1.0f, 1.0f, 1.0f, 1.0f),
+            .hoveredColor = Color(0.5f, 0.5f, 0.5f, 1.0f),
+            .clickedColor = Color(0.0f, 0.0f, 0.0f, 1.0f),
+        };
+        UXX::ScrollBoxStyle scrollBoxStyle;
 
         // ===[Widgets]===
+
         UXX::MultiInputField(Rect(50, 50, 400, 120), multiLineTextValue, inputFieldStyle);
         UXX::NumberInputField(Rect(50, 200, 200, 40), numberFieldValue, inputFieldStyle);
         UXX::CodeInputField(Rect(50, 260, 400, 150), codeTextValue, codeInputFieldStyle);
+
+        UXX::BeginScrollBox(inventoryScrollBoxRect, inventoryScrollOffset, inventoryContentHeight, scrollBoxStyle);
+        for (int itemIndex = 0; itemIndex < 20; itemIndex++)
+        {
+            // Subtracting the offset is what makes the content scroll
+            float itemTopY = inventoryScrollBoxRect.yPos + itemIndex * 60.0f - inventoryScrollOffset;
+            UXX::Button(Rect(inventoryScrollBoxRect.xPos + 10, itemTopY, 360, 50), buttonStyle, "Item " + std::to_string(itemIndex));
+        }
+        UXX::EndScrollBox();
 
         UXX::EndPanel();
     });

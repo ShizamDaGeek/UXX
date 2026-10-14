@@ -65,8 +65,8 @@ enum class WindowBackend
 
 namespace UXX
 {
-    inline float SCREEN_WIDTH = 1920.0f;
-    inline float SCREEN_HEIGHT = 1080.0f;
+    inline float SCREEN_WIDTH   = 1920.0f;
+    inline float SCREEN_HEIGHT  = 1080.0f;
     inline float SCREEN_SCALE_X = 1.0f;
     inline float SCREEN_SCALE_Y = 1.0f;
 
@@ -74,33 +74,33 @@ namespace UXX
     inline unsigned int textVAO, textVBO;
 
     // ===[Sensible defaults so callers don't have to specify every param]===
-    inline Color DefaultColor        { 0.20f, 0.20f, 0.20f, 1.0f };
-    inline Color DefaultHoverColor   { 0.30f, 0.30f, 0.30f, 1.0f };
-    inline Color DefaultClickedColor { 0.15f, 0.15f, 0.15f, 1.0f };
-    inline Color DefaultTextColor    { 1.0f, 1.0f, 1.0f, 1.0f };
-    inline std::string DefaultFontPath = "../UXXAssets/Fonts/sandypixels_5x5_font2.ttf";
+    inline Color DefaultColor           { 0.20f, 0.20f, 0.20f, 1.0f };
+    inline Color DefaultHoverColor      { 0.30f, 0.30f, 0.30f, 1.0f };
+    inline Color DefaultClickedColor    { 0.15f, 0.15f, 0.15f, 1.0f };
+    inline Color DefaultTextColor       { 1.0f, 1.0f, 1.0f, 1.0f };
+    inline std::string DefaultFontPath  = "../UXXAssets/Fonts/sandypixels_5x5_font2.ttf";
 
     // ===[Style types for each UI widget]===
     struct ButtonStyle
     {
-        Color normalColor  = DefaultColor;
-        Color hoveredColor = DefaultHoverColor;
-        Color clickedColor = DefaultClickedColor;
+        Color normalColor       = DefaultColor;
+        Color hoveredColor      = DefaultHoverColor;
+        Color clickedColor      = DefaultClickedColor;
 
-        Color textColor    = DefaultTextColor;
-        float textSize     = 2.0f;
+        Color textColor         = DefaultTextColor;
+        float textSize          = 2.0f;
 
-        std::string fontPath  = DefaultFontPath;
-        std::string imagePath = "";
+        std::string fontPath    = DefaultFontPath;
+        std::string imagePath   = "";
     };
     // Shared by IntSlider and FloatSlider
     struct SliderStyle
     {
-        Color trackColor  = DefaultColor;
-        Color handleColor = DefaultHoverColor;
+        Color trackColor            = DefaultColor;
+        Color handleColor           = DefaultHoverColor;
 
-        Color textColor   = DefaultTextColor;
-        float textSize    = 2.0f;
+        Color textColor             = DefaultTextColor;
+        float textSize              = 2.0f;
 
         std::string fontPath        = DefaultFontPath;
         std::string trackImagePath  = "";
@@ -108,15 +108,15 @@ namespace UXX
     };
     struct SwitchStyle
     {
-        Color onColor   = DefaultColor;
-        Color offColor  = DefaultClickedColor;
+        Color onColor               = DefaultColor;
+        Color offColor              = DefaultClickedColor;
 
-        Color textColor = DefaultTextColor;
-        float textSize  = 2.0f;
+        Color textColor             = DefaultTextColor;
+        float textSize              = 2.0f;
 
-        std::string fontPath     = DefaultFontPath;
-        std::string onImagePath  = "";
-        std::string offImagePath = "";
+        std::string fontPath        = DefaultFontPath;
+        std::string onImagePath     = "";
+        std::string offImagePath    = "";
     };
     struct TextStyle
     {
@@ -139,8 +139,8 @@ namespace UXX
         Color textColor = DefaultTextColor;
         float textSize  = 2.0f;
 
-        std::string fontPath = DefaultFontPath;
-        std::string imagePath = "";
+        std::string fontPath            = DefaultFontPath;
+        std::string backgroundImagePath = "";
     };
     struct CodeInputFieldStyle
     {
@@ -150,10 +150,20 @@ namespace UXX
         Color curlyBracketColor;
         Color angleBracketColor;
 
-        Color textColor = DefaultTextColor;
-        float textSize  = 2.0f;
-        std::string fontPath = DefaultFontPath;
-        std::string imagePath = "";
+        Color textColor                 = DefaultTextColor;
+        float textSize                  = 2.0f;
+        std::string fontPath            = DefaultFontPath;
+        std::string backgroundImagePath = "";
+    };
+    struct ScrollBoxStyle
+    {
+         Color backGroundColor  = DefaultColor;
+         Color scrollColor      = DefaultHoverColor;
+         Color barColor         = DefaultClickedColor;
+
+         std::string backgroundImagePath = "";
+         std::string scrollImagePath = "";
+         std::string barImagePath = "";
     };
 
     struct GraphicsInfo
@@ -195,26 +205,29 @@ namespace UXX
     //                           *O=[_||_]<--
     // *-------_-_---____-----_.'o*  U  U  \
 
-    void BeginPanel(Rect PanelRect, Color PanelColor, std::string PanelImagePath);
+    void BeginPanel(Rect panelRect, Color panelColor, std::string panelImagePath);
     void EndPanel();
 
     bool Button(Rect buttonRect, const ButtonStyle& buttonStyle, std::string buttonText = "");
 
     bool IntSlider(Rect sliderRect, int& value, int minIntValue, int maxIntValue, int intStep,
                    const SliderStyle& sliderStyle, std::string sliderText = "");
-
     bool FloatSlider(Rect sliderRect, float& value, float minFloatValue, float maxFloatValue, float floatStep,
                      const SliderStyle& sliderStyle, std::string sliderText = "");
-
     bool Switch(Rect switchRect, bool& value, const SwitchStyle& switchStyle,
                 std::string switchOnText = "", std::string switchOffText = "");
 
     void Image(Rect imageRect, const ImageStyle& imageStyle);
     void Text(Rect textRect, const TextStyle& textStyle, std::string textItself);
+
     // void Separator(Rect SeparatorRect, Color SeparatorColor);
+
     bool MultiInputField(Rect inputFieldRect, std::string& textValue, const InputFieldStyle& inputFieldStyle);
     bool NumberInputField(Rect inputFieldRect, float& numberValue, const InputFieldStyle& inputFieldStyle);
     bool CodeInputField(Rect inputFieldRect, std::string& textValue, const CodeInputFieldStyle& codeInputFieldStyle);
+
+    void BeginScrollBox(Rect scrollBoxRect, float& scrollOffset, float contentHeight, const ScrollBoxStyle& scrollBoxStyle);
+    void EndScrollBox();
 
     void BlowUp();
 };

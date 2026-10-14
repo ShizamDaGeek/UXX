@@ -21,7 +21,7 @@ constexpr int TOTAL_SUPPORTED_MOUSE_BUTTON_COUNT = GLFW_MOUSE_BUTTON_LAST + 1;
 
 struct MouseState
 {
-    double cursorPositionX = 0.0, cursorPositionY = 0.0;
+    double cursorPositionX   = 0.0, cursorPositionY   = 0.0;
     double scrollWheelDeltaX = 0.0, scrollWheelDeltaY = 0.0;
 
     // Indexed by GLFW_MOUSE_BUTTON_* (0 .. TOTAL_SUPPORTED_MOUSE_BUTTON_COUNT-1).
@@ -39,9 +39,9 @@ struct MouseState
 
     // Convenience accessors so callers can just ask about a button index
     // without reaching into the arrays directly.
-    bool IsButtonHeld(int glfwMouseButtonIndex) const { return buttonHeldThisFrame[glfwMouseButtonIndex]; }
-    bool WasButtonPressed(int glfwMouseButtonIndex) const { return buttonPressedThisFrame[glfwMouseButtonIndex]; }
-    bool WasButtonReleased(int glfwMouseButtonIndex) const { return buttonReleasedThisFrame[glfwMouseButtonIndex]; }
+    bool IsButtonHeld(int glfwMouseButtonIndex)         const { return buttonHeldThisFrame[glfwMouseButtonIndex]; }
+    bool WasButtonPressed(int glfwMouseButtonIndex)     const { return buttonPressedThisFrame[glfwMouseButtonIndex]; }
+    bool WasButtonReleased(int glfwMouseButtonIndex)    const { return buttonReleasedThisFrame[glfwMouseButtonIndex]; }
 };
 
 class UXXBackendGLFW
@@ -60,7 +60,7 @@ public:
     // Bypasses GLFW polling entirely so unit tests can drive widgets without a real window/device.
     void InjectMouseState(const MouseState& state) { mouseState = state; }
 
-    unsigned int SCREEN_WIDTH = 1920;
+    unsigned int SCREEN_WIDTH  = 1920;
     unsigned int SCREEN_HEIGHT = 1080;
 
 private:
@@ -68,15 +68,15 @@ private:
     MouseState mouseState;
 
     std::string typedCharactersSinceLastPoll;
-    int backspacePressCountSinceLastPoll = 0;
-    int enterPressCountSinceLastPoll = 0;
-    int leftArrowPressCountSinceLastPoll = 0;
-    int rightArrowPressCountSinceLastPoll = 0;
-    int upArrowPressCountSinceLastPoll = 0;
-    int downArrowPressCountSinceLastPoll = 0;
-    int homePressCountSinceLastPoll = 0;
-    int endPressCountSinceLastPoll = 0;
-    int deletePressCountSinceLastPoll = 0;
+    int backspacePressCountSinceLastPoll    = 0;
+    int enterPressCountSinceLastPoll        = 0;
+    int leftArrowPressCountSinceLastPoll    = 0;
+    int rightArrowPressCountSinceLastPoll   = 0;
+    int upArrowPressCountSinceLastPoll      = 0;
+    int downArrowPressCountSinceLastPoll    = 0;
+    int homePressCountSinceLastPoll         = 0;
+    int endPressCountSinceLastPoll          = 0;
+    int deletePressCountSinceLastPoll       = 0;
 
     static void CharacterCallback(GLFWwindow* window, unsigned int unicodeCodepoint);
     static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);

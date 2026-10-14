@@ -186,9 +186,11 @@ void UXXBackendGLFW::run(std::function<void()> drawUserInterfaceCallback)
             mouseState.buttonHeldThisFrame[GLFW_MOUSE_BUTTON_LEFT],
             mouseState.buttonPressedThisFrame[GLFW_MOUSE_BUTTON_LEFT],
             mouseState.buttonReleasedThisFrame[GLFW_MOUSE_BUTTON_LEFT],
+
             mouseState.buttonHeldThisFrame[GLFW_MOUSE_BUTTON_RIGHT],
             mouseState.buttonPressedThisFrame[GLFW_MOUSE_BUTTON_RIGHT],
             mouseState.buttonReleasedThisFrame[GLFW_MOUSE_BUTTON_RIGHT],
+
             mouseState.buttonHeldThisFrame[GLFW_MOUSE_BUTTON_MIDDLE],
             mouseState.buttonPressedThisFrame[GLFW_MOUSE_BUTTON_MIDDLE],
             mouseState.buttonReleasedThisFrame[GLFW_MOUSE_BUTTON_MIDDLE],
@@ -205,13 +207,15 @@ void UXXBackendGLFW::run(std::function<void()> drawUserInterfaceCallback)
                              upArrowPressCountSinceLastPoll, downArrowPressCountSinceLastPoll,
                              homePressCountSinceLastPoll, endPressCountSinceLastPoll,
                              deletePressCountSinceLastPoll);
-        leftArrowPressCountSinceLastPoll = 0;
-        rightArrowPressCountSinceLastPoll = 0;
-        upArrowPressCountSinceLastPoll = 0;
-        downArrowPressCountSinceLastPoll = 0;
-        homePressCountSinceLastPoll = 0;
-        endPressCountSinceLastPoll = 0;
-        deletePressCountSinceLastPoll = 0;
+
+        leftArrowPressCountSinceLastPoll    = 0;
+        rightArrowPressCountSinceLastPoll   = 0;
+        upArrowPressCountSinceLastPoll      = 0;
+        downArrowPressCountSinceLastPoll    = 0;
+
+        homePressCountSinceLastPoll         = 0;
+        endPressCountSinceLastPoll          = 0;
+        deletePressCountSinceLastPoll       = 0;
 
         // ===[Arrow key polling]===
         static bool previousLeft = false, previousRight = false, previousUp = false, previousDown = false;

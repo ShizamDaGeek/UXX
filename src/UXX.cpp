@@ -8,19 +8,21 @@ namespace UXX
     namespace
     {
         // ===[Shader stuff]===
-        VAO* vao = nullptr;
-        VBO* vbo = nullptr;
-        EBO* ebo = nullptr;
-        Shader* shader = nullptr;
+        VAO* vao        = nullptr;
+        VBO* vbo        = nullptr;
+        EBO* ebo        = nullptr;
+        Shader* shader  = nullptr;
 
-        GLint uColorLoc = -1,
-            uSizeLoc = -1,
-            uPositionLoc = -1,
-            uRotationLoc = -1,
-            uUseTextureLoc = -1,
-            uDarkenLoc = -1;
-        GLint textColorLoc = -1;
-        GLint textModelLoc = -1;
+        // ===[Shader uniform locations]===
+        GLint colorUniformLocation      = -1;
+        GLint sizeUniformLocation       = -1;
+        GLint positionUniformLocation   = -1;
+        GLint rotationUniformLocation   = -1;
+        GLint useTextureUniformLocation = -1;
+        GLint darkenUniformLocation     = -1;
+
+        GLint textColorUniformLocation  = -1;
+        GLint textModelUniformLocation  = -1;
 
         // ===[Caches]===
         std::unordered_map<std::string, GLTexture*> textureCache;
@@ -33,33 +35,39 @@ namespace UXX
         // before its own definition appears in this file
         bool WidgetClaimsActive(const void* widgetIdentifier, bool widgetIsHoveredThisFrame);
 
-        // ===[Tile]===
-        bool panelOpen = false;
+        // ===[Wiget variables]===
+        bool panelOpen              = false;
+        bool scrollBoxOpen          = false;
+
+        float scrollBarWidth              = 16.0f;  // Width of the scrollbar track
+        float scrollBarMinimumHandleSize  = 20.0f;  // Handle never gets smaller than this
+        float mouseWheelScrollPixels      = 40.0f;  // Pixels scrolled per wheel notch
+
         // ===[Keyboard]===
-        bool leftArrowKeyPressed = false;
-        bool rightArrowKeyPressed = false;
-        bool upArrowKeyPressed = false;
-        bool downArrowKeyPressed = false;
+        bool leftArrowKeyPressed    = false;
+        bool rightArrowKeyPressed   = false;
+        bool upArrowKeyPressed      = false;
+        bool downArrowKeyPressed    = false;
 
         // ===[Shared hover/active widget ownership, used by every widget type]===
         const void* currentFrameHoveredWidgetIdentifier = nullptr;
         const void* currentFrameActiveWidgetIdentifier = nullptr;
 
         // ===[Mouse]===
-        bool leftMouseButtonDown = false;
-        bool leftMouseButtonPressed = false;
-        bool leftMouseButtonReleased = false;
-        bool rightMouseButtonDown = false;
-        bool rightMouseButtonPressed = false;
-        bool rightMouseButtonReleased = false;
-        bool middleMouseButtonDown = false;
-        bool middleMouseButtonPressed = false;
-        bool middleMouseButtonReleased = false;
+        bool leftMouseButtonDown                = false;
+        bool leftMouseButtonPressed             = false;
+        bool leftMouseButtonReleased            = false;
 
-        bool mouseHoveredOverWidgetThisFrame = false;
+        bool rightMouseButtonDown               = false;
+        bool rightMouseButtonPressed            = false;
+        bool rightMouseButtonReleased           = false;
+
+        bool middleMouseButtonDown              = false;
+        bool middleMouseButtonPressed           = false;
+        bool middleMouseButtonReleased          = false;
+        bool mouseHoveredOverWidgetThisFrame    = false;
 
         double mousePositionX = -1.0, mousePositionY = -1.0;
-        // ===[Raw per-frame delta, for future scrollable widgets]===
         double scrollDeltaXState = 0.0;
         double scrollDeltaYState = 0.0;
 
@@ -67,7 +75,7 @@ namespace UXX
         // Shared unit-quad geometry reused by every UI element
         float rectangleVertices[] =
         {
-        //  positions               Color               TexCoords
+            //  Positions           Color               Texture Coords
             -0.5f, -0.5f, 0.0f,     1.0f, 1.0f, 1.0f,   0.0f, 0.0f, // Lower Left Corner
              0.5f, -0.5f, 0.0f,     1.0f, 1.0f, 1.0f,   1.0f, 0.0f, // Lower Right Corner
              0.5f,  0.5f, 0.0f,     1.0f, 1.0f, 1.0f,   1.0f, 1.0f, // Upper Right Corner
@@ -83,7 +91,9 @@ namespace UXX
         // |=====================================================
         // |---[Private Helper Functions]------------------------
         // |=====================================================
-        // ===[tits]===
+        // |=====================================================
+        // |---[Getting or Loading]------------------------------
+        // |=====================================================
         GLTexture* GetOrLoadTexture(const std::string& path)
         {
             // Reuse an already-loaded texture if one exists for this path
@@ -107,7 +117,6 @@ namespace UXX
             textureCache[path] = loadedTexture;
             return loadedTexture;
         }
-        // ===[foot]===
         Font* GetOrLoadFont(const std::string& path, unsigned int pixelHeight)
         {
             // Key by path+size so the same font at different sizes stays distinct
@@ -135,27 +144,31 @@ namespace UXX
             return Color(color.red * darkenFactor, color.green * darkenFactor, color.blue * darkenFactor, color.alpha);
         }
         // Shared hover/active darken factors so every widget dims consistently
-        constexpr float kHoverDarkenFactor  = 0.85f;
-        constexpr float kActiveDarkenFactor = 0.70f;
+        constexpr float hoverDarkenFactor  = 0.85f;
+        constexpr float activeDarkenFactor = 0.70f;
+
+        // |=====================================================
+        // |---[Drawing]-----------------------------------------
+        // |=====================================================
         // ===[Be there or be SQUARE]===
         void DrawQuad(Rect rect, Color color, GLTexture* texture, float darkenAmount = 1.0f)
         {
             shader->Use();
 
             // Color of Quad
-            glUniform4f(uColorLoc, color.red, color.green, color.blue, color.alpha);
+            glUniform4f(colorUniformLocation, color.red, color.green, color.blue, color.alpha);
             // Size of Quad
-            glUniform2f(uSizeLoc, (rect.width / SCREEN_WIDTH) * 2.0f, (rect.height / SCREEN_HEIGHT) * 2.0f);
+            glUniform2f(sizeUniformLocation, (rect.width / SCREEN_WIDTH) * 2.0f, (rect.height / SCREEN_HEIGHT) * 2.0f);
             // Position of Quad
-            glUniform2f(uPositionLoc,
+            glUniform2f(positionUniformLocation,
                 ((rect.xPos + rect.width * 0.5f) / SCREEN_WIDTH) * 2.0f - 1.0f,
                 1.0f - ((rect.yPos + rect.height * 0.5f) / SCREEN_HEIGHT) * 2.0f);
             // Rotation of Quad
-            glUniform1f(uRotationLoc, rect.rotation);
+            glUniform1f(rotationUniformLocation, rect.rotation);
             // Tell the shader whether to sample tex0 or just use the flat color
-            glUniform1i(uUseTextureLoc, texture ? 1 : 0);
+            glUniform1i(textColorUniformLocation, texture ? 1 : 0);
             // Darken of Quad when hoverd/clicked
-            glUniform1f(uDarkenLoc, darkenAmount);
+            glUniform1f(darkenUniformLocation, darkenAmount);
 
             if (texture) texture->Bind();
             vao->Bind();
@@ -173,14 +186,18 @@ namespace UXX
             // Set up an orthographic projection matching the current screen size
             glm::mat4 projection = glm::ortho(0.0f, SCREEN_WIDTH, 0.0f, SCREEN_HEIGHT);
             textShader->setMat4("projection", projection);
-            glUniform4f(textColorLoc, color.red, color.green, color.blue, color.alpha);
+            glUniform4f(textColorUniformLocation, color.red, color.green, color.blue, color.alpha);
 
             glEnable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-            font->rendererText(*textShader, text, textPositionX, bottomUpY, size, textVAO, textVBO, textModelLoc, angleRadians);
+            font->rendererText(*textShader, text, textPositionX, bottomUpY, size, textVAO, textVBO, textModelUniformLocation, angleRadians);
         }
-        // ===[Shared drag math for sliders]===
+
+        // |=====================================================
+        // |---[Widget Functionality]----------------------------
+        // |=====================================================
+        // ===[Shared drag math for both Int and Float sliders]===
         float SliderNormalizedDragValue(const void* widgetIdentifier, Rect sliderRect, float handleWidth, bool widgetIsHoveredThisFrame)
         {
             bool widgetIsActive = WidgetClaimsActive(widgetIdentifier, widgetIsHoveredThisFrame);
@@ -203,7 +220,6 @@ namespace UXX
 
             return currentFrameHoveredWidgetIdentifier == widgetIdentifier;
         }
-
         // ===[Claims the active slot on press, holds it until release, shared by every widget type]===
         bool WidgetClaimsActive(const void* widgetIdentifier, bool widgetIsHoveredThisFrame)
         {
@@ -213,26 +229,45 @@ namespace UXX
             return currentFrameActiveWidgetIdentifier == widgetIdentifier;
         }
 
+        // |=====================================================
+        // |---[Cut out anything that are outside somthing]------
+        // |=====================================================
         // Stack of scissor boxes so nested scissors restore properly
         std::vector<std::array<GLint,4>> scissorStack;
         std::vector<GLboolean> scissorEnabledStack;
-        // ===[Push a scissor rect, remembering whatever was active before]===
+        // ===[Push a scissor rect, intersected with whatever scissor is already active so nested clips only ever shrink]===
         void PushScissor(Rect rect)
         {
-            GLboolean wasEnabled = glIsEnabled(GL_SCISSOR_TEST);
-            GLint prev[4];
-            glGetIntegerv(GL_SCISSOR_BOX, prev);
+            GLboolean scissorWasEnabled = glIsEnabled(GL_SCISSOR_TEST);
+            GLint previousScissorBox[4];
+            glGetIntegerv(GL_SCISSOR_BOX, previousScissorBox);
 
-            scissorEnabledStack.push_back(wasEnabled);
-            scissorStack.push_back({ prev[0], prev[1], prev[2], prev[3] });
+            scissorEnabledStack.push_back(scissorWasEnabled);
+            scissorStack.push_back({ previousScissorBox[0], previousScissorBox[1], previousScissorBox[2], previousScissorBox[3] });
 
-            GLint scissorX = (GLint)(rect.xPos * SCREEN_SCALE_X);
-            GLint scissorY = (GLint)((SCREEN_HEIGHT - (rect.yPos + rect.height)) * SCREEN_SCALE_Y);
-            GLsizei scissorWidth = (GLsizei)(rect.width  * SCREEN_SCALE_X);
-            GLsizei scissorHeight = (GLsizei)(rect.height * SCREEN_SCALE_Y);
+            GLint newScissorLeft   = (GLint)(rect.xPos * SCREEN_SCALE_X);
+            GLint newScissorBottom = (GLint)((SCREEN_HEIGHT - (rect.yPos + rect.height)) * SCREEN_SCALE_Y);
+            GLint newScissorRight  = newScissorLeft + (GLint)(rect.width  * SCREEN_SCALE_X);
+            GLint newScissorTop    = newScissorBottom + (GLint)(rect.height * SCREEN_SCALE_Y);
+
+            // Only intersect when a scissor was really active, otherwise the box is just the default full window
+            if (scissorWasEnabled)
+            {
+                GLint previousScissorRight = previousScissorBox[0] + previousScissorBox[2];
+                GLint previousScissorTop   = previousScissorBox[1] + previousScissorBox[3];
+
+                newScissorLeft   = std::max(newScissorLeft,   previousScissorBox[0]);
+                newScissorBottom = std::max(newScissorBottom, previousScissorBox[1]);
+                newScissorRight  = std::min(newScissorRight,  previousScissorRight);
+                newScissorTop    = std::min(newScissorTop,    previousScissorTop);
+            }
+
+            // An empty intersection becomes a zero-size scissor, which clips everything
+            GLsizei intersectedScissorWidth  = (GLsizei)std::max(0, newScissorRight - newScissorLeft);
+            GLsizei intersectedScissorHeight = (GLsizei)std::max(0, newScissorTop - newScissorBottom);
 
             glEnable(GL_SCISSOR_TEST);
-            glScissor(scissorX, scissorY, scissorWidth, scissorHeight);
+            glScissor(newScissorLeft, newScissorBottom, intersectedScissorWidth, intersectedScissorHeight);
         }
         // ===[Restore whatever scissor state was active before the matching PushScissor]===
         void PopScissor()
@@ -247,45 +282,47 @@ namespace UXX
             scissorEnabledStack.pop_back();
         }
 
-        // ===[Input field state, filled each frame by the backend]===
+        // |=====================================================
+        // |---[Input Field Functionality]-----------------------
+        // |=====================================================
+
+        // ===[Per-frame input, filled by the backend]===
         // Characters typed this frame, in the order they were typed
         std::string typedCharactersThisFrame;
-        // Caret position inside each input field, keyed by the widget's value address
-        std::unordered_map<const void*, size_t> caretIndexMap;
 
-        // Editing key presses counted this frame
-        int backspacePressCountThisFrame = 0;
-        int enterPressCountThisFrame = 0;
-        int leftArrowPressCountThisFrame = 0;
-        int rightArrowPressCountThisFrame = 0;
-        int upArrowPressCountThisFrame = 0;
-        int downArrowPressCountThisFrame = 0;
-        int homePressCountThisFrame = 0;
-        int endPressCountThisFrame = 0;
-        int deletePressCountThisFrame = 0;
+        // How many times each editing key was pressed this frame
+        int backspacePressCountThisFrame    = 0;
+        int enterPressCountThisFrame        = 0;
+        int leftArrowPressCountThisFrame    = 0;
+        int rightArrowPressCountThisFrame   = 0;
+        int upArrowPressCountThisFrame      = 0;
+        int downArrowPressCountThisFrame    = 0;
+        int homePressCountThisFrame         = 0;
+        int endPressCountThisFrame          = 0;
+        int deletePressCountThisFrame       = 0;
 
-        // Which input field currently receives typing (nullptr means none)
+        // ===[Per-field state, remembered between frames]===
+        // Which input field currently receives typing
         const void* focusedInputFieldIdentifier = nullptr;
-
-        // Number fields edit a text copy while focused, keyed by the widget's value address
+        // Caret position inside each field, keyed by the address of the field's value
+        std::unordered_map<const void*, size_t> caretIndexMap;
+        // Number fields edit a text copy while focused ("3." or "-" is not a valid float yet)
         std::unordered_map<const void*, std::string> numberFieldEditBufferMap;
 
-        // ===[Character rules and constants]===
+        // ===[Constants]===
         // An empty allowed list means every character is accepted
         const std::string anyCharacterAllowed = "";
-        // Number fields only accept digits, a decimal point and a minus sign
-        const std::string numberFieldAllowedCharacters = "0123456789.-";
-        // Characters the code field colors individually
+        const std::string numberFieldAllowedCharacters = "0123456789.-/";
         const std::string bracketCharacters = "()[]{}<>";
-        // Space between the field edge and its text, in pixels
-        constexpr float inputFieldPadding = 8.0f;
-        // Line height as a multiple of the font's glyph height
-        constexpr float inputFieldLineHeightMultiplier = 1.5f;
-        // Width of the blinking caret, in pixels
-        constexpr float caretWidth = 2.0f;
-        // How long the caret stays on, then off, in seconds
-        constexpr double caretBlinkHalfPeriodSeconds = 0.5;
 
+        constexpr float inputFieldPadding = 8.0f;                   // Space between field edge and text, in pixels
+        constexpr float inputFieldLineHeightMultiplier = 1.5f;      // Line height as a multiple of glyph height
+        constexpr float caretWidth = 2.0f;                          // In pixels
+        constexpr double caretBlinkHalfPeriodSeconds = 0.5;         // Time the caret stays on, then off
+
+        // |=====================================================
+        // |---[Small text helpers]------------------------------
+        // |=====================================================
         // ===[Turns a float into clean text, so 3.5000 shows as 3.5 and 2.0000 as 2]===
         std::string FormatNumberAsText(float numberToFormat)
         {
@@ -296,38 +333,48 @@ namespace UXX
             // Only trim zeros when there is a decimal point, otherwise "100" would lose its zeros
             if (formattedNumberText.find('.') != std::string::npos)
             {
-                // Remove trailing zeros, then a trailing decimal point if one is left over
                 formattedNumberText.erase(formattedNumberText.find_last_not_of('0') + 1);
                 if (formattedNumberText.back() == '.') formattedNumberText.pop_back();
             }
             return formattedNumberText;
         }
+        bool IsBracketCharacter(char character)
+        {
+            return bracketCharacters.find(character) != std::string::npos;
+        }
 
-        // ===[Click inside to focus (caret goes to the end), click outside to unfocus]===
+        // |=====================================================
+        // |---[Focus]-------------------------------------------
+        // |=====================================================
+        // ===[Click inside to focus, click outside to unfocus. Returns true if this field is focused]===
         bool UpdateInputFieldFocus(const void* widgetIdentifier, bool widgetIsHoveredThisFrame)
         {
             // Focus only changes on the frame the left mouse button goes down
-            if (leftMouseButtonPressed)
-            {
-                if (widgetIsHoveredThisFrame)
-                {
-                    // npos is clamped to the text length later, which means "the end"
-                    if (focusedInputFieldIdentifier != widgetIdentifier)
-                        caretIndexMap[widgetIdentifier] = std::string::npos;
+            if (!leftMouseButtonPressed) return focusedInputFieldIdentifier == widgetIdentifier;
 
-                    focusedInputFieldIdentifier = widgetIdentifier;
-                }
-                else if (focusedInputFieldIdentifier == widgetIdentifier)
-                {
-                    // Clicked somewhere else while this field was focused
-                    focusedInputFieldIdentifier = nullptr;
-                }
+            if (widgetIsHoveredThisFrame)
+            {
+                // Newly focused fields start with the caret at the end (npos is clamped to the text size later)
+                if (focusedInputFieldIdentifier != widgetIdentifier)
+                    caretIndexMap[widgetIdentifier] = std::string::npos;
+
+                focusedInputFieldIdentifier = widgetIdentifier;
             }
+            else if (focusedInputFieldIdentifier == widgetIdentifier)
+            {
+                // Clicked somewhere else while this field was focused
+                focusedInputFieldIdentifier = nullptr;
+            }
+
             return focusedInputFieldIdentifier == widgetIdentifier;
         }
 
-        // ===[Line helpers: the caret index is a position in the whole text, these find line edges]===
-        // Index of the first character on the line that holds the caret
+        // |=====================================================
+        // |---[Lines and caret movement]------------------------
+        // |=====================================================
+        // The caret index is a position in the WHOLE text, so these helpers find where lines begin and end.
+
+        // ===[Index of the first character on the line that holds the caret]===
         size_t FindLineStartIndex(const std::string& textToSearch, size_t caretIndex)
         {
             if (caretIndex == 0) return 0;
@@ -336,102 +383,115 @@ namespace UXX
             size_t previousNewlineIndex = textToSearch.rfind('\n', caretIndex - 1);
             return previousNewlineIndex == std::string::npos ? 0 : previousNewlineIndex + 1;
         }
-        // Index of the newline ending the caret's line, or the text size on the last line
+        // ===[Index of the newline ending the caret's line, or the text size on the last line]===
         size_t FindLineEndIndex(const std::string& textToSearch, size_t caretIndex)
         {
             size_t nextNewlineIndex = textToSearch.find('\n', caretIndex);
             return nextNewlineIndex == std::string::npos ? textToSearch.size() : nextNewlineIndex;
         }
-        // Moves the caret up one line, keeping the same column when the line above is long enough
-        void MoveCaretUpOneLine(const std::string& textToSearch, size_t& caretIndex)
+        // ===[Moves the caret one line up (-1) or down (+1), keeping the same column when the target line is long enough]===
+        void MoveCaretToNeighborLine(const std::string& textToSearch, size_t& caretIndex, int lineDirection)
         {
             size_t currentLineStartIndex = FindLineStartIndex(textToSearch, caretIndex);
-
-            // Already on the first line, nowhere to go
-            if (currentLineStartIndex == 0) return;
-
+            size_t currentLineEndIndex = FindLineEndIndex(textToSearch, caretIndex);
             size_t columnIndex = caretIndex - currentLineStartIndex;
 
-            // The newline just before the current line belongs to the previous line, so look one back from it
-            size_t previousLineStartIndex = FindLineStartIndex(textToSearch, currentLineStartIndex - 1);
-            size_t previousLineLength = (currentLineStartIndex - 1) - previousLineStartIndex;
+            size_t targetLineStartIndex = 0;
+            size_t targetLineEndIndex = 0;
 
-            // A shorter previous line clamps the caret to its end
-            caretIndex = previousLineStartIndex + std::min(columnIndex, previousLineLength);
+            if (lineDirection < 0)
+            {
+                // Already on the first line, nowhere to go
+                if (currentLineStartIndex == 0) return;
+
+                // The newline just before this line is the end of the line above
+                targetLineEndIndex = currentLineStartIndex - 1;
+                targetLineStartIndex = FindLineStartIndex(textToSearch, targetLineEndIndex);
+            }
+            else
+            {
+                // Already on the last line, nowhere to go
+                if (currentLineEndIndex >= textToSearch.size()) return;
+
+                // The line below starts right after the newline that ends this one
+                targetLineStartIndex = currentLineEndIndex + 1;
+                targetLineEndIndex = FindLineEndIndex(textToSearch, targetLineStartIndex);
+            }
+
+            // A shorter target line clamps the caret to its end
+            size_t targetLineLength = targetLineEndIndex - targetLineStartIndex;
+            caretIndex = targetLineStartIndex + std::min(columnIndex, targetLineLength);
         }
-        // Moves the caret down one line, keeping the same column when the line below is long enough
-        void MoveCaretDownOneLine(const std::string& textToSearch, size_t& caretIndex)
+
+        // |=====================================================
+        // |---[Applying this frame's keys to the text]----------
+        // |=====================================================
+        // Each step below handles ONE kind of key. ApplyTypingToText just runs them in order.
+
+        // ===[Arrow keys: left/right always work, up/down only in multi-line fields]===
+        void MoveCaretWithArrowKeys(const std::string& textToEdit, size_t& caretIndex, bool allowNewlines)
         {
-            size_t currentLineEndIndex = FindLineEndIndex(textToSearch, caretIndex);
-
-            // Already on the last line, nowhere to go
-            if (currentLineEndIndex >= textToSearch.size()) return;
-
-            size_t columnIndex = caretIndex - FindLineStartIndex(textToSearch, caretIndex);
-
-            // The next line starts right after the newline that ends this one
-            size_t nextLineStartIndex = currentLineEndIndex + 1;
-            size_t nextLineLength = FindLineEndIndex(textToSearch, nextLineStartIndex) - nextLineStartIndex;
-
-            // A shorter next line clamps the caret to its end
-            caretIndex = nextLineStartIndex + std::min(columnIndex, nextLineLength);
-        }
-
-        // ===[Applies this frame's caret movement and typing, returns true if the text changed]===
-        bool ApplyTypingToText(std::string& textToEdit, size_t& caretIndex, bool allowNewlines, const std::string& allowedCharacters)
-        {
-            bool textChanged = false;
-
-            // Turns the "end of text" marker (npos) into a real index
-            caretIndex = std::min(caretIndex, textToEdit.size());
-
-            // Left and right arrows move one character per press
             for (int pressIndex = 0; pressIndex < leftArrowPressCountThisFrame; pressIndex++)
                 if (caretIndex > 0) caretIndex--;
+
             for (int pressIndex = 0; pressIndex < rightArrowPressCountThisFrame; pressIndex++)
                 if (caretIndex < textToEdit.size()) caretIndex++;
 
-            // Up and down only make sense when the field has more than one line
-            if (allowNewlines)
-            {
-                for (int pressIndex = 0; pressIndex < upArrowPressCountThisFrame; pressIndex++)
-                    MoveCaretUpOneLine(textToEdit, caretIndex);
-                for (int pressIndex = 0; pressIndex < downArrowPressCountThisFrame; pressIndex++)
-                    MoveCaretDownOneLine(textToEdit, caretIndex);
-            }
+            if (!allowNewlines) return;
 
-            // Home and End jump to the start or end of the current line
+            for (int pressIndex = 0; pressIndex < upArrowPressCountThisFrame; pressIndex++)
+                MoveCaretToNeighborLine(textToEdit, caretIndex, -1);
+            for (int pressIndex = 0; pressIndex < downArrowPressCountThisFrame; pressIndex++)
+                MoveCaretToNeighborLine(textToEdit, caretIndex, +1);
+        }
+        // ===[Home and End jump to the start or end of the current line]===
+        void MoveCaretWithHomeAndEndKeys(const std::string& textToEdit, size_t& caretIndex)
+        {
             if (homePressCountThisFrame > 0) caretIndex = FindLineStartIndex(textToEdit, caretIndex);
-            if (endPressCountThisFrame > 0) caretIndex = FindLineEndIndex(textToEdit, caretIndex);
+            if (endPressCountThisFrame > 0)  caretIndex = FindLineEndIndex(textToEdit, caretIndex);
+        }
+        // ===[Inserts typed characters at the caret, skipping ones the field does not allow]===
+        bool InsertTypedCharacters(std::string& textToEdit, size_t& caretIndex, const std::string& allowedCharacters)
+        {
+            bool textChanged = false;
 
-            // Insert typed characters at the caret, skipping any the field does not allow
             for (char typedCharacter : typedCharactersThisFrame)
             {
-                if (!allowedCharacters.empty() && allowedCharacters.find(typedCharacter) == std::string::npos) continue;
+                bool characterIsAllowed = allowedCharacters.empty() ||
+                                          allowedCharacters.find(typedCharacter) != std::string::npos;
+                if (!characterIsAllowed) continue;
 
                 textToEdit.insert(caretIndex, 1, typedCharacter);
                 caretIndex++;
                 textChanged = true;
             }
+            return textChanged;
+        }
+        // ===[Backspace removes the character before the caret, Delete removes the one after it]===
+        bool DeleteCharactersAroundCaret(std::string& textToEdit, size_t& caretIndex)
+        {
+            bool textChanged = false;
 
-            // Backspace removes the character before the caret
-            for (int pressIndex = 0; pressIndex < backspacePressCountThisFrame; pressIndex++)
+            for (int pressIndex = 0; pressIndex < backspacePressCountThisFrame && caretIndex > 0; pressIndex++)
             {
-                if (caretIndex == 0) break;
                 textToEdit.erase(caretIndex - 1, 1);
                 caretIndex--;
                 textChanged = true;
             }
 
-            // Delete removes the character after the caret, the caret itself does not move
-            for (int pressIndex = 0; pressIndex < deletePressCountThisFrame; pressIndex++)
+            // Delete leaves the caret where it is
+            for (int pressIndex = 0; pressIndex < deletePressCountThisFrame && caretIndex < textToEdit.size(); pressIndex++)
             {
-                if (caretIndex >= textToEdit.size()) break;
                 textToEdit.erase(caretIndex, 1);
                 textChanged = true;
             }
+            return textChanged;
+        }
+        // ===[Enter adds a new line in multi-line fields, otherwise it ends editing]===
+        bool HandleEnterKey(std::string& textToEdit, size_t& caretIndex, bool allowNewlines)
+        {
+            bool textChanged = false;
 
-            // Enter adds a new line in multi-line fields, otherwise it ends editing
             for (int pressIndex = 0; pressIndex < enterPressCountThisFrame; pressIndex++)
             {
                 if (allowNewlines)
@@ -442,10 +502,27 @@ namespace UXX
                 }
                 else focusedInputFieldIdentifier = nullptr;
             }
+            return textChanged;
+        }
+        // ===[Applies this frame's caret movement and typing, returns true if the text changed]===
+        bool ApplyTypingToText(std::string& textToEdit, size_t& caretIndex, bool allowNewlines, const std::string& allowedCharacters)
+        {
+            // Turns the "end of text" marker (npos) into a real index
+            caretIndex = std::min(caretIndex, textToEdit.size());
 
+            MoveCaretWithArrowKeys(textToEdit, caretIndex, allowNewlines);
+            MoveCaretWithHomeAndEndKeys(textToEdit, caretIndex);
+
+            bool textChanged = false;
+            textChanged |= InsertTypedCharacters(textToEdit, caretIndex, allowedCharacters);
+            textChanged |= DeleteCharactersAroundCaret(textToEdit, caretIndex);
+            textChanged |= HandleEnterKey(textToEdit, caretIndex, allowNewlines);
             return textChanged;
         }
 
+        // |=====================================================
+        // |---[Drawing the field text]--------------------------
+        // |=====================================================
         // ===[Picks the bracket color for a character, or the normal text color]===
         Color PickCodeCharacterColor(char character, const CodeInputFieldStyle& codeStyle)
         {
@@ -455,9 +532,7 @@ namespace UXX
             if (character == '<' || character == '>') return codeStyle.angleBracketColor;
             return codeStyle.textColor;
         }
-
-        // ===[Draws one line of code, splitting it into runs so each bracket gets its own color]===
-        // Normal text is drawn in one call per run, and every bracket is its own one-character run.
+        // ===[Draws one line of code. Normal text is one run until the next bracket, every bracket is its own run]===
         void DrawCodeLineWithColoredBrackets(float lineStartX, float baselineBottomUpY, const std::string& lineText,
             float textSize, Font* font, const CodeInputFieldStyle& codeStyle)
         {
@@ -466,16 +541,12 @@ namespace UXX
 
             while (runStartIndex < lineText.size())
             {
-                bool runIsBracket = bracketCharacters.find(lineText[runStartIndex]) != std::string::npos;
                 size_t runEndIndex = runStartIndex + 1;
 
                 // Normal text keeps growing until the next bracket
-                if (!runIsBracket)
-                {
-                    while (runEndIndex < lineText.size() &&
-                           bracketCharacters.find(lineText[runEndIndex]) == std::string::npos)
+                if (!IsBracketCharacter(lineText[runStartIndex]))
+                    while (runEndIndex < lineText.size() && !IsBracketCharacter(lineText[runEndIndex]))
                         runEndIndex++;
-                }
 
                 std::string runText = lineText.substr(runStartIndex, runEndIndex - runStartIndex);
                 DrawTextRaw(currentRunStartX, baselineBottomUpY,
@@ -487,7 +558,24 @@ namespace UXX
                 runStartIndex = runEndIndex;
             }
         }
+        // ===[Draws the blinking caret at its real position]===
+        void DrawCaret(Rect fieldRect, const std::string& textToDraw, size_t caretIndex,
+            float lineHeight, Color caretColor, float textSize, Font* font)
+        {
+            bool caretIsInOnPhase = std::fmod(glfwGetTime(), caretBlinkHalfPeriodSeconds * 2.0) < caretBlinkHalfPeriodSeconds;
+            if (!caretIsInOnPhase) return;
 
+            // Which line the caret is on = how many newlines come before it
+            int caretLineNumber = (int)std::count(textToDraw.begin(), textToDraw.begin() + caretIndex, '\n');
+
+            // Horizontal position = width of the text between the line start and the caret
+            size_t caretLineStartIndex = FindLineStartIndex(textToDraw, caretIndex);
+            std::string textBeforeCaretOnItsLine = textToDraw.substr(caretLineStartIndex, caretIndex - caretLineStartIndex);
+
+            float caretX = fieldRect.xPos + inputFieldPadding + font->measureTextWidth(textBeforeCaretOnItsLine, textSize);
+            float caretTopY = fieldRect.yPos + inputFieldPadding + lineHeight * caretLineNumber;
+            DrawQuad(Rect(caretX, caretTopY, caretWidth, lineHeight), caretColor, nullptr);
+        }
         // ===[Draws all text line by line plus a blinking caret, brackets are colored if codeStyle is given]===
         void DrawInputFieldText(Rect fieldRect, const std::string& textToDraw, size_t caretIndex, bool fieldIsFocused,
             Color textColor, float textSize, const std::string& fontPath,
@@ -501,25 +589,19 @@ namespace UXX
 
             float lineHeight = font->measureTextHeight("A", textSize) * inputFieldLineHeightMultiplier;
             caretIndex = std::min(caretIndex, textToDraw.size());
-
-            size_t lineStartIndex = 0;
-            int lineNumber = 0;
-
-            // Filled while walking the lines, then used to place the caret
-            int caretLineNumber = 0;
-            std::string textBeforeCaretOnItsLine;
+            float lineStartX = fieldRect.xPos + inputFieldPadding;
 
             // Walk through the text one line at a time
-            while (true)
+            size_t lineStartIndex = 0;
+            int lineNumber = 0;
+            while (lineStartIndex <= textToDraw.size())
             {
-                size_t lineEndIndex = textToDraw.find('\n', lineStartIndex);
-                std::string lineText = textToDraw.substr(lineStartIndex,
-                    lineEndIndex == std::string::npos ? std::string::npos : lineEndIndex - lineStartIndex);
+                size_t lineEndIndex = FindLineEndIndex(textToDraw, lineStartIndex);
+                std::string lineText = textToDraw.substr(lineStartIndex, lineEndIndex - lineStartIndex);
 
                 // Text is drawn from a baseline measured from the bottom of the screen
                 float baselineTopDownY = fieldRect.yPos + inputFieldPadding + lineHeight * (lineNumber + 1);
                 float baselineBottomUpY = SCREEN_HEIGHT - baselineTopDownY;
-                float lineStartX = fieldRect.xPos + inputFieldPadding;
 
                 // Code fields color the brackets, other fields draw the whole line in one color
                 if (codeStyle)
@@ -527,27 +609,13 @@ namespace UXX
                 else
                     DrawTextRaw(lineStartX, baselineBottomUpY, textColor, textSize, lineText, font, 0.0f);
 
-                // If the caret is on this line, remember the line and the text left of the caret
-                if (caretIndex >= lineStartIndex && caretIndex <= lineStartIndex + lineText.size())
-                {
-                    caretLineNumber = lineNumber;
-                    textBeforeCaretOnItsLine = lineText.substr(0, caretIndex - lineStartIndex);
-                }
-
-                // No newline found means this was the last line
-                if (lineEndIndex == std::string::npos) break;
+                // Next line starts after the newline (this goes past the text size after the last line, which ends the loop)
                 lineStartIndex = lineEndIndex + 1;
                 lineNumber++;
             }
 
-            // Blink the caret at its real position, only while the field is focused
-            bool caretIsVisible = fieldIsFocused && std::fmod(glfwGetTime(), caretBlinkHalfPeriodSeconds * 2.0) < caretBlinkHalfPeriodSeconds;
-            if (caretIsVisible)
-            {
-                float caretX = fieldRect.xPos + inputFieldPadding + font->measureTextWidth(textBeforeCaretOnItsLine, textSize);
-                float caretTopY = fieldRect.yPos + inputFieldPadding + lineHeight * caretLineNumber;
-                DrawQuad(Rect(caretX, caretTopY, caretWidth, lineHeight), textColor, nullptr);
-            }
+            if (fieldIsFocused)
+                DrawCaret(fieldRect, textToDraw, caretIndex, lineHeight, textColor, textSize, font);
 
             PopScissor();
         }
@@ -582,20 +650,21 @@ namespace UXX
     {
         mousePositionX = mouseX;
         mousePositionY = mouseY;
-        leftMouseButtonDown = leftDown;
-        leftMouseButtonPressed = leftPressed;
-        leftMouseButtonReleased = leftReleased;
-        rightMouseButtonDown = rightDown;
-        rightMouseButtonPressed = rightPressed;
-        rightMouseButtonReleased = rightReleased;
-        middleMouseButtonDown = middleDown;
-        middleMouseButtonPressed = middlePressed;
-        middleMouseButtonReleased = middleReleased;
+
+        leftMouseButtonDown         = leftDown;
+        leftMouseButtonPressed      = leftPressed;
+        leftMouseButtonReleased     = leftReleased;
+        rightMouseButtonDown        = rightDown;
+        rightMouseButtonPressed     = rightPressed;
+        rightMouseButtonReleased    = rightReleased;
+        middleMouseButtonDown       = middleDown;
+        middleMouseButtonPressed    = middlePressed;
+        middleMouseButtonReleased   = middleReleased;
 
         scrollDeltaXState = scrollDeltaX;
         scrollDeltaYState = scrollDeltaY;
 
-        mouseHoveredOverWidgetThisFrame = false;
+        mouseHoveredOverWidgetThisFrame     = false;
         currentFrameHoveredWidgetIdentifier = nullptr;
 
         // A release always clears the active widget
@@ -633,10 +702,10 @@ namespace UXX
     }
     void SetKeyState(bool leftArrowPressed, bool rightArrowPressed, bool upArrowPressed, bool downArrowPressed)
     {
-        leftArrowKeyPressed = leftArrowPressed;
-        rightArrowKeyPressed = rightArrowPressed;
-        upArrowKeyPressed = upArrowPressed;
-        downArrowKeyPressed = downArrowPressed;
+        leftArrowKeyPressed     = leftArrowPressed;
+        rightArrowKeyPressed    = rightArrowPressed;
+        upArrowKeyPressed       = upArrowPressed;
+        downArrowKeyPressed     = downArrowPressed;
     }
     bool MouseHoveredOverWidget()
     {
@@ -644,21 +713,22 @@ namespace UXX
     }
     void SetTextInputState(const std::string& typedCharacters, int backspacePressCount, int enterPressCount)
     {
-        typedCharactersThisFrame = typedCharacters;
-        backspacePressCountThisFrame = backspacePressCount;
-        enterPressCountThisFrame = enterPressCount;
+        typedCharactersThisFrame        = typedCharacters;
+        backspacePressCountThisFrame    = backspacePressCount;
+        enterPressCountThisFrame        = enterPressCount;
     }
     // Receives how many times each editing key was pressed this frame
     void SetEditKeyState(int leftArrowPressCount, int rightArrowPressCount, int upArrowPressCount,
-                         int downArrowPressCount, int homePressCount, int endPressCount, int deletePressCount)
+        int downArrowPressCount, int homePressCount, int endPressCount, int deletePressCount)
     {
-        leftArrowPressCountThisFrame = leftArrowPressCount;
-        rightArrowPressCountThisFrame = rightArrowPressCount;
-        upArrowPressCountThisFrame = upArrowPressCount;
-        downArrowPressCountThisFrame = downArrowPressCount;
-        homePressCountThisFrame = homePressCount;
-        endPressCountThisFrame = endPressCount;
-        deletePressCountThisFrame = deletePressCount;
+        leftArrowPressCountThisFrame    = leftArrowPressCount;
+        rightArrowPressCountThisFrame   = rightArrowPressCount;
+        upArrowPressCountThisFrame      = upArrowPressCount;
+        downArrowPressCountThisFrame    = downArrowPressCount;
+
+        homePressCountThisFrame         = homePressCount;
+        endPressCountThisFrame          = endPressCount;
+        deletePressCountThisFrame       = deletePressCount;
     }
 
     // |=====================================================
@@ -713,12 +783,12 @@ namespace UXX
         shader->Use();
         GLuint scale   = glGetUniformLocation(shader->ID, "scale");
         glUniform1f(scale, 1.0f);
-        uColorLoc      = glGetUniformLocation(shader->ID, "uColor");
-        uSizeLoc       = glGetUniformLocation(shader->ID, "uSize");
-        uPositionLoc   = glGetUniformLocation(shader->ID, "uPosition");
-        uRotationLoc   = glGetUniformLocation(shader->ID, "uRotation");
-        uUseTextureLoc = glGetUniformLocation(shader->ID, "uUseTexture");
-        uDarkenLoc     = glGetUniformLocation(shader->ID, "uDarken");
+        colorUniformLocation        = glGetUniformLocation(shader->ID, "uColor");
+        sizeUniformLocation         = glGetUniformLocation(shader->ID, "uSize");
+        positionUniformLocation     = glGetUniformLocation(shader->ID, "uPosition");
+        rotationUniformLocation     = glGetUniformLocation(shader->ID, "uRotation");
+        textColorUniformLocation    = glGetUniformLocation(shader->ID, "uUseTexture");
+        darkenUniformLocation       = glGetUniformLocation(shader->ID, "uDarken");
 
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
@@ -727,9 +797,9 @@ namespace UXX
     void InitTextRendering()
     {
         // Separate shader and VAO/VBO pair dedicated to glyph quads
-        textShader   = new Shader("../shader_files/VertexText.glsl", "../shader_files/FragmentText.glsl");
-        textColorLoc = glGetUniformLocation(textShader->ID, "textColor");
-        textModelLoc = glGetUniformLocation(textShader->ID, "model");
+        textShader                  = new Shader("../shader_files/VertexText.glsl", "../shader_files/FragmentText.glsl");
+        textColorUniformLocation    = glGetUniformLocation(textShader->ID, "textColor");
+        textModelUniformLocation    = glGetUniformLocation(textShader->ID, "model");
 
         glGenVertexArrays(1, &textVAO);
         glGenBuffers(1, &textVBO);
@@ -746,15 +816,15 @@ namespace UXX
     // |=====================================================
     // |---[Begin and End Panel]-----------------------------
     // |=====================================================
-    void BeginPanel(Rect PanelRect, Color PanelColor, std::string PanelImagePath)
+    void BeginPanel(Rect panelRect, Color panelColor, std::string panelImagePath)
     {
         panelOpen = true;
 
         // Draw the panel background, optionally textured
-        GLTexture* panelTexture = PanelImagePath.empty() ? nullptr : GetOrLoadTexture(PanelImagePath);
-        DrawQuad(PanelRect, PanelColor, panelTexture);
+        GLTexture* panelTexture = panelImagePath.empty() ? nullptr : GetOrLoadTexture(panelImagePath);
+        DrawQuad(panelRect, panelColor, panelTexture);
 
-        PushScissor(PanelRect);
+        PushScissor(panelRect);
     }
     void EndPanel()
     {
@@ -789,12 +859,12 @@ namespace UXX
         if (hoveredButton)
         {
             finalColor = ButtonHoverColor;
-            darkenAmount = kHoverDarkenFactor;
+            darkenAmount = hoverDarkenFactor;
         }
         if (clickedButton)
         {
             finalColor = ButtonClickedColor;
-            darkenAmount = kActiveDarkenFactor;
+            darkenAmount = activeDarkenFactor;
         }
 
         // Draw button with the colors
@@ -887,8 +957,8 @@ namespace UXX
         // ===[Handle darkening: same has-image vs no-image split as Button]===
         bool isActiveIntSlider = (currentFrameActiveWidgetIdentifier == &value);
         float handleDarkenAmount = 1.0f;
-        if (isActiveIntSlider)     handleDarkenAmount = kActiveDarkenFactor;
-        else if (hoveredIntTrack)  handleDarkenAmount = kHoverDarkenFactor;
+        if (isActiveIntSlider)     handleDarkenAmount = activeDarkenFactor;
+        else if (hoveredIntTrack)  handleDarkenAmount = hoverDarkenFactor;
 
         // ===[Draw optional texture, and both the Slider Handle and Track]===
         GLTexture* intTrackTexture  = IntSliderTrackImagePath.empty()  ? nullptr : GetOrLoadTexture(IntSliderTrackImagePath);
@@ -981,8 +1051,8 @@ namespace UXX
         // ===[Handle darkening: same has-image vs no-image split as Button]===
         bool isActiveFloatSlider = (currentFrameActiveWidgetIdentifier == &value);
         float handleDarkenAmount = 1.0f;
-        if (isActiveFloatSlider)     handleDarkenAmount = kActiveDarkenFactor;
-        else if (hoveredFloatTrack)  handleDarkenAmount = kHoverDarkenFactor;
+        if (isActiveFloatSlider)     handleDarkenAmount = activeDarkenFactor;
+        else if (hoveredFloatTrack)  handleDarkenAmount = hoverDarkenFactor;
 
         // ===[Draw optional texture, and both the Slider Handle and Track]===
         GLTexture* floatTrackTexture  = FloatSliderTrackImagePath.empty()  ? nullptr : GetOrLoadTexture(FloatSliderTrackImagePath);
@@ -1043,8 +1113,8 @@ namespace UXX
         // ===[Handle darkening: same has-image vs no-image split as Button]===
         bool pressedSwitch = hoveredSwitch && leftMouseButtonDown;
         float switchDarkenAmount = 1.0f;
-        if (pressedSwitch)        switchDarkenAmount = kActiveDarkenFactor;
-        else if (hoveredSwitch)   switchDarkenAmount = kHoverDarkenFactor;
+        if (pressedSwitch)        switchDarkenAmount = activeDarkenFactor;
+        else if (hoveredSwitch)   switchDarkenAmount = hoverDarkenFactor;
 
         const std::string& activeImagePath = value ? SwitchOnImagePath : SwitchOffImagePath;
         GLTexture* switchTexture = activeImagePath.empty() ? nullptr : GetOrLoadTexture(activeImagePath);
@@ -1111,7 +1181,7 @@ namespace UXX
         if (!panelOpen) return false;
 
         // Handles hover, focus and the background, and tells us if we should accept typing
-        bool fieldIsFocused = BeginInputField(&textValue, inputFieldRect, inputFieldStyle.backGroundColor, inputFieldStyle.imagePath);
+        bool fieldIsFocused = BeginInputField(&textValue, inputFieldRect, inputFieldStyle.backGroundColor, inputFieldStyle.backgroundImagePath);
 
         // Each field remembers its own caret, keyed by the address of its text
         size_t& caretIndex = caretIndexMap[&textValue];
@@ -1131,7 +1201,7 @@ namespace UXX
 
         // Must be read before BeginInputField, because that call can change the focus
         bool fieldWasFocusedBefore = (focusedInputFieldIdentifier == &numberValue);
-        bool fieldIsFocused = BeginInputField(&numberValue, inputFieldRect, inputFieldStyle.backGroundColor, inputFieldStyle.imagePath);
+        bool fieldIsFocused = BeginInputField(&numberValue, inputFieldRect, inputFieldStyle.backGroundColor, inputFieldStyle.backgroundImagePath);
 
         size_t& caretIndex = caretIndexMap[&numberValue];
 
@@ -1171,7 +1241,7 @@ namespace UXX
     {
         if (!panelOpen) return false;
 
-        bool fieldIsFocused = BeginInputField(&textValue, inputFieldRect, codeInputFieldStyle.backGroundColor, codeInputFieldStyle.imagePath);
+        bool fieldIsFocused = BeginInputField(&textValue, inputFieldRect, codeInputFieldStyle.backGroundColor, codeInputFieldStyle.backgroundImagePath);
         size_t& caretIndex = caretIndexMap[&textValue];
 
         // Same editing as MultiInputField, the only difference is how the text gets drawn
@@ -1183,6 +1253,72 @@ namespace UXX
         DrawInputFieldText(inputFieldRect, textValue, caretIndex, fieldIsFocused, codeInputFieldStyle.textColor,
             codeInputFieldStyle.textSize, codeInputFieldStyle.fontPath, &codeInputFieldStyle);
         return textChanged;
+    }
+    void BeginScrollBox(Rect scrollBoxRect, float& scrollOffset, float contentHeight, const ScrollBoxStyle& scrollBoxStyle)
+    {
+        if (!panelOpen) return;
+        scrollBoxOpen = true;
+
+        // How far the content can move before its bottom reaches the bottom of the box
+        float maximumScrollOffset = std::max(0.0f, contentHeight - scrollBoxRect.height);
+
+        // ===[Background]===
+        GLTexture* backgroundTexture = scrollBoxStyle.backgroundImagePath.empty()
+            ? nullptr : GetOrLoadTexture(scrollBoxStyle.backgroundImagePath);
+        DrawQuad(scrollBoxRect, scrollBoxStyle.backGroundColor, backgroundTexture);
+
+        // ===[Scrollbar track sits on the right edge of the box]===
+        Rect scrollBarTrackRect(scrollBoxRect.xPos + scrollBoxRect.width - scrollBarWidth,
+                                scrollBoxRect.yPos, scrollBarWidth, scrollBoxRect.height);
+
+        bool scrollBarTrackIsHovered = WidgetIsHovered(&scrollOffset, scrollBarTrackRect);
+        if (scrollBarTrackIsHovered) mouseHoveredOverWidgetThisFrame = true;
+
+        // ===[Handle size is proportional to how much of the content is visible]===
+        float visibleFraction = (contentHeight > 0.0f) ? std::min(1.0f, scrollBoxRect.height / contentHeight) : 1.0f;
+        float handleHeight = std::max(scrollBarMinimumHandleSize, scrollBarTrackRect.height * visibleFraction);
+        handleHeight = std::min(handleHeight, scrollBarTrackRect.height);
+        float handleTravelDistance = scrollBarTrackRect.height - handleHeight;
+
+        // ===[Dragging the handle]===
+        bool scrollBarIsActive = WidgetClaimsActive(&scrollOffset, scrollBarTrackIsHovered);
+        if (scrollBarIsActive && leftMouseButtonDown && handleTravelDistance > 0.0f)
+        {
+            float normalizedDragPosition = (float)(mousePositionY - scrollBarTrackRect.yPos - handleHeight * 0.5f) / handleTravelDistance;
+            scrollOffset = std::clamp(normalizedDragPosition, 0.0f, 1.0f) * maximumScrollOffset;
+        }
+
+        // ===[Mouse wheel while the cursor is anywhere over the box]===
+        bool cursorIsInsideScrollBox = (mousePositionX >= scrollBoxRect.xPos && mousePositionX <= scrollBoxRect.xPos + scrollBoxRect.width &&
+                                        mousePositionY >= scrollBoxRect.yPos && mousePositionY <= scrollBoxRect.yPos + scrollBoxRect.height);
+        if (cursorIsInsideScrollBox)
+            scrollOffset -= (float)scrollDeltaYState * mouseWheelScrollPixels;  // Wheel up = content moves down
+
+        scrollOffset = std::clamp(scrollOffset, 0.0f, maximumScrollOffset);
+
+        // ===[Draw the track and the handle]===
+        GLTexture* barTexture    = scrollBoxStyle.barImagePath.empty()    ? nullptr : GetOrLoadTexture(scrollBoxStyle.barImagePath);
+        GLTexture* scrollTexture = scrollBoxStyle.scrollImagePath.empty() ? nullptr : GetOrLoadTexture(scrollBoxStyle.scrollImagePath);
+
+        float scrollProgress = (maximumScrollOffset > 0.0f) ? scrollOffset / maximumScrollOffset : 0.0f;
+        Rect scrollBarHandleRect(scrollBarTrackRect.xPos, scrollBarTrackRect.yPos + scrollProgress * handleTravelDistance,
+                                 scrollBarWidth, handleHeight);
+
+        float handleDarkenAmount = 1.0f;
+        if (scrollBarIsActive)               handleDarkenAmount = activeDarkenFactor;
+        else if (scrollBarTrackIsHovered)    handleDarkenAmount = hoverDarkenFactor;
+
+        DrawQuad(scrollBarTrackRect, scrollBoxStyle.barColor, barTexture);
+        Color finalHandleColor = scrollTexture ? scrollBoxStyle.scrollColor : ApplyDarken(scrollBoxStyle.scrollColor, handleDarkenAmount);
+        DrawQuad(scrollBarHandleRect, finalHandleColor, scrollTexture, handleDarkenAmount);
+
+        // ===[Clip everything drawn until EndScrollBox to the content area, so it can't cover the scrollbar]===
+        PushScissor(Rect(scrollBoxRect.xPos, scrollBoxRect.yPos, scrollBoxRect.width - scrollBarWidth, scrollBoxRect.height));
+    }
+    void EndScrollBox()
+    {
+        scrollBoxOpen = false;
+        PopScissor();
     }
 
     // |=====================================================
