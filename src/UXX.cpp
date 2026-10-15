@@ -67,9 +67,21 @@ namespace UXX
         bool middleMouseButtonReleased          = false;
         bool mouseHoveredOverWidgetThisFrame    = false;
 
-        double mousePositionX = -1.0, mousePositionY = -1.0;
-        double scrollDeltaXState = 0.0;
-        double scrollDeltaYState = 0.0;
+        double mousePositionX       = -1.0, mousePositionY = -1.0;
+        double scrollDeltaXState    = 0.0;
+        double scrollDeltaYState    = 0.0;
+
+        // ===[Adding Input clipping to widgets that are inside the scroll box and panel rect]===
+        bool inputClipIsActive = false;
+        Rect inputClipRect(0, 0, 0, 0);
+        // True when no clip is active, or the cursor is inside the visible clip area
+        bool CursorIsInsideInputClip()
+        {
+            if (!inputClipIsActive) return true;
+
+            return mousePositionX >= inputClipRect.xPos && mousePositionX <= inputClipRect.xPos + inputClipRect.width &&
+                   mousePositionY >= inputClipRect.yPos && mousePositionY <= inputClipRect.yPos + inputClipRect.height;
+        }
 
         // ===[Square like Minecraft]===
         // Shared unit-quad geometry reused by every UI element
@@ -176,6 +188,15 @@ namespace UXX
             vao->Unbind();
             if (texture) texture->Unbind();
         }
+        // ===[Don't Draw Quad >:) ]===
+        bool SkipDraw(Rect rectToSkip)
+        {
+            // Skip any widget if their width and position are outside the users screen
+            if (rectToSkip.xPos + rectToSkip.width > SCREEN_WIDTH ||
+                rectToSkip.yPos + rectToSkip.height > SCREEN_HEIGHT) return false;
+
+            return false;
+        }
         // ===[Shared shader/uniform setup + draw call for any piece of text]===
         void DrawTextRaw(float textPositionX, float bottomUpY, Color color, float size, const std::string& text, Font* font, float angleRadians)
         {
@@ -215,7 +236,7 @@ namespace UXX
                                         mousePositionY >= widgetBounds.yPos && mousePositionY <= widgetBounds.yPos + widgetBounds.height);
 
             // Last widget submitted this frame that contains the cursor wins hover,
-            if (cursorInsideBounds)
+            if (cursorInsideBounds && CursorIsInsideInputClip())
                 currentFrameHoveredWidgetIdentifier = widgetIdentifier;
 
             return currentFrameHoveredWidgetIdentifier == widgetIdentifier;
@@ -819,16 +840,25 @@ namespace UXX
     void BeginPanel(Rect panelRect, Color panelColor, std::string panelImagePath)
     {
         panelOpen = true;
+        SkipDraw(panelRect);
 
         // Draw the panel background, optionally textured
         GLTexture* panelTexture = panelImagePath.empty() ? nullptr : GetOrLoadTexture(panelImagePath);
         DrawQuad(panelRect, panelColor, panelTexture);
 
         PushScissor(panelRect);
+
+        // ===[Clip drawing and mouse input to the content area, so nothing covers or reacts through the panel]===
+        Rect panelContentRect(panelRect.xPos, panelRect.yPos, panelRect.width, panelRect.height);
+        PushScissor(panelContentRect);
+
+        inputClipRect = panelContentRect;
+        inputClipIsActive = true;
     }
     void EndPanel()
     {
         panelOpen = false;
+        inputClipIsActive = false;
         PopScissor();
     }
 
@@ -838,57 +868,51 @@ namespace UXX
     bool Button(Rect ButtonRect, const ButtonStyle& buttonStyle, std::string ButtonTextItself)
     {
         if (!panelOpen) return false;
-
-        Color ButtonColor           = buttonStyle.normalColor;
-        Color ButtonHoverColor      = buttonStyle.hoveredColor;
-        Color ButtonClickedColor    = buttonStyle.clickedColor;
-        Color ButtonTextColor       = buttonStyle.textColor;
-        float ButtonTextSize        = buttonStyle.textSize;
-        std::string ButtonImagePath = buttonStyle.imagePath;
-        std::string ButtonFontPath  = buttonStyle.fontPath;
+        SkipDraw(ButtonRect);
 
         // Find out what state the button is on
         bool hoveredButton = (mousePositionX >= ButtonRect.xPos && mousePositionX <= ButtonRect.xPos + ButtonRect.width &&
-                                mousePositionY >= ButtonRect.yPos && mousePositionY <= ButtonRect.yPos + ButtonRect.height);
+                                mousePositionY >= ButtonRect.yPos && mousePositionY <= ButtonRect.yPos + ButtonRect.height)
+                                && CursorIsInsideInputClip();
         if (hoveredButton) mouseHoveredOverWidgetThisFrame = true;
         bool clickedButton = hoveredButton && leftMouseButtonPressed;
 
         // Pick color based on state
-        Color finalColor = ButtonColor;
+        Color finalColor = buttonStyle.normalColor;
         float darkenAmount = 1.0f;
         if (hoveredButton)
         {
-            finalColor = ButtonHoverColor;
+            finalColor = buttonStyle.hoveredColor;
             darkenAmount = hoverDarkenFactor;
         }
         if (clickedButton)
         {
-            finalColor = ButtonClickedColor;
+            finalColor = buttonStyle.clickedColor;
             darkenAmount = activeDarkenFactor;
         }
 
         // Draw button with the colors
-        GLTexture* buttonTexture = ButtonImagePath.empty() ? nullptr : GetOrLoadTexture(ButtonImagePath);
+        GLTexture* buttonTexture = buttonStyle.imagePath.empty() ? nullptr : GetOrLoadTexture(buttonStyle.imagePath);
         DrawQuad(ButtonRect, finalColor, buttonTexture, darkenAmount);
 
         // If it's empty and don't do shit
         if (!ButtonTextItself.empty())
         {
-            Font* font = GetOrLoadFont(ButtonFontPath, (unsigned int)ButtonTextSize);
+            Font* font = GetOrLoadFont(buttonStyle.fontPath, (unsigned int)buttonStyle.textSize);
             if (font)
             {
                 // Draw font but cut it off if it's too long and out of the button
                 PushScissor(ButtonRect);
 
                 // Center the label horizontally and roughly vertically inside the button
-                float textWidth = font->measureTextWidth(ButtonTextItself, ButtonTextSize);
-                float textHeight = font->measureTextHeight(ButtonTextItself, ButtonTextSize);
+                float textWidth = font->measureTextWidth(ButtonTextItself, buttonStyle.textSize);
+                float textHeight = font->measureTextHeight(ButtonTextItself, buttonStyle.textSize);
 
                 float textX = ButtonRect.xPos + (ButtonRect.width - textWidth) * 0.5f;
                 float centerYTopDown = ButtonRect.yPos + ButtonRect.height * 0.5f + textHeight * 0.5f;
                 float bottomUpY = SCREEN_HEIGHT - centerYTopDown;
 
-                DrawTextRaw(textX, bottomUpY, ButtonTextColor, ButtonTextSize, ButtonTextItself, font, 0.0f);
+                DrawTextRaw(textX, bottomUpY, buttonStyle.textColor, buttonStyle.textSize, ButtonTextItself, font, 0.0f);
 
                 PopScissor();
             }
@@ -900,6 +924,7 @@ namespace UXX
         const SliderStyle& sliderStyle, std::string IntSliderTextItself)
     {
         if (!panelOpen) return false;
+        SkipDraw(IntSliderRect);
 
         Color IntTrackColor                  = sliderStyle.trackColor;
         Color IntHandleColor                 = sliderStyle.handleColor;
@@ -996,6 +1021,7 @@ namespace UXX
         const SliderStyle& sliderStyle, std::string FloatSliderTextItself)
     {
         if (!panelOpen) return false;
+        SkipDraw(FloatSliderRect);
 
         Color FloatTrackColor                  = sliderStyle.trackColor;
         Color FloatHandleColor                 = sliderStyle.handleColor;
@@ -1090,6 +1116,7 @@ namespace UXX
         std::string SwitchOnTextItself, std::string SwitchOffTextItself)
     {
         if (!panelOpen) return false;
+        SkipDraw(SwitchRect);
 
         Color SwitchOnColor             = switchStyle.onColor;
         Color SwitchOffColor            = switchStyle.offColor;
@@ -1154,6 +1181,7 @@ namespace UXX
     void Image(Rect ImageRect, const ImageStyle& imageStyle)
     {
         if (!panelOpen) return;
+        SkipDraw(ImageRect);
 
         GLTexture* imageTexture = GetOrLoadTexture(imageStyle.imagePath);
         DrawQuad(ImageRect, imageStyle.color, imageTexture);
@@ -1167,6 +1195,7 @@ namespace UXX
     void Text(Rect TextRect, const TextStyle& textStyle, std::string TextItself)
     {
         if (!panelOpen) return;
+        SkipDraw(TextRect);
 
         Font* font = GetOrLoadFont(textStyle.fontPath, (unsigned int)textStyle.size);
         if (!font) return;
@@ -1179,6 +1208,7 @@ namespace UXX
     bool MultiInputField(Rect inputFieldRect, std::string& textValue, const InputFieldStyle& inputFieldStyle)
     {
         if (!panelOpen) return false;
+        SkipDraw(inputFieldRect);
 
         // Handles hover, focus and the background, and tells us if we should accept typing
         bool fieldIsFocused = BeginInputField(&textValue, inputFieldRect, inputFieldStyle.backGroundColor, inputFieldStyle.backgroundImagePath);
@@ -1198,6 +1228,7 @@ namespace UXX
     bool NumberInputField(Rect inputFieldRect, float& numberValue, const InputFieldStyle& inputFieldStyle)
     {
         if (!panelOpen) return false;
+        SkipDraw(inputFieldRect);
 
         // Must be read before BeginInputField, because that call can change the focus
         bool fieldWasFocusedBefore = (focusedInputFieldIdentifier == &numberValue);
@@ -1240,6 +1271,7 @@ namespace UXX
     bool CodeInputField(Rect inputFieldRect, std::string& textValue, const CodeInputFieldStyle& codeInputFieldStyle)
     {
         if (!panelOpen) return false;
+        SkipDraw(inputFieldRect);
 
         bool fieldIsFocused = BeginInputField(&textValue, inputFieldRect, codeInputFieldStyle.backGroundColor, codeInputFieldStyle.backgroundImagePath);
         size_t& caretIndex = caretIndexMap[&textValue];
@@ -1257,6 +1289,7 @@ namespace UXX
     void BeginScrollBox(Rect scrollBoxRect, float& scrollOffset, float contentHeight, const ScrollBoxStyle& scrollBoxStyle)
     {
         if (!panelOpen) return;
+        SkipDraw(scrollBoxRect);
         scrollBoxOpen = true;
 
         // How far the content can move before its bottom reaches the bottom of the box
@@ -1312,13 +1345,26 @@ namespace UXX
         Color finalHandleColor = scrollTexture ? scrollBoxStyle.scrollColor : ApplyDarken(scrollBoxStyle.scrollColor, handleDarkenAmount);
         DrawQuad(scrollBarHandleRect, finalHandleColor, scrollTexture, handleDarkenAmount);
 
-        // ===[Clip everything drawn until EndScrollBox to the content area, so it can't cover the scrollbar]===
-        PushScissor(Rect(scrollBoxRect.xPos, scrollBoxRect.yPos, scrollBoxRect.width - scrollBarWidth, scrollBoxRect.height));
+        // ===[Clip drawing and mouse input to the content area, so nothing covers or reacts through the scrollbar]===
+        Rect scrollContentRect(scrollBoxRect.xPos, scrollBoxRect.yPos, scrollBoxRect.width - scrollBarWidth, scrollBoxRect.height);
+        PushScissor(scrollContentRect);
+
+        inputClipRect = scrollContentRect;
+        inputClipIsActive = true;
     }
     void EndScrollBox()
     {
         scrollBoxOpen = false;
+        inputClipIsActive = false;
         PopScissor();
+    }
+
+    bool DropDown(Rect dropDownRect, const DropDownStyle& dropDownStyle, std::string dropDownText)
+    {
+        if (!panelOpen) return false;
+        SkipDraw(dropDownRect);
+
+        return 0;
     }
 
     // |=====================================================

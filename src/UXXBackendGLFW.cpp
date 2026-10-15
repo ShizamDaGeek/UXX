@@ -1,4 +1,5 @@
 #include "UXXBackendGLFW.hpp"
+#include <GL/gl.h>
 
 // |=====================================================
 // |---[Helper Functions]--------------------------------
@@ -118,6 +119,7 @@ bool UXXBackendGLFW::init()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_SAMPLES, 2);
     #ifndef NDEBUG
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
     #else
@@ -147,6 +149,10 @@ bool UXXBackendGLFW::init()
         std::cerr << "Error trying to initialize GLAD\n";
         return false;
     }
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
+    glEnable(GL_MULTISAMPLE);
 
     // ===[Record initial window size for the renderer's screen-space math]===
     int windowWidth, windowHeight;
