@@ -114,12 +114,12 @@ bool UXXBackendGLFW::init()
         return false;
     }
 
-    // ===[Request an OpenGL 4.6, core-profile, forward compatablity, context with debug output]===
+    // ===[Request an OpenGL 4.6, core-profile, forward compatablity, context with debug, etc]===
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-    glfwWindowHint(GLFW_SAMPLES, 2);
+    glfwWindowHint(GLFW_SAMPLES, 6);
     #ifndef NDEBUG
         glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
     #else

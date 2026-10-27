@@ -1,14 +1,13 @@
-# ===[CMAKE setup]===
+# ===[CMake setup]===
 cmake_minimum_required(VERSION 3.31.11)
 project(UXX VERSION 0.1.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# Lets clangd and other tools find the compile flags
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 option(UXX_BUILD_GLFW_BACKEND "Build the GLFW window backend" ON)
-
-# Needed for GLM extensions like glm::radians on some setups
-add_compile_definitions(GLM_ENABLE_EXPERIMENTAL)
 
 
 
@@ -20,6 +19,11 @@ else()
 endif()
 
 option(UXX_BUILD_DEMO "Build the UXX demo executable" ${uxxIsTopLevelProject})
+
+# Standalone builds default to Debug so the GL debug context is enabled
+if(uxxIsTopLevelProject AND NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
+endif()
 
 
 
@@ -51,10 +55,19 @@ if(NOT TARGET stb_image)
     )
 endif()
 
+# stb_textedit.h is header-only and used by UXX.cpp, fail early with a clear message if it is missing
+if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/third_party_libs/STB/stb_textedit.h")
+    message(FATAL_ERROR "Missing third_party_libs/STB/stb_textedit.h (get it from github.com/nothings/stb)")
+endif()
+
 
 
 # ===[UXX library]===
 file(GLOB_RECURSE UXX_SRC_FILES CONFIGURE_DEPENDS "src/*.cpp")
+
+# stb_image.cpp already builds as its own library above, compiling it twice would duplicate its symbols
+list(FILTER UXX_SRC_FILES EXCLUDE REGEX ".*stb_image\\.cpp$")
+
 if(NOT UXX_BUILD_GLFW_BACKEND)
     list(FILTER UXX_SRC_FILES EXCLUDE REGEX ".*UXXBackendGLFW\\.cpp$") # Drop GLFW backend source if it's disabled
 endif()
@@ -68,6 +81,14 @@ target_include_directories(UXX PUBLIC
     $<INSTALL_INTERFACE:include>
 )
 
+# Private so stb_textedit.h stays an implementation detail of UXX
+target_include_directories(UXX PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/third_party_libs/STB
+)
+
+# Needed for GLM extensions like glm::radians on some setups
+target_compile_definitions(UXX PUBLIC GLM_ENABLE_EXPERIMENTAL)
+
 target_link_libraries(UXX PUBLIC
     glad
     OpenGL::GL
@@ -79,8 +100,9 @@ if(UXX_BUILD_GLFW_BACKEND)
     target_compile_definitions(UXX PUBLIC UXX_HAS_GLFW_BACKEND) # Lets code #ifdef around GLFW-specific bits
 endif()
 
-if(TARGET freetype)
-    target_compile_options(freetype PRIVATE -Wno-deprecated-declarations) # Freetype uses some deprecated APIs internally
+# Freetype uses some deprecated APIs internally, this flag only exists on GCC and Clang
+if(TARGET freetype AND CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
+    target_compile_options(freetype PRIVATE -Wno-deprecated-declarations)
 endif()
 
 

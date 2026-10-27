@@ -38,10 +38,16 @@ namespace UXX
         // ===[Wiget variables]===
         bool panelOpen              = false;
         bool scrollBoxOpen          = false;
+        bool dropDownOpen           = false;
 
         float scrollBarWidth              = 16.0f;  // Width of the scrollbar track
         float scrollBarMinimumHandleSize  = 20.0f;  // Handle never gets smaller than this
         float mouseWheelScrollPixels      = 40.0f;  // Pixels scrolled per wheel notch
+
+        // Which drop down is currently expanded, keyed by the address of its selectedIndex
+        const void* expandedDropDownIdentifier = nullptr;
+        // Each drop down remembers its own list scroll position
+        std::unordered_map<const void*, float> dropDownScrollOffsetMap;
 
         // ===[Keyboard]===
         bool leftArrowKeyPressed    = false;
@@ -311,16 +317,32 @@ namespace UXX
         // Characters typed this frame, in the order they were typed
         std::string typedCharactersThisFrame;
 
-        // How many times each editing key was pressed this frame
+        // ===[How many times each editing key was pressed this frame]===
         int backspacePressCountThisFrame    = 0;
         int enterPressCountThisFrame        = 0;
         int leftArrowPressCountThisFrame    = 0;
         int rightArrowPressCountThisFrame   = 0;
         int upArrowPressCountThisFrame      = 0;
         int downArrowPressCountThisFrame    = 0;
+
         int homePressCountThisFrame         = 0;
         int endPressCountThisFrame          = 0;
         int deletePressCountThisFrame       = 0;
+
+        // ===[Shortcut input, filled by the backend every frame]===
+        bool copyShortcutPressedSinceLastPoll       = false;
+        bool cutShortcutPressedSinceLastPoll        = false;
+        bool pasteShortcutPressedSinceLastPoll      = false;
+
+        bool tabShortcutPressedSinceLastPoll        = false;
+        bool shiftTabShortcutPressedSinceLastPoll   = false;
+
+        // Text from the clipboard (for paste) and text waiting to be sent to it (for copy/cut)
+        std::string clipboardTextThisFrame;
+        std::string textWaitingToBeCopied;
+
+        // How many spaces one Tab press inserts
+        constexpr int tabSpaceCount = 4;
 
         // ===[Per-field state, remembered between frames]===
         // Which input field currently receives typing
@@ -750,6 +772,14 @@ namespace UXX
         homePressCountThisFrame         = homePressCount;
         endPressCountThisFrame          = endPressCount;
         deletePressCountThisFrame       = deletePressCount;
+    }
+    void SetShortCutKeyState(bool copyShortcutPressed, bool cutShortcutPressed, bool pasteShortcutPressed)
+    {
+
+    }
+    void SetCodeShortCutKeyState(bool tabShortcutPressed, bool shiftTabShortcutPressed)
+    {
+
     }
 
     // |=====================================================
@@ -1186,12 +1216,27 @@ namespace UXX
         GLTexture* imageTexture = GetOrLoadTexture(imageStyle.imagePath);
         DrawQuad(ImageRect, imageStyle.color, imageTexture);
     }
-    // void Separator(Rect SeparatorRect, Color SeparatorColor)
-    // {
-    //     if (!panelOpen) return;
+    void Separator(Rect separatorRect, const SeparatorStyle& separatorStyle)
+    {
+        if (!panelOpen) return;
+        SkipDraw(separatorRect);
 
-    //     DrawQuad(SeparatorRect, SeparatorColor, nullptr);
-    // }
+        // i wish i was that long
+        float separatorLineLength = 100000.0f;
+
+        // The line passes through the center of the rect the caller gives us
+        float lineCenterX = separatorRect.xPos + separatorRect.width * 0.5f;
+        float lineCenterY = separatorRect.yPos + separatorRect.height * 0.5f;
+
+        // Shift the quad left by half its length so its center sits on the point
+        Rect longLine(lineCenterX - separatorLineLength * 0.5f,
+                        lineCenterY - separatorStyle.thickness * 0.5f,
+                        separatorLineLength,
+                        separatorStyle.thickness,
+                        separatorRect.rotation);
+
+        DrawQuad(longLine, separatorStyle.lineColor, nullptr);
+    }
     void Text(Rect TextRect, const TextStyle& textStyle, std::string TextItself)
     {
         if (!panelOpen) return;
@@ -1358,13 +1403,209 @@ namespace UXX
         inputClipIsActive = false;
         PopScissor();
     }
-
-    bool DropDown(Rect dropDownRect, const DropDownStyle& dropDownStyle, std::string dropDownText)
+    void BeginDropDown(Rect dropDownRect, int& selectedIndex, const std::vector<std::string>& labelList,
+                        const DropDownStyle& dropDownStyle, std::string placeholderText)
     {
-        if (!panelOpen) return false;
+        if (!panelOpen) return;
         SkipDraw(dropDownRect);
+        dropDownOpen = true;
 
-        return 0;
+        int itemCount = (int)labelList.size();
+        float itemHeight = dropDownRect.height;
+        bool dropDownIsExpanded = (expandedDropDownIdentifier == &selectedIndex);
+
+        // ===[Header: click it to expand or collapse the list]===
+        bool headerIsHovered = WidgetIsHovered(&selectedIndex, dropDownRect);
+        if (headerIsHovered) mouseHoveredOverWidgetThisFrame = true;
+
+        if (headerIsHovered && leftMouseButtonPressed)
+        {
+            dropDownIsExpanded = !dropDownIsExpanded;
+            expandedDropDownIdentifier = dropDownIsExpanded ? &selectedIndex : nullptr;
+        }
+
+        // ===[Draw the header with the selected label, or the placeholder if nothing is selected]===
+        float headerDarkenAmount = 1.0f;
+        if (headerIsHovered && leftMouseButtonDown)  headerDarkenAmount = activeDarkenFactor;
+        else if (headerIsHovered)                    headerDarkenAmount = hoverDarkenFactor;
+
+        GLTexture* headerTexture = dropDownStyle.backgroundImagePath.empty()
+            ? nullptr : GetOrLoadTexture(dropDownStyle.backgroundImagePath);
+        Color finalHeaderColor = headerTexture ? dropDownStyle.backGroundColor
+                                               : ApplyDarken(dropDownStyle.backGroundColor, headerDarkenAmount);
+        DrawQuad(dropDownRect, finalHeaderColor, headerTexture, headerDarkenAmount);
+
+        Font* font = GetOrLoadFont(dropDownStyle.fontPath, (unsigned int)dropDownStyle.textSize);
+
+        bool selectedIndexIsValid = (selectedIndex >= 0 && selectedIndex < itemCount);
+        const std::string& headerText = selectedIndexIsValid ? labelList[selectedIndex] : placeholderText;
+
+        if (font && !headerText.empty())
+        {
+            PushScissor(dropDownRect);
+
+            float headerTextHeight = font->measureTextHeight(headerText, dropDownStyle.textSize);
+            float headerCenterYTopDown = dropDownRect.yPos + dropDownRect.height * 0.5f + headerTextHeight * 0.5f;
+            DrawTextRaw(dropDownRect.xPos + inputFieldPadding, SCREEN_HEIGHT - headerCenterYTopDown,
+                        dropDownStyle.textColor, dropDownStyle.textSize, headerText, font, 0.0f);
+
+            PopScissor();
+        }
+
+        if (!dropDownIsExpanded) return;
+
+        // ===[List sits right under the header and shows at most maxVisibleItems rows]===
+        int visibleItemCount = std::min(itemCount, std::max(1, dropDownStyle.maxVisibleItems));
+        Rect listRect(dropDownRect.xPos, dropDownRect.yPos + dropDownRect.height,
+                      dropDownRect.width, visibleItemCount * itemHeight);
+
+        float contentHeight = itemCount * itemHeight;
+        float maximumScrollOffset = std::max(0.0f, contentHeight - listRect.height);
+        bool listNeedsScrollBar = maximumScrollOffset > 0.0f;
+
+        float& scrollOffset = dropDownScrollOffsetMap[&selectedIndex];
+
+        // ===[List background]===
+        GLTexture* listTexture = dropDownStyle.backgroundImagePath.empty()
+            ? nullptr : GetOrLoadTexture(dropDownStyle.backgroundImagePath);
+        DrawQuad(listRect, dropDownStyle.dropcBackGroundColor, listTexture);
+
+        // ===[Scrollbar track on the right edge, only when the list is longer than what is visible]===
+        Rect scrollBarTrackRect(listRect.xPos + listRect.width - scrollBarWidth, listRect.yPos,
+                                scrollBarWidth, listRect.height);
+
+        bool scrollBarTrackIsHovered = listNeedsScrollBar && WidgetIsHovered(&scrollOffset, scrollBarTrackRect);
+        if (scrollBarTrackIsHovered) mouseHoveredOverWidgetThisFrame = true;
+
+        float visibleFraction = (contentHeight > 0.0f) ? std::min(1.0f, listRect.height / contentHeight) : 1.0f;
+        float handleHeight = std::max(scrollBarMinimumHandleSize, scrollBarTrackRect.height * visibleFraction);
+        handleHeight = std::min(handleHeight, scrollBarTrackRect.height);
+        float handleTravelDistance = scrollBarTrackRect.height - handleHeight;
+
+        // ===[Dragging the handle]===
+        bool scrollBarIsActive = listNeedsScrollBar && WidgetClaimsActive(&scrollOffset, scrollBarTrackIsHovered);
+        if (scrollBarIsActive && leftMouseButtonDown && handleTravelDistance > 0.0f)
+        {
+            float normalizedDragPosition = (float)(mousePositionY - scrollBarTrackRect.yPos - handleHeight * 0.5f) / handleTravelDistance;
+            scrollOffset = std::clamp(normalizedDragPosition, 0.0f, 1.0f) * maximumScrollOffset;
+        }
+
+        // ===[Mouse wheel while the cursor is anywhere over the list]===
+        bool cursorIsInsideList = (mousePositionX >= listRect.xPos && mousePositionX <= listRect.xPos + listRect.width &&
+                                   mousePositionY >= listRect.yPos && mousePositionY <= listRect.yPos + listRect.height);
+        if (cursorIsInsideList)
+            scrollOffset -= (float)scrollDeltaYState * mouseWheelScrollPixels;
+
+        scrollOffset = std::clamp(scrollOffset, 0.0f, maximumScrollOffset);
+
+        // ===[Items are clipped to the list area, minus the scrollbar if there is one]===
+        Rect listContentRect(listRect.xPos, listRect.yPos,
+                             listRect.width - (listNeedsScrollBar ? scrollBarWidth : 0.0f), listRect.height);
+
+        bool cursorIsInsideListContent = (mousePositionX >= listContentRect.xPos && mousePositionX <= listContentRect.xPos + listContentRect.width &&
+                                          mousePositionY >= listContentRect.yPos && mousePositionY <= listContentRect.yPos + listContentRect.height);
+
+        bool anItemWasClicked = false;
+        PushScissor(listContentRect);
+
+        // Only walk the rows that can actually be seen
+        int firstVisibleItemIndex = std::max(0, (int)(scrollOffset / itemHeight));
+        int lastVisibleItemIndex = std::min(itemCount - 1, firstVisibleItemIndex + visibleItemCount);
+
+        for (int itemIndex = firstVisibleItemIndex; itemIndex <= lastVisibleItemIndex; itemIndex++)
+        {
+            Rect itemRect(listContentRect.xPos, listRect.yPos + itemIndex * itemHeight - scrollOffset,
+                          listContentRect.width, itemHeight);
+
+            // Rows scrolled half out of view must not react outside the visible list
+            bool itemIsHovered = cursorIsInsideListContent && WidgetIsHovered(&labelList[itemIndex], itemRect);
+            if (itemIsHovered) mouseHoveredOverWidgetThisFrame = true;
+
+            if (itemIsHovered && leftMouseButtonPressed)
+            {
+                selectedIndex = itemIndex;
+                anItemWasClicked = true;
+            }
+
+            // Highlight hovered rows, and keep the selected row slightly darker
+            float itemDarkenAmount = 1.0f;
+            if (itemIsHovered && leftMouseButtonDown)    itemDarkenAmount = activeDarkenFactor;
+            else if (itemIsHovered)                      itemDarkenAmount = hoverDarkenFactor;
+            else if (itemIndex == selectedIndex)         itemDarkenAmount = hoverDarkenFactor;
+
+            if (itemDarkenAmount != 1.0f)
+                DrawQuad(itemRect, ApplyDarken(dropDownStyle.dropcBackGroundColor, itemDarkenAmount), nullptr);
+
+            if (font && !labelList[itemIndex].empty())
+            {
+                float itemTextHeight = font->measureTextHeight(labelList[itemIndex], dropDownStyle.textSize);
+                float itemCenterYTopDown = itemRect.yPos + itemRect.height * 0.5f + itemTextHeight * 0.5f;
+                DrawTextRaw(itemRect.xPos + inputFieldPadding, SCREEN_HEIGHT - itemCenterYTopDown,
+                            dropDownStyle.textColor, dropDownStyle.textSize, labelList[itemIndex], font, 0.0f);
+            }
+        }
+        PopScissor();
+
+        // ===[Draw the track and the handle, same look as the scroll box]===
+        if (listNeedsScrollBar)
+        {
+            GLTexture* barTexture    = dropDownStyle.barImagePath.empty()    ? nullptr : GetOrLoadTexture(dropDownStyle.barImagePath);
+            GLTexture* scrollTexture = dropDownStyle.scrollImagePath.empty() ? nullptr : GetOrLoadTexture(dropDownStyle.scrollImagePath);
+
+            float scrollProgress = scrollOffset / maximumScrollOffset;
+            Rect scrollBarHandleRect(scrollBarTrackRect.xPos, scrollBarTrackRect.yPos + scrollProgress * handleTravelDistance,
+                                     scrollBarWidth, handleHeight);
+
+            float handleDarkenAmount = 1.0f;
+            if (scrollBarIsActive)               handleDarkenAmount = activeDarkenFactor;
+            else if (scrollBarTrackIsHovered)    handleDarkenAmount = hoverDarkenFactor;
+
+            DrawQuad(scrollBarTrackRect, DefaultClickedColor, barTexture);
+            Color finalHandleColor = scrollTexture ? DefaultHoverColor : ApplyDarken(DefaultHoverColor, handleDarkenAmount);
+            DrawQuad(scrollBarHandleRect, finalHandleColor, scrollTexture, handleDarkenAmount);
+        }
+
+        // ===[Picking an item closes the list, and so does clicking anywhere outside the header and list]===
+        bool clickedOutside = leftMouseButtonPressed && !headerIsHovered && !cursorIsInsideList;
+        if (anItemWasClicked || clickedOutside)
+            expandedDropDownIdentifier = nullptr;
+    }
+    void EndDropDown()
+    {
+        // Everything was clipped and drawn inside BeginDropDown, so there is no scissor left to pop
+        dropDownOpen = false;
+    }
+    void ToolTip(Rect toolTipRect, const ToolTipStyle& toolTipStyle, std::string tipText)
+    {
+        if (!panelOpen || tipText.empty()) return;
+
+        // Only show while the mouse is inside the area this tooltip belongs to
+        bool mouseIsInsideHoverArea = mousePositionX >= toolTipRect.xPos && mousePositionX <= toolTipRect.xPos + toolTipRect.width &&
+                                      mousePositionY >= toolTipRect.yPos && mousePositionY <= toolTipRect.yPos + toolTipRect.height;
+        if (!mouseIsInsideHoverArea || !CursorIsInsideInputClip()) return;
+
+        Font* tipFont = GetOrLoadFont(toolTipStyle.fontPath, (unsigned int)toolTipStyle.textSize);
+        if (!tipFont) return;
+
+        // Box is the text size plus padding, placed just below and right of the mouse
+        float tipTextWidth  = tipFont->measureTextWidth(tipText, toolTipStyle.textSize);
+        float tipTextHeight = tipFont->measureTextHeight(tipText, toolTipStyle.textSize);
+        Rect tipBoxRect((float)mousePositionX + 16.0f, (float)mousePositionY + 16.0f,
+                        tipTextWidth + inputFieldPadding * 2.0f, tipTextHeight + inputFieldPadding * 2.0f);
+
+        // Turn the panel scissor off so the tooltip is not cut at the panel edge
+        glDisable(GL_SCISSOR_TEST);
+
+        GLTexture* toolTipTexture = toolTipStyle.backgroundImagePath.empty() ? nullptr : GetOrLoadTexture(toolTipStyle.backgroundImagePath);
+        DrawQuad(tipBoxRect, toolTipStyle.backGroundColor, toolTipTexture, 0.0f);
+
+        // Text position is measured from the bottom of the screen
+        float tipBaselineBottomUpY = SCREEN_HEIGHT - (tipBoxRect.yPos + inputFieldPadding + tipTextHeight);
+        DrawTextRaw(tipBoxRect.xPos + inputFieldPadding, tipBaselineBottomUpY,
+                    toolTipStyle.textColor, toolTipStyle.textSize, tipText, tipFont, 0.0f);
+
+        // Turn the scissor back on for whatever draws next
+        glEnable(GL_SCISSOR_TEST);
     }
 
     // |=====================================================

@@ -16,6 +16,7 @@
 #include <array>
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 
 #include "internal/Texture.hpp"
 #include "internal/VAO.hpp"
@@ -51,7 +52,6 @@ struct Style
     float bottomRightCornerRadius;
 };
 
-enum class SeparatorStyle { Solid, Dashed, Dotted };
 enum class TextAlign { Left, Center, Right };
 enum class WindowBackend
 {
@@ -131,6 +131,12 @@ namespace UXX
 
         std::string imagePath = "";
     };
+    struct SeparatorStyle
+    {
+        Color lineColor = DefaultColor;
+
+        float thickness = 2.0f;
+    };
     // Shared by MultiInputField and NumberInputField
     struct InputFieldStyle
     {
@@ -170,10 +176,25 @@ namespace UXX
          Color backGroundColor      = DefaultColor;
          Color dropcBackGroundColor = DefaultColor;
 
-         Color textColor                 = DefaultTextColor;
-         float textSize                  = 2.0f;
+         Color textColor                    = DefaultTextColor;
+         float textSize                     = 2.0f;
 
-         std::string fontPath            = DefaultFontPath;
+         int maxVisibleItems                = 5;
+
+         std::string fontPath               = DefaultFontPath;
+         std::string backgroundImagePath    = "";
+         std::string scrollImagePath        = "";
+         std::string barImagePath           = "";
+    };
+    struct ToolTipStyle
+    {
+        Color backGroundColor   = DefaultColor;
+
+        Color textColor         = DefaultTextColor;
+        float textSize          = 2.0f;
+
+        std::string fontPath                = DefaultFontPath;
+        std::string backgroundImagePath     = "";
     };
 
     struct GraphicsInfo
@@ -207,9 +228,13 @@ namespace UXX
     void GetScrollDelta(double& outX, double& outY);
     void SetKeyState(bool leftArrowPressed, bool rightArrowPressed, bool upArrowPressed, bool downArrowPressed);
     bool MouseHoveredOverWidget();
+
     void SetTextInputState(const std::string& typedCharacters, int backspacePressCount, int enterPressCount);
+
     void SetEditKeyState(int leftArrowPressCount, int rightArrowPressCount, int upArrowPressCount,
         int downArrowPressCount, int homePressCount, int endPressCount, int deletePressCount);
+    void SetShortCutKeyState(bool copyShortcutPressed, bool cutShortcutPressed, bool pasteShortcutPressed);
+    void SetCodeShortCutKeyState(bool tabShortcutPressed, bool shiftTabShortcutPressed);
 
     //                               /TT\  /
     //                           *O=[_||_]<--
@@ -230,7 +255,7 @@ namespace UXX
     void Image(Rect imageRect, const ImageStyle& imageStyle);
     void Text(Rect textRect, const TextStyle& textStyle, std::string textItself);
 
-    // void Separator(Rect SeparatorRect, Color SeparatorColor);
+    void Separator(Rect separatorRect, const SeparatorStyle& separatorStyle);
 
     bool MultiInputField(Rect inputFieldRect, std::string& textValue, const InputFieldStyle& inputFieldStyle);
     bool NumberInputField(Rect inputFieldRect, float& numberValue, const InputFieldStyle& inputFieldStyle);
@@ -239,7 +264,11 @@ namespace UXX
     void BeginScrollBox(Rect scrollBoxRect, float& scrollOffset, float contentHeight, const ScrollBoxStyle& scrollBoxStyle);
     void EndScrollBox();
 
-    bool DropDown(Rect dropDownRect, std::vector<std::string> labelList, const DropDownStyle& dropDownStyle, std::string dropDownText = "");
+    void BeginDropDown(Rect dropDownRect, int& selectedIndex, const std::vector<std::string>& labelList,
+                  const DropDownStyle& dropDownStyle, std::string placeholderText = "");
+    void EndDropDown();
+
+    void ToolTip(Rect toolTipRect, const ToolTipStyle& toolTipStyle, std::string tipText = "");
 
     void BlowUp();
 };

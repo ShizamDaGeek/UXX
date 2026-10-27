@@ -101,6 +101,12 @@ int main()
         const float inventoryContentHeight = 1200.0f;
         Rect inventoryScrollBoxRect(100, 500, 400, 300);
 
+        static int selectedWeaponIndex = -1;   // -1 means nothing selected yet, so the placeholder shows
+        const std::vector<std::string> weaponLabelList =
+        {
+            "Sword", "Axe", "Bow", "Crossbow", "Spear", "Dagger", "Mace", "Staff"
+        };
+
         // ===[Styles]===
         UXX::InputFieldStyle inputFieldStyle;
         UXX::CodeInputFieldStyle codeInputFieldStyle
@@ -117,6 +123,18 @@ int main()
             .clickedColor = Color(0.0f, 0.0f, 0.0f, 1.0f),
         };
         UXX::ScrollBoxStyle scrollBoxStyle;
+        UXX::DropDownStyle dropDownStyle;
+        dropDownStyle.maxVisibleItems = 5;
+
+        UXX::SeparatorStyle horizontalSeparatorStyle;
+        horizontalSeparatorStyle.lineColor = Color(0.8f, 0.8f, 0.8f, 1.0f);
+        horizontalSeparatorStyle.thickness = 2.0f;
+
+        UXX::SeparatorStyle diagonalSeparatorStyle;
+        diagonalSeparatorStyle.lineColor = Color(1.0f, 0.4f, 0.4f, 1.0f);
+        diagonalSeparatorStyle.thickness = 4.0f;
+
+        UXX::ToolTipStyle toolTipStyle;
 
         // ===[Widgets]===
 
@@ -132,6 +150,19 @@ int main()
             UXX::Button(Rect(inventoryScrollBoxRect.xPos + 10, itemTopY, 360, 50), buttonStyle, "Item " + std::to_string(itemIndex));
         }
         UXX::EndScrollBox();
+
+        UXX::BeginDropDown(Rect(500, 50, 270, 40), selectedWeaponIndex, weaponLabelList, dropDownStyle, "Pick a weapon");
+        UXX::EndDropDown();
+        UXX::ToolTip(Rect(500, 50, 270, 40), toolTipStyle, "This is a Drop Down");
+
+        // Rotation 0 gives a horizontal line across the whole panel at y = 200
+        UXX::Separator(Rect(400, 200, 0, 0, 0.0f), horizontalSeparatorStyle);
+
+        // Rotation 90 gives a vertical line across the whole panel at x = 400
+        UXX::Separator(Rect(400, 300, 0, 0, 90.0f), horizontalSeparatorStyle);
+
+        // Rotation 45 gives a diagonal line through the point (300, 250)
+        UXX::Separator(Rect(300, 250, 0, 0, 45.0f), diagonalSeparatorStyle);
 
         UXX::EndPanel();
     });
