@@ -3,5 +3,3 @@ build/
 *.o
 *.a
 .cache/
-cmake/
-third_party_libs/

@@ -1,0 +1,2 @@
+# Mark the bundled libraries as vendored
+third_party_libs/** linguist-vendored
