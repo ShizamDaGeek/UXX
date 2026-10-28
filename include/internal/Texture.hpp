@@ -35,7 +35,7 @@ public:
 
     GLTexture(const char* image, const char* texType, unsigned int slot);
 
-    static unsigned int loadTexture(const std::string& path, const char* texType,
+    static unsigned int loadTexture(const std::string& path, const char* textureType,
         bool* outHasAlpha = nullptr, bool* outIsFallback = nullptr);
 
     void texUnit(Shader& shader, const char* uniform, unsigned int unit);

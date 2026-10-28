@@ -1,5 +1,80 @@
 #include "UXX.hpp"
 
+// Font the stb callbacks use to measure text, set before every stb call
+static Font* textEditFont = nullptr;
+static float textEditFontSize = 2.0f;
+
+// Line height as a multiple of glyph height
+static constexpr float inputFieldLineHeightMultiplier = 1.5f;
+
+// Width of one character, a newline must return the special newline value
+static float GetTextEditCharacterWidth(std::string* text, int lineStartIndex, int characterOffset)
+{
+    char character = (*text)[lineStartIndex + characterOffset];
+    if (character == '\n') return -1.0f;
+
+    return textEditFont->measureTextWidth(std::string(1, character), textEditFontSize);
+}
+
+// Declared here and defined below the include, because it needs stb's row type
+static void LayoutTextEditRow(void* rowPointer, std::string* text, int lineStartIndex);
+
+// ===[Tell stb_textedit how our text and keys work]===
+#define STB_TEXTEDIT_STRING                 std::string
+#define STB_TEXTEDIT_CHARTYPE               char
+#define STB_TEXTEDIT_GETWIDTH_NEWLINE       (-1.0f)
+#define STB_TEXTEDIT_STRINGLEN(text)        ((int)(text)->size())
+#define STB_TEXTEDIT_GETCHAR(text, index)   ((*(text))[index])
+#define STB_TEXTEDIT_NEWLINE                '\n'
+#define STB_TEXTEDIT_KEYTOTEXT(key)         (((key) >= 0x200000) ? 0 : (key))
+#define STB_TEXTEDIT_GETWIDTH(text, lineStart, offset)  GetTextEditCharacterWidth(text, lineStart, offset)
+#define STB_TEXTEDIT_LAYOUTROW(row, text, lineStart)    LayoutTextEditRow((void*)(row), text, lineStart)
+#define STB_TEXTEDIT_DELETECHARS(text, index, count)    ((text)->erase((size_t)(index), (size_t)(count)))
+#define STB_TEXTEDIT_INSERTCHARS(text, index, newText, count) \
+    (((text)->insert((size_t)(index), (newText), (size_t)(count))), 1)
+
+#define STB_TEXTEDIT_K_SHIFT        0x400000
+#define STB_TEXTEDIT_K_LEFT         0x200000
+#define STB_TEXTEDIT_K_RIGHT        0x200001
+#define STB_TEXTEDIT_K_UP           0x200002
+#define STB_TEXTEDIT_K_DOWN         0x200003
+#define STB_TEXTEDIT_K_LINESTART    0x200004
+#define STB_TEXTEDIT_K_LINEEND      0x200005
+#define STB_TEXTEDIT_K_TEXTSTART    0x200006
+#define STB_TEXTEDIT_K_TEXTEND      0x200007
+#define STB_TEXTEDIT_K_DELETE       0x200008
+#define STB_TEXTEDIT_K_BACKSPACE    0x200009
+#define STB_TEXTEDIT_K_UNDO         0x20000A
+#define STB_TEXTEDIT_K_REDO         0x20000B
+#define STB_TEXTEDIT_K_PGUP         0x20000E
+#define STB_TEXTEDIT_K_PGDOWN       0x20000F
+
+#define STB_TEXTEDIT_IMPLEMENTATION
+#include <stb_textedit.h>
+
+// Tells stb how wide and tall one line is, a line ends after its newline
+static void LayoutTextEditRow(void* rowPointer, std::string* text, int lineStartIndex)
+{
+    StbTexteditRow* row = static_cast<StbTexteditRow*>(rowPointer);
+
+    // Find where this line's text ends
+    int lineEndIndex = lineStartIndex;
+    while (lineEndIndex < (int)text->size() && (*text)[lineEndIndex] != '\n') lineEndIndex++;
+
+    float lineWidth  = textEditFont->measureTextWidth(text->substr(lineStartIndex, lineEndIndex - lineStartIndex), textEditFontSize);
+    float lineHeight = textEditFont->measureTextHeight("A", textEditFontSize) * inputFieldLineHeightMultiplier;
+
+    // The newline itself belongs to the row
+    if (lineEndIndex < (int)text->size()) lineEndIndex++;
+
+    row->x0 = 0.0f;
+    row->x1 = lineWidth;
+    row->baseline_y_delta = lineHeight;
+    row->ymin = 0.0f;
+    row->ymax = lineHeight;
+    row->num_chars = lineEndIndex - lineStartIndex;
+}
+
 namespace UXX
 {
     // |=====================================================
@@ -347,19 +422,17 @@ namespace UXX
         // ===[Per-field state, remembered between frames]===
         // Which input field currently receives typing
         const void* focusedInputFieldIdentifier = nullptr;
-        // Caret position inside each field, keyed by the address of the field's value
-        std::unordered_map<const void*, size_t> caretIndexMap;
+        // stb state (cursor, selection, undo) of each field, keyed by the address of the field's value
+        std::unordered_map<const void*, STB_TexteditState> textEditStateMap;
         // Number fields edit a text copy while focused ("3." or "-" is not a valid float yet)
         std::unordered_map<const void*, std::string> numberFieldEditBufferMap;
 
         // ===[Constants]===
-        // An empty allowed list means every character is accepted
         const std::string anyCharacterAllowed = "";
         const std::string numberFieldAllowedCharacters = "0123456789.-/";
         const std::string bracketCharacters = "()[]{}<>";
 
         constexpr float inputFieldPadding = 8.0f;                   // Space between field edge and text, in pixels
-        constexpr float inputFieldLineHeightMultiplier = 1.5f;      // Line height as a multiple of glyph height
         constexpr float caretWidth = 2.0f;                          // In pixels
         constexpr double caretBlinkHalfPeriodSeconds = 0.5;         // Time the caret stays on, then off
 
@@ -389,25 +462,18 @@ namespace UXX
         // |=====================================================
         // |---[Focus]-------------------------------------------
         // |=====================================================
-        // ===[Click inside to focus, click outside to unfocus. Returns true if this field is focused]===
+        // ===[Click inside to focus, click outside to unfocus]===
         bool UpdateInputFieldFocus(const void* widgetIdentifier, bool widgetIsHoveredThisFrame)
         {
             // Focus only changes on the frame the left mouse button goes down
-            if (!leftMouseButtonPressed) return focusedInputFieldIdentifier == widgetIdentifier;
+            if (!leftMouseButtonPressed)
+                return focusedInputFieldIdentifier == widgetIdentifier;
 
+            // Click inside to focus, click anywhere else to unfocus
             if (widgetIsHoveredThisFrame)
-            {
-                // Newly focused fields start with the caret at the end (npos is clamped to the text size later)
-                if (focusedInputFieldIdentifier != widgetIdentifier)
-                    caretIndexMap[widgetIdentifier] = std::string::npos;
-
                 focusedInputFieldIdentifier = widgetIdentifier;
-            }
             else if (focusedInputFieldIdentifier == widgetIdentifier)
-            {
-                // Clicked somewhere else while this field was focused
                 focusedInputFieldIdentifier = nullptr;
-            }
 
             return focusedInputFieldIdentifier == widgetIdentifier;
         }
@@ -432,135 +498,72 @@ namespace UXX
             size_t nextNewlineIndex = textToSearch.find('\n', caretIndex);
             return nextNewlineIndex == std::string::npos ? textToSearch.size() : nextNewlineIndex;
         }
-        // ===[Moves the caret one line up (-1) or down (+1), keeping the same column when the target line is long enough]===
-        void MoveCaretToNeighborLine(const std::string& textToSearch, size_t& caretIndex, int lineDirection)
+
+        // ===[Runs one frame of editing through stb_textedit, returns true if the text changed]===
+        bool EditTextWithStb(const void* widgetIdentifier, std::string& textToEdit, Rect fieldRect,
+            bool allowNewlines, const std::string& allowedCharacters, const std::string& fontPath, float textSize)
         {
-            size_t currentLineStartIndex = FindLineStartIndex(textToSearch, caretIndex);
-            size_t currentLineEndIndex = FindLineEndIndex(textToSearch, caretIndex);
-            size_t columnIndex = caretIndex - currentLineStartIndex;
+            // The stb callbacks measure text with this font, so set it before any stb call
+            textEditFont        = GetOrLoadFont(fontPath, (unsigned int)textSize);
+            textEditFontSize    = textSize;
+            if (!textEditFont) return false;
 
-            size_t targetLineStartIndex = 0;
-            size_t targetLineEndIndex = 0;
+            // Each field owns one stb state, created the first time the field is edited
+            bool stateIsNew = textEditStateMap.find(widgetIdentifier) == textEditStateMap.end();
+            STB_TexteditState& editState = textEditStateMap[widgetIdentifier];
+            if (stateIsNew) stb_textedit_initialize_state(&editState, allowNewlines ? 0 : 1);
 
-            if (lineDirection < 0)
+            std::string textBeforeEditing = textToEdit;
+
+            // Mouse position relative to the top left corner of the text area
+            float mouseTextX = (float)mousePositionX - (fieldRect.xPos + inputFieldPadding);
+            float mouseTextY = (float)mousePositionY - (fieldRect.yPos + inputFieldPadding);
+
+            // Clicking places the cursor, holding and dragging selects text
+            bool fieldIsHovered = (currentFrameHoveredWidgetIdentifier == widgetIdentifier);
+            bool fieldIsActive = WidgetClaimsActive(widgetIdentifier, fieldIsHovered);
+            if (fieldIsHovered && leftMouseButtonPressed)
+                stb_textedit_click(&textToEdit, &editState, mouseTextX, mouseTextY);
+            else if (fieldIsActive && leftMouseButtonDown)
+                stb_textedit_drag(&textToEdit, &editState, mouseTextX, mouseTextY);
+
+            // Sends one stb key code once for every physical key press this frame
+            auto sendKeyToStb = [&](int stbKeyCode, int pressCount)
             {
-                // Already on the first line, nowhere to go
-                if (currentLineStartIndex == 0) return;
+                for (int pressIndex = 0; pressIndex < pressCount; pressIndex++)
+                    stb_textedit_key(&textToEdit, &editState, stbKeyCode);
+            };
 
-                // The newline just before this line is the end of the line above
-                targetLineEndIndex = currentLineStartIndex - 1;
-                targetLineStartIndex = FindLineStartIndex(textToSearch, targetLineEndIndex);
-            }
-            else
+            // Up and down only make sense when the field has several lines
+            sendKeyToStb(STB_TEXTEDIT_K_LEFT, leftArrowPressCountThisFrame);
+            sendKeyToStb(STB_TEXTEDIT_K_RIGHT, rightArrowPressCountThisFrame);
+            if (allowNewlines)
             {
-                // Already on the last line, nowhere to go
-                if (currentLineEndIndex >= textToSearch.size()) return;
-
-                // The line below starts right after the newline that ends this one
-                targetLineStartIndex = currentLineEndIndex + 1;
-                targetLineEndIndex = FindLineEndIndex(textToSearch, targetLineStartIndex);
+                sendKeyToStb(STB_TEXTEDIT_K_UP, upArrowPressCountThisFrame);
+                sendKeyToStb(STB_TEXTEDIT_K_DOWN, downArrowPressCountThisFrame);
             }
+            sendKeyToStb(STB_TEXTEDIT_K_LINESTART, homePressCountThisFrame);
+            sendKeyToStb(STB_TEXTEDIT_K_LINEEND, endPressCountThisFrame);
 
-            // A shorter target line clamps the caret to its end
-            size_t targetLineLength = targetLineEndIndex - targetLineStartIndex;
-            caretIndex = targetLineStartIndex + std::min(columnIndex, targetLineLength);
-        }
-
-        // |=====================================================
-        // |---[Applying this frame's keys to the text]----------
-        // |=====================================================
-        // Each step below handles ONE kind of key. ApplyTypingToText just runs them in order.
-
-        // ===[Arrow keys: left/right always work, up/down only in multi-line fields]===
-        void MoveCaretWithArrowKeys(const std::string& textToEdit, size_t& caretIndex, bool allowNewlines)
-        {
-            for (int pressIndex = 0; pressIndex < leftArrowPressCountThisFrame; pressIndex++)
-                if (caretIndex > 0) caretIndex--;
-
-            for (int pressIndex = 0; pressIndex < rightArrowPressCountThisFrame; pressIndex++)
-                if (caretIndex < textToEdit.size()) caretIndex++;
-
-            if (!allowNewlines) return;
-
-            for (int pressIndex = 0; pressIndex < upArrowPressCountThisFrame; pressIndex++)
-                MoveCaretToNeighborLine(textToEdit, caretIndex, -1);
-            for (int pressIndex = 0; pressIndex < downArrowPressCountThisFrame; pressIndex++)
-                MoveCaretToNeighborLine(textToEdit, caretIndex, +1);
-        }
-        // ===[Home and End jump to the start or end of the current line]===
-        void MoveCaretWithHomeAndEndKeys(const std::string& textToEdit, size_t& caretIndex)
-        {
-            if (homePressCountThisFrame > 0) caretIndex = FindLineStartIndex(textToEdit, caretIndex);
-            if (endPressCountThisFrame > 0)  caretIndex = FindLineEndIndex(textToEdit, caretIndex);
-        }
-        // ===[Inserts typed characters at the caret, skipping ones the field does not allow]===
-        bool InsertTypedCharacters(std::string& textToEdit, size_t& caretIndex, const std::string& allowedCharacters)
-        {
-            bool textChanged = false;
-
+            // Typed characters go in one by one, skipping ones the field does not allow
             for (char typedCharacter : typedCharactersThisFrame)
             {
                 bool characterIsAllowed = allowedCharacters.empty() ||
                                           allowedCharacters.find(typedCharacter) != std::string::npos;
-                if (!characterIsAllowed) continue;
-
-                textToEdit.insert(caretIndex, 1, typedCharacter);
-                caretIndex++;
-                textChanged = true;
-            }
-            return textChanged;
-        }
-        // ===[Backspace removes the character before the caret, Delete removes the one after it]===
-        bool DeleteCharactersAroundCaret(std::string& textToEdit, size_t& caretIndex)
-        {
-            bool textChanged = false;
-
-            for (int pressIndex = 0; pressIndex < backspacePressCountThisFrame && caretIndex > 0; pressIndex++)
-            {
-                textToEdit.erase(caretIndex - 1, 1);
-                caretIndex--;
-                textChanged = true;
+                if (characterIsAllowed) stb_textedit_key(&textToEdit, &editState, typedCharacter);
             }
 
-            // Delete leaves the caret where it is
-            for (int pressIndex = 0; pressIndex < deletePressCountThisFrame && caretIndex < textToEdit.size(); pressIndex++)
-            {
-                textToEdit.erase(caretIndex, 1);
-                textChanged = true;
-            }
-            return textChanged;
-        }
-        // ===[Enter adds a new line in multi-line fields, otherwise it ends editing]===
-        bool HandleEnterKey(std::string& textToEdit, size_t& caretIndex, bool allowNewlines)
-        {
-            bool textChanged = false;
+            sendKeyToStb(STB_TEXTEDIT_K_BACKSPACE, backspacePressCountThisFrame);
+            sendKeyToStb(STB_TEXTEDIT_K_DELETE, deletePressCountThisFrame);
 
+            // Enter adds a new line in multi-line fields, otherwise it ends editing
             for (int pressIndex = 0; pressIndex < enterPressCountThisFrame; pressIndex++)
             {
-                if (allowNewlines)
-                {
-                    textToEdit.insert(caretIndex, 1, '\n');
-                    caretIndex++;
-                    textChanged = true;
-                }
+                if (allowNewlines) stb_textedit_key(&textToEdit, &editState, '\n');
                 else focusedInputFieldIdentifier = nullptr;
             }
-            return textChanged;
-        }
-        // ===[Applies this frame's caret movement and typing, returns true if the text changed]===
-        bool ApplyTypingToText(std::string& textToEdit, size_t& caretIndex, bool allowNewlines, const std::string& allowedCharacters)
-        {
-            // Turns the "end of text" marker (npos) into a real index
-            caretIndex = std::min(caretIndex, textToEdit.size());
 
-            MoveCaretWithArrowKeys(textToEdit, caretIndex, allowNewlines);
-            MoveCaretWithHomeAndEndKeys(textToEdit, caretIndex);
-
-            bool textChanged = false;
-            textChanged |= InsertTypedCharacters(textToEdit, caretIndex, allowedCharacters);
-            textChanged |= DeleteCharactersAroundCaret(textToEdit, caretIndex);
-            textChanged |= HandleEnterKey(textToEdit, caretIndex, allowNewlines);
-            return textChanged;
+            return textToEdit != textBeforeEditing;
         }
 
         // |=====================================================
@@ -619,8 +622,8 @@ namespace UXX
             float caretTopY = fieldRect.yPos + inputFieldPadding + lineHeight * caretLineNumber;
             DrawQuad(Rect(caretX, caretTopY, caretWidth, lineHeight), caretColor, nullptr);
         }
-        // ===[Draws all text line by line plus a blinking caret, brackets are colored if codeStyle is given]===
-        void DrawInputFieldText(Rect fieldRect, const std::string& textToDraw, size_t caretIndex, bool fieldIsFocused,
+        // ===[Draws all text line by line, plus the selection and a blinking caret when editState is given]===
+        void DrawInputFieldText(Rect fieldRect, const std::string& textToDraw, const STB_TexteditState* editState,
             Color textColor, float textSize, const std::string& fontPath,
             const CodeInputFieldStyle* codeStyle)
         {
@@ -631,8 +634,17 @@ namespace UXX
             PushScissor(fieldRect);
 
             float lineHeight = font->measureTextHeight("A", textSize) * inputFieldLineHeightMultiplier;
-            caretIndex = std::min(caretIndex, textToDraw.size());
             float lineStartX = fieldRect.xPos + inputFieldPadding;
+            Color selectionColor(0.20f, 0.40f, 0.80f, 1.0f);
+
+            // Selected range as text indexes, both stay 0 when nothing is selected
+            size_t selectionLowIndex = 0;
+            size_t selectionHighIndex = 0;
+            if (editState)
+            {
+                selectionLowIndex  = (size_t)std::max(0, std::min(editState->select_start, editState->select_end));
+                selectionHighIndex = (size_t)std::max(0, std::max(editState->select_start, editState->select_end));
+            }
 
             // Walk through the text one line at a time
             size_t lineStartIndex = 0;
@@ -641,6 +653,19 @@ namespace UXX
             {
                 size_t lineEndIndex = FindLineEndIndex(textToDraw, lineStartIndex);
                 std::string lineText = textToDraw.substr(lineStartIndex, lineEndIndex - lineStartIndex);
+
+                // Highlight the selected part of this line, drawn before the text so the text stays on top
+                size_t highlightStartIndex = std::max(selectionLowIndex, lineStartIndex);
+                size_t highlightEndIndex = std::min(selectionHighIndex, lineEndIndex);
+                if (highlightStartIndex < highlightEndIndex)
+                {
+                    float highlightX = lineStartX + font->measureTextWidth(
+                        textToDraw.substr(lineStartIndex, highlightStartIndex - lineStartIndex), textSize);
+                    float highlightWidth = font->measureTextWidth(
+                        textToDraw.substr(highlightStartIndex, highlightEndIndex - highlightStartIndex), textSize);
+                    float highlightTopY = fieldRect.yPos + inputFieldPadding + lineHeight * lineNumber;
+                    DrawQuad(Rect(highlightX, highlightTopY, highlightWidth, lineHeight), selectionColor, nullptr);
+                }
 
                 // Text is drawn from a baseline measured from the bottom of the screen
                 float baselineTopDownY = fieldRect.yPos + inputFieldPadding + lineHeight * (lineNumber + 1);
@@ -652,13 +677,17 @@ namespace UXX
                 else
                     DrawTextRaw(lineStartX, baselineBottomUpY, textColor, textSize, lineText, font, 0.0f);
 
-                // Next line starts after the newline (this goes past the text size after the last line, which ends the loop)
+                // Next line starts after the newline (goes past the text size after the last line, which ends the loop)
                 lineStartIndex = lineEndIndex + 1;
                 lineNumber++;
             }
 
-            if (fieldIsFocused)
+            // Only the focused field passes an editState, so only it gets a caret
+            if (editState)
+            {
+                size_t caretIndex = std::min((size_t)std::max(0, editState->cursor), textToDraw.size());
                 DrawCaret(fieldRect, textToDraw, caretIndex, lineHeight, textColor, textSize, font);
+            }
 
             PopScissor();
         }
@@ -1258,15 +1287,14 @@ namespace UXX
         // Handles hover, focus and the background, and tells us if we should accept typing
         bool fieldIsFocused = BeginInputField(&textValue, inputFieldRect, inputFieldStyle.backGroundColor, inputFieldStyle.backgroundImagePath);
 
-        // Each field remembers its own caret, keyed by the address of its text
-        size_t& caretIndex = caretIndexMap[&textValue];
-
         // Edit the real string directly, new lines are allowed and every character is accepted
         bool textChanged = false;
         if (fieldIsFocused)
-            textChanged = ApplyTypingToText(textValue, caretIndex, true, anyCharacterAllowed);
+            textChanged = EditTextWithStb(&textValue, textValue, inputFieldRect, true, anyCharacterAllowed,
+                inputFieldStyle.fontPath, inputFieldStyle.textSize);
 
-        DrawInputFieldText(inputFieldRect, textValue, caretIndex, fieldIsFocused, inputFieldStyle.textColor,
+        const STB_TexteditState* editState = fieldIsFocused ? &textEditStateMap[&textValue] : nullptr;
+        DrawInputFieldText(inputFieldRect, textValue, editState, inputFieldStyle.textColor,
             inputFieldStyle.textSize, inputFieldStyle.fontPath, nullptr);
         return textChanged;
     }
@@ -1279,8 +1307,6 @@ namespace UXX
         bool fieldWasFocusedBefore = (focusedInputFieldIdentifier == &numberValue);
         bool fieldIsFocused = BeginInputField(&numberValue, inputFieldRect, inputFieldStyle.backGroundColor, inputFieldStyle.backgroundImagePath);
 
-        size_t& caretIndex = caretIndexMap[&numberValue];
-
         // The text being typed lives here, because "3." or "-" is not a valid float yet
         std::string& editBuffer = numberFieldEditBufferMap[&numberValue];
 
@@ -1290,7 +1316,8 @@ namespace UXX
 
         // Edit the buffer (single line, digits . and - only), then try to turn it into a number
         bool numberChanged = false;
-        if (fieldIsFocused && ApplyTypingToText(editBuffer, caretIndex, false, numberFieldAllowedCharacters))
+        if (fieldIsFocused && EditTextWithStb(&numberValue, editBuffer, inputFieldRect, false, numberFieldAllowedCharacters,
+                inputFieldStyle.fontPath, inputFieldStyle.textSize))
         {
             char* parseEndPointer = nullptr;
             float parsedNumber = std::strtof(editBuffer.c_str(), &parseEndPointer);
@@ -1309,7 +1336,8 @@ namespace UXX
         if (!fieldIsFocused) unfocusedNumberText = FormatNumberAsText(numberValue);
         const std::string& textToShow = fieldIsFocused ? editBuffer : unfocusedNumberText;
 
-        DrawInputFieldText(inputFieldRect, textToShow, caretIndex, fieldIsFocused, inputFieldStyle.textColor,
+        const STB_TexteditState* editState = fieldIsFocused ? &textEditStateMap[&numberValue] : nullptr;
+        DrawInputFieldText(inputFieldRect, textToShow, editState, inputFieldStyle.textColor,
             inputFieldStyle.textSize, inputFieldStyle.fontPath, nullptr);
         return numberChanged;
     }
@@ -1319,15 +1347,16 @@ namespace UXX
         SkipDraw(inputFieldRect);
 
         bool fieldIsFocused = BeginInputField(&textValue, inputFieldRect, codeInputFieldStyle.backGroundColor, codeInputFieldStyle.backgroundImagePath);
-        size_t& caretIndex = caretIndexMap[&textValue];
 
         // Same editing as MultiInputField, the only difference is how the text gets drawn
         bool textChanged = false;
         if (fieldIsFocused)
-            textChanged = ApplyTypingToText(textValue, caretIndex, true, anyCharacterAllowed);
+            textChanged = EditTextWithStb(&textValue, textValue, inputFieldRect, true, anyCharacterAllowed,
+                codeInputFieldStyle.fontPath, codeInputFieldStyle.textSize);
 
         // Passing the code style is what turns on the colored brackets
-        DrawInputFieldText(inputFieldRect, textValue, caretIndex, fieldIsFocused, codeInputFieldStyle.textColor,
+        const STB_TexteditState* editState = fieldIsFocused ? &textEditStateMap[&textValue] : nullptr;
+        DrawInputFieldText(inputFieldRect, textValue, editState, codeInputFieldStyle.textColor,
             codeInputFieldStyle.textSize, codeInputFieldStyle.fontPath, &codeInputFieldStyle);
         return textChanged;
     }
@@ -1572,7 +1601,6 @@ namespace UXX
     }
     void EndDropDown()
     {
-        // Everything was clipped and drawn inside BeginDropDown, so there is no scissor left to pop
         dropDownOpen = false;
     }
     void ToolTip(Rect toolTipRect, const ToolTipStyle& toolTipStyle, std::string tipText)

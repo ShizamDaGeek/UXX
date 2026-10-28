@@ -5,12 +5,12 @@ std::string GLTexture::missingTexturePath = "../UXXAssets/Images/missing_texture
 namespace
 {
     // Does the actual GL upload once we have valid pixel data (real or fallback).
-    unsigned int uploadTexture(unsigned char* imageBytes, int imgWidth, int imgHeight,
-        int numColorChannel, const char* texType, bool& hasAlphaOut)
+    unsigned int uploadTexture(unsigned char* imageBytes, int imageWidth, int imageHeight,
+        int numberOfColorChannel, const char* textureType, bool& hasAlphaOut)
     {
-        unsigned int texID;
-        glGenTextures(1, &texID);
-        glBindTexture(GL_TEXTURE_2D, texID);
+        unsigned int textureID;
+        glGenTextures(1, &textureID);
+        glBindTexture(GL_TEXTURE_2D, textureID);
 
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
@@ -19,47 +19,47 @@ namespace
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-        hasAlphaOut = (numColorChannel == 4);
+        hasAlphaOut = (numberOfColorChannel == 4);
 
-        if (strcmp(texType, "normal") == 0)
+        if (strcmp(textureType, "normal") == 0)
         {
-            if (numColorChannel == 4)
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA, imgWidth, imgHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageBytes);
-            else if (numColorChannel == 3)
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB, imgWidth, imgHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, imageBytes);
+            if (numberOfColorChannel == 4)
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageBytes);
+            else if (numberOfColorChannel == 3)
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, imageBytes);
             else
                 throw std::invalid_argument("Normal Texture type recognition failed!");
         }
-        else if (strcmp(texType, "displacement") == 0)
+        else if (strcmp(textureType, "displacement") == 0)
         {
-            if (numColorChannel == 4)
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA, imgWidth, imgHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageBytes);
-            else if (numColorChannel == 3)
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB, imgWidth, imgHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, imageBytes);
-            else if (numColorChannel == 1)
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, imgWidth, imgHeight, 0, GL_RED, GL_UNSIGNED_BYTE, imageBytes);
+            if (numberOfColorChannel == 4)
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageBytes);
+            else if (numberOfColorChannel == 3)
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, imageBytes);
+            else if (numberOfColorChannel == 1)
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, imageWidth, imageHeight, 0, GL_RED, GL_UNSIGNED_BYTE, imageBytes);
             else
                 throw std::invalid_argument("Displacement Texture type recognition failed!");
         }
-        else if (strcmp(texType, "specular") == 0)
+        else if (strcmp(textureType, "specular") == 0)
         {
-            if (numColorChannel == 4)
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA, imgWidth, imgHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageBytes);
-            else if (numColorChannel == 3)
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB, imgWidth, imgHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, imageBytes);
-            else if (numColorChannel == 1)
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, imgWidth, imgHeight, 0, GL_RED, GL_UNSIGNED_BYTE, imageBytes);
+            if (numberOfColorChannel == 4)
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB_ALPHA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageBytes);
+            else if (numberOfColorChannel == 3)
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, imageBytes);
+            else if (numberOfColorChannel == 1)
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, imageWidth, imageHeight, 0, GL_RED, GL_UNSIGNED_BYTE, imageBytes);
             else
                 throw std::invalid_argument("Specular Texture type recognition failed!");
         }
         else
         {
-            if (numColorChannel == 4)
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imgWidth, imgHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageBytes);
-            else if (numColorChannel == 3)
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imgWidth, imgHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, imageBytes);
-            else if (numColorChannel == 1)
-                glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, imgWidth, imgHeight, 0, GL_RED, GL_UNSIGNED_BYTE, imageBytes);
+            if (numberOfColorChannel == 4)
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageBytes);
+            else if (numberOfColorChannel == 3)
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, imageBytes);
+            else if (numberOfColorChannel == 1)
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, imageWidth, imageHeight, 0, GL_RED, GL_UNSIGNED_BYTE, imageBytes);
             else
                 throw std::invalid_argument("Automatic Texture type recognition failed!");
         }
@@ -68,7 +68,7 @@ namespace
         glBindTexture(GL_TEXTURE_2D, 0);
         glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 
-        return texID;
+        return textureID;
     }
 }
 
@@ -81,8 +81,8 @@ unsigned int GLTexture::loadTexture(const std::string& path, const char* texType
     // Flip on load (since OpenGL expects the origin at the bottom-left)
     stbi_set_flip_vertically_on_load(true);
 
-    int imgWidth, imgHeight, numColorChannel;
-    unsigned char* imageBytes = stbi_load(path.c_str(), &imgWidth, &imgHeight, &numColorChannel, 0);
+    int imageWidth, imageHeight, numberOfColorChannel;
+    unsigned char* imageBytes = stbi_load(path.c_str(), &imageWidth, &imageHeight, &numberOfColorChannel, 0);
 
     bool usingFallback = false;
 
@@ -96,7 +96,7 @@ unsigned int GLTexture::loadTexture(const std::string& path, const char* texType
             throw std::runtime_error("Failed to load texture: " + path +
                                         " (the missing texture placeholder itself is invalid or missing!)");
 
-        imageBytes = stbi_load(missingTexturePath.c_str(), &imgWidth, &imgHeight, &numColorChannel, 0);
+        imageBytes = stbi_load(missingTexturePath.c_str(), &imageWidth, &imageHeight, &numberOfColorChannel, 0);
         usingFallback = true;
 
         if (!imageBytes)
@@ -105,7 +105,7 @@ unsigned int GLTexture::loadTexture(const std::string& path, const char* texType
     }
 
     bool hasAlpha = false;
-    unsigned int texID = uploadTexture(imageBytes, imgWidth, imgHeight, numColorChannel, texType, hasAlpha);
+    unsigned int texID = uploadTexture(imageBytes, imageWidth, imageHeight, numberOfColorChannel, texType, hasAlpha);
 
     stbi_image_free(imageBytes);
 
@@ -118,11 +118,11 @@ unsigned int GLTexture::loadTexture(const std::string& path, const char* texType
 // |=====================================================
 // |---[Constructor]-------------------------------------
 // |=====================================================
-GLTexture::GLTexture(const char* image, const char* texType, unsigned int slot)
+GLTexture::GLTexture(const char* image, const char* textureType, unsigned int slot)
 {
-    type = texType;
+    type = textureType;
     unit = slot;
-    ID = loadTexture(image, texType, &hasAlpha, &isMissingFallback);
+    ID = loadTexture(image, textureType, &hasAlpha, &isMissingFallback);
 
     // Bind immediately so the texture is ready on its assigned unit
     glActiveTexture(GL_TEXTURE0 + slot);

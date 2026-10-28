@@ -30,7 +30,6 @@ void UXXBackendGLFW::KeyCallback(GLFWwindow* window, int key, int scancode, int 
     if (key == GLFW_KEY_HOME)   uxxBackendGLFWInstance->homePressCountSinceLastPoll++;
     if (key == GLFW_KEY_END)    uxxBackendGLFWInstance->endPressCountSinceLastPoll++;
     if (key == GLFW_KEY_DELETE) uxxBackendGLFWInstance->deletePressCountSinceLastPoll++;
-
 }
 void UXXBackendGLFW::FramebufferSizeCallback(GLFWwindow* window, int width, int height)
 {
@@ -56,7 +55,6 @@ void UXXBackendGLFW::CursorPosCallback(GLFWwindow* window, double xpos, double y
         uxxBackendGLFWInstance->mouseState.cursorPositionY = ypos;
     }
 }
-
 void UXXBackendGLFW::ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
 {
     UXXBackendGLFW* uxxBackendGLFWInstance = static_cast<UXXBackendGLFW*>(glfwGetWindowUserPointer(window));
@@ -101,7 +99,7 @@ void UXXBackendGLFW::PollMouseState()
 // |---[Constructer/Destructer]--------------------------
 // |=====================================================
 UXXBackendGLFW::UXXBackendGLFW() {}
-UXXBackendGLFW::~UXXBackendGLFW() {}
+UXXBackendGLFW::~UXXBackendGLFW() { die(); }
 
 // |=====================================================
 // |---[Initlize]----------------------------------------
